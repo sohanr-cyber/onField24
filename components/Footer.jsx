@@ -9,14 +9,24 @@ import { feacebook_page, instagram, whatsapp, footerP } from '@/utility/const'
 
 const Footer = () => {
   const router = useRouter()
-  const categories = useSelector(state => state.product.categories)
+  const categories = useSelector(state => state.article.categories)
 
   return (
     <>
       <div className={styles.wrapper}>
         <div className={styles.left}>
           <Logo />
-          <div className={styles.about}>{footerP}</div>
+          <div className={styles.about}>
+            {categories &&
+              categories.map((i, index) => (
+                <div
+                  className={styles.link}
+                  onClick={() => router.push(`/shop?categories=${i[0]._id}`)}
+                >
+                  {i.name}
+                </div>
+              ))}
+          </div>
         </div>
         <div className={styles.mid}>
           <h2 className={styles.heading}>Links</h2>
@@ -25,26 +35,9 @@ const Footer = () => {
               Home
             </div>{' '}
             <div className={styles.link} onClick={() => router.push('/shop')}>
-              Shop
+              News
             </div>
           </div>
-          {categories &&
-            chunkArray(categories, 2)?.map((i, index) => (
-              <div className={styles.flex} key={index}>
-                <div
-                  className={styles.link}
-                  onClick={() => router.push(`/shop?categories=${i[0]._id}`)}
-                >
-                  {i[0]?.name}
-                </div>
-                <div
-                  className={styles.link}
-                  onClick={() => router.push(`/shop?categories=${i[1]._id}`)}
-                >
-                  {i[1]?.name}
-                </div>
-              </div>
-            ))}
 
           <div className={styles.flex}>
             <div className={styles.link} onClick={() => router.push('/login')}>
@@ -87,22 +80,22 @@ const Footer = () => {
           <div className={styles.social__media__links}>
             <Image
               src={'https://cdn-icons-png.flaticon.com/128/5968/5968764.png'}
-              width='35'
-              height='35'
+              width='25'
+              height='25'
               alt=''
               onClick={() => router.push(feacebook_page)}
             />
             <Image
               src={'https://cdn-icons-png.flaticon.com/128/3955/3955024.png'}
-              width='35'
-              height='35'
+            width='25'
+              height='25'
               alt=''
               onClick={() => router.push(instagram)}
             />
             <Image
               src={'https://cdn-icons-png.flaticon.com/128/733/733585.png'}
-              width='35'
-              height='35'
+            width='25'
+              height='25'
               alt=''
               onClick={() => router.push(whatsapp)}
             />

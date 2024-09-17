@@ -5,10 +5,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
 }
 
 .wrapper .form__container {
-    background: var(--cardBg);
+    background: var(--nav);
+    color: var(--navColor);
     padding: 15px;
     border-radius: 5px;
     text-align: center;

@@ -3,17 +3,20 @@ import mongoose from 'mongoose'
 const categorySchema = new mongoose.Schema(
   {
     name: {
-      type: String,
-      required: true,
-      trim: true,
-      // unique: true
+      en: {
+        type: String,
+        required: true
+      },
+      bn: {
+        type: String,
+        required: true
+      }
     },
-
     slug: {
       // URL friendly identifier
       type: String,
       required: true,
-      trim: true,
+      trim: true
       // unique: true // Ensures unique category URLs
     },
 
@@ -31,15 +34,13 @@ const categorySchema = new mongoose.Schema(
         ref: 'Category' // Reference to itself for child categories
       }
     ],
-    isShown: {
-      type: Boolean,
-      default: true
-    },
     isFeatured: {
       type: Boolean,
-      default: false
+      default: false,
+      required: true
     }
   },
+
   { timestamps: true }
 )
 

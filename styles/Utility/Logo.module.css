@@ -1,13 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 .wrapper {
     display: flex;
     font-weight: bolder;
-    font-size: 180%;
-    transform: scale(1, 0.9);
-    color: var(--icon);
-
+    gap: 3px;
+    font-size: 200%;
+    cursor: pointer;
+    /* background:  var(--buttonBg);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */
+    font-family: "Great Vibes", cursive;
+    font-weight: 1600;
+    font-style: normal;
+    transform: rotate(-4deg) scale(1.05);
+    margin-left: 7px;
 
 }
 
-.wrapper div {
-    padding: 0 2px;
+
+
+.wrapper span:nth-child(1) {
+    color: rgb(0, 255, 0);
+
+}
+
+.wrapper span:nth-child(2) {
+    color: white
+}
+
+.wrapper span:nth-child(3) {
+    color: rgb(0, 169, 254)
 }

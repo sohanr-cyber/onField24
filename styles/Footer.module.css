@@ -4,6 +4,7 @@
     gap: 25px;
     padding: 30px 25px;
     background: var(--nav);
+    color: var(--navColor)
 }
 
 .wrapper .mid,
@@ -13,7 +14,10 @@
 }
 
 .wrapper .left .about {
-    margin: 10px 0
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 
@@ -37,7 +41,8 @@
 .right .social__media__links {
     display: flex;
     gap: 15px;
-    margin: 15px 0
+    margin: 15px 0;
+    margin-bottom: 0;
 }
 
 
@@ -62,11 +67,15 @@
     .wrapper {
         flex-direction: column;
         padding: 30px 15px;
+        gap: 15px;
+
     }
+
+
 }
 
 @media (max-width:410px) {
     .wrapper {
-        padding: 10px;
+        padding: 20px 10px;
     }
 }

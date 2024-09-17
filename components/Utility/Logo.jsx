@@ -6,15 +6,12 @@ import { colors } from '@/utility/const'
 
 const Logo = ({ color }) => {
   const router = useRouter()
-  const name = 'Quince'
+  const name = 'OnField360'
 
   return (
     <div className={styles.wrapper} onClick={() => router.push('/')}>
-      {name.split('').map((i, index) => (
-        <div key={index} style={{ color: `${color}` }}>
-          {i}
-        </div>
-      ))}
+      <span>On</span> <span>Field</span>
+      <span>360</span>
     </div>
   )
 }

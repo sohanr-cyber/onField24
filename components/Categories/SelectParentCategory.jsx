@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 import { Category } from '@mui/icons-material'
 import SelectCategory from './SelectCategory'
 
-const SelectParentCategory = ({ category, setCategory }) => {
-  const categories = useSelector(state => state.product.categories)
+const SelectParentCategory = ({ category, setCategory, lang = 'en' }) => {
+  const categories = useSelector(state => state.article.dualCategories)
 
   const router = useRouter()
 
@@ -28,7 +28,7 @@ const SelectParentCategory = ({ category, setCategory }) => {
               />
             )}
 
-            <div className={styles.name}>{i.name}</div>
+            <div className={styles.name}>{i.name[lang]}</div>
           </div>
           {i.children.length > 0 &&
             i.children?.map((i, index) => (
@@ -46,7 +46,7 @@ const SelectParentCategory = ({ category, setCategory }) => {
                     />
                   )}
 
-                  <div className={styles.name}>{i.name}</div>
+                  <div className={styles.name}>{i.name[lang]}</div>
                 </div>
                 {i.children.length > 0 &&
                   i.children?.map((i, index) => (
@@ -65,7 +65,7 @@ const SelectParentCategory = ({ category, setCategory }) => {
                         />
                       )}
 
-                      <div className={styles.name}>{i.name}</div>
+                      <div className={styles.name}>{i.name[lang]}</div>
                     </div>
                   ))}
               </>

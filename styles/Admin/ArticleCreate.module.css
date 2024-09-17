@@ -105,6 +105,10 @@
     aspect-ratio: 1/1;
 }
 
+
+.image__container img {
+    object-fit: cover;
+}
 .wrapper button {
     padding: var(--buttonPadding);
 }

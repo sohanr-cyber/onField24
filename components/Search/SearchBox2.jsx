@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search'
 
 const SearchBox2 = ({ setOpen }) => {
   const router = useRouter()
-  const categories = useSelector(state => state.product.categories)
+  const categories = useSelector(state => state.article.categories)
 
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
@@ -29,7 +29,7 @@ const SearchBox2 = ({ setOpen }) => {
     <div className={styles.wrapper}>
       <div className={styles.left}>
         <div className={styles.flex}>
-          <h3>Serach</h3>
+          <h3>Search</h3>
           <h3 onClick={() => setOpen(false)}>X</h3>
         </div>
 

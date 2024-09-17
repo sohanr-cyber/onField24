@@ -15,6 +15,7 @@
     min-width: 200px;
     max-width: 200px;
     background: var(--nav);
+    color: var(--navColor);
 
 
 }
@@ -97,12 +98,11 @@
 
 .wrapper .navigators .inner__items {
     margin-left: 15px;
-
-
 }
 
 
 .wrapper .navigators .item:hover {
     background-color: var(--hoverBgColor);
-    color: var(--hoverColor)
+    color: var(--linkColor);
+    background-color: rgb(0, 183, 255, 0.1);
 }

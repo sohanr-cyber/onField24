@@ -59,7 +59,7 @@ const SideBar = ({ setOpen }) => {
           <div
             className={styles.item}
             onClick={() =>
-              setVisible(prev => (prev == 'content' ? '' : 'content'))
+              setVisible(prev => (prev == 'article' ? '' : 'article'))
             }
           >
             <div className={styles.flex}>
@@ -67,88 +67,40 @@ const SideBar = ({ setOpen }) => {
               <div className={styles.icon}>
                 <CameraIcon />
               </div>
-              <div className={styles.title}>Content</div>{' '}
+              <div className={styles.title}>Article</div>{' '}
             </div>
             <div className={styles.icon}>
-              {visible == 'content' ? (
+              {visible == 'article' ? (
                 <KeyboardArrowUpIcon />
               ) : (
                 <KeyboardArrowDownIcon />
               )}{' '}
             </div>
           </div>{' '}
-          {visible == 'content' && (
+          {visible == 'article' && (
             <div className={styles.inner__items}>
               <div
                 className={styles.item}
-                onClick={() => router.push('/admin/content')}
+                onClick={() => router.push('/admin/article')}
               >
                 <div className={styles.flex}>
                   {' '}
                   <div className={styles.icon}>
                     <FormatListBulletedIcon />
                   </div>
-                  <div className={styles.title}>Content List</div>
+                  <div className={styles.title}>Article List</div>
                 </div>
               </div>{' '}
               <div
                 className={styles.item}
-                onClick={() => router.push('/admin/content/create')}
+                onClick={() => router.push('/admin/article/create')}
               >
                 <div className={styles.flex}>
                   {' '}
                   <div className={styles.icon}>
                     <AddCircleIcon />
                   </div>
-                  <div className={styles.title}>Add Content</div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div
-            className={styles.item}
-            onClick={() =>
-              setVisible(prev => (prev == 'product' ? '' : 'product'))
-            }
-          >
-            <div className={styles.flex}>
-              {' '}
-              <div className={styles.icon}>
-                <ShoppingCartIcon />
-              </div>
-              <div className={styles.title}>Product</div>
-            </div>
-            <div className={styles.icon}>
-              {visible == 'product' ? (
-                <KeyboardArrowUpIcon />
-              ) : (
-                <KeyboardArrowDownIcon />
-              )}
-            </div>
-          </div>
-          {visible == 'product' && (
-            <div className={styles.inner__items}>
-              <div
-                className={styles.item}
-                onClick={() => router.push('/admin/product')}
-              >
-                <div className={styles.flex}>
-                  {' '}
-                  <div className={styles.icon}>
-                    <FormatListBulletedIcon />
-                  </div>
-                  <div className={styles.title}>Product List</div>
-                </div>
-              </div>{' '}
-              <div
-                className={styles.item}
-                onClick={() => router.push('/admin/product/create')}
-              >
-                <div className={styles.flex}>
-                  <div className={styles.icon}>
-                    <AddCircleIcon />
-                  </div>
-                  <div className={styles.title}>Add Product</div>
+                  <div className={styles.title}>Add Article</div>
                 </div>
               </div>
             </div>
@@ -204,35 +156,35 @@ const SideBar = ({ setOpen }) => {
           )}
           <div
             className={styles.item}
-            onClick={() => setVisible(prev => (prev == 'order' ? '' : 'order'))}
+            onClick={() => setVisible(prev => (prev == 'user' ? '' : 'user'))}
           >
             <div className={styles.flex}>
               {' '}
               <div className={styles.icon}>
                 <AssignmentTurnedInIcon />
               </div>
-              <div className={styles.title}>Orders</div>
+              <div className={styles.title}>Users</div>
             </div>
             <div className={styles.icon}>
-              {visible == 'order' ? (
+              {visible == 'user' ? (
                 <KeyboardArrowUpIcon />
               ) : (
                 <KeyboardArrowDownIcon />
               )}{' '}
             </div>
           </div>
-          {visible == 'order' && (
+          {visible == 'user' && (
             <div className={styles.inner__items}>
               <div
                 className={styles.item}
-                onClick={() => router.push('/admin/order')}
+                onClick={() => router.push('/admin/user')}
               >
                 <div className={styles.flex}>
                   {' '}
                   <div className={styles.icon}>
                     <FormatListBulletedIcon />
                   </div>
-                  <div className={styles.title}>Order List</div>
+                  <div className={styles.title}>User List</div>
                 </div>
               </div>
               <div className={styles.item} style={{ display: 'none' }}>
@@ -242,56 +194,6 @@ const SideBar = ({ setOpen }) => {
                     <AddCircleIcon />
                   </div>
                   <div className={styles.title}>Add Order</div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div
-            className={styles.item}
-            onClick={() =>
-              setVisible(prev => (prev == 'coupon' ? '' : 'coupon'))
-            }
-            // style={{ display: 'none' }}
-          >
-            <div className={styles.flex}>
-              {' '}
-              <div className={styles.icon}>
-                <AssignmentTurnedInIcon />
-              </div>
-              <div className={styles.title}>Coupon</div>
-            </div>
-            <div className={styles.icon}>
-              {visible == 'coupon' ? (
-                <KeyboardArrowUpIcon />
-              ) : (
-                <KeyboardArrowDownIcon />
-              )}{' '}
-            </div>
-          </div>
-          {visible == 'coupon' && (
-            <div className={styles.inner__items}>
-              <div
-                className={styles.item}
-                onClick={() => router.push('/admin/coupon')}
-              >
-                <div className={styles.flex}>
-                  {' '}
-                  <div className={styles.icon}>
-                    <FormatListBulletedIcon />
-                  </div>
-                  <div className={styles.title}>Coupon List</div>
-                </div>
-              </div>
-              <div
-                className={styles.item}
-                onClick={() => router.push('/admin/coupon/create')}
-              >
-                <div className={styles.flex}>
-                  {' '}
-                  <div className={styles.icon}>
-                    <AddCircleIcon />
-                  </div>
-                  <div className={styles.title}>Add Coupon</div>
                 </div>
               </div>
             </div>

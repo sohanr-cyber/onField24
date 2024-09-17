@@ -1,5 +1,5 @@
 import { showSnackBar } from '@/redux/notistackSlice'
-import { setCategories } from '@/redux/productSlice'
+import { setCategories } from '@/redux/articleSlice'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { buttonC, themeBg } from '@/utility/const'
 import { BorderAllRounded } from '@mui/icons-material'

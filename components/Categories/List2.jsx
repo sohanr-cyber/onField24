@@ -7,7 +7,7 @@ import SkeletonDiv from '../Utility/SkeletonDiv'
 import SubCategories2 from './SubCategories2'
 
 const List2 = () => {
-  const categories = useSelector(state => state.product.categories)?.slice(
+  const categories = useSelector(state => state.article.categories)?.slice(
     0,
     12
   )
@@ -18,6 +18,14 @@ const List2 = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper} onMouseLeave={() => setSelected(null)}>
+        {categories?.length > 0 && (
+          <div
+            className={styles.item}
+            style={{ minWidth: `${'Home'.length * 8.1}px` }}
+          >
+            Home
+          </div>
+        )}
         {categories?.length > 0
           ? categories?.map((i, index) => (
               <>
@@ -90,7 +98,7 @@ const List2 = () => {
                 </div>
               </>
             ))
-          : [1, 2, 3, 4, 5].map((item, index) => (
+          : [1, 2, 3, 4, 5, 6, 7, 9,10].map((item, index) => (
               <div className={styles.item} key={index}>
                 {<SkeletonDiv />}
               </div>

@@ -7,21 +7,21 @@ import { Router, useRouter } from 'next/router'
 import AdminNavbar from './Admin/Navbar'
 import Loading from './Utility/Loading'
 import { useSnackbar } from 'notistack'
-import { setCategories } from '@/redux/productSlice'
+import { setCategories, setDualCategories } from '@/redux/articleSlice'
 import axios from 'axios'
 import { setPixel } from '@/redux/pixelSlice'
 import { PIXEL_ID } from '@/config'
 import ChatButton from './Chat/ChatButton'
-import Navbar from './Navbar'
-import Navbar2 from './Navs/Navbar2'
 import styles from '@/styles/Layout.module.css'
+import Navbar from './Navs/Navbar'
 
 const Layout = ({ children }) => {
   const loading = useSelector(state => state.state.loading)
   const router = useRouter()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const notistack = useSelector(state => state.notistack.notistack)
-  const fetchAgain = useSelector(state => state.product.fetchAgain)
+  const fetchAgain = useSelector(state => state.article.fetchAgain)
+  const fetchDualAgain = useSelector(state => state.article.fetchDualAgain)
 
   const dispatch = useDispatch()
   const fetchCategory = async () => {
@@ -33,9 +33,22 @@ const Layout = ({ children }) => {
     }
   }
 
+  const retrieveCategories = async () => {
+    try {
+      const { data } = await axios.get('/api/category/retrieve')
+      dispatch(setDualCategories(data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     fetchCategory()
-  }, [fetchAgain])
+  }, [])
+
+  useEffect(() => {
+    containsAdmin(router.asPath) && retrieveCategories()
+  }, [fetchDualAgain])
 
   React.useEffect(() => {
     import('react-facebook-pixel')
@@ -66,13 +79,7 @@ const Layout = ({ children }) => {
       {loading && <Loading />}
       {!containsAdmin(router.asPath) ? (
         <>
-          {' '}
-          <div className={styles.nav1}>
-            <Navbar />
-          </div>
-          <div className={styles.nav2}>
-            <Navbar2 />
-          </div>
+          <Navbar />
         </>
       ) : (
         <AdminNavbar />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../../styles/Admin/ProductCreate.module.css'
+import styles from '../../../styles/Admin/ArticleCreate.module.css'
 import Upload from '@/components/Utility/Upload'
 import axios from 'axios'
 import BASE_URL from '@/config'
@@ -12,7 +12,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { buttonC, themeBg } from '@/utility/const'
 import AddCategory from '@/components/Admin/AddCategory'
-import { setFetchAgain } from '@/redux/productSlice'
+import { setFetchAgain } from '@/redux/articleSlice'
 import SelectParentCategory from '@/components/Categories/SelectParentCategory'
 // Order Craetion Form
 const Create = ({ category: data }) => {
@@ -21,7 +21,7 @@ const Create = ({ category: data }) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [newCategory, setNewCategory] = useState(false)
-  const categories = useSelector(state => state.product.categories)
+  const categories = useSelector(state => state.article.categories)
   useEffect(() => {
     setCategory(data)
   }, [router.query])
@@ -147,37 +147,16 @@ const Create = ({ category: data }) => {
             <input
               type='text'
               placeholder='Enter Category Name'
-              value={category.name}
-              onChange={e => setCategory({ ...category, name: e.target.value })}
+              value={category.name.en}
+              onChange={e =>
+                setCategory({
+                  ...category,
+                  name: { en: e.target.value, bn: category.name.bn }
+                })
+              }
             />
           </div>
-          <div className={styles.field}>
-            <label>Category Icon</label>
-            <Upload
-              handle={files => {
-                setCategory(prev => ({ ...prev, image: files.url }))
-              }}
-            />
-          </div>
-          <div className={styles.images}>
-            {category.image ? (
-              <div className={styles.image__container}>
-                <Image src={category.image} alt='' width='180' height={180} />
-              </div>
-            ) : (
-              <div
-                className={styles.image__container}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  textAlign: 'center'
-                }}
-              >
-                No Photo Uploaded
-              </div>
-            )}
-          </div>
+
           <div className={styles.field}>
             <label>Chose Parent Category</label>
             <div className={styles.options}>
@@ -185,17 +164,85 @@ const Create = ({ category: data }) => {
                 category={category}
                 setCategory={setCategory}
               />
+            </div>
+          </div>
+          {newCategory && (
+            <div className={styles.field}>
+              <AddCategory categories={categories} />
+            </div>
+          )}
 
-              {/* <span
-                style={{
-                  background: `${themeBg}`,
-                  color: `${buttonC}`,
-                  padding: '3px 9px'
-                }}
-                onClick={() => setNewCategory(prev => !prev)}
-              >
-                {newCategory ? '-' : '+'}
-              </span> */}
+          <div
+            className={styles.field}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <span
+              onClick={() =>
+                setCategory({ ...category, isFeatured: !category.isFeatured })
+              }
+            >
+              {category.isFeatured ? (
+                <CheckBoxIcon />
+              ) : (
+                <CheckBoxOutlineBlankIcon />
+              )}
+            </span>
+            <span> This Category will be shown in home page</span>{' '}
+          </div>
+          <div
+            className={styles.field}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'flex-start'
+            }}
+          >
+            {/* <span
+              onClick={() =>
+                setCategory({ ...category, isShown: !category.isShown })
+              }
+            >
+              {category.isShown ? (
+                <CheckBoxIcon />
+              ) : (
+                <CheckBoxOutlineBlankIcon />
+              )}{' '}
+            </span>
+            <span>
+              {' '}
+              This category name will be shown in product details page
+            </span>{' '} */}
+          </div>
+        </div>
+        <div className={styles.left}>
+          <div className={styles.field}>
+            <label>Category Name</label>
+            <input
+              type='text'
+              placeholder='Enter Category Name'
+              value={category.name.bn}
+              onChange={e =>
+                setCategory({
+                  ...category,
+                  name: {
+                    en: category.name.en,
+                    bn: e.target.value
+                  }
+                })
+              }
+            />
+          </div>
+
+          <div className={styles.field}>
+            <label>Chose Parent Category</label>
+            <div className={styles.options}>
+              <SelectParentCategory
+                category={category}
+                setCategory={setCategory}
+                lang={'bn'}
+              />
             </div>
           </div>
           {newCategory && (

@@ -13,7 +13,7 @@
 }
 
 .wrapper .slide {
-    min-height: 60vh;
+    min-height: 50vh;
     min-width: 100%;
     /* aspect-ratio: 5/2; */
     transition: transform 0.5s ease-in-out;
@@ -26,7 +26,7 @@
 .slide .surface {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
     /* gap: 15px; */
     color: white;
@@ -35,18 +35,40 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--tGradient);
+    background: linear-gradient(0deg, rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.1));
     padding: 0 25px;
 
 }
 
-.slide h2 {
-    max-width: 350px;
-    text-shadow: 1px 1px var(--theme);
+.slide .surface .flex {
+    margin-bottom: 15px;
+    margin-right: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.wrapper .slide button {
-    padding: var(--buttonPadding)
+.slide .surface .flex .categories {
+    display: flex;
+    gap: 10px;
+    color:var(--highlight)
+}
+
+.slide h2 {
+    /* max-width: 350px; */
+    text-shadow: 1px 1px var(--theme);
+    margin: 0;
+}
+
+.wrapper .surface .flex .button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    color: var(--linkColor);
+    font-size: 110%;
+    cursor: pointer;
 }
 
 .wrapper .dots {
@@ -113,7 +135,11 @@
 
 
     .slide h2 {
-        max-width: 150px;
         font-size: 120%;
+        margin: 10px 0
+    }
+
+    .slide p {
+        display: none;
     }
 }

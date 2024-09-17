@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  serverActions: {
+    bodySizeLimit: '2mb' // Set desired value here
+  },
+  i18n: {
+    locales: ['en', 'bn'], // Add the languages you want to support
+    defaultLocale: 'en' // Default language
+  },
   images: {
     remotePatterns: [
       {

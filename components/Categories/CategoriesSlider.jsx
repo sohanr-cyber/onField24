@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { themeBg } from '@/utility/const'
 
 const CategoriesSlider = ({ setOpen }) => {
-  const categories = useSelector(state => state.product.categories)
+  const categories = useSelector(state => state.article.categories)
   const [expand, setExpand] = useState('')
   const router = useRouter()
   const [history, setHistory] = useState([])
@@ -41,7 +41,7 @@ const CategoriesSlider = ({ setOpen }) => {
                     <div onClick={() => router.push(`/`)}>Home</div>
                   </div>
                   <div className={styles.category}>
-                    <div onClick={() => router.push(`/shop`)}>Shop</div>
+                    <div onClick={() => router.push(`/article`)}>News</div>
                   </div>
                 </>
               )}
@@ -95,7 +95,7 @@ const Expanded = ({ categories, setHistory, history, setOpen }) => {
     <>
       <div
         className={styles.top}
-        style={{ color: 'white' }}
+        style={{ color: 'white', fontWeight: 'bold' }}
         onClick={() =>
           setHistory(
             history.filter(i => i._id != history[history.length - 1]._id)

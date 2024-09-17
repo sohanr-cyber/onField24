@@ -2,18 +2,18 @@ import React from 'react'
 import styles from '../../../styles/Admin/Home.module.css'
 import SideBar from '@/components/Admin/SideBar'
 import Dashboard from '@/components/Admin/Dashboard/Dashboard'
-import Product from '@/components/Product'
-import Products from '@/components/Admin/Dashboard/Products'
+// import Article from '@/components/Article'
+import Articles from '@/components/Admin/Dashboard/Articles'
 import BASE_URL from '@/config'
 import axios from 'axios'
 import { current } from '@reduxjs/toolkit'
 
-const index = ({ products, totalPages, currentPage, count }) => {
+const index = ({ articles, totalPages, currentPage, count }) => {
   return (
     <div className={styles.wrapper}>
-      <Products
-        title={'Product List'}
-        products={products}
+      <Articles
+        title={'Article List'}
+        articles={articles}
         totalPages={totalPages}
         count={count}
         currentPage={currentPage}
@@ -26,27 +26,34 @@ export default index
 
 export async function getServerSideProps (context) {
   try {
-    const { page, name } = context.query
+    const { page, search } = context.query
     console.log('new rquesy for page', page)
     const response = await axios.get(
-      `${BASE_URL}/api/product/filter?name=${name || ''}&page=${page || 1}`
+      `${BASE_URL}/api/article?page=${page || '1'}&search=${search || ''}`
     )
-    const { products, totalPages, page: currentPage, count } = response.data
+    const {
+      articles,
+      totalPages,
+      page: currentPage,
+      totalArticles
+    } = response.data
     return {
       props: {
-        title: 'Product List',
-        products,
+        title: 'Article List',
+        articles,
         totalPages,
         currentPage,
-        count
+        count: totalArticles
       }
     }
   } catch (error) {
-    console.error('Error fetching products:', error)
+    console.error('Error fetching articles:', error)
     return {
       props: {
-        title: 'Product List',
-        products: []
+        title: 'Article List',
+        articles: [],
+        coutn: 0,
+        totalPages: 0
       }
     }
   }

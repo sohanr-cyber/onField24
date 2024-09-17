@@ -1,4 +1,5 @@
 // Import necessary modules and models
+import { SUPPORTED_LANGUAGE } from '@/config'
 import db from '@/database/connection'
 import Category from '@/database/model/Category'
 import nc from 'next-connect'
@@ -8,6 +9,13 @@ const handler = nc()
 
 // get all the category
 handler.get(async (req, res) => {
+  const { lang = 'en' } = req.query
+  // Validate the lang parameter (only allow 'en' or 'bn')
+  if (!SUPPORTED_LANGUAGE.includes(lang)) {
+    return res.status(400).json({
+      message: 'Invalid language. Supported languages are en and bn.'
+    })
+  }
   try {
     await db.connect()
     // Get the page number from the query parameters, default to 1
@@ -33,7 +41,7 @@ handler.get(async (req, res) => {
             const { _id, name } = item
             const sc = await Category.find({ parent: _id })
             return {
-              name: name,
+              name: name[lang],
               _id: _id,
               children: sc
             }
@@ -41,7 +49,7 @@ handler.get(async (req, res) => {
         )
 
         return {
-          name: name,
+          name: name[lang],
           _id: _id,
           children: subtree
         }

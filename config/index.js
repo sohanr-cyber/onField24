@@ -18,6 +18,15 @@ if (process.env.NODE_ENV !== 'production') {
   PIXEL_ID = '1040750500772753'
 }
 
+const SUPPORTED_LANGUAGE = ['en', 'bn']
+
 const APP_SECRET = process.env.APP_SECRET
 export default BASE_URL
-export { APP_SECRET, MONGODB_URI, GMAIL, PASSWORD, PIXEL_ID }
+export {
+  APP_SECRET,
+  MONGODB_URI,
+  GMAIL,
+  PASSWORD,
+  PIXEL_ID,
+  SUPPORTED_LANGUAGE
+}

@@ -25,7 +25,7 @@ handler.get(async (req, res) => {
   }
 })
 
-handler.use(isAuth, isAdmin)
+// handler.use(isAuth, isAdmin)
 // Update category by ID
 handler.put(async (req, res) => {
   console.log(req.body)
@@ -35,7 +35,7 @@ handler.put(async (req, res) => {
     await db.connect()
     const updatedCategory = await Category.findByIdAndUpdate(
       id,
-      { ...req.body, slug: slugify(req.body.name) },
+      { ...req.body, slug: slugify(req.body.name.en) },
       {
         new: true
       }
@@ -46,7 +46,7 @@ handler.put(async (req, res) => {
     const category = await Category.findById(id).populate({
       path: 'children'
     })
-    
+
     await db.disconnect()
 
     res.status(200).json(category)

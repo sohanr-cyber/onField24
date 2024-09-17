@@ -3,7 +3,7 @@ import user from './userSlice'
 import state from './stateSlice'
 import cart from './cartSlice'
 import address from './addressSlice'
-import product from './productSlice'
+import article from './articleSlice'
 import notistack from './notistackSlice'
 import pixel from './pixelSlice'
 export const store = configureStore({
@@ -12,7 +12,7 @@ export const store = configureStore({
     state,
     cart,
     address,
-    product,
+    article,
     notistack,
     pixel
   }

@@ -25,33 +25,13 @@ const userSchema = new mongoose.Schema(
     salt: {
       type: String
     },
-    // Optional fields
-    phoneNumber: {
-      type: String
-    },
-    // Address information (optional - consider referencing an Address model)
-    shippingAddress: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Address' // Reference to a separate Address model (optional)
-    },
-    billingAddress: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Address' // Reference to a separate Address model (optional)
-    },
-    // User roles (optional)
+
     role: {
       type: String,
-      enum: ['user', 'admin'], // Define allowed roles (can be extended)
+      enum: ['user', 'admin', 'editor', 'writer'], // Define allowed roles (can be extended)
       default: 'user'
     },
     // Additional information (optional)
-    wishlist: [
-      {
-        // Array of product IDs for user's wishlist
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
-      }
-    ],
     phone: { type: String },
     isVerified: { type: Boolean, default: false },
     verificationCode: { type: String },
@@ -60,8 +40,6 @@ const userSchema = new mongoose.Schema(
 
   { timestamps: true }
 )
-
-
 
 const User = mongoose.models.User || mongoose.model('User', userSchema)
 export default User

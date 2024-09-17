@@ -5,8 +5,8 @@ import CheckBox from '@mui/icons-material/CheckBox'
 import CheckBoxOutlineBlank from '@mui/icons-material/CheckBoxOutlineBlank'
 import { useRouter } from 'next/router'
 
-const SelectCategory = ({ selected, setSelected }) => {
-  const categories = useSelector(state => state.product.categories)
+const SelectCategory = ({ selected, setSelected, lang = 'en' }) => {
+  const categories = useSelector(state => state.article.dualCategories)
 
   const router = useRouter()
 
@@ -26,7 +26,7 @@ const SelectCategory = ({ selected, setSelected }) => {
               />
             )}
 
-            <div className={styles.name}>{i.name}</div>
+            <div className={styles.name}>{i.name[lang]}</div>
           </div>
           {i.children.length > 0 &&
             i.children?.map((i, index) => (
@@ -44,7 +44,7 @@ const SelectCategory = ({ selected, setSelected }) => {
                     />
                   )}
 
-                  <div className={styles.name}>{i.name}</div>
+                  <div className={styles.name}>{i.name[lang]}</div>
                 </div>
                 {i.children.length > 0 &&
                   i.children?.map((i, index) => (
@@ -61,7 +61,7 @@ const SelectCategory = ({ selected, setSelected }) => {
                         />
                       )}
 
-                      <div className={styles.name}>{i.name}</div>
+                      <div className={styles.name}>{i.name[lang]}</div>
                     </div>
                   ))}
               </>

@@ -1,4 +1,5 @@
 // Import necessary modules and models
+import { SUPPORTED_LANGUAGE } from '@/config'
 import db from '@/database/connection'
 import Category from '@/database/model/Category'
 import { isAdmin, isAuth } from '@/utility'
@@ -7,9 +8,15 @@ import slugify from 'slugify'
 const PAGE_SIZE = 20
 const handler = nc()
 
-
 // get all the category
 handler.get(async (req, res) => {
+  const { lang = 'en' } = req.query
+  // Validate the lang parameter (only allow 'en' or 'bn')
+  if (!SUPPORTED_LANGUAGE.includes(lang)) {
+    return res.status(400).json({
+      message: 'Invalid language. Supported languages are en and bn.'
+    })
+  }
   try {
     await db.connect()
     // Get the page number from the query parameters, default to 1
@@ -24,10 +31,15 @@ handler.get(async (req, res) => {
     const totalPages = Math.ceil(totalCount / PAGE_SIZE)
 
     // Retrieve products with pagination and sorting
-    const categories = await Category.find()
+    let categories = await Category.find()
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(PAGE_SIZE)
+
+    categories = categories.map(i => ({
+      name: i.name.en,
+      _id: i._id
+    }))
 
     await db.disconnect()
     res.json({ page, categories, totalPages })
@@ -37,28 +49,39 @@ handler.get(async (req, res) => {
   }
 })
 
-handler.use(isAuth, isAdmin)
+// handler.use(isAuth, isAdmin)
 // Create a new category
 handler.post(async (req, res) => {
   try {
+    const { name, parent } = req.body
+
+    // Validate required fields
+    if (!name) {
+      return res.status(400).json({ message: 'Missing required fields' })
+    }
+
     await db.connect()
-    // const exist = await Category.findOne({ name: req.body.name })
-    // if (exist) {
-    //   return res.status(200).send({
-    //     error: 'Already A Cateory Exist With This Name'
-    //   })
-    // }
-    const category = await Category.create({
-      ...req.body,
-      slug: slugify(req.body.name)
+
+    const newCategory = new Category({
+      name: {
+        en: name.en,
+        bn: name.bn
+      },
+      slug: slugify(name.en),
+      parent
     })
-    await db.disconnect()
-    res.status(201).json(category)
+
+    // Save the article to the database
+    const savedCategory = await newCategory.save()
+
+    res.status(201).json({
+      message: 'Category created successfully',
+      article: savedCategory
+    })
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ message: 'Server Error' })
+    console.error('Error creating category:', error)
+    res.status(500).json({ message: 'Server error' })
   }
 })
-
 
 export default handler

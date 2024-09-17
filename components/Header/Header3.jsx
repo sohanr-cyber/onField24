@@ -3,25 +3,8 @@ import styles from '../../styles/Header/Header3.module.css'
 import Image from 'next/image'
 import { themeBg } from '@/utility/const'
 import { useRouter } from 'next/router'
-
-// const contents = [
-//   {
-//     image:
-//       'https://images.pexels.com/photos/581087/pexels-photo-581087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-//   },
-//   {
-//     image:
-//       'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=400'
-//   },
-//   {
-//     image:
-//       'https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=400'
-//   },
-//   {
-//     image:
-//       'https://images.pexels.com/photos/46212/men-s-shirt-shirt-attire-clothing-46212.jpeg?auto=compress&cs=tinysrgb&w=600'
-//   }
-// ]
+import { calculateReadingTimeFromHTML } from '@/utility/helper'
+import EastIcon from '@mui/icons-material/East'
 
 const Header3 = ({ contents }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -47,7 +30,7 @@ const Header3 = ({ contents }) => {
               key={index}
               className={styles.slide}
               style={{
-                backgroundImage: `url('${slide.image}')`,
+                backgroundImage: `url('${slide.thumbnail}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -56,17 +39,34 @@ const Header3 = ({ contents }) => {
             >
               <div className={styles.surface}>
                 {slide.title && <h2>{slide.title}</h2>}
-                {slide.buttonText && slide.buttonHref && (
-                  <button onClick={() => router.push(slide.buttonHref)}>
-                    {slide.buttonText}
-                  </button>
-                )}{' '}
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Quos, dolores sequi? Voluptatum cupiditate et vel
+                  reprehenderit nesciunt temporibus iure voluptas nostrum
+                  pariatur esse eos cumque quaerat ipsam, vitae excepturi sit!
+                </p>
+                <div className={styles.flex}>
+                  <div className={styles.categories}>
+                    {slide.categories.map((i, index) => (
+                      <span>{i.name}</span>
+                    ))}
+                  </div>
+                  <div>
+                    {calculateReadingTimeFromHTML(slide.content)} minutes read
+                  </div>
+                  <div
+                    className={styles.button}
+                    onClick={() => router.push(`/article/${slide.slug}`)}
+                  >
+                    View <EastIcon />
+                  </div>
+                </div>
               </div>
             </div>
           ))}
         </>
       </div>
-      <div className={styles.dots}>
+      {/* <div className={styles.dots}>
         {contents.map((i, indx) => (
           <span
             key={indx}
@@ -75,7 +75,7 @@ const Header3 = ({ contents }) => {
             onClick={() => setCurrentSlide(indx)}
           ></span>
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }

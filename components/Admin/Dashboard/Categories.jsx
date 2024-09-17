@@ -8,7 +8,7 @@ import axios from 'axios'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
-import { setFetchAgain } from '@/redux/productSlice'
+import { setFetchAgain } from '@/redux/articleSlice'
 
 const Categories = ({
   title,

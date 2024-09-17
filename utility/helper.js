@@ -57,6 +57,18 @@ const getTime = timestamp => {
 
   return formattedDate
 }
+const calculateReadingTimeFromHTML = htmlString => {
+  const wordsPerMinute = 200 // Average reading speed
+  // Strip HTML tags and get plain text
+  const plainText = htmlString.replace(/<\/?[^>]+(>|$)/g, '')
+  // Split by spaces to get the word count
+  const wordCount = plainText
+    .split(/\s+/)
+    .filter(word => word.length > 0).length
+  // Calculate reading time
+  const readingTime = Math.ceil(wordCount / wordsPerMinute)
+  return readingTime
+}
 
 const generateProductSeoData = productData => {
   const {
@@ -272,6 +284,16 @@ const dateDevider = days => {
     return 1
   }
 }
+
+const readMinute = duration => {
+  if (!duration) {
+    return
+  } else if (duration > 1) {
+    return `${duration} Minutes Read`
+  } else {
+    return `${duration} Minute Read`
+  }
+}
 export {
   generateTrackingNumber,
   containsAdmin,
@@ -291,5 +313,7 @@ export {
   generateTransactionId,
   convertToCamelCase,
   summarizeOrders,
-  dateDevider
+  dateDevider,
+  calculateReadingTimeFromHTML,
+  readMinute
 }

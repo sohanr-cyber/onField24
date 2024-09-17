@@ -8,12 +8,12 @@ import { useDispatch } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { orderStatusColors } from '@/utility/const'
-import { extractRGBA } from '@/utility/helper'
+import { extractRGBA, readMinute } from '@/utility/helper'
 
-const Products = ({
+const Articles = ({
   title,
   dashboard,
-  products,
+  articles,
   totalPages,
   count,
   currentPage
@@ -21,16 +21,16 @@ const Products = ({
   const router = useRouter()
   const dispatch = useDispatch()
   const [searchQuery, setSearchQuery] = useState('')
-  const [filteredProducts, setFilteredProducts] = useState({
-    products,
+  const [filteredArticles, setFilteredArticles] = useState({
+    articles,
     totalPages,
     count,
     page: currentPage
   })
 
   useEffect(() => {
-    setFilteredProducts({ products, totalPages, count, page: currentPage })
-  }, [products])
+    setFilteredArticles({ articles, totalPages, count, page: currentPage })
+  }, [articles])
 
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
@@ -44,10 +44,10 @@ const Products = ({
   const remove = async id => {
     try {
       dispatch(startLoading())
-      const { data } = await axios.delete(`/api/product/${id}`)
-      setFilteredProducts({
-        ...filteredProducts,
-        products: filteredProducts.products.filter(i => i._id != id)
+      const { data } = await axios.delete(`/api/article?id=${id}`)
+      setFilteredArticles({
+        ...filteredArticles,
+        articles: filteredArticles.articles.filter(i => i._id != id)
       })
       dispatch(finishLoading())
       dispatch(showSnackBar({ message: 'Product Removed !' }))
@@ -63,18 +63,19 @@ const Products = ({
       )
     }
   }
+
   return (
     <>
       {' '}
       {!dashboard && <h2>{title}</h2>}
-      <div className={styles.wrapper} id='products'>
+      <div className={styles.wrapper} id='articles'>
         {dashboard && <h2>{title}</h2>}
         {!dashboard && (
           <div className={styles.flex}>
             <div className={styles.left}>
               <input
                 type='text'
-                placeholder='Search by product name...'
+                placeholder='Search by article name...'
                 value={searchQuery || router.query.name}
                 onChange={e => setSearchQuery(e.target.value)}
               />
@@ -83,8 +84,8 @@ const Products = ({
               </span>
             </div>
             <div className={styles.right}>
-              <button onClick={() => router.push('/admin/product/create')}>
-                <span className={styles.plus__btn}>Add Product</span>
+              <button onClick={() => router.push('/admin/article/create')}>
+                <span className={styles.plus__btn}>Add Article</span>
                 <span className={styles.plus__icon}>+</span>
               </button>
             </div>
@@ -94,26 +95,26 @@ const Products = ({
           <table>
             <thead>
               <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Discount</th> <th>Categories</th>
-                <th>Stock Quantity</th>
-                <th>Sold</th>
+                <th>Title </th>
+                <th>Categories</th>
+                <th>Tags</th>
+                <th>Duration</th>
+                <th>Views</th>
                 <th>Action</th>
                 {/* Add more table headers as needed */}
               </tr>
             </thead>
             <tbody>
-              {filteredProducts?.products?.map((product, index) => (
+              {filteredArticles?.articles?.map((article, index) => (
                 <tr
                   key={index}
                   style={{
                     borderLeft: `3px solid ${
                       orderStatusColors[
                         `${
-                          product.stockQuantity < 5
+                          article.stockQuantity < 5
                             ? 'pending'
-                            : product.stockQuantity <= 1
+                            : article.stockQuantity <= 1
                             ? 'failed'
                             : 'none'
                         }`.toLowerCase()
@@ -122,9 +123,9 @@ const Products = ({
                     background: `${extractRGBA(
                       orderStatusColors[
                         `${
-                          product.stockQuantity < 5
+                          article.stockQuantity < 5
                             ? 'pending'
-                            : product.stockQuantity <= 1
+                            : article.stockQuantity <= 1
                             ? 'failed'
                             : 'none'
                         }`.toLowerCase()
@@ -133,26 +134,33 @@ const Products = ({
                     )}`
                   }}
                 >
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.discount}%</td>
+                  <td>{article.title}</td>
+
                   <td>
-                    {product.categories?.map((item, index) => (
+                    {article.categories?.map((item, index) => (
                       <span key={index}>
                         {item?.name} {'  '}
                       </span>
                     ))}
                   </td>
-                  <td>{product.stockQuantity}</td>
-                  <td>{product.sold}</td>
+                  <td>
+                    {' '}
+                    {article.tags?.map((item, index) => (
+                      <span key={index}>
+                        {item?.name} {'  '}
+                      </span>
+                    ))}
+                  </td>
+                  <td>{readMinute(article.duration)}</td>
+                  <td>{article.views}</td>
 
                   <td className={styles.action}>
-                    <span onDoubleClick={() => remove(product._id)}>
+                    <span onDoubleClick={() => remove(article._id)}>
                       Delete
                     </span>
                     <span
                       onClick={() =>
-                        router.push(`/admin/product/create?id=${product._id}`)
+                        router.push(`/admin/article/create?id=${article._id}`)
                       }
                     >
                       View
@@ -167,8 +175,8 @@ const Products = ({
         {!dashboard && (
           <div className={styles.pagination}>
             <Pages
-              totalPages={filteredProducts.totalPages}
-              currentPage={filteredProducts.page}
+              totalPages={filteredArticles.totalPages}
+              currentPage={filteredArticles.page}
             />
           </div>
         )}
@@ -177,4 +185,4 @@ const Products = ({
   )
 }
 
-export default Products
+export default Articles
