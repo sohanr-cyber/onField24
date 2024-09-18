@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from '../../../styles/Admin/Home.module.css'
 import SideBar from '@/components/Admin/SideBar'
-import Dashboard from '@/components/Admin/Dashboard/Dashboard'
 // import Article from '@/components/Article'
 import Articles from '@/components/Admin/Dashboard/Articles'
 import BASE_URL from '@/config'

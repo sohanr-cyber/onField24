@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/Admin/Home.module.css'
 import SideBar from '@/components/Admin/SideBar'
-import Dashboard from '@/components/Admin/Dashboard/Dashboard'
 import Graph from '../../components/Chart/Graph'
 import LineChart from '../../components/Chart/LineChart'
 import BarChart from '../../components/Chart/BarChart'

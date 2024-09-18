@@ -11,6 +11,34 @@ import User from '@/database/model/User'
 const handler = nextConnect()
 const PAGE_SIZE = 20
 
+function sortArrayByKey (arr, key, order = 'asc') {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    return []
+  }
+
+  // Determine if the key is numeric or date to handle sorting accordingly
+  const isNumericKey = typeof arr[0][key] === 'number'
+  const isDateKey =
+    !isNumericKey &&
+    new Date(arr[0][key]) !== 'Invalid Date' &&
+    !isNaN(new Date(arr[0][key]))
+
+  return arr.sort((a, b) => {
+    let comparison = 0
+
+    if (isNumericKey) {
+      comparison = a[key] - b[key]
+    } else if (isDateKey) {
+      comparison = new Date(a[key]) - new Date(b[key])
+    } else {
+      if (a[key] < b[key]) comparison = -1
+      if (a[key] > b[key]) comparison = 1
+    }
+
+    return order === 'desc' ? -comparison : comparison
+  })
+}
+
 handler.get(async (req, res) => {
   try {
     const {
@@ -21,10 +49,11 @@ handler.get(async (req, res) => {
       search,
       lang = 'en',
       page = 1,
-      limit = 10
+      limit = 10,
+      sortBy,
+      sortOrder
     } = req.query
 
-    // Validate the lang parameter (only allow 'en' or 'bn')
     const supportedLangs = ['en', 'bn']
     if (!supportedLangs.includes(lang)) {
       return res.status(400).json({
@@ -32,27 +61,23 @@ handler.get(async (req, res) => {
       })
     }
 
-    // Build a filter object dynamically
     const filter = {}
 
-    // Filter by status (draft or published)
     if (status) {
       filter.status = status
     }
 
-    // Filter by author ID
     if (authorId) {
       filter.author = authorId
     }
 
-    // Filter by category
     if (categories && categories != 'all') {
-      filter.categories = { $in: categories.split(',') } // Filter products by category
+      filter.categories = { $in: categories.split(',') } // Filter articles by category
     }
 
     // Filter by category
     if (tags && tags != 'all') {
-      filter.tags = { $in: tags.split(',') } // Filter products by category
+      filter.tags = { $in: tags.split(',') } // Filter articles by category
     }
 
     // Search in both English and Bengali fields of title and content
@@ -77,12 +102,23 @@ handler.get(async (req, res) => {
     const skip = (page - 1) * limit
     await db.connect()
     // Query the articles based on the filter and pagination
-    const articles = await Article.find(filter)
+    let articles = await Article.find(filter)
       .populate('author', 'name email') // Populate author info
       .populate('categories', 'name')
       // .populate('tags', 'name') // Populate category info
+
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(Number(limit))
+
+    if (sortBy && sortOrder) {
+      console.log({ sortBy, sortOrder })
+      if (sortOrder === 'desc') {
+        articles = sortArrayByKey(articles, sortBy, 'desc')
+      } else {
+        articles = sortArrayByKey(articles, sortBy, 'asc')
+      }
+    }
 
     // Map over articles to return only the selected language fields for title and content
     const localizedArticles = articles.map(article => ({
@@ -103,7 +139,6 @@ handler.get(async (req, res) => {
       duration: article.duration
     }))
 
-    // Get the total number of articles that match the filter
     const totalArticles = await Article.countDocuments(filter)
 
     res.status(200).json({

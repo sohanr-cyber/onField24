@@ -17,7 +17,7 @@ const SearchBox2 = ({ setOpen }) => {
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
     router.push({
-      pathname: '/shop',
+      pathname: '/news',
       query: queryParams,
       shallow: false
     })
@@ -40,7 +40,7 @@ const SearchBox2 = ({ setOpen }) => {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-          <span onClick={() => router.push(`/shop?name=${name}`)}>
+          <span onClick={() => router.push(`/news?name=${name}`)}>
             <SearchIcon />
           </span>
         </div>

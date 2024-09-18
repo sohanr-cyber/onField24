@@ -41,7 +41,7 @@ const CategoriesSlider = ({ setOpen }) => {
                     <div onClick={() => router.push(`/`)}>Home</div>
                   </div>
                   <div className={styles.category}>
-                    <div onClick={() => router.push(`/article`)}>News</div>
+                    <div onClick={() => router.push(`/news`)}>News</div>
                   </div>
                 </>
               )}
@@ -53,7 +53,7 @@ const CategoriesSlider = ({ setOpen }) => {
                       <div className={styles.category} key={index}>
                         <div
                           onClick={() =>
-                            router.push(`/shop?categories=${i._id}`)
+                            router.push(`/news?categories=${i._id}`)
                           }
                         >
                           {i.name}
@@ -114,7 +114,7 @@ const Expanded = ({ categories, setHistory, history, setOpen }) => {
         {categories &&
           categories.map((i, index) => (
             <div className={styles.category} key={index}>
-              <div onClick={() => router.push(`/shop?categories=${i._id}`)}>
+              <div onClick={() => router.push(`/news?categories=${i._id}`)}>
                 {i.name}
               </div>
               {i.children.length > 0 && (

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import styles from '../../styles/Shop/Shop.module.css'
+import styles from '../../styles/SearchResult/SearchResult.module.css'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import GridViewIcon from '@mui/icons-material/GridView'
-import Product from '@/components/Product'
 import axios from 'axios'
 import BASE_URL from '@/config'
 import { TurnRightSharp } from '@mui/icons-material'
-import Filter from '@/components/Shop/Filter'
 import Pagination from '@/components/Utility/Pagination'
 import { useRouter } from 'next/router'
+import Article from '@/components/Article/Article'
+import Article2 from '@/components/Article/Article2'
 
 const sortOptions = [
   {
@@ -18,20 +18,7 @@ const sortOptions = [
       sortOrder: ''
     }
   },
-  {
-    value: 'Price Low To High',
-    query: {
-      sortBy: 'price',
-      sortOrder: 'asc'
-    }
-  },
-  {
-    value: 'Price Hight To Low',
-    query: {
-      sortBy: 'price',
-      sortOrder: 'desc'
-    }
-  },
+
   {
     value: 'Newest To Oldest',
     query: {
@@ -47,7 +34,7 @@ const sortOptions = [
     }
   }
 ]
-const Home = ({ products, totalPages, currentPage, count }) => {
+const Home = ({ articles, totalPages, currentPage, count }) => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const updateRoute = data => {
@@ -64,10 +51,6 @@ const Home = ({ products, totalPages, currentPage, count }) => {
     <div className={styles.wrapper}>
       <div className={styles.top}>
         <div className={styles.left}>
-          <div className={styles.filter} onClick={() => setOpen(true)}>
-            <FilterAltIcon />
-            Filter
-          </div>
           <div>{count} items found </div>
         </div>
         <div className={styles.right}>
@@ -86,9 +69,22 @@ const Home = ({ products, totalPages, currentPage, count }) => {
           </select>
         </div>
       </div>
-      <div className={styles.products}>
-        {[...products].map((item, index) => (
-          <Product key={index} item={item} redirect={true} />
+      <div className={styles.articles}>
+        {articles?.map((item, index) => (
+          <>
+            {' '}
+            <div className={styles.mediumToBig__width}>
+              <Article
+                key={index}
+                article={item}
+                redirect={true}
+                style={{ minWidth: '180px' }}
+              />
+            </div>
+            <div className={styles.small__width}>
+              <Article2 key={index} article={item} />
+            </div>
+          </>
         ))}
       </div>
       <div className={styles.flex}>
@@ -106,40 +102,36 @@ const Home = ({ products, totalPages, currentPage, count }) => {
 export default Home
 
 export async function getServerSideProps (context) {
-  const {
-    name,
-    categories,
-    colors,
-    minPrice,
-    maxPrice,
-    page,
-    sortBy,
-    sortOrder
-  } = context.query
+  const { search, categories, tags, page, sortBy, sortOrder } = context.query
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/product/filter?blur=true&name=${name || ''}&categories=${
-        categories || 'all'
-      }&colors=${colors || 'all'}&minPrice=${minPrice || 'all'}&maxPrice=${
-        maxPrice || 'all'
-      }&page=${page || 1}&sortBy=${sortBy || ''}&sortOrder=${sortOrder || ''}`
+      `${BASE_URL}/api/article?search=${search || ''}&categories=${
+        categories || ''
+      }&tags=${tags || ''}&page=${page || 1}&sortBy=${sortBy || ''}&sortOrder=${
+        sortOrder || ''
+      }`
     )
-    const { products, totalPages, page: currentPage, count } = response.data
+    const {
+      articles,
+      totalPages,
+      page: currentPage,
+      totalArticles: count
+    } = response.data
     return {
       props: {
-        title: 'Product List',
-        products,
+        title: 'Article List',
+        articles,
         totalPages,
         currentPage,
         count
       }
     }
   } catch (error) {
-    console.error('Error fetching products:', error)
+    console.error('Error fetching articles:', error)
     return {
       props: {
-        title: 'Product List',
-        products: []
+        title: 'Article List',
+        articles: []
       }
     }
   }
