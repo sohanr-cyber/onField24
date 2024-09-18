@@ -11,8 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
   // BASE_URL = 'https://organic-food-mu.vercel.app'
   // BASE_URL = 'https://ecomerce-phi-gold.vercel.app'
   // BASE_URL = 'https://electronics-52h4.vercel.app'
-  BASE_URL = 'http://localhost:3000'
-  // BASE_URL = 'https://on-field360.vercel.app'
+  BASE_URL = 'https://on-field360.vercel.app'
 
   MONGODB_URI = process.env.MONGODB_URI
 
