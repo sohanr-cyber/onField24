@@ -30,39 +30,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import ShareIcon from '@mui/icons-material/Share'
 import { formatDistanceToNow } from 'date-fns'
 
-export async function getStaticPaths () {
-  try {
-    // Fetch the list of slugs for all locales
-    const response = await axios.get(`${BASE_URL}/api/article/slugs`)
-    const articles = response.data // Assuming the API returns an array of slugs
-
-    const locales = ['en', 'bn'] // Add all supported locales here
-
-    // Map the slugs to the required format, including locale
-    const paths = articles.flatMap(p =>
-      locales.map(locale => ({
-        params: { slug: p.slug },
-        locale
-      }))
-    )
-
-    return {
-      paths,
-      fallback: 'blocking'
-    }
-  } catch (error) {
-    console.log(
-      'Error fetching article slugs:',
-      error.response ? error.response.data : error.message
-    )
-    return {
-      paths: [],
-      fallback: 'blocking'
-    }
-  }
-}
-
-export async function getStaticProps (context) {
+export async function getServerSideProps (context) {
   const { slug } = context.params
   const { locale } = context
 
@@ -78,7 +46,6 @@ export async function getStaticProps (context) {
 
     // Extract the categories from the article data
     const categories = data.categories.map(i => i._id).join(',')
-    console.log(categories)
 
     let relatedArticles = []
     if (categories) {
@@ -86,7 +53,7 @@ export async function getStaticProps (context) {
       const resp = await axios.get(
         `${BASE_URL}/api/article?categories=${
           categories || ''
-        }&limit=${5}&lang=${locale}`
+        }&limit=15&lang=${locale}`
       )
 
       // Exclude the current article from related articles
@@ -99,8 +66,7 @@ export async function getStaticProps (context) {
       props: {
         article: data,
         relatedArticles
-      },
-      revalidate: 10 // Revalidate at most every 10 seconds
+      }
     }
   } catch (error) {
     console.error('Error fetching articles:', error)
@@ -173,7 +139,9 @@ const News = ({ article, error, relatedArticles }) => {
                 <div className={styles.name}>Md Sohanur Rahman</div>
                 <div className={styles.date}>
                   {/* {getTime(article.publishedAt)} */}
-                  {formatDistanceToNow(article.publishedAt)} Ago
+                  {article.publishedAt && (
+                    <>{formatDistanceToNow(article.publishedAt)} Ago</>
+                  )}
                 </div>
               </div>
             </div>

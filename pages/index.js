@@ -128,29 +128,31 @@ export default function Home ({ data }) {
   )
 }
 
-export async function getStaticProps ({ locale }) {
+export async function getServerSideProps({ locale }) {
   try {
     const start = new Date()
- 
 
+    // Fetch the data on each request
     const { data } = await axios.get(
       `${BASE_URL}/api/article/bycategory?lang=${locale}`
     )
+    
     const end = new Date()
     console.log(`time : ${end - start}ms`)
+    
     return {
       props: {
         data,
-      },
-      revalidate: 10 // Revalidate at most every 10 seconds
+      }
     }
   } catch (error) {
     console.error('Error fetching products:', error)
+    
     return {
       props: {
         data: [],
-      },
-      revalidate: 10 // Revalidate at most every 10 seconds
+      }
     }
   }
 }
+
