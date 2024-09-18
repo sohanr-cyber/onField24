@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 const LangPicker = () => {
   const router = useRouter()
 
-  const changeLocale = (locale) => {
+  const changeLocale = locale => {
     router.push(router.pathname, router.asPath, { locale })
   }
 

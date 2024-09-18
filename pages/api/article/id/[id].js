@@ -35,12 +35,20 @@ handler.get(async (req, res) => {
   }
 })
 
-// handler.use(isAuth, isAdmin)
+handler.use(isAuth, isAdmin)
 handler.put(async (req, res) => {
   try {
     const { id } = req.query // Get the article ID from the query parameters
-    const { title, content, status, categories, tags, thumbnail, excerpt } =
-      req.body // Extract fields from the request body
+    const {
+      title,
+      content,
+      status,
+      categories,
+      tags,
+      thumbnail,
+      excerpt,
+      publishedAt
+    } = req.body // Extract fields from the request body
     console.log({ tags })
     // console.log({ content })
     // Validate required fields
@@ -60,6 +68,7 @@ handler.put(async (req, res) => {
           status,
           categories,
           excerpt,
+          publishedAt,
           tags,
           thumbnail,
           duration: calculateReadingTimeFromHTML(content.en || content.bn)

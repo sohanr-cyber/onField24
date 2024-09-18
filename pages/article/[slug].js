@@ -28,6 +28,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import ShareIcon from '@mui/icons-material/Share'
+import { formatDistanceToNow } from 'date-fns'
 
 export async function getStaticPaths () {
   try {
@@ -171,7 +172,8 @@ const News = ({ article, error, relatedArticles }) => {
               <div className={styles.text}>
                 <div className={styles.name}>Md Sohanur Rahman</div>
                 <div className={styles.date}>
-                  {getTime(article.publishedAt)}
+                  {/* {getTime(article.publishedAt)} */}
+                  {formatDistanceToNow(article.publishedAt)} Ago
                 </div>
               </div>
             </div>

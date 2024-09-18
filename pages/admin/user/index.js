@@ -3,17 +3,17 @@ import styles from '../../../styles/Admin/Home.module.css'
 import SideBar from '@/components/Admin/SideBar'
 import Dashboard from '@/components/Admin/Dashboard/Dashboard'
 import Product from '@/components/Product'
-import Payments from '@/components/Admin/Dashboard/Payments'
+import Users from '@/components/Admin/Dashboard/Users'
 import BASE_URL from '@/config'
 import axios from 'axios'
 import { parse } from 'cookie'
 
-const index = ({ payments, totalPages, currentPage, page }) => {
+const index = ({ users, totalPages, currentPage, page }) => {
   return (
     <div className={styles.wrapper}>
-      <Payments
-        title={'Payments List'}
-        payments={payments}
+      <Users
+        title={'User List'}
+        users={users}
         totalPages={totalPages}
         currentPage={currentPage}
       />
@@ -41,16 +41,19 @@ export async function getServerSideProps (context) {
     const headers = { Authorization: `Bearer ${userInfo.token}` }
 
     const response = await axios.get(
-      `${BASE_URL}/api/transaction?page=${page || 1}&query=${query || ''}`,
+      `${BASE_URL}/api/user?page=${page || 1}&query=${
+        query || ''
+      }&position=${position}`,
       {
         headers
       }
     )
-    const { payments, totalPages, page: currentPage } = response.data
+    const { users, totalPages, page: currentPage } = response.data
+    console.log({ users })
     return {
       props: {
-        title: 'Payments List',
-        payments,
+        title: 'User List',
+        users,
         totalPages,
         currentPage
       }
@@ -59,8 +62,8 @@ export async function getServerSideProps (context) {
     console.error('Error fetching products:', error)
     return {
       props: {
-        title: 'Payments List',
-        payments: [],
+        title: 'User List',
+        users: [],
         totalPages: 0,
         currentPage: 0
       }

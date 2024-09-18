@@ -23,7 +23,8 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import CameraIcon from '@mui/icons-material/Camera'
 import Logout from '../Utility/Logout'
-
+import TagIcon from '@mui/icons-material/Tag'
+import AccessibilityIcon from '@mui/icons-material/Accessibility'
 const SideBar = ({ setOpen }) => {
   const router = useRouter()
   const [visible, setVisible] = useState('')
@@ -156,58 +157,61 @@ const SideBar = ({ setOpen }) => {
           )}
           <div
             className={styles.item}
-            onClick={() => setVisible(prev => (prev == 'user' ? '' : 'user'))}
+            onClick={() => setVisible(prev => (prev == 'tag' ? '' : 'tag'))}
           >
             <div className={styles.flex}>
               {' '}
               <div className={styles.icon}>
-                <AssignmentTurnedInIcon />
+                <TagIcon />
               </div>
-              <div className={styles.title}>Users</div>
+              <div className={styles.title}>Tag</div>{' '}
             </div>
             <div className={styles.icon}>
-              {visible == 'user' ? (
+              {visible == 'tag' ? (
                 <KeyboardArrowUpIcon />
               ) : (
                 <KeyboardArrowDownIcon />
               )}{' '}
             </div>
-          </div>
-          {visible == 'user' && (
+          </div>{' '}
+          {visible == 'tag' && (
             <div className={styles.inner__items}>
               <div
                 className={styles.item}
-                onClick={() => router.push('/admin/user')}
+                onClick={() => router.push('/admin/tag')}
               >
                 <div className={styles.flex}>
                   {' '}
                   <div className={styles.icon}>
                     <FormatListBulletedIcon />
                   </div>
-                  <div className={styles.title}>User List</div>
+                  <div className={styles.title}>Category List</div>
                 </div>
-              </div>
-              <div className={styles.item} style={{ display: 'none' }}>
+              </div>{' '}
+              <div
+                className={styles.item}
+                onClick={() => router.push('/admin/category/create')}
+              >
                 <div className={styles.flex}>
                   {' '}
                   <div className={styles.icon}>
                     <AddCircleIcon />
                   </div>
-                  <div className={styles.title}>Add Order</div>
+                  <div className={styles.title}>Add Category</div>
                 </div>
               </div>
             </div>
           )}
           <div
             className={styles.item}
-            onClick={() => router.push('/admin/address')}
+            onClick={() => router.push('/admin/user')}
           >
             <div className={styles.flex}>
               {' '}
               <div className={styles.icon}>
-                <MapIcon />
+                <AccessibilityIcon />
               </div>
-              <div className={styles.title}>Address</div>
+              <div className={styles.title}>User</div>
             </div>
           </div>
           <div className={styles.item}>

@@ -15,10 +15,10 @@
   --action: red;
   --regularAction: #FFC107;
   --cardBg: rgba(255, 255, 255, 255);
-  --buttonBg: linear-gradient(45deg, rgba(149, 145, 254, 255), rgba(7, 121, 214, 255));
+  --buttonBg: linear-gradient(45deg, rgb(136, 0, 255, 0.9), rgba(7, 121, 214, 255));
   --buttonC: white;
   --borderColor: rgba(197, 223, 244, 255);
-  --inputField: linear-gradient(245deg, rgba(7, 121, 214, 0.1), rgba(7, 121, 214, 0.1));
+  --inputField: linear-gradient(245deg, rgb(136, 0, 255, 0.1), rgba(7, 121, 214, 0.1));
   --hoverBgColor: rgba(7, 121, 214, 255);
   --hoverColor: rgba(7, 121, 214, 255);
   --scrollbar: rgba(7, 121, 214, 255);
@@ -30,8 +30,8 @@
 }
 
 ::selection {
-  background-color: rgb(221, 255, 0, 0.2);
-  color: black;
+  background-color: rgb(136, 0, 255, 0.9);
+  color: white
 }
 
 html,
@@ -128,6 +128,7 @@ button {
   body {
     font-size: 84%;
   }
+
   h1 {
     font-size: 160%;
   }

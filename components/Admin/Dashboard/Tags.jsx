@@ -10,28 +10,20 @@ import { showSnackBar } from '@/redux/notistackSlice'
 import { orderStatusColors } from '@/utility/const'
 import { extractRGBA, readMinute } from '@/utility/helper'
 
-const Articles = ({
-  title,
-  dashboard,
-  articles,
-  totalPages,
-  count,
-  currentPage,
-  style
-}) => {
+const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [searchQuery, setSearchQuery] = useState('')
-  const [filteredArticles, setFilteredArticles] = useState({
-    articles,
+  const [filteredTags, setFilteredTags] = useState({
+    tags,
     totalPages,
     count,
     page: currentPage
   })
 
   useEffect(() => {
-    setFilteredArticles({ articles, totalPages, count, page: currentPage })
-  }, [articles])
+    setFilteredTags({ tags, totalPages, count, page: currentPage })
+  }, [tags])
 
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
@@ -42,25 +34,21 @@ const Articles = ({
     })
   }
 
-  useEffect(() => {
-    setSearchQuery(router.query.search)
-  }, [router.query.search])
-
   const remove = async id => {
     try {
       dispatch(startLoading())
-      const { data } = await axios.delete(`/api/article?id=${id}`)
-      setFilteredArticles({
-        ...filteredArticles,
-        articles: filteredArticles.articles.filter(i => i._id != id)
+      const { data } = await axios.delete(`/api/tag?id=${id}`)
+      setFilteredTags({
+        ...filteredTags,
+        tags: filteredTags.tags.filter(i => i._id != id)
       })
       dispatch(finishLoading())
-      dispatch(showSnackBar({ message: 'Product Removed !' }))
+      dispatch(showSnackBar({ message: 'Tag Removed !' }))
     } catch (error) {
       dispatch(finishLoading())
       dispatch(
         showSnackBar({
-          message: 'Error While Deleting Product !',
+          message: 'Error While Deleting Tag !',
           option: {
             variant: 'error'
           }
@@ -71,32 +59,26 @@ const Articles = ({
 
   return (
     <>
+      {' '}
       {!dashboard && <h2>{title}</h2>}
-
-      <div
-        className={styles.wrapper}
-        id='articles'
-        style={style ? { ...style } : {}}
-      >
+      <div className={styles.wrapper} id='tags'>
         {dashboard && <h2>{title}</h2>}
         {!dashboard && (
           <div className={styles.flex}>
             <div className={styles.left}>
               <input
                 type='text'
-                placeholder='Search by article name...'
-                value={searchQuery}
+                placeholder='Search by tag name...'
+                value={searchQuery || router.query.name}
                 onChange={e => setSearchQuery(e.target.value)}
               />
-              <span
-                onClick={() => updateRoute({ search: searchQuery, page: 1 })}
-              >
+              <span onClick={() => updateRoute({ name: searchQuery, page: 1 })}>
                 <SearchIcon />
               </span>
             </div>
             <div className={styles.right}>
-              <button onClick={() => router.push('/admin/article/create')}>
-                <span className={styles.plus__btn}>Add Article</span>
+              <button onClick={() => router.push('/admin/tag/create')}>
+                <span className={styles.plus__btn}>Add Tag</span>
                 <span className={styles.plus__icon}>+</span>
               </button>
             </div>
@@ -107,25 +89,22 @@ const Articles = ({
             <thead>
               <tr>
                 <th>Title </th>
-                <th>Categories</th>
-                <th>Tags</th>
-                <th>Duration</th>
-                <th>Views</th>
+                <th>Title</th>
                 <th>Action</th>
                 {/* Add more table headers as needed */}
               </tr>
             </thead>
             <tbody>
-              {filteredArticles?.articles?.map((article, index) => (
+              {filteredTags?.tags?.map((tag, index) => (
                 <tr
                   key={index}
                   style={{
                     borderLeft: `3px solid ${
                       orderStatusColors[
                         `${
-                          article.stockQuantity < 5
+                          tag.stockQuantity < 5
                             ? 'pending'
-                            : article.stockQuantity <= 1
+                            : tag.stockQuantity <= 1
                             ? 'failed'
                             : 'none'
                         }`.toLowerCase()
@@ -134,9 +113,9 @@ const Articles = ({
                     background: `${extractRGBA(
                       orderStatusColors[
                         `${
-                          article.stockQuantity < 5
+                          tag.stockQuantity < 5
                             ? 'pending'
-                            : article.stockQuantity <= 1
+                            : tag.stockQuantity <= 1
                             ? 'failed'
                             : 'none'
                         }`.toLowerCase()
@@ -145,39 +124,14 @@ const Articles = ({
                     )}`
                   }}
                 >
-                  <td
-                    onDoubleClick={() =>
-                      router.push(`/article/${article.slug}`)
-                    }
-                  >
-                    {article.title}
-                  </td>
-
-                  <td>
-                    {article.categories?.map((item, index) => (
-                      <span key={index}>
-                        {item?.name} {'  '}
-                      </span>
-                    ))}
-                  </td>
-                  <td>
-                    {' '}
-                    {article.tags?.map((item, index) => (
-                      <span key={index}>
-                        {item?.name} {'  '}
-                      </span>
-                    ))}
-                  </td>
-                  <td>{readMinute(article.duration)}</td>
-                  <td>{article.views}</td>
+                  <td>{tag.name['en']}</td>
+                  <td>{tag.name['bn']}</td>
 
                   <td className={styles.action}>
-                    <span onDoubleClick={() => remove(article._id)}>
-                      Delete
-                    </span>
+                    <span onDoubleClick={() => remove(tag._id)}>Delete</span>
                     <span
                       onClick={() =>
-                        router.push(`/admin/article/create?id=${article._id}`)
+                        router.push(`/admin/tag/create?id=${tag._id}`)
                       }
                     >
                       View
@@ -192,8 +146,8 @@ const Articles = ({
         {!dashboard && (
           <div className={styles.pagination}>
             <Pages
-              totalPages={filteredArticles.totalPages}
-              currentPage={filteredArticles.page}
+              totalPages={filteredTags.totalPages}
+              currentPage={filteredTags.page}
             />
           </div>
         )}
@@ -202,4 +156,4 @@ const Articles = ({
   )
 }
 
-export default Articles
+export default Tags

@@ -8,11 +8,12 @@
     z-index: 3;
     animation: slideIn 0.5s ease-in-out forwards;
     display: flex;
+
 }
 
 .wrapper .left {
     background: var(--nav);
-    color:var(--navColor);
+    color: var(--navColor);
     min-width: 200px;
     max-width: 200px;
     height: 100%;
@@ -38,8 +39,10 @@
 }
 
 .categories {
-    max-height: 100%;
-    overflow-y: scroll;;
+    max-height: 85%;
+    overflow-y: scroll;
+
+    ;
 }
 
 

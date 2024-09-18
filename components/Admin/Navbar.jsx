@@ -15,9 +15,9 @@ const Navbar = () => {
         <div className={styles.menu} onClick={() => setOpen(true)}>
           <MenuIcon />
         </div>
-        <div className={styles.logo}>
-          <Logo />
-        </div>
+      </div>
+      <div className={styles.logo}>
+        <Logo />
       </div>
       <div className={styles.right}>
         <div

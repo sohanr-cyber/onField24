@@ -125,6 +125,7 @@ handler.post(async (req, res) => {
     const { title, content, categories, status, thumbnail, tags, excerpt } =
       req.body
     const authorId = req.user._id
+    console.log({ excerpt })
     // Validate required fields
     if (!title || !content || !excerpt) {
       return res.status(400).json({ message: 'Missing required fields' })
@@ -144,6 +145,13 @@ handler.post(async (req, res) => {
       return res.status(404).json({ message: 'Some categories not found' })
     }
 
+    const existing = await Article.findOne({ slug: slugify(title.en) })
+    if (existing) {
+      return res
+        .status(304)
+        .json({ message: 'Already Exist A Article with this slug .' })
+    }
+
     // Create a new article
     const newArticle = new Article({
       title: {
@@ -154,8 +162,10 @@ handler.post(async (req, res) => {
         en: content.en,
         bn: content.bn
       },
-      tags: tags,
+      excerpt,
+      tags,
       thumbnail,
+      author,
       duration: calculateReadingTimeFromHTML(content.en || content.bn),
       //   author: authorId,
       categories: categories,

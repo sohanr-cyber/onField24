@@ -3,7 +3,64 @@
     min-height: 100vh;
 
 
+
 }
+
+.wrapper .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    margin-top: 0;
+}
+
+.wrapper h2 {
+    margin: 0;
+}
+
+ .currentLang {
+    background: var(--highlight);
+    color: var(--navColor)
+}
+
+.wrapper label {
+    font-weight: bold;
+}
+
+/*  top flex for product */
+
+
+.wrapper .top__flex {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    /* background: var(--cardBg); */
+    padding: 10px;
+    margin: 10px 0;
+    gap: 15px;
+
+}
+
+.wrapper .top__flex .field {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.wrapper .status {
+    display: flex;
+    border: 1px solid var(--borderColor);
+    border-radius: 5px;
+    overflow: hidden;
+
+}
+
+.wrapper .status span {
+    padding: 10px;
+    cursor: pointer;
+    ;
+}
+
 
 .wrapper .forms {
     display: flex;
@@ -24,12 +81,16 @@
 }
 
 
-.left .flex {
+.wrapper .forms .left .flex {
     display: flex;
     gap: 10px;
     width: 100%;
     /* margin: 10px 0; */
     margin: -10px 0;
+    align-items: flex-start;
+    /* background-color: red; */
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
 
 
@@ -109,91 +170,13 @@
 .image__container img {
     object-fit: cover;
 }
+
 .wrapper button {
     padding: var(--buttonPadding);
 }
 
 
 
-/* Order Crate */
-
-.left .products,
-.right .products {
-    display: flex;
-    overflow-x: scroll;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-
-.left .products .item {
-    position: relative;
-    padding: 0;
-}
-
-
-.left .products .item .selection {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 120px;
-    background-color: rgb(255, 255, 255, 0.8);
-    color: black;
-    padding: 10px;
-    right: 0;
-    /* display: none; */
-    overflow-y: hidden;
-    max-height: 120px;
-
-}
-
-.left .products .item:hover .selection {
-    display: block;
-    overflow-y: scroll;
-}
-
-.selection .sizes,
-.selection .colors,
-.selection .quantity {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 10px 0;
-
-}
-
-.selection span {
-    padding: 2px 7px;
-    border-radius: 5px;
-    border: 1px solid var(--borderColor);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-}
-
-
-.selection .quantity {
-    gap: 0;
-}
-
-.selection .quantity span {
-    border-radius: 0;
-}
-
-.selected {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    font-size: 160%;
-    font-weight: bold;
-    display: block;
-    z-index: 3;
-    border: 2px solid red;
-    border-radius: 50%;
-}
 
 @media (max-width:720px) {
     .forms {

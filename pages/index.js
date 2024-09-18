@@ -21,7 +21,7 @@ const inter = Inter({ subsets: ['latin'] })
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import EastIcon from '@mui/icons-material/East'
 import Article2 from '@/components/Article/Article2'
-export default function Home ({ data, contents }) {
+export default function Home ({ data }) {
   return (
     <>
       <div className={styles.wrapper}>
@@ -131,9 +131,7 @@ export default function Home ({ data, contents }) {
 export async function getStaticProps ({ locale }) {
   try {
     const start = new Date()
-    const { data: contents } = await axios.get(
-      `${BASE_URL}/api/content?show=true`
-    )
+ 
 
     const { data } = await axios.get(
       `${BASE_URL}/api/article/bycategory?lang=${locale}`
@@ -143,7 +141,6 @@ export async function getStaticProps ({ locale }) {
     return {
       props: {
         data,
-        contents: contents.contents
       },
       revalidate: 10 // Revalidate at most every 10 seconds
     }
@@ -152,7 +149,6 @@ export async function getStaticProps ({ locale }) {
     return {
       props: {
         data: [],
-        contents: []
       },
       revalidate: 10 // Revalidate at most every 10 seconds
     }

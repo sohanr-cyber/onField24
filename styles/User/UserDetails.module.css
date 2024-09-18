@@ -1,0 +1,175 @@
+.wrapper {
+    display: flex;
+    padding: 25px;
+    gap: 15px;
+}
+
+.left {
+    flex: 1;
+    max-width: 40%;
+    background-color: var(--cardBg);
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
+
+.right {
+    flex: 2;
+    overflow-x: scroll;
+
+}
+
+.image__container {
+    /* margin-bottom: 20px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 200px;
+    padding: 10px;
+
+}
+
+
+.image__container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 200px;
+    max-height: 200px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+
+
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* margin-bottom: 20px; */
+    gap: 10px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.buttons .button {
+    padding: var(--buttonPadding);
+    background: var(--highlight);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+
+}
+
+.text__container {
+    padding: 20px;
+    border-radius: 8px;
+
+
+}
+
+.contribution {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+
+}
+
+.item {
+    text-align: center;
+}
+
+.item b {
+    display: block;
+    font-size: 24px;
+}
+
+.details {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.details b {
+    font-size: 18px;
+    display: block;
+}
+
+.profession {
+    margin-top: 10px;
+    text-transform: capitalize;
+}
+
+.location {
+    color: #888;
+    font-size: 14px;
+}
+
+
+
+.settings {
+    background-color: var(--cardBg);
+    padding: 10px;
+}
+
+.articles {
+    background-color: var(--cardBg);
+}
+
+.settings,
+.articles {
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+
+}
+
+.field {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.field label {
+    font-weight: bold;
+    ;
+}
+
+
+.field input {
+    width: 97%;
+}
+
+.articles {
+    margin-top: 20px;
+}
+
+
+@media (min-width:1024px) {
+    .wrapper {
+        padding: 25px var(--percent);
+    }
+}
+
+@media (max-width:570px) {
+    .wrapper {
+        flex-direction: column;
+        padding: 15px;
+
+    }
+
+    .wrapper .left,
+    .wrapper .right {
+        min-width: 100%;
+    }
+}
+
+@media (max-width:410px) {
+    .wrapper {
+        padding: 10px;
+    }
+}

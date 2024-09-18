@@ -11,27 +11,25 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { buttonC, themeBg } from '@/utility/const'
-import AddCategory from '@/components/Admin/AddCategory'
 import { setFetchAgain } from '@/redux/articleSlice'
-import SelectParentCategory from '@/components/Categories/SelectParentCategory'
 // Order Craetion Form
-const Create = ({ category: data }) => {
-  const [category, setCategory] = useState(data)
+const Create = ({ tag: data }) => {
+  const [tag, setTag] = useState(data)
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const router = useRouter()
-  const [newCategory, setNewCategory] = useState(false)
+  const [newTag, setNewTag] = useState(false)
   const categories = useSelector(state => state.article.categories)
   const [lang, setLang] = useState(['en'])
 
   useEffect(() => {
-    setCategory(data)
+    setTag(data)
   }, [router.query])
   const userInfo = useSelector(state => state.user.userInfo)
   const headers = { Authorization: `Bearer ${userInfo?.token}` }
 
-  const saveCategory = async () => {
-    if (!category.name) {
+  const saveTag = async () => {
+    if (!tag) {
       dispatch(
         showSnackBar({
           message: 'Please fill all the necessaary field',
@@ -45,9 +43,9 @@ const Create = ({ category: data }) => {
     try {
       dispatch(startLoading())
       const { data } = await axios.post(
-        '/api/category',
+        '/api/tag',
         {
-          ...category
+          ...tag
         },
         {
           headers
@@ -66,14 +64,13 @@ const Create = ({ category: data }) => {
         return
       }
       dispatch(setFetchAgain())
-      setCategory({
-        name: '',
-        image: ''
+      setTag({
+        name: ''
       })
       dispatch(finishLoading())
       dispatch(
         showSnackBar({
-          message: 'New Category Created ',
+          message: 'New Tag Created ',
           option: {
             variant: 'success'
           }
@@ -83,7 +80,7 @@ const Create = ({ category: data }) => {
       dispatch(finishLoading())
       dispatch(
         showSnackBar({
-          message: 'Error While Creating Category !',
+          message: 'Error While Creating Tag !',
           option: {
             variant: 'error'
           }
@@ -93,8 +90,8 @@ const Create = ({ category: data }) => {
   }
 
   console.log({ categories })
-  const updateCategory = async () => {
-    if (!category.name) {
+  const updateTag = async () => {
+    if (!tag) {
       setError('Pleas fill all the necessaary field')
       dispatch(
         showSnackBar({
@@ -109,18 +106,18 @@ const Create = ({ category: data }) => {
     try {
       dispatch(startLoading())
       const { data } = await axios.put(
-        `/api/category/${router.query.id}`,
+        `/api/tag/${router.query.id}`,
         {
-          ...category
+          ...tag
         },
         { headers }
       )
-      // setCategory(data)
+      // setTag(data)
       dispatch(setFetchAgain())
       dispatch(finishLoading())
       dispatch(
         showSnackBar({
-          message: 'Category Updated',
+          message: 'Tag Updated',
           option: {
             variant: 'default'
           }
@@ -130,20 +127,19 @@ const Create = ({ category: data }) => {
       dispatch(finishLoading())
       dispatch(
         showSnackBar({
-          message: 'Error While Updating Category !',
+          message: 'Error While Updating Tag !',
           option: {
             variant: 'error'
           }
         })
       )
-      setError('Error While Updating Category !')
+      setError('Error While Updating Tag !')
     }
   }
   return (
     <div className={styles.wrapper}>
       <div className={styles.flex}>
-        <h2>{router.query.id ? 'Update' : 'Add'} Category</h2>
-        <h2>Add Article</h2>
+        <h2>{router.query.id ? 'Update' : 'Add'} Tag</h2>
         <div
           className={styles.status}
           onDoubleClick={() => setLang(['en', 'bn'])}
@@ -166,136 +162,47 @@ const Create = ({ category: data }) => {
         {lang.find(i => i == 'en') && (
           <div className={styles.left}>
             <div className={styles.field}>
-              <label>Category Name</label>
+              <label>Tag Name</label>
               <input
                 type='text'
-                placeholder='Enter Category Name'
-                value={category.name.en}
+                placeholder='Enter Tag Name'
+                value={tag.name?.en}
                 onChange={e =>
-                  setCategory({
-                    ...category,
-                    name: { en: e.target.value, bn: category.name.bn }
+                  setTag({
+                    ...tag,
+                    name: { en: e.target.value, bn: tag.name?.bn }
                   })
                 }
               />
             </div>
-
-            <div className={styles.field}>
-              <label>Chose Parent Category</label>
-              <div className={styles.options}>
-                <SelectParentCategory
-                  category={category}
-                  setCategory={setCategory}
-                />
-              </div>
-            </div>
-            {newCategory && (
-              <div className={styles.field}>
-                <AddCategory categories={categories} />
-              </div>
-            )}
-
-            <div
-              className={styles.field}
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <span
-                onClick={() =>
-                  setCategory({ ...category, isFeatured: !category.isFeatured })
-                }
-              >
-                {category.isFeatured ? (
-                  <CheckBoxIcon />
-                ) : (
-                  <CheckBoxOutlineBlankIcon />
-                )}
-              </span>
-              <span> This Category will be shown in home page</span>{' '}
-            </div>
-            <div
-              className={styles.field}
-              style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start'
-              }}
-            ></div>
           </div>
         )}
 
         {lang.find(i => i == 'bn') && (
           <div className={styles.left}>
             <div className={styles.field}>
-              <label>Category Name</label>
+              <label>Tag Name</label>
               <input
                 type='text'
-                placeholder='Enter Category Name'
-                value={category.name.bn}
+                placeholder='Enter Tag Name'
+                value={tag.name.bn}
                 onChange={e =>
-                  setCategory({
-                    ...category,
+                  setTag({
+                    ...tag,
                     name: {
-                      en: category.name.en,
+                      en: tag.name.en,
                       bn: e.target.value
                     }
                   })
                 }
               />
             </div>
-
-            <div className={styles.field}>
-              <label>Chose Parent Category</label>
-              <div className={styles.options}>
-                <SelectParentCategory
-                  category={category}
-                  setCategory={setCategory}
-                  lang={'bn'}
-                />
-              </div>
-            </div>
-            {newCategory && (
-              <div className={styles.field}>
-                <AddCategory categories={categories} />
-              </div>
-            )}
-
-            <div
-              className={styles.field}
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center'
-              }}
-            >
-              <span
-                onClick={() =>
-                  setCategory({ ...category, isFeatured: !category.isFeatured })
-                }
-              >
-                {category.isFeatured ? (
-                  <CheckBoxIcon />
-                ) : (
-                  <CheckBoxOutlineBlankIcon />
-                )}
-              </span>
-              <span> This Category will be shown in home page</span>{' '}
-            </div>
-            <div
-              className={styles.field}
-              style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start'
-              }}
-            ></div>
           </div>
         )}
       </form>
       {error && <p style={{ color: 'red', margin: '10px' }}>{error}</p>}
-      <button
-        onClick={() => (router.query.id ? updateCategory() : saveCategory())}
-      >
-        Save Category
+      <button onClick={() => (router.query.id ? updateTag() : saveTag())}>
+        Save Tag
       </button>
     </div>
   )
@@ -306,23 +213,23 @@ export default Create
 export async function getServerSideProps ({ query }) {
   const { id } = query
 
-  const fetchCategory = async () => {
-    const { data } = await axios.get(`${BASE_URL}/api/category/${id}`)
+  const fetchTag = async () => {
+    const { data } = await axios.get(`${BASE_URL}/api/tag/${id}`)
     return data
   }
 
   const fetchCategories = async () => {
-    const { data } = await axios.get(`${BASE_URL}/api/category`)
+    const { data } = await axios.get(`${BASE_URL}/api/tag`)
     return data.categories
   }
 
   // const categories = await fetchCategories()
 
   if (id) {
-    const category = await fetchCategory()
+    const tag = await fetchTag()
     return {
       props: {
-        category
+        tag
         // categories
       }
     }
@@ -330,10 +237,8 @@ export async function getServerSideProps ({ query }) {
 
   return {
     props: {
-      category: {
-        name: '',
-        image: '',
-        children: []
+      tag: {
+        name: {}
       }
       // categories: categories
     }
