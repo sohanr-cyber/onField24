@@ -30,53 +30,63 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import ShareIcon from '@mui/icons-material/Share'
 import { formatDistanceToNow } from 'date-fns'
 
-export async function getServerSideProps (context) {
-  const { slug } = context.params
-  const { locale } = context
+
+export async function getStaticPaths() {
+  // Fetch all available slugs for articles
+  const { data } = await axios.get(`${BASE_URL}/api/article/slugs`);
+  
+  const paths = data.map((article) => ({
+    params: { slug: article.slug },
+    locale: article.locale
+  }));
+  
+  return {
+    paths,
+    fallback: 'blocking' // Use blocking so new pages are generated on-demand
+  };
+}
+
+export async function getStaticProps({ params, locale }) {
+  const { slug } = params;
 
   try {
-    const start = new Date()
+    const start = new Date();
 
     // Fetch the article based on the slug and the locale
     const { data } = await axios.get(
       `${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`
-    )
+    );
 
-    const end = new Date()
+    const end = new Date();
+    const categories = data.categories.map(i => i._id).join(',');
 
-    // Extract the categories from the article data
-    const categories = data.categories.map(i => i._id).join(',')
-
-    let relatedArticles = []
+    let relatedArticles = [];
     if (categories) {
-      // Fetch related articles based on the categories, also filter by locale
       const resp = await axios.get(
-        `${BASE_URL}/api/article?categories=${
-          categories || ''
-        }&limit=15&lang=${locale}`
-      )
+        `${BASE_URL}/api/article?categories=${categories || ''}&limit=15&lang=${locale}`
+      );
 
-      // Exclude the current article from related articles
-      relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
+      relatedArticles = resp.data.articles.filter(i => i._id !== data._id);
     }
 
-    console.log(`Data fetching time: ${end - start}ms`)
+    console.log(`Data fetching time: ${end - start}ms`);
 
     return {
       props: {
         article: data,
         relatedArticles
-      }
-    }
+      },
+      revalidate: 60 // Regenerate the page every 60 seconds
+    };
   } catch (error) {
-    console.error('Error fetching articles:', error)
+    console.error('Error fetching articles:', error);
     return {
       props: {
         article: {},
         relatedArticles: [],
         error: error.message
       }
-    }
+    };
   }
 }
 
