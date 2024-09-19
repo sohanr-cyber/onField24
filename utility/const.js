@@ -41,28 +41,66 @@ const colors = [
 ]
 
 const seoData = {
-  title: `Latest News and Updates - ${companyName}`,
-  description: `Stay informed with the latest news and updates from ${companyName}. Read trending articles, in-depth analysis on politics, technology, and more.`,
-  canonical: BASE_URL,
-  openGraph: {
-    url: BASE_URL,
-    title: `Latest News and Updates - ${companyName}`,
-    description: `Catch up on the latest articles and breaking news from ${companyName}, covering a variety of topics including technology, politics, and education.`,
-    images: [
-      {
-        url: 'https://images.pexels.com/photos/237635/pexels-photo-237635.jpeg?auto=compress&cs=tinysrgb&w=600',
-        alt: 'News and Articles - ${companyName}',
-        width: 1200,
-        height: 630
-      }
-    ],
-    site_name: companyName
-  },
   twitter: {
     handle: '@newsportal',
     site: '@newsportal',
     cardType: 'summary_large_image'
   }
+}
+
+function getSeoData (lang) {
+  const seoData = {
+    en: {
+      title: `Latest News and Updates - ${companyName}`,
+      description: `Stay informed with the latest news and updates from ${companyName}. Read trending articles, in-depth analysis on politics, technology, and more.`,
+      canonical: BASE_URL,
+      openGraph: {
+        url: BASE_URL,
+        title: `Latest News and Updates - ${companyName}`,
+        description: `Catch up on the latest articles and breaking news from ${companyName}, covering a variety of topics including technology, politics, and education.`,
+        images: [
+          {
+            url: 'https://images.pexels.com/photos/237635/pexels-photo-237635.jpeg?auto=compress&cs=tinysrgb&w=600',
+            alt: `News and Articles - ${companyName}`,
+            width: 1200,
+            height: 630
+          }
+        ],
+        site_name: companyName
+      },
+      twitter: {
+        handle: '@newsportal',
+        site: '@newsportal',
+        cardType: 'summary_large_image'
+      }
+    },
+    bn: {
+      title: `সর্বশেষ খবর এবং আপডেট - ${companyName}`,
+      description: `${companyName} থেকে সর্বশেষ খবর এবং আপডেট সম্পর্কে জানুন। প্রযুক্তি, রাজনীতি, এবং আরও অনেক বিষয়ের গভীর বিশ্লেষণ পড়ুন।`,
+      canonical: BASE_URL,
+      openGraph: {
+        url: BASE_URL,
+        title: `সর্বশেষ খবর এবং আপডেট - ${companyName}`,
+        description: `${companyName} থেকে প্রযুক্তি, রাজনীতি এবং শিক্ষা সহ বিভিন্ন বিষয়ের সাম্প্রতিক নিবন্ধ এবং ব্রেকিং নিউজ সম্পর্কে জানুন।`,
+        images: [
+          {
+            url: 'https://images.pexels.com/photos/237635/pexels-photo-237635.jpeg?auto=compress&cs=tinysrgb&w=600',
+            alt: `সংবাদ এবং নিবন্ধ - ${companyName}`,
+            width: 1200,
+            height: 630
+          }
+        ],
+        site_name: companyName
+      },
+      twitter: {
+        handle: '@newsportal',
+        site: '@newsportal',
+        cardType: 'summary_large_image'
+      }
+    }
+  }
+
+  return seoData[lang] || seoData.en // Fallback to English if lang is not found
 }
 
 const TermsAndConditionSeoData = {
@@ -185,7 +223,7 @@ export {
   buttonC,
   buttonBg,
   borderColor,
-  seoData,
+  getSeoData,
   TermsAndConditionSeoData,
   privacyPolicySeoData,
   registerSeoData,

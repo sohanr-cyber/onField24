@@ -3,8 +3,12 @@ import styles from '@/styles/TermsAndCondition.module.css'
 import { termsAndConditions } from '@/utility/data'
 import { NextSeo } from 'next-seo'
 import { TermsAndConditionSeoData } from '@/utility/const'
+import { useRouter } from 'next/router'
 
 const termAndCondition = () => {
+  const router = useRouter()
+  const lang = router.locale
+  
   return (
     <>
       {' '}
@@ -29,14 +33,18 @@ const termAndCondition = () => {
             <div className={styles.item} key={index}>
               <h3>
                 {' '}
-                {item.section}. {item.title}
+                {item.section}. {item.title[lang]}
               </h3>
-              <p>{item.content}</p>
+              <p>{item.content[lang]}</p>
             </div>
           ))}
         <div className={styles.item}>
-          <h3>{termsAndConditions[termsAndConditions.length - 1].title}</h3>
-          <p>{termsAndConditions[termsAndConditions.length - 1].content}</p>
+          <h3>
+            {termsAndConditions[termsAndConditions.length - 1].title[lang]}
+          </h3>
+          <p>
+            {termsAndConditions[termsAndConditions.length - 1].content[lang]}
+          </p>
         </div>
       </div>
     </>

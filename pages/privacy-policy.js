@@ -3,8 +3,11 @@ import styles from '@/styles/TermsAndCondition.module.css'
 import { privacyPolicy } from '@/utility/data'
 import { NextSeo } from 'next-seo'
 import { privacyPolicySeoData } from '@/utility/const'
+import { useRouter } from 'next/router'
 
 const privacy = () => {
+  const router = useRouter()
+  const lang = router.locale
   return (
     <>
       <NextSeo {...privacyPolicySeoData} />{' '}
@@ -21,14 +24,14 @@ const privacy = () => {
           <div className={styles.item} key={index}>
             <h3>
               {' '}
-              {item.section}. {item.title}
+              {item.section}. {item.title[lang]}
             </h3>
-            <p>{item.content}</p>
+            <p>{item.content[lang]}</p>
           </div>
         ))}
         <div className={styles.item}>
-          <h3>{privacyPolicy[privacyPolicy.length - 1].title}</h3>
-          <p>{privacyPolicy[privacyPolicy.length - 1].content}</p>
+          <h3>{privacyPolicy[privacyPolicy.length - 1].title[lang]}</h3>
+          <p>{privacyPolicy[privacyPolicy.length - 1].content[lang]}</p>
         </div>
       </div>
     </>
