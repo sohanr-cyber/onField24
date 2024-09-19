@@ -30,6 +30,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import ShareIcon from '@mui/icons-material/Share'
 import { formatDistanceToNow } from 'date-fns'
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
+import t from '@/utility/dict'
 
 export async function getStaticPaths () {
   // Fetch all available slugs for articles
@@ -97,6 +98,7 @@ const News = ({ article, error, relatedArticles }) => {
   const [size, setSize] = useState(article?.sizes?.split(',')[0])
   const [thumbnail, setThumbnail] = useState(article?.thumbnail)
   const router = useRouter()
+  const lang = router.locale
   const userInfo = useSelector(state => state.user.userInfo)
   const dispatch = useDispatch()
   const [isClient, setIsClient] = useState(false)
@@ -213,7 +215,7 @@ const News = ({ article, error, relatedArticles }) => {
           </div>
         </div>
         <div className={styles.right}>
-          <h1>Read More </h1>
+          <h1>{t('readMore', lang)} </h1>
           <PBar height={'2px'} />
           <div className={styles.articles__horizontal}>
             {relatedArticles?.length > 0 &&

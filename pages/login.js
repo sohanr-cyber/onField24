@@ -10,11 +10,13 @@ import { showSnackBar } from '@/redux/notistackSlice'
 import { NextSeo } from 'next-seo'
 import { loginSeoData } from '@/utility/const'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
+import t from '@/utility/dict'
 
 const Login = () => {
   const [user, setUser] = useState({})
   const router = useRouter()
   const dispatch = useDispatch()
+  const lang = router.locale
 
   const signup = async () => {
     if (!user.password || !user.email) {
@@ -88,31 +90,36 @@ const Login = () => {
           <div className={styles.logo}>
             <Logo />
           </div>
-          <h2>Sign In to Account</h2>
-          <p>Enter Your Email and Password to sign in</p>
+          <h2>{t('loginH', lang)}</h2>
+          <p>{t('loginP', lang)}</p>
           <form>
             <input
               type='email'
-              placeholder='Enter Your Email'
+              placeholder={t('enterEmail', lang)}
               value={user.email}
               onChange={e => setUser({ ...user, email: e.target.value })}
             />
             <input
               type='password'
-              placeholder='Enter Your Password'
+              placeholder={t('enterPassword', lang)}
               onChange={e => setUser({ ...user, password: e.target.value })}
             />
             <div className={styles.btn} onClick={() => signup()}>
-              Sign In
+              {t('signIn', lang)}
             </div>
           </form>
           <p className={styles.route}>
-            Don&apos;t have an account ?{' '}
-            <Link href='/register'>&nbsp; Create new one</Link>
+            {t('noAccount', lang)}
+
+            <Link href='/register'>&nbsp; {t('createAccount', lang)}</Link>
           </p>
           <p className={styles.route}>
-            Forget Password ?{' '}
-            <Link href='/verify/existance'>&nbsp; Reset password</Link>
+            {t('forgetPassword', lang)}
+
+            <Link href='/verify/existance'>
+              &nbsp;
+              {t('resetPassword', lang)}{' '}
+            </Link>
           </p>
         </div>
       </div>

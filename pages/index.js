@@ -17,8 +17,13 @@ import PBar from '@/components/Utility/PBar'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import EastIcon from '@mui/icons-material/East'
 import Article2 from '@/components/Article/Article2'
+import t from '@/utility/dict'
+import { useRouter } from 'next/router'
 
 export default function Home ({ data }) {
+  const router = useRouter()
+  const lang = router.locale
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -34,9 +39,9 @@ export default function Home ({ data }) {
         {/* Latest Article */}
         <div className={styles.latest__articles}>
           <div className={styles.flex}>
-            <h2>Latest News</h2>
+            <h2>{t('latest', lang)}</h2>
             <div className={styles.button}>
-              See All <EastIcon />
+              {t('seeAll', lang)} <EastIcon />
             </div>
           </div>
           <PBar height={'2px'} />
@@ -49,9 +54,9 @@ export default function Home ({ data }) {
         <div className={styles.latest__articles}>
           {' '}
           <div className={styles.flex}>
-            <h2>Featured News</h2>
+            <h2>{t('mustRead', lang)}</h2>
             <div className={styles.button}>
-              See All <EastIcon />
+              {t('seeAll', lang)} <EastIcon />
             </div>
           </div>
           <PBar height={'2px'} />

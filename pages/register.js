@@ -10,11 +10,13 @@ import { showSnackBar } from '@/redux/notistackSlice'
 import { NextSeo } from 'next-seo'
 import { registerSeoData } from '@/utility/const'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
+import t from '@/utility/dict'
 
 const Register = () => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [user, setUser] = useState({})
+  const lang = router.locale
   const createAccount = async () => {
     if (
       !user.email ||
@@ -77,47 +79,47 @@ const Register = () => {
           <div className={styles.logo}>
             <Logo />
           </div>
-          <h2>Create an Account</h2>
+          <h2>{t('registerH', lang)}</h2>
           <form>
             <input
               type='text'
-              placeholder='Enter Your First Name'
+              placeholder={t('enterFName', lang)}
               value={user?.firstName}
               onChange={e => setUser({ ...user, firstName: e.target.value })}
             />
             <input
               type='text'
-              placeholder='Enter Your Last Name'
+              placeholder={t('enterLName', lang)}
               value={user.lastName}
               onChange={e => setUser({ ...user, lastName: e.target.value })}
             />
 
             <input
               type='text'
-              placeholder='Enter Your Phone Number'
+              placeholder={t('enterPhone', lang)}
               value={user.phone}
               onChange={e => setUser({ ...user, phone: e.target.value })}
             />
 
             <input
               type='email'
-              placeholder='Enter Your Email'
+              placeholder={t('enterEmail', lang)}
               value={user.email}
               onChange={e => setUser({ ...user, email: e.target.value })}
             />
             <input
               type='password'
-              placeholder='Enter Your Password'
+              placeholder={t('enterPassword', lang)}
               value={user.password}
               onChange={e => setUser({ ...user, password: e.target.value })}
             />
             <div className={styles.btn} onClick={() => createAccount()}>
-              Create Account
+              {t('createAccount', lang)}
             </div>
           </form>
           <p className={styles.route}>
-            Already have an account ?{' '}
-            <Link href='/login'>&nbsp;Sign In Here</Link>
+            {t('haveAccount', lang)}
+            <Link href='/login'>&nbsp; {t('signInHere', lang)}</Link>
           </p>
         </div>
       </div>

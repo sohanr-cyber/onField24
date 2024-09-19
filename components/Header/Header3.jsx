@@ -5,10 +5,12 @@ import { themeBg } from '@/utility/const'
 import { useRouter } from 'next/router'
 import { calculateReadingTimeFromHTML } from '@/utility/helper'
 import EastIcon from '@mui/icons-material/East'
+import t from '@/utility/dict'
 
 const Header3 = ({ contents }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const router = useRouter()
+  const lang = router.locale
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,7 +60,7 @@ const Header3 = ({ contents }) => {
                     className={styles.button}
                     onClick={() => router.push(`/article/${slide.slug}`)}
                   >
-                    View <EastIcon />
+                    {t('readMore', lang)} <EastIcon />
                   </div>
                 </div>
               </div>
