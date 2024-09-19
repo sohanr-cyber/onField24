@@ -29,47 +29,49 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import ShareIcon from '@mui/icons-material/Share'
 import { formatDistanceToNow } from 'date-fns'
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
 
-
-export async function getStaticPaths() {
+export async function getStaticPaths () {
   // Fetch all available slugs for articles
-  const { data } = await axios.get(`${BASE_URL}/api/article/slugs`);
-  
-  const paths = data.map((article) => ({
+  const { data } = await axios.get(`${BASE_URL}/api/article/slugs`)
+
+  const paths = data.map(article => ({
     params: { slug: article.slug },
     locale: article.locale
-  }));
-  
+  }))
+
   return {
     paths,
     fallback: 'blocking' // Use blocking so new pages are generated on-demand
-  };
+  }
 }
 
-export async function getStaticProps({ params, locale }) {
-  const { slug } = params;
+export async function getStaticProps ({ params, locale }) {
+  const { slug } = params
 
   try {
-    const start = new Date();
+    const start = new Date()
 
     // Fetch the article based on the slug and the locale
     const { data } = await axios.get(
       `${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`
-    );
+    )
 
-    const end = new Date();
-    const categories = data.categories.map(i => i._id).join(',');
+    const end = new Date()
+    const categories = data.categories.map(i => i._id).join(',')
 
-    let relatedArticles = [];
+    let relatedArticles = []
     if (categories) {
       const resp = await axios.get(
-        `${BASE_URL}/api/article?categories=${categories || ''}&limit=15&lang=${locale}`
-      );
+        `${BASE_URL}/api/article?categories=${
+          categories || ''
+        }&limit=5&lang=${locale}`
+      )
 
-      relatedArticles = resp.data.articles.filter(i => i._id !== data._id);
+      relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
     }
 
-    console.log(`Data fetching time: ${end - start}ms`);
+    console.log(`Data fetching time: ${end - start}ms`)
 
     return {
       props: {
@@ -77,16 +79,16 @@ export async function getStaticProps({ params, locale }) {
         relatedArticles
       },
       revalidate: 60 // Regenerate the page every 60 seconds
-    };
+    }
   } catch (error) {
-    console.error('Error fetching articles:', error);
+    console.error('Error fetching articles:', error)
     return {
       props: {
         article: {},
         relatedArticles: [],
         error: error.message
       }
-    };
+    }
   }
 }
 
@@ -156,6 +158,16 @@ const News = ({ article, error, relatedArticles }) => {
               </div>
             </div>
             <div className={styles.right}>
+              {isClient && userInfo?.role == 'admin' && (
+                <div
+                  className={styles.icon}
+                  onClick={() =>
+                    router.push(`/admin/article/create?id=${article._id}`)
+                  }
+                >
+                  <AutoFixHighIcon />
+                </div>
+              )}
               <div
                 className={styles.icon}
                 onClick={() => router.push(facebookShareUrl)}

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap');
 
 :root {
 
@@ -71,7 +70,13 @@ body {
   color: rgb(0, 0, 0, 0.8);
   background: var(--background);
   min-height: 100vh;
-  font-family: var(--font)
+  font-family: "Noto Sans Bengali", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+
 }
 
 a {
@@ -90,7 +95,12 @@ input,
 select,
 textarea {
   border: none;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Noto Sans Bengali", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
   background: var(--inputField);
   border-radius: 5px;
   border: none;

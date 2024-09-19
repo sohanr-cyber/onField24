@@ -10,17 +10,14 @@ import Categories from '@/components/Categories/Categories'
 import Footer from '@/components/Footer'
 import BASE_URL from '@/config'
 import axios from 'axios'
-import Header2 from '@/components/Header/Header2'
 import Header3 from '@/components/Header/Header3'
-import List from '@/components/Categories/List'
 import List2 from '@/components/Categories/List2'
-import ArticlesByCategory from '@/components/Articles/ArticlesByCategory'
 import Article from '@/components/Article/Article'
 import PBar from '@/components/Utility/PBar'
-const inter = Inter({ subsets: ['latin'] })
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import EastIcon from '@mui/icons-material/East'
 import Article2 from '@/components/Article/Article2'
+
 export default function Home ({ data }) {
   return (
     <>

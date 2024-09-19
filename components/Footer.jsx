@@ -15,7 +15,9 @@ const Footer = () => {
     <>
       <div className={styles.wrapper}>
         <div className={styles.left}>
-          <Logo />
+          <div className={styles.logo}>
+            <Logo />
+          </div>
           <div className={styles.about}>
             {categories &&
               categories.map((i, index) => (
@@ -87,14 +89,14 @@ const Footer = () => {
             />
             <Image
               src={'https://cdn-icons-png.flaticon.com/128/3955/3955024.png'}
-            width='25'
+              width='25'
               height='25'
               alt=''
               onClick={() => router.push(instagram)}
             />
             <Image
               src={'https://cdn-icons-png.flaticon.com/128/733/733585.png'}
-            width='25'
+              width='25'
               height='25'
               alt=''
               onClick={() => router.push(whatsapp)}

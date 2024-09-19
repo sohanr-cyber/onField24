@@ -18,7 +18,7 @@
     position: absolute;
     top: 28px;
     z-index: 3;
-    background: var(--nav);
+    background: var(--cardBg);
     color: black;
     padding: 10px;
     border-top: 2px solid rgb(0, 183, 255);
@@ -44,7 +44,7 @@
     top: -2px;
     /* left: 160px; */
     position: absolute;
-    background: var(--nav);
+    background: var(--cardBg);
     min-width: 150px;
     ;
 }
