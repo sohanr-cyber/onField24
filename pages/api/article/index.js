@@ -1,7 +1,7 @@
 import db from '@/database/connection'
 import Category from '@/database/model/Category'
 import UserService from '@/services/user-service'
-import { isAdmin, isAuth } from '@/utility'
+import { isAdmin, isAdminOrEditor, isAuth } from '@/utility'
 import nextConnect from 'next-connect'
 import slugify from 'slugify'
 import Article from '@/database/model/Article'
@@ -9,7 +9,6 @@ import Tag from '@/database/model/Tag'
 import { calculateReadingTimeFromHTML } from '@/utility/helper'
 import User from '@/database/model/User'
 const handler = nextConnect()
-const PAGE_SIZE = 20
 
 function sortArrayByKey (arr, key, order = 'asc') {
   if (!Array.isArray(arr) || arr.length === 0) {
@@ -154,7 +153,7 @@ handler.get(async (req, res) => {
   }
 })
 
-handler.use(isAuth, isAdmin)
+handler.use(isAuth, isAdminOrEditor)
 handler.post(async (req, res) => {
   try {
     const { title, content, categories, status, thumbnail, tags, excerpt } =
@@ -222,6 +221,7 @@ handler.post(async (req, res) => {
   }
 })
 
+handler.use(isAdmin)
 handler.delete(async (req, res) => {
   try {
     await db.connect()

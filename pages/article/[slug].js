@@ -9,7 +9,7 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, addToBuyNow } from '@/redux/cartSlice'
 import { useRouter } from 'next/router'
-import { generateArticleSeoData, getPrice, getTime } from '@/utility/helper'
+import { generateArticleSeoData, getTime } from '@/utility/helper'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { NextSeo } from 'next-seo'
 import ArticlesByCategory from '@/components/Articles/ArticlesByCategory'
@@ -137,7 +137,7 @@ const News = ({ article, error, relatedArticles }) => {
   return (
     <>
       {loading && <Loading />}
-      {/* <NextSeo {...generateArticleSeoData(article)} />{' '} */}
+      <NextSeo {...generateArticleSeoData(article)} />{' '}
       <div className={styles.wrapper}>
         <div className={styles.left}>
           <h1>{article.title} </h1>

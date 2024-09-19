@@ -1,32 +1,9 @@
 import BASE_URL from '@/config'
-const companyName = 'Quince'
+const companyName = 'OnField360'
 
 const footerP =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu erat in eros varius congue vitae ut mauris. Nunc sit amet justo vitae enim rutrum consectetur. Morbi id pretium risus. Donec gravida porta tellus, non iaculis purus ornare ac. Donec sagittis, nulla nec placerat efficitur, velit enim malesuada felis'
-const Inside_Dhaka = 70
-const Outside_Dhaka = 145
-const Dhaka_Subburb = 150
 
-const delivery_charge = {
-  'Inside Dhaka': 70,
-  'Outside Dhaka': 145,
-  'Dhaka Subburb': 150
-}
-
-const statusMessages = {
-  pending: 'Your order is pending. We are processing it.',
-  processing: 'Your order is being processed.',
-  confirmed:
-    'Your order has been confirmed and is now being prepared for packing.',
-  packing: 'Your order is currently being packed.',
-  packed: 'Your order has been packed and is ready for delivery.',
-  delivering: 'Your order is out for delivery.',
-  delivered: 'Your order has been delivered. Thank you for shopping with us!',
-  canceled:
-    'Your order has been canceled. If you have any questions, please contact customer support.',
-  failed:
-    'There was an issue processing your order. Please contact customer support for assistance.'
-}
 const support_number = '01744329811'
 const support_mail = 'contactus@gmail.com'
 const delivery_positions = ['Inside Dhaka', 'Outside Dhaka', 'Dhaka Subburb']
@@ -90,29 +67,6 @@ const seoData = {
   }
 }
 
-const orderCartSeoData = {
-  title: 'Your Order Cart - SET Organic Food',
-  description:
-    'Review and manage items in your order cart at SET Organic Food.',
-  canonical: `${BASE_URL}/cart`,
-  openGraph: {
-    title: 'Your Order Cart - SET Organic Food',
-    description:
-      'Review and manage items in your order cart at SET Organic Food.',
-    url: `${BASE_URL}/cart`,
-    images: [
-      {
-        url: `${BASE_URL}/images/order-cart.png`,
-        width: 1200,
-        height: 630,
-        alt: 'Order Cart - SET Organic Food'
-      }
-    ],
-    type: 'website'
-  },
-  twitter: seoData.twitter
-}
-
 const TermsAndConditionSeoData = {
   title: `Our Terms And Conditions - ${companyName}`,
   description: `Welcome to ${companyName}! These terms and conditions outline the rules and regulations for the use of ${companyName}'s Website, located at ${BASE_URL}`,
@@ -157,84 +111,13 @@ const privacyPolicySeoData = {
   twitter: seoData.twitter
 }
 
-const orderDetailSeoData = {
-  title: `Order Details - ${companyName}`,
-  description: `View the details of your order on ${companyName}. Check the products, quantities, and shipping information.`,
-  canonical: `${BASE_URL}/order-detail`,
-  openGraph: {
-    title: `Order Details - ${companyName}`,
-    description: `View the details of your order on ${companyName}. Check the products, quantities, and shipping information.`,
-    url: `${BASE_URL}/order-detail`,
-    images: [
-      {
-        url: `${BASE_URL}/images/order-detail.png`,
-        width: 1200,
-        height: 630,
-        alt: `Order Details - ${companyName}`
-      }
-    ],
-    type: 'website'
-  },
-  twitter: seoData.twitter
-}
-
-const reviewSeoData = {
-  title: `Review Order - ${companyName}`,
-  description: `Review your order on ${companyName} before placing it. Confirm the products, quantities, and shipping details.`,
-  canonical: `${BASE_URL}/review`,
-  openGraph: {
-    title: `Review Order - ${companyName}`,
-    description: `Review your order on ${companyName} before placing it. Confirm the products, quantities, and shipping details.`,
-    url: `${BASE_URL}/review`,
-    images: [
-      {
-        url: `${BASE_URL}/images/review.png`,
-        width: 800,
-        height: 600,
-        alt: `Review Order - ${companyName}`
-      }
-    ],
-    type: 'website'
-  },
-  twitter: {
-    handle: '@yourtwitterhandle',
-    site: '@yourtwitterhandle',
-    cardType: 'summary_large_image'
-  }
-}
-
-const addressSeoData = {
-  title: `Address - ${companyName}`,
-  description: `Enter your shipping address on ${companyName} to complete your order and receive your products.`,
-  canonical: `${BASE_URL}/address`,
-  openGraph: {
-    title: `Address - ${companyName}`,
-    description: `Enter your shipping address on ${companyName} to complete your order and receive your products.`,
-    url: `${BASE_URL}/address`,
-    images: [
-      {
-        url: `${BASE_URL}/images/address.png`,
-        width: 1200,
-        height: 630,
-        alt: `Address - ${companyName}`
-      }
-    ],
-    type: 'website'
-  },
-  twitter: {
-    handle: '@yourtwitterhandle',
-    site: '@yourtwitterhandle',
-    cardType: 'summary_large_image'
-  }
-}
-
 const registerSeoData = {
   title: `Register - ${companyName}`,
-  description: `Create an account on ${companyName} to start shopping for your favorite products.`,
+  description: `Create an account on ${companyName} to stay updated with the latest news and articles from various categories.`,
   canonical: `${BASE_URL}/register`,
   openGraph: {
     title: `Register - ${companyName}`,
-    description: `Create an account on ${companyName} to start shopping for your favorite products.`,
+    description: `Join ${companyName} to stay informed about breaking news, exclusive content, and in-depth analysis on current events.`,
     url: `${BASE_URL}/register`,
     images: [
       {
@@ -251,44 +134,24 @@ const registerSeoData = {
 
 const loginSeoData = {
   title: `Login - ${companyName}`,
-  description: `Sign in to your ${companyName} account to access your profile and manage your orders.`,
+  description: `Sign in to your ${companyName} account to access personalized news, save your favorite articles, and stay informed.`,
   canonical: `${BASE_URL}/login`,
   openGraph: {
     title: `Login - ${companyName}`,
-    description: `Sign in to your ${companyName} account to access your profile and manage your orders.`,
+    description: `Sign in to your ${companyName} account to access personalized news, save your favorite articles, and stay informed.`,
     url: `${BASE_URL}/login`,
     images: [
       {
         url: `${BASE_URL}/images/login.png`,
         width: 1200,
         height: 630,
-        alt: 'Login - SET Organic Food'
+        alt: `Login - ${companyName}`
       }
     ],
     type: 'website'
   },
   twitter: seoData.twitter
 }
-
-// const themeBg = 'linear-gradient(45deg, rgb(8, 78, 67), rgb(9, 82, 71))'
-// const themeTransparent = 'rgb(8, 78, 67,0.1)'
-// const themeC = 'rgb(8, 78, 67)'
-// const buttonC = 'white'
-// const bg = 'aliceblue'
-// const outerBg = 'lightgrey'
-// const buttonBg = 'linear-gradient(45deg, rgb(8, 78, 67), rgb(9, 82, 71))'
-// const borderColor = 'rgb(8, 78, 67,0.1)'
-
-// const themeBg =
-//   'linear-gradient(45deg, rgba(149, 145, 254, 255), rgba(7, 121, 214, 255))'
-// const themeTransparent = 'rgba(7, 121, 214,0.1)'
-// const themeC = 'rgba(7, 121, 214, 255)'
-// const buttonC = 'white'
-// const buttonBg =
-//   'linear-gradient(45deg, rgba(149, 145, 254, 255), rgba(7, 121, 214, 255))'
-// const bg = 'white'
-// const outerBg = 'rgb(232, 241, 247)'
-// const borderColor = 'rgba(197, 223, 244, 255)'
 
 const themeBg = 'linear-gradient(45deg, rgb(29, 102, 12), rgb(137, 208, 5))'
 const themeTransparent = 'rgba(7, 121, 214,0.1)'
@@ -314,9 +177,7 @@ const orderStatusColors = {
 }
 
 export {
-  delivery_charge,
   delivery_positions,
-  statusMessages,
   themeTransparent,
   themeBg,
   themeC,
@@ -327,12 +188,8 @@ export {
   buttonBg,
   borderColor,
   seoData,
-  orderCartSeoData,
-  orderDetailSeoData,
-  reviewSeoData,
   TermsAndConditionSeoData,
   privacyPolicySeoData,
-  addressSeoData,
   registerSeoData,
   loginSeoData,
   companyName,

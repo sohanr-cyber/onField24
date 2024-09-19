@@ -53,6 +53,14 @@ const isAdmin = async (req, res, next) => {
   }
   return res.status(403).json({ message: 'Not Authorized' })
 }
+
+const isAdminOrEditor = async (req, res, next) => {
+  if (req.user.role == 'admin' || req.user.role == 'editor') {
+    return next()
+  }
+  return res.status(403).json({ message: 'Neither Admin nor Editor' })
+}
+
 const FormateData = data => {
   if (data) {
     return data
@@ -69,5 +77,7 @@ export {
   GenerateSignature,
   ValidateSignature,
   FormateData,
-  isAuth,isAdmin
+  isAuth,
+  isAdmin,
+  isAdminOrEditor
 }

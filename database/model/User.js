@@ -28,7 +28,15 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ['user', 'admin', 'editor', 'writer'], // Define allowed roles (can be extended)
+      enum: [
+        'admin',
+        'editor',
+        'journalist',
+        'contributor',
+        'moderator',
+        'subscriber',
+        'user'
+      ],
       default: 'user'
     },
     // Additional information (optional)

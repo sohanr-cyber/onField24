@@ -26,26 +26,6 @@ function containsAdmin (url) {
   return regex.test(url)
 }
 
-const calculateSubtotal = cartItems => {
-  let subtotal = 0
-  cartItems?.forEach(item => {
-    subtotal +=
-      (item.product?.price -
-        item.product?.price * (item.product?.discount / 100)) *
-      item.quantity
-  })
-  return subtotal
-}
-
-const getPrice = (price, discount = 0) => {
-  price = price - price * (discount / 100)
-  return Math.floor(price).toFixed(2)
-}
-
-const getDeliveryCharge = position => {
-  return delivery_charge[position] ? delivery_charge[position] : 100
-}
-
 const getTime = timestamp => {
   const date = new Date(timestamp)
 
@@ -70,36 +50,39 @@ const calculateReadingTimeFromHTML = htmlString => {
   return readingTime
 }
 
-const generateProductSeoData = productData => {
-  const {
-    name,
-    metaDescription: description,
-    slug,
-    thumbnail: imageUrl
-  } = productData
+const generateArticleSeoData = article => {
+  const { title, excerpt = title, slug, thumbnail, author } = article
 
-  const productSeoData = {
-    title: `${companyName} - ${name}`,
-    description: description,
-    canonical: `${BASE_URL}/products/${slug}`,
+  const articleSeoData = {
+    title: title.substring(0, 60), // Ensure it's under 60 characters
+    description: excerpt.substring(0, 160), // Ensure it's under 160 characters
+    canonical: `${BASE_URL}/article/${slug}`,
     openGraph: {
-      title: `Quince Cloth - ${name}`,
-      description: description,
-      url: `${BASE_URL}/products/${slug}`,
+      title: title,
+      description: excerpt,
+      url: `${BASE_URL}/article/${slug}`,
       images: [
         {
-          url: imageUrl,
+          url: thumbnail,
           width: 800,
           height: 600,
-          alt: name
+          alt: title
         }
       ],
-      type: 'product'
+      type: 'article',
+      article: {
+        published_time: new Date().toISOString(), // add publish time if available
+        author: 'Author Name' // replace with actual author data
+      }
     },
-    twitter: seoData.twitter
+    twitter: {
+      card: 'summary_large_image', // Ensures a large image is shown
+      site: '@yourTwitterHandle', // Your Twitter account handle
+      ...seoData.twitter // Include other twitter-specific metadata
+    }
   }
 
-  return productSeoData
+  return articleSeoData
 }
 function chunkArray (array, chunkSize) {
   // Initialize an empty array to hold the chunks
@@ -156,6 +139,7 @@ function summarizeOrders (orders) {
 
   return summary
 }
+
 function generateVerificationCode (length) {
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -183,33 +167,6 @@ function generateUniqueID (existingIDs) {
   return number
 }
 
-function orderToGraph (inputData) {
-  const result = []
-
-  for (const [date, values] of Object.entries(inputData)) {
-    const total = values.total || 0
-    const pending = (values.pending || 0) + (values.Pending || 0)
-    const processing = values.Processing || 0
-    const canceled = values.Canceled || 0
-    const failed = values.Failed || 0
-    const delivered = values.Delivered || 0
-    const packing = values.Packing || 0
-
-    result.push({
-      date: date,
-      total: total,
-      pending: pending,
-      processing: processing,
-      canceled: canceled,
-      failed: failed,
-      delivered: delivered,
-      packing: packing,
-      red: failed + canceled
-    })
-  }
-  return result
-}
-
 const sortByMonth = data => {
   return data.sort((a, b) => new Date(a.month) - new Date(b.month))
 }
@@ -229,14 +186,6 @@ function extractRGBA (rgbString, opacity = 1) {
   }
 }
 
-const getTotalProfit = arr => {
-  let total = 0
-  arr.forEach(i => {
-    total += i.revenue
-  })
-  return total.toFixed(0)
-}
-
 function findCategoryById (categories, id) {
   for (const category of categories) {
     if (category._id === id) {
@@ -250,17 +199,6 @@ function findCategoryById (categories, id) {
     }
   }
   return null // Return null if no category is found with the given ID
-}
-
-function generateTransactionId (orderId) {
-  const timestamp = Date.now().toString() // Current timestamp
-  const randomString = crypto.randomBytes(4).toString('hex') // Random string of 8 characters
-  const orderIdString = orderId.toString() // Convert order ID to string
-
-  // Combine the order ID, timestamp, and random string to create a unique transaction ID
-  const transactionId = `${orderIdString}-${timestamp}-${randomString}`
-
-  return transactionId
 }
 
 function convertToCamelCase (str) {
@@ -297,20 +235,14 @@ const readMinute = duration => {
 export {
   generateTrackingNumber,
   containsAdmin,
-  calculateSubtotal,
-  getPrice,
-  getDeliveryCharge,
   getTime,
-  generateProductSeoData,
+  generateArticleSeoData,
   generateUniqueID,
   generateVerificationCode,
   chunkArray,
-  orderToGraph,
-  getTotalProfit,
   sortByMonth,
   extractRGBA,
   findCategoryById,
-  generateTransactionId,
   convertToCamelCase,
   summarizeOrders,
   dateDevider,
