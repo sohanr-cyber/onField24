@@ -37,6 +37,7 @@ const getTime = timestamp => {
 
   return formattedDate
 }
+
 const calculateReadingTimeFromHTML = htmlString => {
   const wordsPerMinute = 200 // Average reading speed
   // Strip HTML tags and get plain text
