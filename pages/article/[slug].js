@@ -210,7 +210,11 @@ const News = ({ article, error, relatedArticles }) => {
           />
           <div className={styles.tags}>
             {article.tags?.map((tag, index) => (
-              <span>{tag.name}</span>
+              <span
+                onClick={() => router.push(`/news?tags=${tag._id}`)}
+              >
+                {tag.name}
+              </span>
             ))}
           </div>
         </div>

@@ -10,6 +10,7 @@ import { showSnackBar } from '@/redux/notistackSlice'
 import { NextSeo } from 'next-seo'
 import { loginSeoData } from '@/utility/const'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
+import t from '@/utility/dict'
 
 const Reset = () => {
   const [code, setCode] = useState('')
@@ -17,6 +18,7 @@ const Reset = () => {
   const userInfo = useSelector(state => state.user.userInfo)
   const router = useRouter()
   const dispatch = useDispatch()
+  const lang = router.locale
 
   const resetPassword = async () => {
     if (!code || !newPassword) {
@@ -88,28 +90,31 @@ const Reset = () => {
           <div className={styles.logo}>
             <Logo />
           </div>
-          <h2>Set New Password</h2>
+          <h2>{t('resetNewH', lang)}</h2>
           <form>
             <input
               type='text'
-              placeholder='Enter The Verification Code'
+              placeholder={t('enterVCode', lang)}
               value={code}
               onChange={e => setCode(e.target.value)}
             />
             <input
               type='text'
-              placeholder='Enter Your New Password'
+              placeholder={t("enterNewPassword",lang)}
               value={newPassword}
               onChange={e => setNewPassword(e.target.value)}
             />
 
             <div className={styles.btn} onClick={() => resetPassword()}>
-              Submit
+              {t('submit', lang)}
             </div>
           </form>
           <p className={styles.route}>
-            Don&apos;t have an account ?{' '}
-            <Link href='/register'>&nbsp;create new account</Link>
+            {t('noAccount', lang)}{' '}
+            <Link href='/register'>
+              &nbsp;
+              {t('createAccount', lang)}
+            </Link>
           </p>
         </div>
       </div>

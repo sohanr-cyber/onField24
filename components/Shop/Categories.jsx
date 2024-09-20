@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from '../../styles/Shop/Filter.module.css'
+import styles from '../../styles/SearchResult/Filter.module.css'
 import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material'
 import { useRouter } from 'next/router'
 import SkeletonDiv from '../Utility/SkeletonDiv'

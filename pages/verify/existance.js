@@ -10,12 +10,14 @@ import { showSnackBar } from '@/redux/notistackSlice'
 import { NextSeo } from 'next-seo'
 import { loginSeoData } from '@/utility/const'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
+import t from '@/utility/dict'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const userInfo = useSelector(state => state.user.userInfo)
   const router = useRouter()
   const dispatch = useDispatch()
+  const lang = router.locale
 
   const SendCode = async () => {
     if (!email) {
@@ -54,31 +56,34 @@ const Login = () => {
       console.log(error)
     }
   }
+
   return (
     <>
       <NextSeo {...loginSeoData} />
       <div className={styles.wrapper}>
         <div className={styles.form__container}>
-          {' '}
           <div className={styles.logo}>
             <Logo />
           </div>
-          <h2>Reset Your Account Password</h2>
+          <h2>{t('resetH', lang)}</h2>
           <form>
             <input
               type='email'
-              placeholder='Enter Your Email'
+              placeholder={t('enterEmail', lang)}
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
 
             <div className={styles.btn} onClick={() => SendCode()}>
-              Submit
+              {t('submit', lang)}
             </div>
           </form>
           <p className={styles.route}>
-            Don&apos;t have an account ?{' '}
-            <Link href='/register'>&nbsp;create new account</Link>
+            {t('noAccount', lang)}
+            <Link href='/register'>
+              &nbsp;
+              {t('createAccount', lang)}
+            </Link>
           </p>
         </div>
       </div>

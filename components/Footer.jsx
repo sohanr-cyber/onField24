@@ -25,7 +25,7 @@ const Footer = () => {
               categories.map((i, index) => (
                 <div
                   className={styles.link}
-                  onClick={() => router.push(`/shop?categories=${i[0]._id}`)}
+                  onClick={() => router.push(`/news?categories=${i._id}`)}
                 >
                   {i.name}
                 </div>
@@ -38,7 +38,7 @@ const Footer = () => {
             <div className={styles.link} onClick={() => router.push('/')}>
               {t('home', lang)}
             </div>{' '}
-            <div className={styles.link} onClick={() => router.push('/shop')}>
+            <div className={styles.link} onClick={() => router.push('/news')}>
               {t('news', lang)}
             </div>
           </div>

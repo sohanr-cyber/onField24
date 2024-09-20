@@ -123,6 +123,38 @@ const dict = {
   addressDetails: {
     en: 'House 41(meena bazar, lift 4), Gareeb-e-Newaz Avenue Road, Rangpur',
     bn: 'বাড়ি 41 (মীনা বাজার, লিফট 4), গরিব-ই-নেওয়াজ এভিনিউ রোড, রংপুর'
+  },
+  'Best Match': {
+    en: 'Relavant',
+    bn: 'প্রাসঙ্গিক'
+  },
+  'Newest To Oldest': {
+    en: 'Newest to Oldest',
+    bn: 'নতুন থেকে পুরাতন'
+  },
+  'Oldest To Newest': {
+    en: 'Oldest to Newest',
+    bn: 'পুরানো থেকে নতুন'
+  },
+  resetH: {
+    en: 'Reset Your Password',
+    bn: 'পুনরায় পাসওয়ার্ড সেট করুন'
+  },
+  submit: {
+    en: 'Submit',
+    bn: 'সাবমিট'
+  },
+  enterVCode: {
+    en: 'Enter Varification Code',
+    bn: 'ভেরিফিকেশন কোড লিখুন'
+  },
+  enterNewPassword: {
+    en: 'Enter New Password',
+    bn: 'নতুন পাসওয়ার্ড লিখুন'
+  },
+  resetNewH: {
+    en: 'Set New Password',
+    bn: 'নতুন পাসওয়ার্ড সেট করুন'
   }
 }
 

@@ -11,8 +11,9 @@ import { getSeoData } from '@/utility/const'
 import Script from 'next/script'
 
 export default function App ({ Component, pageProps }) {
-  const router = useRouter
+  const router = useRouter()
   const lang = router.locale
+  console.log({ locale: lang })
 
   return (
     <>

@@ -9,6 +9,8 @@ import Pagination from '@/components/Utility/Pagination'
 import { useRouter } from 'next/router'
 import Article from '@/components/Article/Article'
 import Article2 from '@/components/Article/Article2'
+import t from '@/utility/dict'
+import Filter from '@/components/Shop/Filter'
 
 const sortOptions = [
   {
@@ -37,6 +39,7 @@ const sortOptions = [
 const Home = ({ articles, totalPages, currentPage, count }) => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
+  const lang = router.locale
   const updateRoute = data => {
     console.log({ data })
     const queryParams = { ...router.query, ...data }
@@ -51,6 +54,10 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
     <div className={styles.wrapper}>
       <div className={styles.top}>
         <div className={styles.left}>
+          <div className={styles.filter} onClick={() => setOpen(true)}>
+            <FilterAltIcon />
+            Filter
+          </div>
           <div>{count} items found </div>
         </div>
         <div className={styles.right}>
@@ -62,8 +69,14 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
             }}
           >
             {[...sortOptions].map((i, index) => (
-              <option key={index} value={i.value}>
-                {i.value}
+              <option
+                key={index}
+                value={i.value}
+                selected={
+                  i.query.sortOrder == router.query.sortOrder ? true : false
+                }
+              >
+                {t(i.value, lang)}
               </option>
             ))}
           </select>

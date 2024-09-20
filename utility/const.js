@@ -48,7 +48,7 @@ const seoData = {
   }
 }
 
-function getSeoData (lang) {
+function getSeoData (lang = 'en') {
   const seoData = {
     en: {
       title: `Latest News and Updates - ${companyName}`,
@@ -100,7 +100,8 @@ function getSeoData (lang) {
     }
   }
 
-  return seoData[lang] || seoData.en // Fallback to English if lang is not found
+  console.log({ lang })
+  return seoData[lang] // Fallback to English if lang is not found
 }
 
 const TermsAndConditionSeoData = {
