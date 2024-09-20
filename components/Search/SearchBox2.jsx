@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '@/styles/Search/SearchBox2.module.css'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
@@ -9,11 +9,12 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import SkeletonDiv from '../Utility/SkeletonDiv'
 import SearchBox from '../SearchBox'
 import SearchIcon from '@mui/icons-material/Search'
+import { handleSearch } from '@/redux/pixelSlice'
 
 const SearchBox2 = ({ setOpen }) => {
   const router = useRouter()
   const categories = useSelector(state => state.article.categories)
-
+  const lang = router.locale
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
     router.push({
@@ -25,6 +26,14 @@ const SearchBox2 = ({ setOpen }) => {
   }
 
   const [name, setName] = useState('')
+
+  useEffect(() => {
+    setName(router.query.search)
+  }, [router.query.search])
+  const handleClick = () => {
+    router.push(`/news?search=${name || ''}`)
+    handleSearch(name)
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
@@ -40,7 +49,7 @@ const SearchBox2 = ({ setOpen }) => {
             value={name}
             onChange={e => setName(e.target.value)}
           />
-          <span onClick={() => router.push(`/news?name=${name}`)}>
+          <span onClick={() => handleClick()}>
             <SearchIcon />
           </span>
         </div>

@@ -80,22 +80,23 @@ handler.get(async (req, res) => {
     }
 
     // Search in both English and Bengali fields of title and content
-    // if (search) {
-    //   filter.$or = [
-    //     { 'title.en': { $regex: search, $options: 'i' } }, // Search in English title
-    //     { 'title.bn': { $regex: search, $options: 'i' } }, // Search in Bengali title
-    //     { 'content.en': { $regex: search, $options: 'i' } }, // Search in English content
-    //     { 'content.bn': { $regex: search, $options: 'i' } } // Search in Bengali content
-    //   ]
-    // }
-
-    // Handle text search in the selected language (lang)
     if (search) {
       filter.$or = [
-        { [`title.${lang}`]: { $regex: search, $options: 'i' } }, // Search in title based on lang
-        { [`content.${lang}`]: { $regex: search, $options: 'i' } } // Search in content based on lang
+        { 'title.en': { $regex: search, $options: 'i' } }, // Search in English title
+        { 'title.bn': { $regex: search, $options: 'i' } }, // Search in Bengali title
+
+        { 'content.en': { $regex: search, $options: 'i' } }, // Search in English content
+        { 'content.bn': { $regex: search, $options: 'i' } } // Search in Bengali content // Search in category name (populated from Category collection, both English and Bengali)
       ]
     }
+
+    // Handle text search in the selected language (lang)
+    // if (search) {
+    //   filter.$or = [
+    //     { [`title.${lang}`]: { $regex: search, $options: 'i' } },
+    //     { [`content.${lang}`]: { $regex: search, $options: 'i' } }
+    //   ]
+    // }
 
     // Pagination settings (skip and limit)
     const skip = (page - 1) * limit
@@ -139,7 +140,7 @@ handler.get(async (req, res) => {
     }))
 
     const totalArticles = await Article.countDocuments(filter)
-
+    console.log({ totalArticles })
     res.status(200).json({
       message: 'Articles retrieved successfully',
       page: Number(page),
@@ -159,7 +160,7 @@ handler.post(async (req, res) => {
     const { title, content, categories, status, thumbnail, tags, excerpt } =
       req.body
     const authorId = req.user._id
-    console.log({ excerpt })
+
     // Validate required fields
     if (!title || !content || !excerpt) {
       return res.status(400).json({ message: 'Missing required fields' })

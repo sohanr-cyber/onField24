@@ -103,13 +103,15 @@ export default Home
 
 export async function getServerSideProps (context) {
   const { search, categories, tags, page, sortBy, sortOrder } = context.query
+  console.log(context.query)
+  const { locale } = context
   try {
     const response = await axios.get(
-      `${BASE_URL}/api/article?search=${search || ''}&categories=${
-        categories || ''
-      }&tags=${tags || ''}&page=${page || 1}&sortBy=${sortBy || ''}&sortOrder=${
-        sortOrder || ''
-      }`
+      `${BASE_URL}/api/article?lang=${locale || ''}&search=${
+        search || ''
+      }&categories=${categories || ''}&tags=${tags || ''}&page=${
+        page || 1
+      }&sortBy=${sortBy || ''}&sortOrder=${sortOrder || ''}`
     )
     const {
       articles,

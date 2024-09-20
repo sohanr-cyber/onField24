@@ -3,12 +3,19 @@ import styles from '@/styles/Article/Article.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { readMinute } from '@/utility/helper'
+import { handleViewArticle } from '@/redux/pixelSlice'
 const Article = ({ article, index, flex, style }) => {
   const router = useRouter()
+
+  const handleClick = article => {
+    router.push(`/article/${article.slug}`)
+    handleViewArticle(article)
+  }
+
   return (
     <div
       className={styles.wrapper}
-      onClick={() => router.push(`/article/${article.slug}`)}
+      onClick={() => handleClick(article)}
       style={style ? { ...style } : {}}
     >
       <div className={styles.image__container}>

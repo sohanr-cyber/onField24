@@ -63,11 +63,11 @@
 }
 
 .flex h3:nth-child(2) {
-   
+
     padding: 1px 5px;
     color: white;
     cursor: pointer;
-    border:1px solid var(--borderColor)
+    border: 1px solid var(--borderColor)
 }
 
 .heading {
@@ -130,6 +130,9 @@
 .serach input {
     padding: 10px;
     background: var(--nav);
+    color: var(--navColor);
+    /* border: 1px solid red; */
+    width: 90%;
 }
 
 .serach span {

@@ -224,6 +224,7 @@ export {
   buttonBg,
   borderColor,
   getSeoData,
+  seoData,
   TermsAndConditionSeoData,
   privacyPolicySeoData,
   registerSeoData,

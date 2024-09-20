@@ -6,7 +6,14 @@ const LangPicker = () => {
   const router = useRouter()
 
   const changeLocale = locale => {
-    router.push(router.pathname, router.asPath, { locale })
+    router.push(
+      {
+        pathname: router.pathname,
+        query: { ...router.query } // Preserve the current query parameters
+      },
+      router.asPath,
+      { locale }
+    )
   }
 
   return (

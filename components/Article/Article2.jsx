@@ -2,13 +2,17 @@ import React from 'react'
 import styles from '@/styles/Article/Article2.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { handleViewArticle } from '@/redux/pixelSlice'
 const Article2 = ({ article, index }) => {
   const router = useRouter()
+
+  const handleClick = article => {
+    router.push(`/article/${article.slug}`)
+    handleViewArticle(article)
+  }
+
   return (
-    <div
-      className={styles.wrapper}
-      onClick={() => router.push(`/article/${article.slug}`)}
-    >
+    <div className={styles.wrapper} onClick={() => handleClick(article)}>
       <div className={styles.image__container}>
         <Image
           src={article.thumbnail || '/images/logo.png'}
