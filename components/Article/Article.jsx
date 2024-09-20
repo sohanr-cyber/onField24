@@ -39,7 +39,7 @@ const Article = ({ article, index, flex, style }) => {
         </div>
         <div className={styles.flex}>
           {[article.categories[0]].map((c, index) => (
-            <span className={styles.category}>{c.name}</span>
+            <span className={styles.category}>{c?.name}</span>
           ))}
           <div className={styles.time}>{readMinute(article.duration)}</div>
         </div>
