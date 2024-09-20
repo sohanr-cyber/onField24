@@ -38,6 +38,11 @@ export default function App ({ Component, pageProps }) {
               `
         }}
       />
+      <script
+        async
+        src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6701405762080594'
+        crossorigin='anonymous'
+      ></script>
 
       <Provider store={store}>
         <SnackbarProvider>
