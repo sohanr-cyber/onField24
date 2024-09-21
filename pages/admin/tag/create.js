@@ -12,6 +12,7 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { buttonC, themeBg } from '@/utility/const'
 import { setFetchAgain } from '@/redux/articleSlice'
+import t from '@/utility/dict'
 // Order Craetion Form
 const Create = ({ tag: data }) => {
   const [tag, setTag] = useState(data)
@@ -21,6 +22,7 @@ const Create = ({ tag: data }) => {
   const [newTag, setNewTag] = useState(false)
   const categories = useSelector(state => state.article.categories)
   const [lang, setLang] = useState(['en'])
+  const locale = router.locale
 
   useEffect(() => {
     setTag(data)
@@ -139,7 +141,9 @@ const Create = ({ tag: data }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.flex}>
-        <h2>{router.query.id ? 'Update' : 'Add'} Tag</h2>
+        <h2>
+          {router.query.id ? t('updateTag', locale) : t('createTag', locale)}{' '}
+        </h2>
         <div
           className={styles.status}
           onDoubleClick={() => setLang(['en', 'bn'])}
@@ -162,10 +166,10 @@ const Create = ({ tag: data }) => {
         {lang.find(i => i == 'en') && (
           <div className={styles.left}>
             <div className={styles.field}>
-              <label>Tag Name</label>
+              <label>{t('tagName', lang)}</label>
               <input
                 type='text'
-                placeholder='Enter Tag Name'
+                placeholder={t('enterTagName', lang)}
                 value={tag.name?.en}
                 onChange={e =>
                   setTag({
@@ -181,10 +185,10 @@ const Create = ({ tag: data }) => {
         {lang.find(i => i == 'bn') && (
           <div className={styles.left}>
             <div className={styles.field}>
-              <label>Tag Name</label>
+              <label>{t('tagName', 'bn')}</label>
               <input
                 type='text'
-                placeholder='Enter Tag Name'
+                placeholder={t('enterTagName', 'bn')}
                 value={tag.name.bn}
                 onChange={e =>
                   setTag({
@@ -202,7 +206,7 @@ const Create = ({ tag: data }) => {
       </form>
       {error && <p style={{ color: 'red', margin: '10px' }}>{error}</p>}
       <button onClick={() => (router.query.id ? updateTag() : saveTag())}>
-        Save Tag
+        {t('saveTag', locale)}
       </button>
     </div>
   )

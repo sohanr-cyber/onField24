@@ -42,10 +42,15 @@ const Header3 = ({ contents }) => {
               <div className={styles.surface}>
                 {slide.title && <h2>{slide.title}</h2>}
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Quos, dolores sequi? Voluptatum cupiditate et vel
-                  reprehenderit nesciunt temporibus iure voluptas nostrum
-                  pariatur esse eos cumque quaerat ipsam, vitae excepturi sit!
+                  {slide.excerpt || (
+                    <>
+                      {' '}
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Atque, a eveniet. Quo aperiam odit, nulla nam ab,
+                      voluptate commodi quis ea, temporibus sunt excepturi odio
+                      delectus architecto
+                    </>
+                  )}
                 </p>
                 <div className={styles.flex}>
                   <div className={styles.categories}>

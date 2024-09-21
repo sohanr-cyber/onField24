@@ -32,10 +32,14 @@ const Article = ({ article, index, flex, style }) => {
           {' '}
           <div className={styles.title}>{article.title}</div>
           <div className={styles.excerpt}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a
-            eveniet. Quo aperiam odit, nulla nam ab, voluptate commodi quis ea,
-            temporibus sunt excepturi odio delectus architecto laudantium
-            perspiciatis id!
+            {article.excerpt || (
+              <>
+                {' '}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,
+                a eveniet. Quo aperiam odit, nulla nam ab, voluptate commodi
+                quis ea, temporibus sunt excepturi odio delectus architecto
+              </>
+            )}
           </div>
         </div>
         <div className={styles.flex}>

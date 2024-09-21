@@ -37,7 +37,7 @@ handler.get(async (req, res) => {
       .limit(PAGE_SIZE)
 
     categories = categories.map(i => ({
-      name: i.name.en,
+      name: i.name[lang],
       _id: i._id
     }))
 

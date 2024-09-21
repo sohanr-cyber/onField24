@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useRouter } from 'next/router'
 import { showSnackBar } from '@/redux/notistackSlice'
+import t from '@/utility/dict'
 
 const Logout = () => {
   const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const Logout = () => {
       })
     )
   }
+  const lang = router.locale
+
   return (
     <div
       onClick={() => {
@@ -31,7 +34,7 @@ const Logout = () => {
       }}
     >
       <LogoutIcon />
-      <span>Logout</span>
+      <span>{t('logout', lang)}</span>
     </div>
   )
 }

@@ -25,9 +25,11 @@ import CameraIcon from '@mui/icons-material/Camera'
 import Logout from '../Utility/Logout'
 import TagIcon from '@mui/icons-material/Tag'
 import AccessibilityIcon from '@mui/icons-material/Accessibility'
+import t from '@/utility/dict'
 const SideBar = ({ setOpen }) => {
   const router = useRouter()
   const [visible, setVisible] = useState('')
+  const lang = router.locale
   const logout = () => {
     // Cookies.remove('userInfo')
     router.reload()
@@ -54,7 +56,7 @@ const SideBar = ({ setOpen }) => {
               <div className={styles.icon}>
                 <DashboardIcon />
               </div>
-              <div className={styles.title}>Dashboard</div>
+              <div className={styles.title}>{t('dashboard', lang)}</div>
             </div>
           </div>
           <div
@@ -68,7 +70,7 @@ const SideBar = ({ setOpen }) => {
               <div className={styles.icon}>
                 <CameraIcon />
               </div>
-              <div className={styles.title}>Article</div>{' '}
+              <div className={styles.title}>{t('article', lang)}</div>{' '}
             </div>
             <div className={styles.icon}>
               {visible == 'article' ? (
@@ -89,7 +91,7 @@ const SideBar = ({ setOpen }) => {
                   <div className={styles.icon}>
                     <FormatListBulletedIcon />
                   </div>
-                  <div className={styles.title}>Article List</div>
+                  <div className={styles.title}>{t('articleList', lang)}</div>
                 </div>
               </div>{' '}
               <div
@@ -101,7 +103,7 @@ const SideBar = ({ setOpen }) => {
                   <div className={styles.icon}>
                     <AddCircleIcon />
                   </div>
-                  <div className={styles.title}>Add Article</div>
+                  <div className={styles.title}>{t('addArticle', lang)}</div>
                 </div>
               </div>
             </div>
@@ -117,7 +119,7 @@ const SideBar = ({ setOpen }) => {
               <div className={styles.icon}>
                 <CategoryIcon />
               </div>
-              <div className={styles.title}>Category</div>{' '}
+              <div className={styles.title}>{t('category', lang)}</div>{' '}
             </div>
             <div className={styles.icon}>
               {visible == 'category' ? (
@@ -138,7 +140,7 @@ const SideBar = ({ setOpen }) => {
                   <div className={styles.icon}>
                     <FormatListBulletedIcon />
                   </div>
-                  <div className={styles.title}>Category List</div>
+                  <div className={styles.title}>{t('categoryList', lang)}</div>
                 </div>
               </div>{' '}
               <div
@@ -150,7 +152,7 @@ const SideBar = ({ setOpen }) => {
                   <div className={styles.icon}>
                     <AddCircleIcon />
                   </div>
-                  <div className={styles.title}>Add Category</div>
+                  <div className={styles.title}>{t('addCategory', lang)}</div>
                 </div>
               </div>
             </div>
@@ -164,7 +166,7 @@ const SideBar = ({ setOpen }) => {
               <div className={styles.icon}>
                 <TagIcon />
               </div>
-              <div className={styles.title}>Tag</div>{' '}
+              <div className={styles.title}>{t('tag', lang)}</div>{' '}
             </div>
             <div className={styles.icon}>
               {visible == 'tag' ? (
@@ -185,19 +187,19 @@ const SideBar = ({ setOpen }) => {
                   <div className={styles.icon}>
                     <FormatListBulletedIcon />
                   </div>
-                  <div className={styles.title}>Category List</div>
+                  <div className={styles.title}>{t('tagList', lang)}</div>
                 </div>
               </div>{' '}
               <div
                 className={styles.item}
-                onClick={() => router.push('/admin/category/create')}
+                onClick={() => router.push('/admin/tag/create')}
               >
                 <div className={styles.flex}>
                   {' '}
                   <div className={styles.icon}>
                     <AddCircleIcon />
                   </div>
-                  <div className={styles.title}>Add Category</div>
+                  <div className={styles.title}>{t('addTag', lang)}</div>
                 </div>
               </div>
             </div>
@@ -211,7 +213,7 @@ const SideBar = ({ setOpen }) => {
               <div className={styles.icon}>
                 <AccessibilityIcon />
               </div>
-              <div className={styles.title}>User</div>
+              <div className={styles.title}>{t('user', lang)}</div>
             </div>
           </div>
           <div className={styles.item}>

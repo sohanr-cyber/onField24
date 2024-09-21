@@ -7,6 +7,7 @@ import { finishLoading, startLoading } from '@/redux/stateSlice'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { showSnackBar } from '@/redux/notistackSlice'
+import t from '@/utility/dict'
 
 const Users = ({ title, dashboard, users, totalPages, currentPage }) => {
   const [filteredUsers, setFilteredUsers] = useState(users)
@@ -15,6 +16,7 @@ const Users = ({ title, dashboard, users, totalPages, currentPage }) => {
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user.userInfo)
   const headers = { Authorization: 'Bearer ' + userInfo?.token }
+  const lang = router.locale
 
   useEffect(() => {
     setFilteredUsers(users)
@@ -59,7 +61,7 @@ const Users = ({ title, dashboard, users, totalPages, currentPage }) => {
             <div className={styles.left}>
               <input
                 type='text'
-                placeholder='Search by name or phone '
+                placeholder={`${t('search', lang)} ...`}
                 onChange={e => setSearchQuery(e.target.value)}
                 value={searchQuery}
               />
@@ -107,12 +109,12 @@ const Users = ({ title, dashboard, users, totalPages, currentPage }) => {
           <table>
             <thead>
               <tr>
-                <th>User ID</th>
-                <th> Name</th>
-                <th>Email</th>
-                <th> Phone</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th>{t('userId', lang)}</th>
+                <th>{t('name', lang)}</th>
+                <th>{t('email', lang)}</th>
+                <th>{t('phone', lang)}</th>
+                <th>{t('role', lang)}</th>
+                <th>{t('action', lang)}</th>
                 {/* Add more table headers as needed */}
               </tr>
             </thead>
@@ -134,11 +136,7 @@ const Users = ({ title, dashboard, users, totalPages, currentPage }) => {
                   <td>{user.role}</td>
                   <td className={styles.action}>
                     <span onDoubleClick={() => remove(user._id)}>Delete</span>
-                    <span
-                      onClick={() =>
-                        router.push(`/user/${user._id}`)
-                      }
-                    >
+                    <span onClick={() => router.push(`/user/${user._id}`)}>
                       View
                     </span>
                   </td>

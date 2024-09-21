@@ -14,6 +14,7 @@ import { buttonC, themeBg } from '@/utility/const'
 import AddCategory from '@/components/Admin/AddCategory'
 import { setFetchAgain } from '@/redux/articleSlice'
 import SelectParentCategory from '@/components/Categories/SelectParentCategory'
+import t from '@/utility/dict'
 // Order Craetion Form
 const Create = ({ category: data }) => {
   const [category, setCategory] = useState(data)
@@ -139,11 +140,17 @@ const Create = ({ category: data }) => {
       setError('Error While Updating Category !')
     }
   }
+
+  const locale = router.locale
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.flex}>
-        <h2>{router.query.id ? 'Update' : 'Add'} Category</h2>
-        <h2>Add Article</h2>
+        <h2>
+          {router.query.id
+            ? t('updateCategory', locale)
+            : t('createCategory', locale)}{' '}
+        </h2>
         <div
           className={styles.status}
           onDoubleClick={() => setLang(['en', 'bn'])}
@@ -228,10 +235,10 @@ const Create = ({ category: data }) => {
         {lang.find(i => i == 'bn') && (
           <div className={styles.left}>
             <div className={styles.field}>
-              <label>Category Name</label>
+              <label>{t('categoryName', 'bn')}</label>
               <input
                 type='text'
-                placeholder='Enter Category Name'
+                placeholder={t('enterCategoryName', 'bn')}
                 value={category.name.bn}
                 onChange={e =>
                   setCategory({
@@ -246,7 +253,7 @@ const Create = ({ category: data }) => {
             </div>
 
             <div className={styles.field}>
-              <label>Chose Parent Category</label>
+              <label>{t('chosePCategory', 'bn')}</label>
               <div className={styles.options}>
                 <SelectParentCategory
                   category={category}
@@ -279,7 +286,7 @@ const Create = ({ category: data }) => {
                   <CheckBoxOutlineBlankIcon />
                 )}
               </span>
-              <span> This Category will be shown in home page</span>{' '}
+              <span>{t('showInHomPage', 'bn')}</span>{' '}
             </div>
             <div
               className={styles.field}
@@ -295,7 +302,7 @@ const Create = ({ category: data }) => {
       <button
         onClick={() => (router.query.id ? updateCategory() : saveCategory())}
       >
-        Save Category
+        {t('saveCategory', locale)}
       </button>
     </div>
   )

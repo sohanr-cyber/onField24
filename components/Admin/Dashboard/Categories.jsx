@@ -9,6 +9,7 @@ import { showSnackBar } from '@/redux/notistackSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { setFetchAgain } from '@/redux/articleSlice'
+import t from '@/utility/dict'
 
 const Categories = ({
   title,
@@ -23,6 +24,7 @@ const Categories = ({
   const dispatch = useDispatch()
   const userInfo = useSelector(state => state.user.userInfo)
   const headers = { Authorization: 'Bearer ' + userInfo?.token }
+  const lang = router.locale
   useEffect(() => {
     setFilteredCategories(categories)
   }, [categories])
@@ -74,7 +76,7 @@ const Categories = ({
             <div className={styles.left}>
               <input
                 type='text'
-                placeholder=''
+                placeholder={`${t('search', lang)} ...`}
                 onChange={e => handleSearchChange(e)}
               />
               <span>
@@ -83,7 +85,9 @@ const Categories = ({
             </div>
             <div className={styles.right}>
               <button onClick={() => router.push('/admin/category/create')}>
-                <span className={styles.plus__btn}>Add Category</span>
+                <span className={styles.plus__btn}>
+                  {t('addCategory', lang)}
+                </span>
                 <span className={styles.plus__icon}>+</span>
               </button>{' '}
             </div>
@@ -94,11 +98,11 @@ const Categories = ({
           <table>
             <thead>
               <tr>
-                <th>Category Id</th>
-                <th>Category Name</th>
-                <th>Category Icon</th>
+                <th>{t('categoryId', lang)}</th>
+                <th>{t('categoryName', lang)}</th>
+
                 {/* <th>CreatedAt</th> */}
-                <th>Action</th>
+                <th>{t('action', lang)}</th>
                 {/* Add more table headers as needed */}
               </tr>
             </thead>
@@ -107,20 +111,17 @@ const Categories = ({
                 <tr key={index}>
                   <td>{c._id}</td>
                   <td>{c.name}</td>
-                  <td>
-                    {c.image && (
-                      <Image src={c.image} width='50' height='50' alt='' />
-                    )}
-                  </td>
 
                   <td className={styles.action}>
-                    <span onDoubleClick={() => remove(c._id)}>Delete</span>
+                    <span onDoubleClick={() => remove(c._id)}>
+                      {t('delete', lang)}
+                    </span>
                     <span
                       onClick={() =>
                         router.push(`/admin/category/create?id=${c._id}`)
                       }
                     >
-                      View
+                      {t('view', lang)}
                     </span>
                   </td>
                   {/* Add more table cells as needed */}

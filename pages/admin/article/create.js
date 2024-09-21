@@ -10,10 +10,9 @@ import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { useRouter } from 'next/router'
 import TextEditor from '@/components/Utility/TextEditor'
 import { showSnackBar } from '@/redux/notistackSlice'
-import Colors from '@/components/News/Colors'
-import ControlPointDuplicateOutlinedIcon from '@mui/icons-material/ControlPointDuplicateOutlined'
 import SelectCategory from '@/components/Categories/SelectCategory'
 import LangPicker from '@/components/Utility/LangPicker'
+import t from '@/utility/dict'
 
 const Create = ({ article: data, tags }) => {
   const [images, setImages] = useState([])
@@ -30,7 +29,7 @@ const Create = ({ article: data, tags }) => {
   const userInfo = useSelector(state => state.user.userInfo)
   const headers = { Authorization: 'Bearer ' + userInfo?.token }
   const [selected, setSelected] = useState(article.categories?.map(i => i._id))
-
+  const { locale } = router
   const categories = useSelector(state => state.article.dualCategories)
 
   const saveArticle = async () => {
@@ -150,14 +149,14 @@ const Create = ({ article: data, tags }) => {
     }
   }
 
-  const setColor = c => {
-    setArticle({ ...article, color: article.color == c ? '' : c })
-  }
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.flex}>
-        <h2>Add Article</h2>
+        <h2>
+          {router.query.id
+            ? t('updateArticle', locale)
+            : t('createArticle', locale)}
+        </h2>
         <div
           className={styles.status}
           onDoubleClick={() => setLang(['en', 'bn'])}
@@ -279,6 +278,7 @@ const Create = ({ article: data, tags }) => {
               <label>Excerpt</label>
               <textarea
                 value={article.excerpt?.en}
+                placeholder='Write Excerpt ... '
                 onChange={e =>
                   setArticle(prev => ({
                     ...prev,
@@ -297,10 +297,10 @@ const Create = ({ article: data, tags }) => {
           <div className={`${styles.left} ${styles.right}`}>
             {' '}
             <div className={styles.field}>
-              <label>Article Name</label>
+              <label>{t('title', 'bn')}</label>
               <input
                 type='text'
-                placeholder='Enter Title'
+                placeholder={t('enterTitle', 'bn')}
                 value={article.title?.bn}
                 onChange={e =>
                   setArticle(prev => ({
@@ -314,7 +314,7 @@ const Create = ({ article: data, tags }) => {
               />
             </div>
             <div className={styles.field}>
-              <label> Thumbnail</label>
+              <label>{t('thumbnail', 'bn')}</label>
               <Upload
                 handle={files => {
                   setArticle(prev => ({
@@ -343,14 +343,14 @@ const Create = ({ article: data, tags }) => {
                       textAlign: 'center'
                     }}
                   >
-                    No Photo Uploaded
+                    {t('noPhotoUploaded', 'bn')}
                   </div>
                 )}
               </div>
             </div>
             <div className={styles.flex}>
               <div className={styles.field}>
-                <label>Tag </label>
+                <label>{t('tag', 'bn')} </label>
                 <div className={styles.options}>
                   {' '}
                   {tags?.map(i => (
@@ -376,7 +376,7 @@ const Create = ({ article: data, tags }) => {
                 </div>
               </div>
               <div className={styles.field}>
-                <label>Category</label>
+                <label>{t('category', 'bn')}</label>
                 <div className={styles.options}>
                   <SelectCategory
                     currentCategories={article.categories}
@@ -388,7 +388,7 @@ const Create = ({ article: data, tags }) => {
               </div>
             </div>
             <div className={styles.field}>
-              <label>Description</label>
+              <label>{t('description', 'bn')}</label>
 
               <TextEditor
                 setDescriptionBn={setDescriptionBn}
@@ -397,9 +397,10 @@ const Create = ({ article: data, tags }) => {
               />
             </div>
             <div className={styles.field}>
-              <label>Excerpt</label>
+              <label>{t('excerpt', 'bn')}</label>
               <textarea
                 value={article.excerpt?.bn}
+                placeholder={t('enterExcerpt', 'bn')}
                 onChange={e =>
                   setArticle(prev => ({
                     ...prev,
@@ -416,7 +417,7 @@ const Create = ({ article: data, tags }) => {
       </form>
       <div className={styles.top__flex}>
         <div className={styles.field}>
-          <label>Published At</label>
+          <label>{t('publishedAt', locale)}</label>
           <input
             type='datetime-local'
             value={
@@ -447,7 +448,7 @@ const Create = ({ article: data, tags }) => {
               }`}
               onClick={() => setArticle({ ...article, status: 'published' })}
             >
-              Published
+              {t('published', locale)}
             </span>
             <span
               className={`${
@@ -455,14 +456,14 @@ const Create = ({ article: data, tags }) => {
               }`}
               onClick={() => setArticle({ ...article, status: 'draft' })}
             >
-              Draft
+              {t('draft', locale)}
             </span>
           </div>
         </div>
         <button
           onClick={() => (router.query.id ? updateArticle() : saveArticle())}
         >
-          Save Prdouct
+          {t('saveArticle', locale)}
         </button>
       </div>
     </div>

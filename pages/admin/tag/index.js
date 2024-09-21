@@ -3,15 +3,19 @@ import styles from '../../../styles/Admin/Home.module.css'
 import axios from 'axios'
 import BASE_URL from '@/config'
 import Tags from '@/components/Admin/Dashboard/Tags'
+import t from '@/utility/dict'
+import { useRouter } from 'next/router'
 
 const index = ({ tags, totalPages, currentPage }) => {
+  const router = useRouter()
+  const lang = router.locale
   return (
     <div className={styles.wrapper}>
       <Tags
         tags={tags}
         totalPages={totalPages}
         currentPage={currentPage}
-        title={'Tag List'}
+        title={t('tagList', lang)}
       />
     </div>
   )

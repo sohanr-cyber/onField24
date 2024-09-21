@@ -32,10 +32,14 @@ const Header = ({ article }) => {
         <h1>{article.title}</h1>
         <div className={styles.left__top}>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed eos
-            debitis porro et enim, aliquid cupiditate, doloribus modi, dolor
-            natus alias voluptatum suscipit exercitationem nulla aperiam
-            consequatur ex molestias illum.
+            {article.excerpt || (
+              <>
+                {' '}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,
+                a eveniet. Quo aperiam odit, nulla nam ab, voluptate commodi
+                quis ea, temporibus sunt excepturi odio delectus architecto
+              </>
+            )}
           </p>
           <div className={styles.flex}>
             <div className={styles.category}>{article.categories[0]?.name}</div>

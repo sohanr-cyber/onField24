@@ -9,6 +9,7 @@ import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { orderStatusColors } from '@/utility/const'
 import { extractRGBA, readMinute } from '@/utility/helper'
+import t from '@/utility/dict'
 
 const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
   const router = useRouter()
@@ -24,6 +25,8 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
   useEffect(() => {
     setFilteredTags({ tags, totalPages, count, page: currentPage })
   }, [tags])
+
+  const lang = router.locale
 
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
@@ -68,7 +71,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
             <div className={styles.left}>
               <input
                 type='text'
-                placeholder='Search by tag name...'
+                placeholder={`${t('search', lang)} ...`}
                 value={searchQuery || router.query.name}
                 onChange={e => setSearchQuery(e.target.value)}
               />
@@ -78,7 +81,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
             </div>
             <div className={styles.right}>
               <button onClick={() => router.push('/admin/tag/create')}>
-                <span className={styles.plus__btn}>Add Tag</span>
+                <span className={styles.plus__btn}>{t('addTag', lang)}</span>
                 <span className={styles.plus__icon}>+</span>
               </button>
             </div>
@@ -88,9 +91,9 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
           <table>
             <thead>
               <tr>
-                <th>Title </th>
-                <th>Title</th>
-                <th>Action</th>
+                <th>{t('name', lang)}</th>
+                <th>{t('name', lang)}(BN)</th>
+                <th>{t('action', lang)}</th>
                 {/* Add more table headers as needed */}
               </tr>
             </thead>
@@ -128,13 +131,15 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
                   <td>{tag.name['bn']}</td>
 
                   <td className={styles.action}>
-                    <span onDoubleClick={() => remove(tag._id)}>Delete</span>
+                    <span onDoubleClick={() => remove(tag._id)}>
+                      {t('delete', lang)}
+                    </span>
                     <span
                       onClick={() =>
                         router.push(`/admin/tag/create?id=${tag._id}`)
                       }
                     >
-                      View
+                      {t('view', lang)}
                     </span>
                   </td>
                   {/* Add more table cells as needed */}

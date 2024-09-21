@@ -9,6 +9,7 @@ import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { orderStatusColors } from '@/utility/const'
 import { extractRGBA, readMinute } from '@/utility/helper'
+import t from '@/utility/dict'
 
 const Articles = ({
   title,
@@ -28,6 +29,7 @@ const Articles = ({
     count,
     page: currentPage
   })
+  const lang = router.locale
 
   useEffect(() => {
     setFilteredArticles({ articles, totalPages, count, page: currentPage })
@@ -84,7 +86,7 @@ const Articles = ({
             <div className={styles.left}>
               <input
                 type='text'
-                placeholder='Search by article name...'
+                placeholder={`${t('search', lang)}...`}
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
               />
@@ -96,7 +98,9 @@ const Articles = ({
             </div>
             <div className={styles.right}>
               <button onClick={() => router.push('/admin/article/create')}>
-                <span className={styles.plus__btn}>Add Article</span>
+                <span className={styles.plus__btn}>
+                  {t('addArticle', lang)}
+                </span>
                 <span className={styles.plus__icon}>+</span>
               </button>
             </div>
@@ -106,12 +110,12 @@ const Articles = ({
           <table>
             <thead>
               <tr>
-                <th>Title </th>
-                <th>Categories</th>
-                <th>Tags</th>
-                <th>Duration</th>
-                <th>Views</th>
-                <th>Action</th>
+                <th>{t('title', lang)} </th>
+                <th>{t('category', lang)}</th>
+                <th>{t('tag', lang)}</th>
+                <th>{t('duration', lang)}</th>
+                <th>{t('views', lang)}</th>
+                <th>{t('action', lang)}</th>
                 {/* Add more table headers as needed */}
               </tr>
             </thead>
@@ -173,14 +177,14 @@ const Articles = ({
 
                   <td className={styles.action}>
                     <span onDoubleClick={() => remove(article._id)}>
-                      Delete
+                      {t('delete', lang)}
                     </span>
                     <span
                       onClick={() =>
                         router.push(`/admin/article/create?id=${article._id}`)
                       }
                     >
-                      View
+                      {t('view', lang)}
                     </span>
                   </td>
                   {/* Add more table cells as needed */}
