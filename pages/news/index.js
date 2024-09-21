@@ -10,7 +10,8 @@ import { useRouter } from 'next/router'
 import Article from '@/components/Article/Article'
 import Article2 from '@/components/Article/Article2'
 import t from '@/utility/dict'
-import Filter from '@/components/Shop/Filter'
+import Filter from '@/components/News/Filter'
+import { convertToBanglaNumber } from '@/utility/helper'
 
 const sortOptions = [
   {
@@ -37,7 +38,7 @@ const sortOptions = [
   }
 ]
 const Home = ({ articles, totalPages, currentPage, count }) => {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const router = useRouter()
   const lang = router.locale
   const updateRoute = data => {
@@ -56,9 +57,12 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
         <div className={styles.left}>
           <div className={styles.filter} onClick={() => setOpen(true)}>
             <FilterAltIcon />
-            Filter
+            {t('filter', lang)}
           </div>
-          <div>{count} items found </div>
+          <div>
+            {convertToBanglaNumber(count, lang)}{' '}
+            {count > 1 ? t('items', lang) : t('item', lang)}{' '}
+          </div>
         </div>
         <div className={styles.right}>
           <select

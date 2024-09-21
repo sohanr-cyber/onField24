@@ -10,6 +10,7 @@ import SkeletonDiv from '../Utility/SkeletonDiv'
 import Colors from './Colors'
 import Categories from './Categories'
 import axios from 'axios'
+import t from '@/utility/dict'
 
 const Filter = ({ setOpen }) => {
   const router = useRouter()
@@ -44,18 +45,18 @@ const Filter = ({ setOpen }) => {
     <div className={styles.wrapper}>
       <div className={styles.left}>
         <div className={styles.flex}>
-          <h3>FILTER</h3>
+          <h3>{t('filter', lang)}</h3>
           <h3 onClick={() => setOpen(false)}>X</h3>
         </div>
 
         {/* Category Filter */}
-        <div className={styles.heading}>Category</div>
+        <div className={styles.heading}>{t('Category', lang)}</div>
         <div className={styles.filterOptions}>
           <Categories categories={categories} updateRoute={updateRoute} />
         </div>
 
         {/* Color Family */}
-        <div className={styles.heading}>Tags</div>
+        <div className={styles.heading}>{t('Tags', lang)}</div>
         <div
           className={styles.filterOptions}
           style={{
@@ -67,15 +68,25 @@ const Filter = ({ setOpen }) => {
           {tags?.map((i, index) => (
             <span
               key={index}
-              className={styles.tag}
-              
+              className={`${
+                router.query.tags?.split(',').find(tag => tag == i._id)
+                  ? styles.selectedTag
+                  : ''
+              } ${styles.tag}`}
               onClick={() =>
                 updateRoute({
-                  tags: i._id
+                  tags: router.query.tags
+                    ? router.query.tags.split(',').find(tag => tag == i._id)
+                      ? router.query.tags
+                          .split(',')
+                          .filter(tag => tag != i._id)
+                          .join(',')
+                      : [...router.query.tags.split(','), i._id].join(',')
+                    : i._id // if router.query.tags is undefined, add the first tag
                 })
               }
             >
-              {i.name[lang]}
+              {i.name?.[lang]}
             </span>
           ))}
         </div>

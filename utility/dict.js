@@ -155,6 +155,26 @@ const dict = {
   resetNewH: {
     en: 'Set New Password',
     bn: 'নতুন পাসওয়ার্ড সেট করুন'
+  },
+  filter: {
+    en: 'Filter',
+    bn: 'ফিল্টার'
+  },
+  Category: {
+    en: 'Category',
+    bn: 'ক্যাটাগরি'
+  },
+  Tags: {
+    en: 'Tags',
+    bn: 'ট্যাগ'
+  },
+  items: {
+    en: 'Results',
+    bn: 'ফলাফল'
+  },
+  item: {
+    en: 'Result',
+    bn: 'ফলাফল'
   }
 }
 

@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import styles from '../../styles/Utility/Pagination.module.css'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import t from '@/utility/dict'
+import { convertToBanglaNumber } from '@/utility/helper'
 
 const Pages = ({ totalPages, currentPage }) => {
   const router = useRouter()
@@ -14,6 +16,7 @@ const Pages = ({ totalPages, currentPage }) => {
       shallow: false
     })
   }
+  const lang = router.locale
 
   return (
     <div className={styles.flex}>

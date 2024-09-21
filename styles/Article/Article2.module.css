@@ -28,4 +28,18 @@
 .wrapper .text__container {
     padding: 10px;
     width: 50%;
+
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper .text__container .flex {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.wrapper .category {
+    color: var(--highlight)
 }

@@ -6,12 +6,14 @@ import Logo from '../Utility/Logo'
 import { useRouter } from 'next/router'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { themeBg } from '@/utility/const'
+import t from '@/utility/dict'
 
 const CategoriesSlider = ({ setOpen }) => {
   const categories = useSelector(state => state.article.categories)
   const [expand, setExpand] = useState('')
   const router = useRouter()
   const [history, setHistory] = useState([])
+  const lang = router.locale
 
   return (
     <div className={styles.wrapper}>
@@ -38,10 +40,14 @@ const CategoriesSlider = ({ setOpen }) => {
                 <>
                   {' '}
                   <div className={styles.category}>
-                    <div onClick={() => router.push(`/`)}>Home</div>
+                    <div onClick={() => router.push(`/`)}>
+                      {t('home', lang)}
+                    </div>
                   </div>
                   <div className={styles.category}>
-                    <div onClick={() => router.push(`/news`)}>News</div>
+                    <div onClick={() => router.push(`/news`)}>
+                      {t('news', lang)}
+                    </div>
                   </div>
                 </>
               )}

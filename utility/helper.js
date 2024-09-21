@@ -2,6 +2,7 @@ import BASE_URL from '@/config'
 import { companyName, delivery_charge, seoData } from './const'
 import mongoose from 'mongoose'
 import crypto from 'crypto'
+import t from './dict'
 
 function generateTrackingNumber (length = 10) {
   const characters =
@@ -188,6 +189,9 @@ function extractRGBA (rgbString, opacity = 1) {
 }
 
 function findCategoryById (categories, id) {
+  if (!categories) {
+    return
+  }
   for (const category of categories) {
     if (category._id === id) {
       return category
@@ -224,15 +228,32 @@ const dateDevider = days => {
   }
 }
 
-const readMinute = duration => {
+const readMinute = (duration, lang) => {
   if (!duration) {
     return
   } else if (duration > 1) {
-    return `${duration} Minutes Read`
+    if (lang == 'en') return `${t(duration, lang)} Minutes Read`
+    else if (lang == 'bn') return `${t(duration, lang)} মিনিট  `
   } else {
-    return `${duration} Minute Read`
+    if (lang == 'en') return `${t(duration, lang)} Minute Read`
+    else if (lang == 'bn') return `${t(duration, lang)} মিনিট  `
   }
 }
+
+function convertToBanglaNumber (englishNumber, lang = 'en') {
+  if (lang == 'en') {
+    return englishNumber
+  }
+  const banglaDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯']
+
+  // Convert the number to a string to work with each character
+  return englishNumber
+    .toString()
+    .split('')
+    .map(digit => (/\d/.test(digit) ? banglaDigits[digit] : digit)) // Check if the character is a digit
+    .join('')
+}
+
 export {
   generateTrackingNumber,
   containsAdmin,
@@ -248,5 +269,6 @@ export {
   summarizeOrders,
   dateDevider,
   calculateReadingTimeFromHTML,
-  readMinute
+  readMinute,
+  convertToBanglaNumber
 }

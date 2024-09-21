@@ -6,6 +6,7 @@ import { readMinute } from '@/utility/helper'
 import { handleViewArticle } from '@/redux/pixelSlice'
 const Article = ({ article, index, flex, style }) => {
   const router = useRouter()
+  const lang = router.locale
 
   const handleClick = article => {
     router.push(`/article/${article.slug}`)
@@ -41,7 +42,9 @@ const Article = ({ article, index, flex, style }) => {
           {[article.categories[0]].map((c, index) => (
             <span className={styles.category}>{c?.name}</span>
           ))}
-          <div className={styles.time}>{readMinute(article.duration)}</div>
+          <div className={styles.time}>
+            {readMinute(article.duration, lang)}
+          </div>
         </div>
       </div>
     </div>
