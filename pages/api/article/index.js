@@ -105,8 +105,6 @@ handler.get(async (req, res) => {
     let articles = await Article.find(filter)
       .populate('author', 'name email') // Populate author info
       .populate('categories', 'name')
-      // .populate('tags', 'name') // Populate category info
-
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(Number(limit))
