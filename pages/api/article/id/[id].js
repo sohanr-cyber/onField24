@@ -49,13 +49,12 @@ handler.put(async (req, res) => {
       excerpt,
       publishedAt
     } = req.body // Extract fields from the request body
-    console.log({ tags })
+
     // console.log({ content })
     // Validate required fields
     if (!title && !content) {
       return res.status(400).json({ message: 'No fields to update' })
     }
-
     await db.connect()
 
     // Find the article by ID and update it with new data
@@ -65,6 +64,7 @@ handler.put(async (req, res) => {
         $set: {
           title,
           content,
+          slug: slugify(title.en),
           status,
           categories,
           excerpt,
@@ -85,6 +85,7 @@ handler.put(async (req, res) => {
     // Respond with the updated article
     res.status(200).json(article)
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: 'Server error', error })
   }
 })
