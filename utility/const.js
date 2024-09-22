@@ -199,15 +199,15 @@ const bg = 'white'
 const outerBg = 'rgb(232, 241, 247)'
 const borderColor = 'rgba(52, 134, 11, 0.5)'
 
-const orderStatusColors = {
-  pending: 'rgb(255, 165, 0)', // Orange
-  processing: 'rgb(0, 0, 255)', // Blue
+const statusColors = {
+  draft: 'rgb(255, 165, 0)', // Orange
+  published: 'rgb(0, 0, 255)', // Blue
   confirmed: 'rgb(0, 128, 0)', // Green
   completed: 'rgb(0, 128, 0)', // Green
   packing: 'rgb(255, 215, 0)', // Gold
   packed: 'rgb(255, 140, 0)', // Dark Orange
-  delivering: 'rgb(30, 144, 255)', // Dodger Blue
-  delivered: 'rgb(50, 205, 50)', // Lime Green
+  reads: 'rgb(30, 144, 255)', // Dodger Blue
+  views: 'rgb(255, 205, 50)', // Lime Green
   canceled: 'rgb(255, 0, 0)', // Red
   failed: 'rgb(139, 0, 0)', // Dark Red
   none: `${themeC}`
@@ -233,7 +233,7 @@ export {
   companyName,
   support_mail,
   support_number,
-  orderStatusColors,
+  statusColors,
   feacebook_page,
   whatsapp,
   messenger,

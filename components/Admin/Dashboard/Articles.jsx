@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
-import { orderStatusColors } from '@/utility/const'
+import { statusColors } from '@/utility/const'
 import { extractRGBA, readMinute } from '@/utility/helper'
 import t from '@/utility/dict'
 
@@ -112,7 +112,8 @@ const Articles = ({
               <tr>
                 <th>{t('title', lang)} </th>
                 <th>{t('category', lang)}</th>
-                <th>{t('tag', lang)}</th>
+                <th>{t('excerpt', lang)}</th>
+                <th>{t('publishedAt', lang)}</th>
                 <th>{t('duration', lang)}</th>
                 <th>{t('views', lang)}</th>
                 <th>{t('action', lang)}</th>
@@ -125,7 +126,7 @@ const Articles = ({
                   key={index}
                   style={{
                     borderLeft: `3px solid ${
-                      orderStatusColors[
+                      statusColors[
                         `${
                           article.stockQuantity < 5
                             ? 'pending'
@@ -136,7 +137,7 @@ const Articles = ({
                       ]
                     }`,
                     background: `${extractRGBA(
-                      orderStatusColors[
+                      statusColors[
                         `${
                           article.stockQuantity < 5
                             ? 'pending'
@@ -166,12 +167,14 @@ const Articles = ({
                   </td>
                   <td>
                     {' '}
-                    {article.tags?.map((item, index) => (
+                    {article.excerpt}
+                    {/* {article.tags?.map((item, index) => (
                       <span key={index}>
                         {item?.name} {'  '}
                       </span>
-                    ))}
+                    ))} */}
                   </td>
+                  <td>{article.publishedAt}</td>
                   <td>{readMinute(article.duration)}</td>
                   <td>{article.views}</td>
 

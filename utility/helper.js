@@ -99,44 +99,22 @@ function chunkArray (array, chunkSize) {
   return result
 }
 
-function summarizeOrders (orders) {
+function summarizeOrders (articles) {
   const summary = {
     total: 0,
-    totalAmount: 0,
-    pending: 0,
-    pendingAmount: 0,
-    failed: 0,
-    failedAmount: 0,
-    canceled: 0,
-    canceledAmount: 0,
-    delivering: 0,
-    deliveringAmount: 0,
-    delivered: 0,
-    deliveredAmount: 0,
-    confirmed: 0,
-    confirmedAmount: 0,
-    failedAndCanceled: 0,
-    failedAndCanceledAmount: 0
+    published: 0,
+    draft: 0,
+    views: 0,
+    reads: 0
   }
 
   // Iterate through each order and sum up all the fields
-  orders.forEach(order => {
-    summary.total += order.total
-    summary.totalAmount += order.totalAmount
-    summary.pending += order.pending
-    summary.pendingAmount += order.pendingAmount
-    summary.failed += order.failed
-    summary.failedAmount += order.failedAmount
-    summary.canceled += order.canceled
-    summary.canceledAmount += order.canceledAmount
-    summary.delivering += order.delivering
-    summary.deliveringAmount += order.deliveringAmount
-    summary.delivered += order.delivered
-    summary.deliveredAmount += order.deliveredAmount
-    summary.confirmed += order.confirmed
-    summary.confirmedAmount += order.confirmedAmount
-    summary.failedAndCanceled += order.failedAndCanceled
-    summary.failedAndCanceledAmount += order.failedAndCanceledAmount
+  articles.forEach(article => {
+    summary.total += article.total
+    summary.published += article.published
+    summary.draft += article.draft
+    summary.views += article.views
+    summary.reads += article.reads
   })
 
   return summary

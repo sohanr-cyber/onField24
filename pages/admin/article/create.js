@@ -510,6 +510,11 @@ export async function getServerSideProps ({ query }) {
       article: {
         title: '',
         content: {},
+        publishedAt: new Date(
+          new Date().getTime() - new Date().getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .slice(0, 16),
 
         categories: [],
         tags: [],

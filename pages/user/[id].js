@@ -17,10 +17,15 @@ const user = ({ user: data }) => {
   const userInfo = useSelector(state => state.user.userInfo)
   const headers = { Authorization: `Bearer ${userInfo?.token}` }
   const dispatch = useDispatch()
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setUser(data)
   }, [data])
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
@@ -65,6 +70,32 @@ const user = ({ user: data }) => {
       console.log(error)
     }
   }
+
+  const updateRole = async (role, id) => {
+    try {
+      dispatch(startLoading())
+      const { data } = await axios.put(
+        '/api/user/role',
+        {
+          role: role,
+          id: id
+        },
+        { headers }
+      )
+      setUser({ ...user, role: role })
+      if (data) {
+        dispatch(
+          showSnackBar({
+            message: 'Role Updated'
+          })
+        )
+      }
+      dispatch(finishLoading())
+    } catch (error) {
+      dispatch(finishLoading())
+      console.log(error)
+    }
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
@@ -80,8 +111,21 @@ const user = ({ user: data }) => {
           />
         </div>
         <div className={styles.buttons}>
-          <span className={styles.button}>Contact</span>
-          <span className={styles.button}>Message</span>
+          <span
+            className={styles.button}
+            onClick={() => router.push(user.facebook)}
+          >
+            Contact
+          </span>
+          <span
+            className={styles.button}
+            onClick={() =>
+              router.push(`https://m.me/${user.facebook.split('=')[1]}
+`)
+            }
+          >
+            Message
+          </span>
           <span
             className={styles.button}
             onClick={() =>
@@ -106,15 +150,15 @@ const user = ({ user: data }) => {
         <div className={styles.text__container}>
           <div className={styles.contribution}>
             <div className={styles.item}>
-              <b>22</b>
-              <div>Posts</div>
+              <b>{user.totalArticles}</b>
+              <div>Total</div>
             </div>
             <div className={styles.item}>
-              <b>19</b>
+              <b>{user.totalPublished}</b>
               <div>Published</div>
             </div>
             <div className={styles.item}>
-              <b>02</b>
+              <b>{user.totalDraft}</b>
               <div>Draft</div>
             </div>
           </div>
@@ -133,21 +177,26 @@ const user = ({ user: data }) => {
       <div className={styles.right}>
         {router.query.current == 'settings' && (
           <div className={styles.settings}>
-            <div className={styles.field}>
-              <label>First Name</label>
-              <input
-                type='text'
-                value={user.firstName}
-                onChange={e => setUser({ ...user, firstName: e.target.value })}
-              />
-            </div>
-            <div className={styles.field}>
-              <label>Last Name</label>
-              <input
-                type='text'
-                value={user.lastName}
-                onChange={e => setUser({ ...user, lastName: e.target.value })}
-              />
+            <div className={styles.flex}>
+              {' '}
+              <div className={styles.field}>
+                <label>First Name</label>
+                <input
+                  type='text'
+                  value={user.firstName}
+                  onChange={e =>
+                    setUser({ ...user, firstName: e.target.value })
+                  }
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Last Name</label>
+                <input
+                  type='text'
+                  value={user.lastName}
+                  onChange={e => setUser({ ...user, lastName: e.target.value })}
+                />
+              </div>
             </div>
             <div className={styles.field}>
               <label>Phone No.</label>
@@ -158,7 +207,6 @@ const user = ({ user: data }) => {
                 placeholder='+8891329811'
               />
             </div>
-
             <div className={styles.field}>
               <label>Email</label>
               <input
@@ -177,7 +225,52 @@ const user = ({ user: data }) => {
               />
             </div>
             <div className={styles.field}>
-              <button onClick={() => updateUser()}>update </button>
+              <label>facebook</label>
+              <input
+                type='text'
+                value={user.location}
+                onChange={e => setUser({ ...user, location: e.target.value })}
+                placeholder='https://www.facebook.com/profile.php?id=100266481262836'
+              />
+            </div>
+            <div className={styles.field}>
+              <label>whatsapp</label>
+              <input
+                type='text'
+                value={user.location}
+                onChange={e => setUser({ ...user, location: e.target.value })}
+                placeholder='+990164238922'
+              />
+            </div>
+            {isClient && userInfo.role == 'admin' && (
+              <div className={styles.field}>
+                <div className={styles.flex}>
+                  {[
+                    'admin',
+                    'editor',
+                    'journalist',
+                    'contributor',
+                    'moderator',
+                    'subscriber',
+                    'user'
+                  ].map((i, index) => (
+                    <span
+                      style={
+                        user.role == i
+                          ? { background: 'black', color: 'white' }
+                          : {}
+                      }
+                      onClick={() => updateRole(i, user._id)}
+                    >
+                      {i}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className={styles.field}>
+              <button onClick={() => updateUser()}>Update </button>
             </div>
           </div>
         )}

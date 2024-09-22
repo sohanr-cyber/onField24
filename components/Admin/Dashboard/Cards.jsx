@@ -34,64 +34,49 @@ const Cards = ({ summary }) => {
         index={0}
         totalAmount={result.totalAmount}
         status={'None'}
-        title={'Total Order'}
+        title={'Total Article'}
         total={result.total}
-        orderTotal={result.total}
+        denominator={result.total}
         icon={'https://cdn-icons-png.flaticon.com/128/17385/17385190.png'}
       />
 
       <Card
         // item={{ ...data[1], number: total?.totalOrders }}
         index={1}
-        status={'Delivered'}
-        title='Delivered'
-        totalAmount={result.deliveredAmount}
-        total={result.delivered}
-        orderTotal={result.total}
-        icon={'https://cdn-icons-png.flaticon.com/128/6815/6815043.png'}
+        status={'published'}
+        title='Published'
+        total={result.published}
+        denominator={result.total}
+        icon={'https://cdn-icons-png.flaticon.com/128/1245/1245280.png'}
+      />
+      <Card
+        // item={{ ...data[1], number: total?.totalOrders }}
+        index={1}
+        status={'draft'}
+        title='Draft'
+        total={result.draft}
+        denominator={result.total}
+        icon={'https://cdn-icons-png.flaticon.com/128/1245/1245280.png'}
       />
 
       <Card
         // item={{ ...data[1], number: total?.totalOrders }}
         index={1}
-        status={'Delivering'}
-        title='Delivering'
-        totalAmount={result.deliveringAmount}
-        total={result.delivering}
-        orderTotal={result.total}
-        icon={'https://cdn-icons-png.flaticon.com/128/4847/4847433.png'}
-      />
-      <Card
-        // item={{ ...data[3], number: total?.totalPending }}
-        index={3}
-        status={'Pending'}
-        totalAmount={result.pendingAmount}
-        title={'Pending'}
-        total={result.pending}
-        orderTotal={result.total}
-        icon={'https://cdn-icons-png.flaticon.com/128/9796/9796480.png'}
+        status={'views'}
+        title='Total Views'
+        total={result.views}
+        // denominator={result.total}
+        icon={'https://cdn-icons-png.flaticon.com/128/7756/7756168.png'}
       />
 
       <Card
-        // item={{ ...data[2], number: total?.totalDelivered }}
-        index={2}
-        status={'Confirmed'}
-        total={result.confirmed}
-        title={'Confirmed'}
-        totalAmount={result.confirmedAmount}
-        orderTotal={result.total}
-        icon={'https://cdn-icons-png.flaticon.com/128/8888/8888205.png'}
-      />
-
-      <Card
-        // item={{ ...data[3], number: total.totalCanceled + total.totalFailed }}
-        index={3}
-        totalAmount={result.canceledAmount + result.failedAmount}
-        title={'Failed'}
-        status={'Failed'}
-        total={result.canceled + result.failed}
-        orderTotal={result.total}
-        icon={'https://cdn-icons-png.flaticon.com/128/1828/1828843.png'}
+        // item={{ ...data[1], number: total?.totalOrders }}
+        index={1}
+        status={'reads'}
+        title='Total Reads'
+        total={result.reads}
+        denominator={result.views}
+        icon={'https://cdn-icons-png.flaticon.com/128/995/995726.png'}
       />
     </div>
   )

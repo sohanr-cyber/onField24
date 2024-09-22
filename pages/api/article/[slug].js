@@ -31,7 +31,6 @@ handler.get(async (req, res) => {
       .populate('categories', 'name')
       .populate('tags', 'name') // Populate category info
 
-    console.log(article)
     if (!article) {
       res.status(404).json({ message: 'Not Found' })
     }
@@ -54,6 +53,7 @@ handler.get(async (req, res) => {
       })),
       publishedAt: article.publishedAt,
       views: article.views,
+      duration: article.duration,
       slug: article.slug,
       createdAt: article.createdAt
     }

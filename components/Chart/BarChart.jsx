@@ -12,13 +12,12 @@ import {
   BarChart,
   Bar
 } from 'recharts'
-import { sortByMonth } from '@/utility/helper'
-import { themeC } from '@/utility/const'
+import { statusColors, themeC } from '@/utility/const'
 
 const ChartBar = ({ title, number, percent, summary }) => {
   return (
     <div className={styles.graph__wrapper} style={{ width: '100%' }}>
-      <h3 className={styles.title}>Revinew Statistics</h3>
+      <h3 className={styles.title}>{title}</h3>
       <ResponsiveContainer width='100%' aspect={7 / 3}>
         <BarChart
           width={650}
@@ -32,7 +31,8 @@ const ChartBar = ({ title, number, percent, summary }) => {
           {/* <YAxis orientation={'right'} axisLine={false} tickLine={false} /> */}
 
           {/* <Tooltip /> */}
-          <Bar dataKey='total' fill={themeC} stackId='a' />
+          <Bar dataKey='views' fill={statusColors['views']} stackId='a' />
+          <Bar dataKey='reads' fill={statusColors['reads']} stackId='a' />
         </BarChart>
       </ResponsiveContainer>
     </div>

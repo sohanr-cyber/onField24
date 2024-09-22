@@ -114,9 +114,39 @@ const News = ({ article, error, relatedArticles }) => {
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${article.title}%20${currentUrl}`
   const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`
 
+  const view = async () => {
+    try {
+      const { data } = await axios.put('/api/article/view', {
+        id: article._id
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     setIsClient(true)
     setThumbnail(article.thumbnail)
+    view()
+  }, [article.slug])
+
+  const read = async () => {
+    try {
+      const { data } = await axios.post('/api/article/view', {
+        id: article._id
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      read()
+    }, (article.duration || 2) * 60 * 1000 * 0.8)
+
+    // Cleanup the timer if the user leaves before 2 minutes
+    return () => clearTimeout(timer)
   }, [article.slug])
 
   const handleShare = async () => {
@@ -210,9 +240,7 @@ const News = ({ article, error, relatedArticles }) => {
           />
           <div className={styles.tags}>
             {article.tags?.map((tag, index) => (
-              <span
-                onClick={() => router.push(`/news?tags=${tag._id}`)}
-              >
+              <span onClick={() => router.push(`/news?tags=${tag._id}`)}>
                 {tag.name}
               </span>
             ))}

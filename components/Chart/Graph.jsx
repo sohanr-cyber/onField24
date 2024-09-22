@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   Brush
 } from 'recharts'
-import { orderStatusColors } from '@/utility/const'
+import { statusColors } from '@/utility/const'
 
 const ChartArea = ({ title, summary }) => {
   return (
@@ -27,36 +27,36 @@ const ChartArea = ({ title, summary }) => {
             <linearGradient id='colorTv' x1='0' y1='0' x2='0' y2='1'>
               <stop
                 offset='5%'
-                stopColor={orderStatusColors['none']}
+                stopColor={statusColors['none']}
                 stopOpacity={0.8}
               />
               <stop
                 offset='95%'
-                stopColor={orderStatusColors['none']}
+                stopColor={statusColors['none']}
                 stopOpacity={0}
               />
             </linearGradient>
             <linearGradient id='colorDv' x1='0' y1='0' x2='0' y2='1'>
               <stop
                 offset='5%'
-                stopColor={orderStatusColors['delivered']}
+                stopColor={statusColors['delivered']}
                 stopOpacity={0.8}
               />
               <stop
                 offset='95%'
-                stopColor={orderStatusColors['delivered']}
+                stopColor={statusColors['delivered']}
                 stopOpacity={0}
               />
             </linearGradient>
             <linearGradient id='colorFv' x1='0' y1='0' x2='0' y2='1'>
               <stop
                 offset='5%'
-                stopColor={orderStatusColors['failed']}
+                stopColor={statusColors['failed']}
                 stopOpacity={0.8}
               />
               <stop
                 offset='95%'
-                stopColor={orderStatusColors['failed']}
+                stopColor={statusColors['failed']}
                 stopOpacity={0}
               />
             </linearGradient>
@@ -69,23 +69,24 @@ const ChartArea = ({ title, summary }) => {
           <Area
             type='monotone'
             dataKey='total'
-            stroke={orderStatusColors['none']}
+            stroke={statusColors['none']}
+            fillOpacity={1}
+            fill='url(#colorTv)'
+            strokeWidth={3}
+          />
+
+          <Area
+            type='monotone'
+            dataKey='published'
+            stroke={statusColors['delivered']}
             fillOpacity={1}
             fill='url(#colorTv)'
             strokeWidth={3}
           />
           <Area
             type='monotone'
-            dataKey='delivered'
-            stroke={orderStatusColors['delivered']}
-            fillOpacity={1}
-            fill='url(#colorDv)'
-            strokeWidth={3}
-          />
-          <Area
-            type='monotone'
-            dataKey='canceled'
-            stroke={orderStatusColors['canceled']}
+            dataKey='draft'
+            stroke={statusColors['canceled']}
             fillOpacity={1}
             fill='url(#colorFv)'
             strokeWidth={3}

@@ -1,4 +1,4 @@
-import { orderStatusColors } from '@/utility/const'
+import { statusColors } from '@/utility/const'
 import { summarizeOrders } from '@/utility/helper'
 import React, { PureComponent } from 'react'
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'

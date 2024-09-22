@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
-import { orderStatusColors } from '@/utility/const'
+import { statusColors } from '@/utility/const'
 import { extractRGBA, readMinute } from '@/utility/helper'
 import t from '@/utility/dict'
 
@@ -103,7 +103,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
                   key={index}
                   style={{
                     borderLeft: `3px solid ${
-                      orderStatusColors[
+                      statusColors[
                         `${
                           tag.stockQuantity < 5
                             ? 'pending'
@@ -114,7 +114,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
                       ]
                     }`,
                     background: `${extractRGBA(
-                      orderStatusColors[
+                      statusColors[
                         `${
                           tag.stockQuantity < 5
                             ? 'pending'

@@ -77,6 +77,14 @@ handler.get(async (req, res) => {
       .lean()
 
     const totalArticles = await Article.countDocuments(filter)
+    const totalPublished = await Article.countDocuments({
+      ...filter,
+      status: 'published'
+    })
+    const totalDraft = await Article.countDocuments({
+      ...filter,
+      status: 'draft'
+    })
 
     await db.disconnect()
 
@@ -86,6 +94,8 @@ handler.get(async (req, res) => {
       page: Number(page),
       totalPages: Math.ceil(totalArticles / pageSize),
       totalArticles,
+      totalPublished,
+      totalDraft,
       articles: articles.map(article => ({
         _id: article._id,
         slug: article.slug,
@@ -115,7 +125,7 @@ handler.get(async (req, res) => {
 handler.put(async (req, res) => {
   try {
     const { id } = req.query // Get the article ID from the query parameters
-    const { firstName, lastName, phone } = req.body // Extract fields from the request body
+    const { firstName, lastName, phone, address, facebook, whatsapp } = req.body // Extract fields from the request body
 
     if (!firstName || (!lastName && !phone)) {
       return res.status(400).json({ message: 'No fields to update' })
@@ -130,7 +140,10 @@ handler.put(async (req, res) => {
         $set: {
           firstName,
           lastName,
-          phone
+          phone,
+          address,
+          facebook,
+          whatsapp
         }
       },
       { new: true, runValidators: true }

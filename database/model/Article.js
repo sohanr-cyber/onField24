@@ -90,6 +90,10 @@ const articleSchema = new mongoose.Schema(
     views: {
       type: Number,
       default: 0
+    },
+    reads: {
+      type: Number,
+      default: 0
     }
   },
   { timestamps: true }

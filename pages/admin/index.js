@@ -17,32 +17,17 @@ const data = result => {
     // {
     //   name: 'Total',
     //   value: result.total,
-    //   color: orderStatusColors['none']
+    //   color: statusColors['none']
     // },
     {
-      name: 'Delivered',
-      value: result.delivered,
-      color: orderStatusColors['delivered']
+      name: 'Published',
+      value: result.published,
+      color: statusColors['published']
     },
     {
-      name: 'Failed',
-      value: result.failed + result.canceled,
-      color: orderStatusColors['canceled']
-    },
-    {
-      name: 'Confirmed',
-      value: result.confirmed,
-      color: orderStatusColors['confirmed']
-    },
-    {
-      name: 'Pending',
-      value: result.pending,
-      color: orderStatusColors['pending']
-    },
-    {
-      name: 'Delivering',
-      value: result.delivering,
-      color: orderStatusColors['delivering']
+      name: 'Draft',
+      value: result.draft,
+      color: statusColors['draft']
     }
   ]
 }
@@ -129,8 +114,8 @@ const index = ({ summary }) => {
       </div>
 
       <div className={styles.flex}>
-        <Graph title={'Order Statistics'} summary={summary} />
-        <BarChart title={'Revenue Statistics'} summary={summary} />
+        <Graph title={'News Statistics'} summary={summary} />
+        <BarChart title={'Reading  Statistics'} summary={summary} />
       </div>
     </div>
   )
@@ -141,12 +126,7 @@ import { parse } from 'cookie' // Import the `parse` function to handle cookies
 import { convertToCamelCase, getTime, summarizeOrders } from '@/utility/helper'
 import { useRouter } from 'next/router'
 import DatePicker from '@/components/Admin/DatePicker'
-import {
-  borderColor,
-  orderStatusColors,
-  themeBg,
-  themeC
-} from '@/utility/const'
+import { borderColor, statusColors, themeBg, themeC } from '@/utility/const'
 import PieWithTag from '@/components/Chart/PieWithTag'
 
 export async function getServerSideProps (context) {

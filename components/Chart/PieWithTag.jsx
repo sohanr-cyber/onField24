@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/styles/Admin/Chart/PieWithTag.module.css'
 import { summarizeOrders } from '@/utility/helper'
-import { orderStatusColors } from '@/utility/const'
+import { statusColors } from '@/utility/const'
 import Pie from './Pie'
 const PieWithTag = ({ data }) => {
   const [client, setClient] = useState(false)
@@ -21,7 +21,7 @@ const PieWithTag = ({ data }) => {
               <div
                 className={styles.identity}
                 style={{
-                  color: `${orderStatusColors[i.name.toLocaleLowerCase()]}`
+                  color: `${statusColors[i.name.toLocaleLowerCase()]}`
                 }}
               >
                 <div

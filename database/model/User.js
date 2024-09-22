@@ -25,7 +25,11 @@ const userSchema = new mongoose.Schema(
     salt: {
       type: String
     },
-
+    facebook: {
+      type: String
+    },
+    whatsapp: { type: String },
+    address: { type: String },
     role: {
       type: String,
       enum: [

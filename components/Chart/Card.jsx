@@ -3,7 +3,7 @@ import React from 'react'
 import styles from '../../styles/Admin/Card.module.css'
 import PeopleIcon from '@mui/icons-material/People'
 import { extractRGBA } from '@/utility/helper'
-import { orderStatusColors, themeTransparent } from '@/utility/const'
+import { statusColors, themeTransparent } from '@/utility/const'
 import ProgressBar from '../Utility/PBar'
 
 const colors = [
@@ -18,22 +18,21 @@ const Card = ({
   index,
   title,
   status,
-  totalAmount,
   total,
-  orderTotal,
+  denominator,
   icon
 }) => {
-  const percentage = ((total / orderTotal) * 100).toFixed(0)
+  const percentage = ((total / denominator) * 100).toFixed(0)
   return (
     <div
       className={styles.card__wrapper}
       style={{
         background: `${
           status != 'None'
-            ? extractRGBA(orderStatusColors[status.toLowerCase()], 0.1)
+            ? extractRGBA(statusColors[status.toLowerCase()], 0.1)
             : themeTransparent
         }`,
-        borderLeft: `2px solid ${orderStatusColors[status.toLowerCase()]}`
+        borderLeft: `2px solid ${statusColors[status.toLowerCase()]}`
       }}
     >
       {' '}
@@ -45,17 +44,17 @@ const Card = ({
         <ProgressBar
           height={'3px'}
           percentage={percentage}
-          color={orderStatusColors[status.toLowerCase()]}
+          color={statusColors[status.toLowerCase()]}
         />
       )}
       <div className={styles.bottom_flex}>
         <div className={styles.total}>
           {total}{' '}
-          {status != 'None' && (total / orderTotal) * 100 > 0 && (
+          {status != 'None' && (total / denominator) * 100 > 0 && (
             <span>({percentage})%</span>
           )}
         </div>
-        <div className={styles.amount}>{totalAmount.toLocaleString()} BDT</div>
+        {/* <div className={styles.amount}>{totalAmount.toLocaleString()} BDT</div> */}
       </div>
     </div>
   )
