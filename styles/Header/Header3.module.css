@@ -36,13 +36,12 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(0deg, rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.1));
-    padding: 0 25px;
+    padding: 0 15px;
 
 }
 
 .slide .surface .flex {
     margin-bottom: 15px;
-    margin-right: 15px;
     display: flex;
     gap: 15px;
     align-items: center;
@@ -58,7 +57,8 @@
 .slide h2 {
     /* max-width: 350px; */
     text-shadow: 1px 1px var(--theme);
-    margin: 0;
+    min-width: 92%;
+    max-width: 92%;
 }
 
 .slide p {
@@ -119,11 +119,23 @@
     }
 
 
+    .wrapper .slide .surface {
+        padding: 0 10px
+    }
+
     .slide h2 {
         max-width: 250px;
-
         font-size: 150%;
 
+    }
+}
+
+
+
+
+@media (max-width:480px) {
+    .slide p {
+        display: none;
     }
 }
 

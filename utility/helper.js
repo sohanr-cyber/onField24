@@ -218,6 +218,36 @@ const readMinute = (duration, lang) => {
   }
 }
 
+const timeAgo = (time, lang = 'en') => {
+  if (lang == 'en') {
+    return time
+  }
+
+  const dict = {
+    days: 'দিন',
+    minutes: 'মিনিট',
+    minute: 'মিনিট',
+    hour: 'ঘন্টা',
+    hours: 'ঘন্টা',
+    seconds: 'সেকেন্ড',
+    months: 'মাস',
+    year: 'বছর',
+    second: 'সেকেন্ড',
+    month: 'মাস',
+    years: 'বছর',
+    Ago: 'আগে'
+  }
+
+  let lst = time.split(' ')
+  let converted = []
+  lst.forEach((i, index) => {
+    if (index == 0) {
+      converted.push(convertToBanglaNumber(i, lang))
+    } else converted.push(dict[i])
+  })
+  return converted.join(' ')
+}
+
 function convertToBanglaNumber (englishNumber, lang = 'en') {
   if (lang == 'en') {
     return englishNumber
@@ -248,5 +278,6 @@ export {
   dateDevider,
   calculateReadingTimeFromHTML,
   readMinute,
-  convertToBanglaNumber
+  convertToBanglaNumber,
+  timeAgo
 }

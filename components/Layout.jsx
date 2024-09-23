@@ -24,6 +24,7 @@ const Layout = ({ children }) => {
   const fetchDualAgain = useSelector(state => state.article.fetchDualAgain)
 
   const dispatch = useDispatch()
+
   const fetchCategory = async () => {
     try {
       const { data } = await axios.get(
@@ -86,7 +87,7 @@ const Layout = ({ children }) => {
       ) : (
         <AdminNavbar />
       )}
-      {children}
+      <div className={styles.body__wrapper}>{children}</div>
       <Footer />
       <BottomFooter />
       {!containsAdmin(router.asPath) && <ChatButton />}

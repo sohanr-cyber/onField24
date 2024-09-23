@@ -1,13 +1,15 @@
 import React from 'react'
 import styles from '@/styles/Header/Header.module.css'
 import Image from 'next/image'
-import { readMinute } from '@/utility/helper'
+import { readMinute, timeAgo } from '@/utility/helper'
 import { formatDistanceToNow } from 'date-fns'
 import EastIcon from '@mui/icons-material/East'
 import { useRouter } from 'next/router'
 
 const Header = ({ article }) => {
   const router = useRouter()
+  const lang = router.locale
+  
   return (
     <div
       className={styles.wrapper}
@@ -18,15 +20,29 @@ const Header = ({ article }) => {
       </div>
       <div className={styles.text__container}>
         <div className={styles.flex}>
-          <div className={styles.author}>
-            <Image src={article?.thumbnail} width={25} height={25} alt='' />
-            <div className={styles.name}>Netflix</div>
-          </div>
+          {article.author && (
+            <div className={styles.author}>
+              <Image
+                src={
+                  article?.author?.photo ||
+                  'https://cdn-icons-png.flaticon.com/128/4322/4322991.png'
+                }
+                width={25}
+                height={25}
+                alt=''
+              />
+              <div className={styles.name}>
+                {article.author?.firstName} &nbsp; {article.author?.lastName}
+              </div>
+            </div>
+          )}
           <div className={styles.date}>
-            {formatDistanceToNow(
-              new Date(article.createdAt || article.publishedAt)
-            )}{' '}
-            Ago
+            {timeAgo(
+              formatDistanceToNow(
+                new Date(article.createdAt || article.publishedAt)
+              ) + ' Ago',
+              lang
+            )}
           </div>
         </div>
         <h1>{article.title}</h1>

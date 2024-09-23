@@ -1,6 +1,7 @@
 import db from '@/database/connection'
 import Category from '@/database/model/Category'
 import Article from '@/database/model/Article'
+import User from '@/database/model/User'
 import nc from 'next-connect'
 import { getPlaceholderImage } from '@/utility/image'
 import { SUPPORTED_LANGUAGE } from '@/config'
@@ -30,6 +31,7 @@ const fetchFeaturedCategories = async lang => {
 
       return {
         category: category.name[lang],
+        _id: category._id,
         subCategories,
         updatedAt: category.updatedAt,
         articles: articles.map(article => ({
@@ -72,6 +74,7 @@ const fetchFeaturedArticles = async lang => {
 const fetchLatestArticles = async lang => {
   const latestArticles = await Article.find({})
     .populate('categories', 'name')
+    .populate('author', 'firstName lastName photo')
     .sort({ publishedAt: -1 })
     .limit(10)
   return latestArticles.map(article => ({
@@ -79,6 +82,7 @@ const fetchLatestArticles = async lang => {
     title: article.title[lang],
     thumbnail: article.thumbnail[lang],
     duration: article.duration,
+    author: article.author,
     slug: article.slug,
     excerpt: article.excerpt[lang],
     categories: article.categories.map(cat => ({

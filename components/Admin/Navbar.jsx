@@ -5,6 +5,7 @@ import Logo from '../Utility/Logo'
 import Image from 'next/image'
 import SideBar from './SideBar'
 import { useRouter } from 'next/router'
+import LangPicker from '../Utility/LangPicker'
 const Navbar = () => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
@@ -22,7 +23,7 @@ const Navbar = () => {
       <div className={styles.right}>
         <div
           className={styles.item}
-          onClick={() => router.push(`/admin/order`)}
+          onClick={() => router.push(`/admin/article/create`)}
         >
           <Image
             src='https://cdn-icons-png.flaticon.com/128/15414/15414285.png'
@@ -39,6 +40,7 @@ const Navbar = () => {
             alt=''
           />
         </div>
+        <LangPicker />
       </div>
     </div>
   )

@@ -60,9 +60,9 @@ export default function Home ({ data }) {
             {' '}
             <div className={styles.flex}>
               <h2>{t('mustRead', lang)}</h2>
-              <div className={styles.button}>
+              {/* <div className={styles.button}>
                 {t('seeAll', lang)} <EastIcon />
-              </div>
+              </div> */}
             </div>
             <PBar height={'2px'} />
           </div>
@@ -70,8 +70,8 @@ export default function Home ({ data }) {
             <>
               <Header3 contents={[data[1].articles[0]]} />
               <div className={styles.articles}>
-                {data[0].articles
-                  .slice(5, data[0].articles.length)
+                {data[1].articles
+                  .slice(1, data[1].articles.length)
                   .map((article, index) => (
                     <Article article={article} />
                   ))}
@@ -85,8 +85,11 @@ export default function Home ({ data }) {
               <div className={styles.left}>
                 <div className={styles.flex}>
                   <h2>{c[0]?.category}</h2>
-                  <div className={styles.button}>
-                    See All <ArrowForwardIcon />{' '}
+                  <div
+                    className={styles.button}
+                    onClick={() => router.push(`/news?categories=${c[0]._id}`)}
+                  >
+                    {t('seeAll', lang)} <ArrowForwardIcon />{' '}
                   </div>
                 </div>
                 <PBar height={'2px'} />
@@ -112,7 +115,12 @@ export default function Home ({ data }) {
               <div className={styles.right}>
                 <div className={styles.flex}>
                   <h2>{c[1]?.category}</h2>
-                  <div className={styles.button}>See All </div>
+                  <div
+                    className={styles.button}
+                    onClick={() => router.push(`/news?categories=${c[1]._id}`)}
+                  >
+                    {t('seeAll', lang)} <ArrowForwardIcon />{' '}
+                  </div>{' '}
                 </div>
                 <PBar height={'2px'} />
 

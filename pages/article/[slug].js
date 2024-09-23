@@ -175,20 +175,32 @@ const News = ({ article, error, relatedArticles }) => {
           <h1>{article.title} </h1>
           <PBar height={'2px'} />
           <div className={styles.flex}>
-            <div className={styles.left}>
-              <div className={styles.avater}>
-                <Image src='/images/logo.png' width={32} height={32} alt='' />
-              </div>
-              <div className={styles.text}>
-                <div className={styles.name}>Md Sohanur Rahman</div>
-                <div className={styles.date}>
-                  {/* {getTime(article.publishedAt)} */}
-                  {article.publishedAt && (
-                    <>{formatDistanceToNow(article.publishedAt)} Ago</>
-                  )}
+            {article.author && (
+              <div className={styles.left}>
+                <div className={styles.avater}>
+                  <Image
+                    src={
+                      article.author.photo ||
+                      'https://cdn-icons-png.flaticon.com/128/4322/4322991.png'
+                    }
+                    width={32}
+                    height={32}
+                    alt=''
+                  />
+                </div>
+                <div className={styles.text}>
+                  <div className={styles.name}>
+                    {article.author.firstName}  {article.author.lastName}
+                  </div>
+                  <div className={styles.date}>
+                    {/* {getTime(article.publishedAt)} */}
+                    {article.publishedAt && (
+                      <>{formatDistanceToNow(article.publishedAt)} Ago</>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className={styles.right}>
               {isClient && userInfo?.role == 'admin' && (
                 <div

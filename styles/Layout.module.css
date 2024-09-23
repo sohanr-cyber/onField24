@@ -7,6 +7,10 @@
 }
 
 
+.body__wrapper {
+    margin-top: 54px;
+}
+
 @media (max-width:1024px) {
     .nav1 {
         display: none;

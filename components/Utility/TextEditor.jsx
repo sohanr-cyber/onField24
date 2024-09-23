@@ -19,14 +19,18 @@ const TextEditor = ({
       [{ header: '1' }, { header: '2' }, { font: [] }],
       [{ size: [] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
       [
         { list: 'ordered' },
         { list: 'bullet' },
         { indent: '-1' },
         { indent: '+1' }
       ],
-      ['link', 'image', 'video'],
-      ['clean']
+      [{ align: [] }], // text alignment
+      ['link', 'image', 'video'], // media
+      ['code-block'], // code block
+      ['clean'] // remove formatting button
     ]
   }
 
@@ -39,12 +43,17 @@ const TextEditor = ({
     'underline',
     'strike',
     'blockquote',
+    'script', // superscript/subscript
+    'color', // text color
+    'background', // background color
     'list',
     'bullet',
     'indent',
+    'align', // text alignment
     'link',
     'image',
-    'video'
+    'video',
+    'code-block' // code block
   ]
 
   return (

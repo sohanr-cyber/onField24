@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema(
       type: String
     },
     photo: {
-      type: String
+      type: String,
+      default: 'https://cdn-icons-png.flaticon.com/128/4322/4322991.png'
     },
     whatsapp: { type: String },
     address: { type: String },
