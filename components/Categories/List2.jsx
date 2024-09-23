@@ -5,6 +5,7 @@ import SubCategories from './SubCategories'
 import { useRouter } from 'next/router'
 import SkeletonDiv from '../Utility/SkeletonDiv'
 import SubCategories2 from './SubCategories2'
+import t from '@/utility/dict'
 
 const List2 = () => {
   const categories = useSelector(state => state.article.categories)?.slice(
