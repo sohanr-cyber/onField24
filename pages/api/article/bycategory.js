@@ -16,11 +16,10 @@ const fetchFeaturedCategories = async lang => {
   })
   return Promise.all(
     categories.map(async category => {
-      const articles = await Article.find(
-        {
-          categories: { $in: category._id }
-        }.sort({ publishedAt: '-1' })
-      )
+      const articles = await Article.find({
+        categories: { $in: category._id }
+      })
+        .sort({ publishedAt: -1 })
         .populate('categories', 'name')
         .limit(4)
 

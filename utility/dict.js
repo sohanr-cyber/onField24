@@ -369,6 +369,10 @@ const dict = {
   role: {
     en: 'Role',
     bn: 'ভূমিকা'
+  },
+  publishedAt:{
+    en:"Publish",
+    bn:"সময়"
   }
 }
 
