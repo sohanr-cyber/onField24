@@ -9,6 +9,8 @@ import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
+import Upload from '@/components/Utility/Upload'
+import { logout } from '@/redux/userSlice'
 
 const user = ({ user: data }) => {
   const [user, setUser] = useState(data)
@@ -50,15 +52,27 @@ const user = ({ user: data }) => {
           headers
         }
       )
-      if (data) {
+      if (!data.error) {
         dispatch(
           showSnackBar({
             message: 'Profile Updated !'
           })
         )
       }
+      if (data.error) {
+        dispatch(
+          showSnackBar({
+            message: data.error,
+            option: {
+              variant: 'error'
+            }
+          })
+        )
+      }
+
       dispatch(finishLoading())
     } catch (error) {
+      dispatch(finishLoading())
       dispatch(
         showSnackBar({
           message: 'Error While Updating Profile !',
@@ -102,7 +116,7 @@ const user = ({ user: data }) => {
         <div className={styles.image__container}>
           <Image
             src={
-              user.pic ||
+              user.photo ||
               'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=600'
             }
             width={220}
@@ -150,6 +164,15 @@ const user = ({ user: data }) => {
           >
             Article
           </span>
+          {isClient && userInfo?.id == router.query.id && (
+            <span
+              className={styles.button}
+              onClick={() => dispatch(logout())}
+              style={{ background: 'red' }}
+            >
+              Logout
+            </span>
+          )}
         </div>
         <div className={styles.text__container}>
           <div className={styles.contribution}>
@@ -201,6 +224,17 @@ const user = ({ user: data }) => {
                   onChange={e => setUser({ ...user, lastName: e.target.value })}
                 />
               </div>
+            </div>
+            <div className={styles.field}>
+              <label>Photo</label>
+              <Upload
+                handle={files => {
+                  setUser(prev => ({
+                    ...prev,
+                    photo: files.url
+                  }))
+                }}
+              />
             </div>
             <div className={styles.field}>
               <label>Phone No.</label>
@@ -273,9 +307,11 @@ const user = ({ user: data }) => {
               </div>
             )}
 
-            <div className={styles.field}>
-              <button onClick={() => updateUser()}>Update </button>
-            </div>
+            {isClient && userInfo.id == router.query.id && (
+              <div className={styles.field}>
+                <button onClick={() => updateUser()}>Update </button>
+              </div>
+            )}
           </div>
         )}
 

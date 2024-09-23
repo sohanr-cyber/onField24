@@ -7,7 +7,7 @@ import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
 
 const handler = nextConnect()
-// handler.use(isAuth)
+handler.use(isAuth)
 handler.get(async (req, res) => {
   const {
     status,
@@ -60,7 +60,12 @@ handler.get(async (req, res) => {
 
   try {
     await db.connect()
-    const user = await User.findOne({ _id: req.query.id }).lean()
+    const user = await User.findOne(
+      { _id: req.query.id },
+      {
+        password: 0
+      }
+    ).lean()
     const articles = await Article.find(
       { ...filter },
       {
@@ -125,7 +130,8 @@ handler.get(async (req, res) => {
 handler.put(async (req, res) => {
   try {
     const { id } = req.query // Get the article ID from the query parameters
-    const { firstName, lastName, phone, address, facebook, whatsapp } = req.body // Extract fields from the request body
+    const { firstName, lastName, phone, address, facebook, whatsapp, photo } =
+      req.body // Extract fields from the request body
 
     if (!firstName || (!lastName && !phone)) {
       return res.status(400).json({ message: 'No fields to update' })
@@ -133,6 +139,11 @@ handler.put(async (req, res) => {
 
     await db.connect()
 
+    const existing = await User.findOne({ _id: req.query.id })
+    if (existing._id != req.user._id) {
+      console.log('Invalid request ....')
+      return res.status(200).send({ error: 'Invalid Request' })
+    }
     // Find the article by ID and update it with new data
     const user = await User.findByIdAndUpdate(
       id,
@@ -143,7 +154,8 @@ handler.put(async (req, res) => {
           phone,
           address,
           facebook,
-          whatsapp
+          whatsapp,
+          photo
         }
       },
       { new: true, runValidators: true }
