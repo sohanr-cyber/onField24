@@ -53,6 +53,11 @@
     padding: 7px;
 }
 
+.item {
+    text-align: center;
+}
+
+
 @media (min-width:1024px) {
     .wrapper {
         padding: 10px var(--percent);

@@ -15,6 +15,7 @@ const List2 = () => {
   const [selected, setSelected] = useState({})
   const router = useRouter()
   const [expanded, setExapanded] = useState({})
+  const lang = router.locale
 
   return (
     <div className={styles.container}>

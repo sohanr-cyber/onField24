@@ -32,14 +32,7 @@ const Article = ({ article, index, flex, style }) => {
           {' '}
           <div className={styles.title}>{article.title}</div>
           <div className={styles.excerpt}>
-            {article.excerpt || (
-              <>
-                {' '}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,
-                a eveniet. Quo aperiam odit, nulla nam ab, voluptate commodi
-                quis ea, temporibus sunt excepturi odio delectus architecto
-              </>
-            )}
+            {article.excerpt?.substring(0, 180)} ...
           </div>
         </div>
         <div className={styles.flex}>

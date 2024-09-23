@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/SearchResult/SearchResult.module.css'
 import FilterAltIcon from '@mui/icons-material/FilterAlt'
 import GridViewIcon from '@mui/icons-material/GridView'
@@ -39,6 +39,7 @@ const sortOptions = [
 ]
 const Home = ({ articles, totalPages, currentPage, count }) => {
   const [open, setOpen] = useState(false)
+  const [tags, setTags] = useState([])
   const router = useRouter()
   const lang = router.locale
   const updateRoute = data => {
@@ -51,6 +52,20 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
       shallow: false
     })
   }
+
+  const fetchTags = async () => {
+    try {
+      const { data } = await axios.get(`/api/tag?limit=50`)
+      setTags(data.tags)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchTags()
+  }, [])
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
@@ -109,7 +124,7 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
       </div>
       {open && (
         <div className={styles.filterOptions}>
-          <Filter setOpen={setOpen} />
+          <Filter setOpen={setOpen} tags={tags} />
         </div>
       )}
     </div>

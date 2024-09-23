@@ -12,24 +12,10 @@ import Categories from './Categories'
 import axios from 'axios'
 import t from '@/utility/dict'
 
-const Filter = ({ setOpen }) => {
+const Filter = ({ setOpen, tags }) => {
   const router = useRouter()
   const categories = useSelector(state => state.article.categories)
-  const [tags, setTags] = useState([])
   const lang = router.locale
-
-  const fetchTags = async () => {
-    try {
-      const { data } = await axios.get(`/api/tag?limit=50`)
-      setTags(data.tags)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    fetchTags()
-  }, [])
 
   const updateRoute = data => {
     const queryParams = { ...router.query, ...data }
