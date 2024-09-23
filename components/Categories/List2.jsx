@@ -24,14 +24,16 @@ const List2 = () => {
             <div
               className={styles.item}
               style={{ minWidth: `${'Home'.length * 8.1}px` }}
+              onClick={() => router.push('/')}
             >
-              Home
+              {t('home', lang)}
             </div>
             <div
               className={styles.item}
               style={{ minWidth: `${'News'.length * 8.1}px` }}
+              onClick={() => router.push('/news')}
             >
-              News
+              {t('news', lang)}
             </div>
           </>
         )}
@@ -48,7 +50,7 @@ const List2 = () => {
                       setSelected(i)
                       setExapanded()
                     }}
-                    onClick={() => router.push(`/shop?categories=${i._id}`)}
+                    onClick={() => router.push(`/news?categories=${i._id}`)}
                   >
                     {i.name}
                   </span>
@@ -65,7 +67,7 @@ const List2 = () => {
                         >
                           <span
                             onClick={() =>
-                              router.push(`/shop?categories=${i._id}`)
+                              router.push(`/news?categories=${i._id}`)
                             }
                           >
                             {i.name}

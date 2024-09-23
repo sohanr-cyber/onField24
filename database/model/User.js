@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema(
     facebook: {
       type: String
     },
+    photo: {
+      type: String
+    },
     whatsapp: { type: String },
     address: { type: String },
     role: {
