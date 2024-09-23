@@ -4,6 +4,7 @@ import Article from '@/database/model/Article'
 import nc from 'next-connect'
 import { getPlaceholderImage } from '@/utility/image'
 import { SUPPORTED_LANGUAGE } from '@/config'
+import t from '@/utility/dict'
 
 const handler = nc()
 
@@ -111,8 +112,8 @@ handler.get(async (req, res) => {
     return res
       .status(200)
       .json([
-        { category: 'Latest', articles: latestArticles },
-        { category: 'featured', articles: featuredArticles },
+        { category: t('latest', lang), articles: latestArticles },
+        { category: t('mustRead', lang), articles: featuredArticles },
         ...featuredCategories
       ])
   } catch (error) {

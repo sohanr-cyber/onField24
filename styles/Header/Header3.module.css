@@ -52,13 +52,17 @@
 .slide .surface .flex .categories {
     display: flex;
     gap: 10px;
-    color:var(--highlight)
+    color: var(--highlight)
 }
 
 .slide h2 {
     /* max-width: 350px; */
     text-shadow: 1px 1px var(--theme);
     margin: 0;
+}
+
+.slide p {
+    width: 92%;
 }
 
 .wrapper .surface .flex .button {
