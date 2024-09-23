@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import styles from '../../../styles/Admin/Orders.module.css'
 import Pages from '@/components/Utility/Pagination'
 import SearchIcon from '@mui/icons-material/Search'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { statusColors } from '@/utility/const'
-import { extractRGBA, readMinute } from '@/utility/helper'
+import { extractRGBA, getTime, readMinute } from '@/utility/helper'
 import t from '@/utility/dict'
 
 const Articles = ({
@@ -30,6 +30,13 @@ const Articles = ({
     page: currentPage
   })
   const lang = router.locale
+  const userInfo = useSelector(state => state.user.userInfo)
+  const headers = { Authorization: 'Bearer ' + userInfo?.token }
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     setFilteredArticles({ articles, totalPages, count, page: currentPage })
@@ -51,7 +58,9 @@ const Articles = ({
   const remove = async id => {
     try {
       dispatch(startLoading())
-      const { data } = await axios.delete(`/api/article?id=${id}`)
+      const { data } = await axios.delete(`/api/article?id=${id}`, {
+        headers
+      })
       setFilteredArticles({
         ...filteredArticles,
         articles: filteredArticles.articles.filter(i => i._id != id)
@@ -128,10 +137,10 @@ const Articles = ({
                     borderLeft: `3px solid ${
                       statusColors[
                         `${
-                          article.stockQuantity < 5
-                            ? 'pending'
-                            : article.stockQuantity <= 1
-                            ? 'failed'
+                          article.status == 'draft'
+                            ? 'draft'
+                            : article.isFeatured
+                            ? 'featured'
                             : 'none'
                         }`.toLowerCase()
                       ]
@@ -139,10 +148,10 @@ const Articles = ({
                     background: `${extractRGBA(
                       statusColors[
                         `${
-                          article.stockQuantity < 5
-                            ? 'pending'
-                            : article.stockQuantity <= 1
-                            ? 'failed'
+                          article.status == 'draft'
+                            ? 'draft'
+                            : article.isFeatured
+                            ? 'featured'
                             : 'none'
                         }`.toLowerCase()
                       ],
@@ -160,7 +169,12 @@ const Articles = ({
 
                   <td>
                     {article.categories?.map((item, index) => (
-                      <span key={index}>
+                      <span
+                        key={index}
+                        onDoubleClick={() =>
+                          router.push(`/news?categories=${item._id}`)
+                        }
+                      >
                         {item?.name} {'  '}
                       </span>
                     ))}
@@ -174,14 +188,16 @@ const Articles = ({
                       </span>
                     ))} */}
                   </td>
-                  <td>{article.publishedAt}</td>
-                  <td>{readMinute(article.duration)}</td>
+                  <td>{getTime(article.publishedAt)}</td>
+                  <td>{readMinute(article.duration, lang)}</td>
                   <td>{article.views}</td>
 
                   <td className={styles.action}>
-                    <span onDoubleClick={() => remove(article._id)}>
-                      {t('delete', lang)}
-                    </span>
+                    {isClient && userInfo.role == 'admin' && (
+                      <span onDoubleClick={() => remove(article._id)}>
+                        {t('delete', lang)}
+                      </span>
+                    )}
                     <span
                       onClick={() =>
                         router.push(`/admin/article/create?id=${article._id}`)

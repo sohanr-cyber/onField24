@@ -48,10 +48,14 @@ const Navbar = () => {
       </div>
       <div className={styles.right}>
         <LangPicker />
-        {isClient && userInfo?.role == 'admin' && (
+        {isClient && userInfo && (
           <AccountCircleIcon
             className={styles.icon}
-            onClick={() => router.push('/admin')}
+            onClick={() =>
+              userInfo.role == 'admin'
+                ? router.push('/admin')
+                : router.push(`/user/${userInfo.id}?current=settings`)
+            }
           />
         )}
       </div>

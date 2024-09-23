@@ -9,7 +9,7 @@ handler.put(async (req, res) => {
     await db.connect()
     const article = await Article.findOne({ _id: req.body.id })
     if (article) {
-      article.views = article.views || 0 + 1
+      article.views = (article.views || 0) + 1
       await article.save()
       console.log('view counted for ', article.title.en)
     }
@@ -29,7 +29,7 @@ handler.post(async (req, res) => {
     await db.connect()
     const article = await Article.findOne({ _id: req.body.id })
     if (article) {
-      article.reads = article.reads || 0 + 1
+      article.reads = (article.reads || 0) + 1
       await article.save()
       console.log('read counted for ', article.title.en)
     }

@@ -47,7 +47,8 @@ handler.put(async (req, res) => {
       tags,
       thumbnail,
       excerpt,
-      publishedAt
+      publishedAt,
+      isFeatured
     } = req.body // Extract fields from the request body
 
     // console.log({ content })
@@ -71,6 +72,7 @@ handler.put(async (req, res) => {
           publishedAt,
           tags,
           thumbnail,
+          isFeatured,
           duration: calculateReadingTimeFromHTML(content.en || content.bn)
         }
       },

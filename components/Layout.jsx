@@ -50,7 +50,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     containsAdmin(router.asPath) && retrieveCategories()
-  }, [fetchDualAgain])
+  }, [fetchDualAgain, router.asPath])
 
   React.useEffect(() => {
     import('react-facebook-pixel')

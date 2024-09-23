@@ -32,7 +32,7 @@ const user = ({ user: data }) => {
     router.push({
       pathname: router.pathname,
       query: queryParams,
-      shallow: false
+      shallow: true
     })
   }
 
@@ -111,21 +111,25 @@ const user = ({ user: data }) => {
           />
         </div>
         <div className={styles.buttons}>
-          <span
-            className={styles.button}
-            onClick={() => router.push(user.facebook)}
-          >
-            Contact
-          </span>
-          <span
-            className={styles.button}
-            onClick={() =>
-              router.push(`https://m.me/${user.facebook.split('=')[1]}
+          {user.facebook && (
+            <span
+              className={styles.button}
+              onClick={() => router.push(user.facebook)}
+            >
+              Contact
+            </span>
+          )}
+          {user.facebook && (
+            <span
+              className={styles.button}
+              onClick={() =>
+                router.push(`https://m.me/${user.facebook.split('=')[1]}
 `)
-            }
-          >
-            Message
-          </span>
+              }
+            >
+              Message
+            </span>
+          )}
           <span
             className={styles.button}
             onClick={() =>
@@ -219,8 +223,8 @@ const user = ({ user: data }) => {
               <label>Address</label>
               <input
                 type='text'
-                value={user.location}
-                onChange={e => setUser({ ...user, location: e.target.value })}
+                value={user.address}
+                onChange={e => setUser({ ...user, address: e.target.value })}
                 placeholder='Dhaka - Rangpur - Kurigram'
               />
             </div>
@@ -228,8 +232,8 @@ const user = ({ user: data }) => {
               <label>facebook</label>
               <input
                 type='text'
-                value={user.location}
-                onChange={e => setUser({ ...user, location: e.target.value })}
+                value={user.facebook}
+                onChange={e => setUser({ ...user, facebook: e.target.value })}
                 placeholder='https://www.facebook.com/profile.php?id=100266481262836'
               />
             </div>
@@ -237,12 +241,12 @@ const user = ({ user: data }) => {
               <label>whatsapp</label>
               <input
                 type='text'
-                value={user.location}
-                onChange={e => setUser({ ...user, location: e.target.value })}
+                value={user.whatsapp}
+                onChange={e => setUser({ ...user, whatsapp: e.target.value })}
                 placeholder='+990164238922'
               />
             </div>
-            {isClient && userInfo.role == 'admin' && (
+            {isClient && userInfo.role == 'admin' && userInfo.id != user._id && (
               <div className={styles.field}>
                 <div className={styles.flex}>
                   {[

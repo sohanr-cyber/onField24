@@ -68,13 +68,11 @@ const articleSchema = new mongoose.Schema(
     ],
     publishedAt: {
       type: Date,
-      default: Date.now
+      default: new Date(),
+      requred: true
     },
     duration: {
       type: Number
-    },
-    updatedAt: {
-      type: Date
     },
     comments: [
       {
@@ -94,6 +92,10 @@ const articleSchema = new mongoose.Schema(
     reads: {
       type: Number,
       default: 0
+    },
+    isFeatured: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true }

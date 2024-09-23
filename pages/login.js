@@ -44,11 +44,11 @@ const Login = () => {
             message: 'Succesfully Logged In '
           })
         )
-
+        console.log({ data })
         if (data.role == 'admin') {
           router.push('/admin')
         } else {
-          router.push('/')
+          router.push(`/user/${data.id}?current=settings`)
         }
       }
 

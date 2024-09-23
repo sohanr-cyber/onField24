@@ -38,7 +38,8 @@ handler.get(async (req, res) => {
 
     categories = categories.map(i => ({
       name: i.name[lang],
-      _id: i._id
+      _id: i._id,
+      isFeatured: i.isFeatured
     }))
 
     await db.disconnect()

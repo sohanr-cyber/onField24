@@ -3,7 +3,7 @@ import styles from '../../styles/Header/Header3.module.css'
 import Image from 'next/image'
 import { themeBg } from '@/utility/const'
 import { useRouter } from 'next/router'
-import { calculateReadingTimeFromHTML } from '@/utility/helper'
+import { calculateReadingTimeFromHTML, readMinute } from '@/utility/helper'
 import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
 
@@ -54,13 +54,11 @@ const Header3 = ({ contents }) => {
                 </p>
                 <div className={styles.flex}>
                   <div className={styles.categories}>
-                    {slide.categories.map((i, index) => (
+                    {slide.categories?.map((i, index) => (
                       <span>{i.name}</span>
                     ))}
                   </div>
-                  <div>
-                    {calculateReadingTimeFromHTML(slide.content)} minutes read
-                  </div>
+                  <div>{readMinute(slide.duration, lang)}</div>
                   <div
                     className={styles.button}
                     onClick={() => router.push(`/article/${slide.slug}`)}

@@ -14,12 +14,12 @@ const Header = ({ article }) => {
       onClick={() => router.push(`/article/${article.slug}`)}
     >
       <div className={styles.image__container}>
-        <Image src={article.thumbnail} width={720} height={480} alt='' />
+        <Image src={article?.thumbnail} width={720} height={480} alt='' />
       </div>
       <div className={styles.text__container}>
         <div className={styles.flex}>
           <div className={styles.author}>
-            <Image src={article.thumbnail} width={25} height={25} alt='' />
+            <Image src={article?.thumbnail} width={25} height={25} alt='' />
             <div className={styles.name}>Netflix</div>
           </div>
           <div className={styles.date}>

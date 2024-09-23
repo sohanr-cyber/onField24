@@ -19,7 +19,7 @@ handler.get(async (req, res) => {
     pageSize = 10
   } = req.query
 
-  const authorId = req.user?._id
+  const authorId = req.query.id
   const supportedLangs = ['en', 'bn']
   if (!supportedLangs.includes(lang)) {
     return res.status(400).json({

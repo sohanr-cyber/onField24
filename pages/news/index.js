@@ -25,20 +25,20 @@ const sortOptions = [
   {
     value: 'Newest To Oldest',
     query: {
-      sortBy: 'createdAt',
+      sortBy: 'publishedAt',
       sortOrder: 'desc'
     }
   },
   {
     value: 'Oldest To Newest',
     query: {
-      sortBy: 'createdAt',
+      sortBy: 'publishedAt',
       sortOrder: 'asc'
     }
   }
 ]
 const Home = ({ articles, totalPages, currentPage, count }) => {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const router = useRouter()
   const lang = router.locale
   const updateRoute = data => {

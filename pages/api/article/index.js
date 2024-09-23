@@ -105,7 +105,7 @@ handler.get(async (req, res) => {
     let articles = await Article.find(filter)
       .populate('author', 'name email') // Populate author info
       .populate('categories', 'name')
-      .sort({ createdAt: -1 })
+      .sort({ publishedAt: -1 })
       .skip(skip)
       .limit(Number(limit))
 
@@ -134,7 +134,8 @@ handler.get(async (req, res) => {
       })),
       publishedAt: article.publishedAt,
       views: article.views,
-      duration: article.duration
+      duration: article.duration,
+      isFeatured: article.isFeatured
     }))
 
     const totalArticles = await Article.countDocuments(filter)
@@ -155,8 +156,17 @@ handler.get(async (req, res) => {
 handler.use(isAuth, isAdminOrEditor)
 handler.post(async (req, res) => {
   try {
-    const { title, content, categories, status, thumbnail, tags, excerpt } =
-      req.body
+    const {
+      title,
+      content,
+      categories,
+      status,
+      thumbnail,
+      tags,
+      excerpt,
+      publishedAt,
+      isFeatured
+    } = req.body
     const authorId = req.user._id
 
     // Validate required fields
@@ -198,9 +208,11 @@ handler.post(async (req, res) => {
       excerpt,
       tags,
       thumbnail,
+      publishedAt,
+      isFeatured,
       author,
       duration: calculateReadingTimeFromHTML(content.en || content.bn),
-      //   author: authorId,
+      author: authorId,
       categories: categories,
       slug: slugify(title.en),
       status: status || 'draft',

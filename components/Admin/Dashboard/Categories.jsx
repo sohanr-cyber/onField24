@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { setFetchAgain } from '@/redux/articleSlice'
 import t from '@/utility/dict'
+import { statusColors } from '@/utility/const'
+import { extractRGBA } from '@/utility/helper'
 
 const Categories = ({
   title,
@@ -108,9 +110,30 @@ const Categories = ({
             </thead>
             <tbody>
               {[...filteredCategories]?.map((c, index) => (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  style={{
+                    borderLeft: `3px solid ${
+                      statusColors[
+                        `${c.isFeatured ? 'featured' : 'none'}`.toLowerCase()
+                      ]
+                    }`,
+                    background: `${extractRGBA(
+                      statusColors[
+                        `${c.isFeatured ? 'featured' : 'none'}`.toLowerCase()
+                      ],
+                      0.1
+                    )}`
+                  }}
+                >
                   <td>{c._id}</td>
-                  <td>{c.name}</td>
+                  <td
+                    onDoubleClick={() =>
+                      router.push(`/news?categories=${c._id}`)
+                    }
+                  >
+                    {c.name}
+                  </td>
 
                   <td className={styles.action}>
                     <span onDoubleClick={() => remove(c._id)}>

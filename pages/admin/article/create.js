@@ -52,22 +52,23 @@ const Create = ({ article: data, tags }) => {
         },
         { headers }
       )
-      // setArticle({
-      //   name: '',
-      //   sizes: '',
-      //   description: '',
-      //   price: 0,
-      //   discount: '',
-      //   categories: [],
-      //   color: '',
-      //   images: [],
-      //   thumbnail: '',
-      //   metaTitle: '',
-      //   excerpt: '',
-      //   attributes: {},
-      //   stockQuantity: 0,
-      //   sold: 0
-      // })
+      setArticle({
+        title: '',
+        content: {},
+        publishedAt: new Date(
+          new Date().getTime() - new Date().getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .slice(0, 16),
+
+        categories: [],
+        tags: [],
+
+        thumbnail: {},
+        metaTitle: {},
+        excerpt: {},
+        status: 'draft'
+      })
 
       // setSelected([])
       dispatch(finishLoading())
@@ -417,6 +418,22 @@ const Create = ({ article: data, tags }) => {
       </form>
       <div className={styles.top__flex}>
         <div className={styles.field}>
+          <div className={styles.status}>
+            <span
+              className={`${article.isFeatured ? styles.currentLang : ''}`}
+              onClick={() => setArticle({ ...article, isFeatured: true })}
+            >
+              {t('Featured', locale)}
+            </span>
+            <span
+              className={`${!article.isFeatured ? styles.currentLang : ''}`}
+              onClick={() => setArticle({ ...article, isFeatured: false })}
+            >
+              {t('NOT', locale)}
+            </span>
+          </div>
+        </div>
+        <div className={styles.field}>
           <label>{t('publishedAt', locale)}</label>
           <input
             type='datetime-local'
@@ -440,6 +457,7 @@ const Create = ({ article: data, tags }) => {
             }
           />
         </div>
+
         <div className={styles.field}>
           <div className={styles.status}>
             <span

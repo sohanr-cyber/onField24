@@ -86,7 +86,7 @@ const generateArticleSeoData = article => {
 
   return articleSeoData
 }
-function chunkArray (array, chunkSize) {
+function chunkArray (array, chunkSize = 2) {
   // Initialize an empty array to hold the chunks
   let result = []
 
