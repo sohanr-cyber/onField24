@@ -36,6 +36,7 @@ const fetchFeaturedCategories = async lang => {
           title: article.title[lang],
           thumbnail: article.thumbnail[lang],
           duration: article.duration,
+          excerpt: article.excerpt[lang],
           slug: article.slug,
           categories: article.categories.map(cat => ({
             name: cat.name[lang]
@@ -57,6 +58,7 @@ const fetchFeaturedArticles = async lang => {
     title: article.title[lang],
     thumbnail: article.thumbnail[lang],
     duration: article.duration,
+    excerpt: article.excerpt[lang],
     slug: article.slug,
     categories: article.categories.map(cat => ({
       name: cat.name[lang]
@@ -77,6 +79,7 @@ const fetchLatestArticles = async lang => {
     thumbnail: article.thumbnail[lang],
     duration: article.duration,
     slug: article.slug,
+    excerpt: article.excerpt[lang],
     categories: article.categories.map(cat => ({
       name: cat.name[lang]
     })),
@@ -96,7 +99,6 @@ handler.get(async (req, res) => {
 
   try {
     await db.connect()
-
     const [featuredCategories, featuredArticles, latestArticles] =
       await Promise.all([
         fetchFeaturedCategories(lang),
@@ -104,7 +106,7 @@ handler.get(async (req, res) => {
         fetchLatestArticles(lang)
       ])
 
-    await db.disconnect()
+    // await db.disconnect()
 
     return res
       .status(200)
