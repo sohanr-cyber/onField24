@@ -43,3 +43,10 @@
 .wrapper .category {
     color: var(--highlight)
 }
+
+.wrapper .time {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 110px;
+    white-space: nowrap;
+}

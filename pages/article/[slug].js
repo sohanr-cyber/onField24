@@ -70,6 +70,12 @@ export async function getStaticProps ({ params, locale }) {
       )
 
       relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
+    } else {
+         const resp = await axios.get(
+        `${BASE_URL}/api/article?limit=5&lang=${locale}`
+      )
+
+      relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
     }
 
     console.log(`Data fetching time: ${end - start}ms`)

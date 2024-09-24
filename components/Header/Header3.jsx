@@ -54,7 +54,7 @@ const Header3 = ({ contents }) => {
                 </p>
                 <div className={styles.flex}>
                   <div className={styles.categories}>
-                    {slide.categories?.map((i, index) => (
+                    {slide.categories?.slice(0,2).map((i, index) => (
                       <span>{i.name}</span>
                     ))}
                   </div>
