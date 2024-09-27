@@ -81,11 +81,13 @@
 
 .wrapper .tags {
     margin: 25px 0;
-    ;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .wrapper .tags span {
-    margin-right: 10px;
+    /* margin-right: 10px; */
     border-radius: 5px;
     padding: 5px 7px;
     background: var(--highlight);
