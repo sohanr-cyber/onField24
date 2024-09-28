@@ -1,0 +1,170 @@
+.wrapper {
+    margin: 0;
+
+}
+
+.wrapper .slider {
+    display: flex;
+    overflow-x: hidden;
+    min-width: 100%;
+    /* border-radius: 5px; */
+    position: relative;
+
+    ;
+}
+
+.wrapper .slide {
+    min-height: 200px;
+    min-width: 100%;
+    /* aspect-ratio: 5/2; */
+    transition: transform 0.5s ease-in-out;
+    background: var(--tGradient);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    /* aspect-ratio: 32/6; */
+
+
+}
+
+.slide .surface {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.1));
+    padding: 15px 25px;
+    cursor: pointer;
+    overflow-y: scroll;
+    gap: 12px;
+text-transform: capitalize;
+
+}
+
+
+
+
+
+
+.slide h2,
+.slide h3,
+.slide b {
+    /* max-width: 350px; */
+    text-shadow: 1px 1px black;
+    ;
+    min-width: 80%;
+    max-width: 80%;
+    margin: 0;
+}
+
+.slide p {
+    width: 92%;
+    margin: 0;
+    text-shadow: 1px 1px black;
+}
+
+.wrapper .surface .button {
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 5px;
+    background-color: var(--highlight);
+    display: inline-block;
+}
+
+.wrapper .dots {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+
+
+}
+
+.wrapper .dots .dot {
+    min-width: 7px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: rgb(186, 186, 186);
+
+}
+
+
+@media (min-width:1024px) {
+    .wrapper .slide .surface {
+        padding: 15px var(--percent);
+    }
+}
+
+
+@media (max-width:720px) {
+    .wrapper .slide {
+        min-height: 180px;
+        min-width: 100%;
+    }
+
+}
+
+
+@media (max-width:570px) {
+    .surface {
+        padding: 15px
+    }
+
+
+    .warpper  .slide {
+        min-height: 150px;
+    }
+
+    .wrapper .slide .surface {
+        padding: 0 10px
+    }
+
+    .slide h2 {
+        max-width: 250px;
+        font-size: 150%;
+
+    }
+}
+
+
+
+
+@media (max-width:480px) {
+    .wrapper .slide p {
+        display: none;
+    }
+
+    .wrapper .slide {
+        min-height: 120px;
+    }
+}
+
+@media (max-width:410px) {
+    .surface {
+        padding: 10px;
+        padding-bottom: 0;
+    }
+
+    .wrapper .dots {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+
+    .slide h2 {
+        font-size: 110%;
+        margin: 10px 0
+    }
+
+    .slide p {
+        /* display: none; */
+    }
+}

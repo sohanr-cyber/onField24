@@ -16,6 +16,8 @@ import Article2 from '@/components/Article/Article2'
 import t from '@/utility/dict'
 import { useRouter } from 'next/router'
 import { chunkArray } from '@/utility/helper'
+import { Widgets } from '@mui/icons-material'
+import Banner from '@/components/Header/Banner'
 
 export default function Home ({ data }) {
   const router = useRouter()
@@ -28,6 +30,9 @@ export default function Home ({ data }) {
           <div className={styles.categories}>
             <List2 />
           </div>
+          <div className={styles.banner} style={{ paddingTop: '1px' }}>
+            <Banner contents={data[0].articles.slice(1, 3)} />
+          </div>
           {data[0].articles.length > 0 && (
             <>
               <div className={styles.header__bigwidth}>
@@ -38,6 +43,9 @@ export default function Home ({ data }) {
               </div>
             </>
           )}
+          <div className={styles.banner}>
+            <Banner contents={data[0].articles.slice(3, 5)} />
+          </div>
           {/* Latest Article */}
           <div className={styles.latest__articles}>
             <div className={styles.flex}>

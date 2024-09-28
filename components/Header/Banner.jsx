@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../styles/Header/Header3.module.css'
+import styles from '../../styles/Header/Banner.module.css'
 import Image from 'next/image'
 import { themeBg } from '@/utility/const'
 import { useRouter } from 'next/router'
@@ -7,7 +7,7 @@ import { calculateReadingTimeFromHTML, readMinute } from '@/utility/helper'
 import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
 
-const Header3 = ({ contents, style }) => {
+const Banner = ({ contents }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const router = useRouter()
   const lang = router.locale
@@ -23,7 +23,7 @@ const Header3 = ({ contents, style }) => {
   }, [contents.length])
 
   return (
-    <div className={styles.wrapper} style={style ? { ...style } : {}}>
+    <div className={styles.wrapper}>
       <div className={styles.slider}>
         <>
           {' '}
@@ -40,32 +40,13 @@ const Header3 = ({ contents, style }) => {
               }}
             >
               <div className={styles.surface}>
-                {slide.title && <h2>{slide.title}</h2>}
+                {slide.title && <h3>{slide.title}</h3>}
                 <p>
-                  {slide.excerpt || (
-                    <>
-                      {' '}
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Atque, a eveniet. Quo aperiam odit, nulla nam ab,
-                      voluptate commodi quis ea, temporibus sunt excepturi odio
-                      delectus architecto
-                    </>
-                  )}
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Magnam ducimus labore voluptate architecto sint laudantium
+                  eius quibusdam non. Eaque cumque{' '}
                 </p>
-                <div className={styles.flex}>
-                  <div className={styles.categories}>
-                    {slide.categories?.slice(0, 2).map((i, index) => (
-                      <span>{i.name}</span>
-                    ))}
-                  </div>
-                  <div>{readMinute(slide.duration, lang)}</div>
-                  <div
-                    className={styles.button}
-                    onClick={() => router.push(`/article/${slide.slug}`)}
-                  >
-                    {t('readMore', lang)} <EastIcon />
-                  </div>
-                </div>
+                <div className={styles.button}>Buy Now</div>
               </div>
             </div>
           ))}
@@ -85,4 +66,4 @@ const Header3 = ({ contents, style }) => {
   )
 }
 
-export default Header3
+export default Banner
