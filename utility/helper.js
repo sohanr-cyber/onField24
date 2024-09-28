@@ -262,6 +262,33 @@ function convertToBanglaNumber (englishNumber, lang = 'en') {
     .join('')
 }
 
+function sortArrayByKey (arr, key, order = 'asc') {
+  if (!Array.isArray(arr) || arr.length === 0) {
+    return []
+  }
+
+  // Determine if the key is numeric or date to handle sorting accordingly
+  const isNumericKey = typeof arr[0][key] === 'number'
+  const isDateKey =
+    !isNumericKey &&
+    new Date(arr[0][key]) !== 'Invalid Date' &&
+    !isNaN(new Date(arr[0][key]))
+
+  return arr.sort((a, b) => {
+    let comparison = 0
+
+    if (isNumericKey) {
+      comparison = a[key] - b[key]
+    } else if (isDateKey) {
+      comparison = new Date(a[key]) - new Date(b[key])
+    } else {
+      if (a[key] < b[key]) comparison = -1
+      if (a[key] > b[key]) comparison = 1
+    }
+
+    return order === 'desc' ? -comparison : comparison
+  })
+}
 export {
   generateTrackingNumber,
   containsAdmin,
@@ -279,5 +306,6 @@ export {
   calculateReadingTimeFromHTML,
   readMinute,
   convertToBanglaNumber,
-  timeAgo
+  timeAgo,
+  sortArrayByKey
 }

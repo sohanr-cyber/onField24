@@ -370,9 +370,41 @@ const dict = {
     en: 'Role',
     bn: 'ভূমিকা'
   },
-  publishedAt:{
-    en:"Publish",
-    bn:"সময়"
+  publishedAt: {
+    en: 'Publish',
+    bn: 'সময়'
+  },
+  adList: {
+    en: 'Ad List',
+    bn: ''
+  },
+  newAd: {
+    en: 'New Ad',
+    bn: ''
+  },
+  targetUrl: {
+    en: 'Target URL',
+    bn: ''
+  },
+  targetText: {
+    en: 'Target Text',
+    bn: ''
+  }
+  ,enterTargetText:{
+    en:"Enter Target Text",
+    bn:""
+  },
+  enterTargetUrl : {
+    en:"Enter Target URL",
+    bn:""
+  },
+  saveAd:{
+    en:"Save Ad",
+    bn:""
+  },
+  updateAd :{
+    en:"Update Ad",
+    bn:""
   }
 }
 

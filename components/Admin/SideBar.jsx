@@ -25,6 +25,8 @@ import CameraIcon from '@mui/icons-material/Camera'
 import Logout from '../Utility/Logout'
 import TagIcon from '@mui/icons-material/Tag'
 import AccessibilityIcon from '@mui/icons-material/Accessibility'
+import SubscriptionsIcon from '@mui/icons-material/Subscriptions'
+
 import t from '@/utility/dict'
 const SideBar = ({ setOpen }) => {
   const router = useRouter()
@@ -200,6 +202,53 @@ const SideBar = ({ setOpen }) => {
                     <AddCircleIcon />
                   </div>
                   <div className={styles.title}>{t('addTag', lang)}</div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div
+            className={styles.item}
+            onClick={() => setVisible(prev => (prev == 'ad' ? '' : 'ad'))}
+          >
+            <div className={styles.flex}>
+              {' '}
+              <div className={styles.icon}>
+                <SubscriptionsIcon />
+              </div>
+              <div className={styles.title}>{t('ad', lang)}</div>{' '}
+            </div>
+            <div className={styles.icon}>
+              {visible == 'ad' ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}{' '}
+            </div>
+          </div>{' '}
+          {visible == 'ad' && (
+            <div className={styles.inner__items}>
+              <div
+                className={styles.item}
+                onClick={() => router.push('/admin/ad')}
+              >
+                <div className={styles.flex}>
+                  {' '}
+                  <div className={styles.icon}>
+                    <FormatListBulletedIcon />
+                  </div>
+                  <div className={styles.title}>{t('adList', lang)}</div>
+                </div>
+              </div>{' '}
+              <div
+                className={styles.item}
+                onClick={() => router.push('/admin/ad/create')}
+              >
+                <div className={styles.flex}>
+                  {' '}
+                  <div className={styles.icon}>
+                    <AddCircleIcon />
+                  </div>
+                  <div className={styles.title}>{t('newAd', lang)}</div>
                 </div>
               </div>
             </div>
