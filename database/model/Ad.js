@@ -27,6 +27,12 @@ const adSchema = new mongoose.Schema(
       enum: ['banner', 'video', 'sidebar', 'popup'], // Different ad formats
       required: true
     },
+    location: {
+      type: String,
+      required: true,
+      default: 'home',
+      enum: ['home', 'news']
+    },
     impressions: {
       type: Number,
       default: 0
@@ -38,11 +44,15 @@ const adSchema = new mongoose.Schema(
     },
     startDate: {
       type: Date,
-      required: true
+      required: true,
+      default: new Date()
     },
     endDate: {
       type: Date,
-      required: true
+      required: true,
+      default: function () {
+        return new Date(this.startDate.getTime() + 3 * 24 * 60 * 60 * 1000) // Adds 3 days to startDate
+      }
     },
     isActive: {
       type: Boolean,
@@ -56,8 +66,7 @@ const adSchema = new mongoose.Schema(
     clicks: {
       type: Number,
       default: 0
-    },
-
+    }
   },
   {
     timestamps: true // Automatically add createdAt and updatedAt fields

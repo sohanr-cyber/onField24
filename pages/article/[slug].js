@@ -59,7 +59,7 @@ export async function getStaticProps ({ params, locale }) {
       `${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`
     )
     const { data: ads } = await axios.get(
-      `${BASE_URL}/api/ad?lang=${locale}&isActive=true`
+      `${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=news`
     )
 
     const end = new Date()
@@ -92,8 +92,6 @@ export async function getStaticProps ({ params, locale }) {
       },
       revalidate: 60 // Regenerate the page every 60 seconds
     }
-
-    
   } catch (error) {
     console.error('Error fetching articles:', error)
     return {
@@ -121,6 +119,7 @@ const News = ({ article, error, relatedArticles, ads }) => {
   const buyNowItems = useSelector(state => state.cart.buyNow)
   const [loading, setLoading] = useState(false)
   const bannerAds = ads.filter(ad => ad.adType == 'banner')
+  
   const sideBarAds = ads
     .filter(ad => ad.adType == 'sidebar')
     .map(ad => ({

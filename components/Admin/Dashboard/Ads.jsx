@@ -124,6 +124,7 @@ const Ads = ({
                 <th>{t('startDate', lang)}</th>
                 <th>{t('EndDate', lang)}</th>
                 <th>{t('addType', lang)}</th>
+                <th>{t('location')}</th>
                 <th>{t('click', lang)}</th>
                 <th>{t('impression', lang)}</th>
                 <th>{t('action', lang)}</th>
@@ -169,6 +170,7 @@ const Ads = ({
                     <td>{getTime(ad.startDate)}</td>
                     <td>{getTime(ad.endDate)}</td>
                     <td>{ad.adType}</td>
+                    <td>{t(ad.location, lang)}</td>
                     <td>{ad.clicks}</td>
                     <td>{ad.impressions}</td>
                     <td className={styles.action}>

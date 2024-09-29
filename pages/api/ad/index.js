@@ -22,7 +22,8 @@ handler.post(async (req, res) => {
       endDate,
       targetAudience,
       adType,
-      isActive
+      isActive,
+      location
     } = req.body
 
     const ad = new Ad({
@@ -36,7 +37,8 @@ handler.post(async (req, res) => {
       targetAudience,
       adType,
       targetText,
-      isActive
+      isActive,
+      location
     })
 
     await ad.save()
@@ -58,7 +60,8 @@ handler.put(async (req, res) => {
       advertiser,
       startDate,
       endDate,
-      targetAudience
+      targetAudience,
+      location
     } = req.body
 
     const updatedAd = await Ad.findByIdAndUpdate(
@@ -72,7 +75,8 @@ handler.put(async (req, res) => {
         advertiser,
         startDate,
         endDate,
-        targetAudience
+        targetAudience,
+        location
       },
       { new: true }
     )
@@ -97,7 +101,8 @@ handler.get(async (req, res) => {
       limit = 10,
       sortBy,
       sortOrder,
-      isActive
+      isActive,
+      location
     } = req.query
     if (!SUPPORTED_LANGUAGE.includes(lang)) {
       return res.status(400).json({
@@ -110,6 +115,12 @@ handler.get(async (req, res) => {
       filter.isActive = isActive === 'true'
     }
 
+    if (location) {
+      filter.location = { $regex: location, $options: 'i' }
+    }
+
+    console.log(filter)
+
     const skip = (page - 1) * limit
 
     // Search in both English and Bengali fields of title and content
@@ -119,7 +130,7 @@ handler.get(async (req, res) => {
         { 'title.bn': { $regex: search, $options: 'i' } } // Search in Bengali title
       ]
     }
-
+    await db.connect()
     let ads = await Ad.find(filter)
       .sort({ publishedAt: -1 })
       .skip(skip)
@@ -145,7 +156,8 @@ handler.get(async (req, res) => {
       endDate: i.endDate,
       adType: i.adType,
       clicks: i.clicks,
-      impressions: i.impressions
+      impressions: i.impressions,
+      location: i.location
     }))
     const totalAds = await Ad.countDocuments(filter)
 
@@ -157,6 +169,7 @@ handler.get(async (req, res) => {
       ads: localizedAds
     })
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: 'Error retrieving ads', error })
   }
 })

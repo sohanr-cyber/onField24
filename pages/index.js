@@ -185,8 +185,9 @@ export async function getStaticProps ({ locale }) {
     )
 
     const { data: ads } = await axios.get(
-      `${BASE_URL}/api/ad?lang=${locale}&isActive=true`
+      `${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=home&fromClient=true`
     )
+
     const end = new Date()
     console.log(`Data fetching time: ${end - start}ms`)
 

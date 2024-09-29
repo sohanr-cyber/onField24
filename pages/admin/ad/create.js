@@ -405,6 +405,23 @@ const Create = ({ ad: data }) => {
           </div>
         </div>
         <div className={styles.field}>
+          <div className={styles.status}>
+          
+            <span
+              className={`${ad.location == 'home' ? styles.currentLang : ''}`}
+              onClick={() => setAd({ ...ad, location: 'home' })}
+            >
+              {t('home', locale)}
+            </span>
+            <span
+              className={`${ad.location == 'news' ? styles.currentLang : ''}`}
+              onClick={() => setAd({ ...ad, location: 'news' })}
+            >
+              {t('news', locale)}
+            </span>
+          </div>
+        </div>
+        <div className={styles.field}>
           <label>{t('From', locale)}</label>
           <input
             type='datetime-local'
@@ -514,7 +531,8 @@ export async function getServerSideProps ({ query }) {
         targetUrl: '',
         image: {},
         description: {},
-        isActive: true
+        isActive: true,
+        location: 'home'
       }
       // categories,
     }
