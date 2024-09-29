@@ -265,16 +265,16 @@ const Create = ({ ad: data }) => {
                       textAlign: 'center'
                     }}
                   >
-                    No Photo Uploaded
+                    {t('noPhotoUploaded', 'en')}
                   </div>
                 )}
               </div>
             </div>
             <div className={styles.field}>
-              <label>Description</label>
+              <label>{t('description', 'en')}</label>
               <textarea
                 value={ad.description?.en}
-                placeholder='Write Description ... '
+                placeholder={t('writeDescription', 'en')}
                 onChange={e =>
                   setAd(prev => ({
                     ...prev,
@@ -314,7 +314,7 @@ const Create = ({ ad: data }) => {
                 <label>{t('targetUrl', 'bn')}</label>
                 <input
                   type='text'
-                  placeholder='Enter Taget Url'
+                  placeholder={t('enterTargetUrl', 'bn')}
                   value={ad.targetUrl}
                   onChange={e =>
                     setAd(prev => ({
@@ -328,7 +328,7 @@ const Create = ({ ad: data }) => {
                 <label>{t('targetText', 'bn')}</label>
                 <input
                   type='text'
-                  placeholder='Enter Taget Tex'
+                  placeholder={t('enterTargetText', 'bn')}
                   value={ad.targetText?.bn}
                   onChange={e =>
                     setAd(prev => ({
@@ -343,7 +343,7 @@ const Create = ({ ad: data }) => {
               </div>
             </div>
             <div className={styles.field}>
-              <label>{t('image', 'bn')}</label>
+              <label>{t('thumbnail', 'bn')}</label>
               <Upload
                 handle={files => {
                   setAd(prev => ({
@@ -376,7 +376,7 @@ const Create = ({ ad: data }) => {
               <label>{t('description', 'bn')}</label>
               <textarea
                 value={ad.description?.bn}
-                placeholder={t('enterDescription', 'bn')}
+                placeholder={t('writeDescription', 'bn')}
                 onChange={e =>
                   setAd(prev => ({
                     ...prev,
@@ -406,7 +406,6 @@ const Create = ({ ad: data }) => {
         </div>
         <div className={styles.field}>
           <div className={styles.status}>
-          
             <span
               className={`${ad.location == 'home' ? styles.currentLang : ''}`}
               onClick={() => setAd({ ...ad, location: 'home' })}
@@ -422,7 +421,7 @@ const Create = ({ ad: data }) => {
           </div>
         </div>
         <div className={styles.field}>
-          <label>{t('From', locale)}</label>
+          <label>{t('from', locale)}</label>
           <input
             type='datetime-local'
             value={
@@ -444,7 +443,7 @@ const Create = ({ ad: data }) => {
           />
         </div>
         <div className={styles.field}>
-          <label>{t('To', locale)}</label>
+          <label>{t('to', locale)}</label>
           <input
             type='datetime-local'
             value={
@@ -472,13 +471,13 @@ const Create = ({ ad: data }) => {
               className={`${ad.isActive ? styles.currentLang : ''}`}
               onClick={() => setAd({ ...ad, isActive: true })}
             >
-              {t('Active', locale)}
+              {t('active', locale)}
             </span>
             <span
               className={`${!ad.isActive ? styles.currentLang : ''}`}
               onClick={() => setAd({ ...ad, isActive: false })}
             >
-              {t('In-Active', locale)}
+              {t('inActive', locale)}
             </span>
           </div>
         </div>

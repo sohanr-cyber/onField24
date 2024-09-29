@@ -376,35 +376,95 @@ const dict = {
   },
   adList: {
     en: 'Ad List',
-    bn: ''
+    bn: 'অ্যাডসমুহ'
   },
   newAd: {
     en: 'New Ad',
-    bn: ''
+    bn: 'নতুন অ্যাড'
   },
   targetUrl: {
     en: 'Target URL',
-    bn: ''
+    bn: 'টার্গেটিং লিংক'
   },
   targetText: {
     en: 'Target Text',
+    bn: 'টার্গেটিং টেক্সট লিখুন'
+  },
+  enterTargetText: {
+    en: 'Enter Target Text',
+    bn: 'টার্গেট টেক্সট লিখুন'
+  },
+  enterTargetUrl: {
+    en: 'Enter Target URL',
+    bn: 'টার্গেটিং লিংক লিখুন'
+  },
+  saveAd: {
+    en: 'Save Ad',
+    bn: 'সেভ করুন'
+  },
+  updateAd: {
+    en: 'Update Ad',
+    bn: 'আপডেট করুন'
+  },
+  from: {
+    en: 'From',
+    bn: 'শুরু'
+  },
+  to: {
+    en: 'To',
+    bn: 'শেষ'
+  },
+  startDate: {
+    en: 'Start Date',
+    bn: 'শুরু'
+  },
+  endDate: {
+    en: 'End Date',
+    bn: 'শেষ'
+  },
+  click: {
+    en: 'Clicks',
+    bn: 'ক্লিক'
+  },
+  impression: {
+    en: 'impressions',
+    bn: 'ইম্প্রেশন'
+  },
+  active: {
+    en: 'Active',
+    bn: 'অ্যাক্টিভ'
+  },
+  inActive: {
+    en: 'In-Active',
+    bn: 'ইন-অ্যাক্টিভ'
+  },
+  location: {
+    en: 'Location',
     bn: ''
-  }
-  ,enterTargetText:{
-    en:"Enter Target Text",
-    bn:""
   },
-  enterTargetUrl : {
-    en:"Enter Target URL",
-    bn:""
+  advertiser: {
+    en: 'Advertiser',
+    bn: 'প্রচারক'
   },
-  saveAd:{
-    en:"Save Ad",
-    bn:""
+  adType: {
+    en: 'Ad Type',
+    bn: 'অ্যাডের ধরন'
   },
-  updateAd :{
-    en:"Update Ad",
-    bn:""
+  createAd: {
+    en: 'Create Ad',
+    bn: 'অ্যাড তৈরি করুন'
+  },
+  updateAd: {
+    en: 'Update Ad',
+    bn: 'আপডেট করুন'
+  },
+  writeDescription: {
+    en: 'Write Description ...',
+    bn: 'বর্ননা লিখুন ...'
+  },
+  ad:{
+    en:"Ad",
+    bn:"অ্যাড"
   }
 }
 

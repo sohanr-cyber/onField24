@@ -8,7 +8,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { statusColors } from '@/utility/const'
-import { extractRGBA, getTime, readMinute } from '@/utility/helper'
+import {
+  convertToBanglaNumber,
+  extractRGBA,
+  getTime,
+  readMinute
+} from '@/utility/helper'
 import t from '@/utility/dict'
 
 const Ads = ({
@@ -120,11 +125,11 @@ const Ads = ({
             <thead>
               <tr>
                 <th>{t('title', lang)} </th>
-                <th>{t('advertiser', lang)}</th>
+                {/* <th>{t('advertiser', lang)}</th> */}
                 <th>{t('startDate', lang)}</th>
-                <th>{t('EndDate', lang)}</th>
-                <th>{t('addType', lang)}</th>
-                <th>{t('location')}</th>
+                <th>{t('endDate', lang)}</th>
+                <th>{t('adType', lang)}</th>
+                <th>{t('location', lang)}</th>
                 <th>{t('click', lang)}</th>
                 {/* <th>{t('impression', lang)}</th> */}
                 <th>{t('action', lang)}</th>
@@ -166,9 +171,11 @@ const Ads = ({
                       {ad.title}
                     </td>
 
-                    <td>{ad.advertiser}</td>
-                    <td>{getTime(ad.startDate)}</td>
-                    <td>{getTime(ad.endDate)}</td>
+                    {/* <td>{ad.advertiser}</td> */}
+                    <td>
+                      {convertToBanglaNumber(getTime(ad.startDate), lang)}
+                    </td>
+                    <td>{convertToBanglaNumber(getTime(ad.endDate), lang)}</td>
                     <td>{ad.adType}</td>
                     <td>{t(ad.location, lang)}</td>
                     <td>{ad.clicks}</td>
