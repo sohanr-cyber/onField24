@@ -40,18 +40,11 @@ const Header3 = ({ contents, style }) => {
               }}
             >
               <div className={styles.surface}>
-                {slide.title && <h2>{slide.title}</h2>}
-                <p>
-                  {slide.excerpt || (
-                    <>
-                      {' '}
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Atque, a eveniet. Quo aperiam odit, nulla nam ab,
-                      voluptate commodi quis ea, temporibus sunt excepturi odio
-                      delectus architecto
-                    </>
-                  )}
-                </p>
+                <div className={styles.text__container}>
+                  {' '}
+                  {slide.title && <h2>{slide.title}</h2>}
+                  <p>{slide.excerpt.substring(0, 300)} . . .</p>
+                </div>
                 <div className={styles.flex}>
                   <div className={styles.categories}>
                     {slide.categories?.slice(0, 2).map((i, index) => (

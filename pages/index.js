@@ -78,7 +78,10 @@ export default function Home ({ data, ads }) {
               </>
             </div>
           </div>
-          <div className={styles.latest__articles}>
+          <div
+            className={styles.latest__articles}
+            style={{ marginBottom: '-5px' }}
+          >
             {' '}
             <div className={styles.flex}>
               <h2>{t('mustRead', lang)}</h2>

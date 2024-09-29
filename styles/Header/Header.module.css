@@ -61,6 +61,16 @@
     flex-wrap: wrap;
 }
 
+.wrapper .text__container {
+    max-height: 300px;
+    overflow-y: scroll;
+    /* background-color: red; */
+}
+
+.wrapper .text__container::-webkit-scrollbar {
+    width: 0;
+}
+
 
 .wrapper .text__container p {
     color: var(--lightText)

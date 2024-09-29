@@ -147,7 +147,7 @@ handler.get(async (req, res) => {
       clicks: i.clicks,
       impressions: i.impressions
     }))
-    const totalAds = await Article.countDocuments(filter)
+    const totalAds = await Ad.countDocuments(filter)
 
     res.status(200).json({
       message: 'Ads retrieved successfully',

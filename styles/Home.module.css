@@ -2,9 +2,11 @@
     display: flex;
     justify-content: flex-start;
     gap: 10px;
-    margin: 25px;
+    margin: 10px 25px;
     overflow-x: scroll;
 }
+
+
 
 .flex .button {
     color: var(--linkColor);
@@ -34,6 +36,7 @@
     margin: 25px;
 }
 
+
 .wrapper h2 {
     margin: 0
 }
@@ -62,6 +65,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
+    margin-top: 20px;
 }
 
 
