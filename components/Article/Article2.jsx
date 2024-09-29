@@ -14,14 +14,14 @@ const Article2 = ({ article, index, isAd }) => {
     handleViewArticle(article)
   }
 
-  const handleAdClick = (ad) => {}
+  const handleAdClick = ad => {}
 
   return (
     <div
       className={`${
         !article.isAd ? styles.wrapper : `${styles.wrapper} ${styles.adWrapper}`
       }`}
-      onClick={() => handleClick(article)}
+      onClick={() => (article.isAd ? handleAdClick() : handleClick(article))}
     >
       {article.isAd && (
         <div className={styles.sponsore}>{t('sponsored', lang)}</div>

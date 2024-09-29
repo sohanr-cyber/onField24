@@ -8,7 +8,7 @@ import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
 import { useSelector } from 'react-redux'
 
-const Banner = ({ contents }) => {
+const Banner = ({ contents, style }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const router = useRouter()
   const lang = router.locale
@@ -46,7 +46,7 @@ const Banner = ({ contents }) => {
                 router.push(`/admin/ad/create?id=${slide._id}`)
               }
             >
-              <div className={styles.surface}>
+              <div className={styles.surface} style={style && { ...style }}>
                 {slide.title && <h3>{slide.title}</h3>}
                 <p>{slide.description}</p>
                 <div className={styles.button}>{slide.targetText}</div>

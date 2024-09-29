@@ -31,6 +31,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import { formatDistanceToNow } from 'date-fns'
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
 import t from '@/utility/dict'
+import Banner from '@/components/Header/Banner'
 
 export async function getStaticPaths () {
   // Fetch all available slugs for articles
@@ -57,6 +58,9 @@ export async function getStaticProps ({ params, locale }) {
     const { data } = await axios.get(
       `${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`
     )
+    const { data: ads } = await axios.get(
+      `${BASE_URL}/api/ad?lang=${locale}&isActive=true`
+    )
 
     const end = new Date()
     const categories = data.categories.map(i => i._id).join(',')
@@ -71,7 +75,7 @@ export async function getStaticProps ({ params, locale }) {
 
       relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
     } else {
-         const resp = await axios.get(
+      const resp = await axios.get(
         `${BASE_URL}/api/article?limit=5&lang=${locale}`
       )
 
@@ -83,7 +87,8 @@ export async function getStaticProps ({ params, locale }) {
     return {
       props: {
         article: data,
-        relatedArticles
+        relatedArticles,
+        ads: ads.ads
       },
       revalidate: 60 // Regenerate the page every 60 seconds
     }
@@ -93,13 +98,14 @@ export async function getStaticProps ({ params, locale }) {
       props: {
         article: {},
         relatedArticles: [],
+        ads: [],
         error: error.message
       }
     }
   }
 }
 
-const News = ({ article, error, relatedArticles }) => {
+const News = ({ article, error, relatedArticles, ads }) => {
   const [quantity, setQuantity] = useState(1)
   const [size, setSize] = useState(article?.sizes?.split(',')[0])
   const [thumbnail, setThumbnail] = useState(article?.thumbnail)
@@ -112,6 +118,17 @@ const News = ({ article, error, relatedArticles }) => {
   const ReactPixel = useSelector(state => state.pixel.pixel)
   const buyNowItems = useSelector(state => state.cart.buyNow)
   const [loading, setLoading] = useState(false)
+  const bannerAds = ads.filter(ad => ad.adType == 'banner')
+  const sideBarAds = ads
+    .filter(ad => ad.adType == 'sidebar')
+    .map(ad => ({
+      ...ad,
+      thumbnail: ad.image,
+      excerpt: ad.description,
+      categories: [],
+      tags: [],
+      isAd: true
+    }))
 
   const currentUrl = `${BASE_URL}/article/${article.slug}`
 
@@ -178,6 +195,14 @@ const News = ({ article, error, relatedArticles }) => {
       <NextSeo {...generateArticleSeoData(article)} />{' '}
       <div className={styles.wrapper}>
         <div className={styles.left}>
+          <div className={styles.tags} style={{ marginBottom: '20px' }}>
+            {article.categories?.map((c, index) => (
+              <span onClick={() => router.push(`/news?categories=${c._id}`)}>
+                {c.name}
+              </span>
+            ))}
+          </div>
+          <PBar height={'2px'} />
           <h1>{article.title} </h1>
           <PBar height={'2px'} />
           <div className={styles.flex}>
@@ -196,7 +221,7 @@ const News = ({ article, error, relatedArticles }) => {
                 </div>
                 <div className={styles.text}>
                   <div className={styles.name}>
-                    {article.author.firstName}  {article.author.lastName}
+                    {article.author.firstName} {article.author.lastName}
                   </div>
                   <div className={styles.date}>
                     {/* {getTime(article.publishedAt)} */}
@@ -252,6 +277,14 @@ const News = ({ article, error, relatedArticles }) => {
           <div className={styles.image__container}>
             <Image src={article.thumbnail} width={720} height={480} />
           </div>
+          <div className={styles.banner}>
+            <Banner
+              contents={bannerAds}
+              style={{
+                padding: '15px'
+              }}
+            />
+          </div>
           <div
             dangerouslySetInnerHTML={{ __html: article.content }}
             className={styles.description}
@@ -268,14 +301,14 @@ const News = ({ article, error, relatedArticles }) => {
           <h1>{t('readMore', lang)} </h1>
           <PBar height={'2px'} />
           <div className={styles.articles__horizontal}>
-            {relatedArticles?.length > 0 &&
-              relatedArticles.map((article, index) => (
+            {[...sideBarAds, ...relatedArticles].length > 0 &&
+              [...sideBarAds, ...relatedArticles].map((article, index) => (
                 <Article2 article={article} />
               ))}
           </div>
           <div className={styles.articles__vertical}>
-            {relatedArticles?.length > 0 &&
-              relatedArticles.map((article, index) => (
+            {[...sideBarAds, ...relatedArticles].length > 0 &&
+              [...sideBarAds, ...relatedArticles].map((article, index) => (
                 <Article article={article} />
               ))}
           </div>
