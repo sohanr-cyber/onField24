@@ -92,6 +92,8 @@ export async function getStaticProps ({ params, locale }) {
       },
       revalidate: 60 // Regenerate the page every 60 seconds
     }
+
+    
   } catch (error) {
     console.error('Error fetching articles:', error)
     return {
