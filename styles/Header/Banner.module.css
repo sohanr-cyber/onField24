@@ -1,6 +1,5 @@
 .wrapper {
     margin: 0;
-
 }
 
 .wrapper .slider {
@@ -44,13 +43,25 @@
     cursor: pointer;
     overflow-y: scroll;
     gap: 12px;
-text-transform: capitalize;
+    text-transform: capitalize;
 
 }
 
 
 
-
+.sponsore {
+    position: absolute;
+    background: var(--nav);
+    color: var(--navColor);
+    padding: 5px;
+    border-radius: 10px;
+    top: 5px;
+    left: -3px;
+    font-weight: bold;
+    font-style: italic;
+    transform: rotate(-30deg);
+    z-index: 23;
+}
 
 
 .slide h2,
@@ -65,7 +76,7 @@ text-transform: capitalize;
 }
 
 .slide p {
-    width: 92%;
+    width: 80%;
     margin: 0;
     text-shadow: 1px 1px black;
 }
@@ -110,6 +121,10 @@ text-transform: capitalize;
         min-width: 100%;
     }
 
+    .wrapper .slide p {
+        width: 90%;
+    }
+
 }
 
 
@@ -119,7 +134,7 @@ text-transform: capitalize;
     }
 
 
-    .warpper  .slide {
+    .warpper .slide {
         min-height: 150px;
     }
 

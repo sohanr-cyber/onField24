@@ -262,6 +262,14 @@ function convertToBanglaNumber (englishNumber, lang = 'en') {
     .join('')
 }
 
+function cleanUrl (url) {
+  // Remove the protocol (http:// or https://) and www.
+  return url
+    .replace(/^https?:\/\//, '') // Remove http:// or https://
+    .replace(/^www\./, '') // Remove www.
+    .trim() // Trim any whitespace
+}
+
 function sortArrayByKey (arr, key, order = 'asc') {
   if (!Array.isArray(arr) || arr.length === 0) {
     return []
@@ -307,5 +315,6 @@ export {
   readMinute,
   convertToBanglaNumber,
   timeAgo,
-  sortArrayByKey
+  sortArrayByKey,
+  cleanUrl
 }

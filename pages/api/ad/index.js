@@ -140,6 +140,7 @@ handler.get(async (req, res) => {
       description: i.description[lang],
       image: i.image[lang] || i.image['en'],
       targetUrl: i.targetUrl,
+      targetText: i.targetText[lang],
       startDate: i.startDate,
       endDate: i.endDate,
       adType: i.adType,

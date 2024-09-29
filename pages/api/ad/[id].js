@@ -21,7 +21,8 @@ handler.put(async (req, res) => {
       startDate,
       endDate,
       targetAudience,
-      adType
+      adType,
+      isActive
     } = req.body
     await db.connect()
     const updatedAd = await Ad.findByIdAndUpdate(
@@ -36,7 +37,8 @@ handler.put(async (req, res) => {
         advertiser,
         startDate,
         endDate,
-        targetAudience
+        targetAudience,
+        isActive
       },
       { new: true }
     )

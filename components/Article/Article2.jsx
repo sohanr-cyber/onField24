@@ -3,18 +3,29 @@ import styles from '@/styles/Article/Article2.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { handleViewArticle } from '@/redux/pixelSlice'
-import { readMinute } from '@/utility/helper'
-const Article2 = ({ article, index }) => {
+import { cleanUrl, readMinute } from '@/utility/helper'
+import t from '@/utility/dict'
+const Article2 = ({ article, index, isAd }) => {
   const router = useRouter()
   const lang = router.locale
-  
+
   const handleClick = article => {
     router.push(`/article/${article.slug}`)
     handleViewArticle(article)
   }
 
+  const handleAdClick = (ad) => {}
+
   return (
-    <div className={styles.wrapper} onClick={() => handleClick(article)}>
+    <div
+      className={`${
+        !article.isAd ? styles.wrapper : `${styles.wrapper} ${styles.adWrapper}`
+      }`}
+      onClick={() => handleClick(article)}
+    >
+      {article.isAd && (
+        <div className={styles.sponsore}>{t('sponsored', lang)}</div>
+      )}
       <div className={styles.image__container}>
         <Image
           src={article.thumbnail || '/images/logo.png'}
@@ -25,7 +36,13 @@ const Article2 = ({ article, index }) => {
       </div>
       <div className={styles.text__container}>
         <b className={styles.title}>{article.title}</b>
+        {article.targetUrl && (
+          <div className={styles.targetURL}>{cleanUrl(article.targetUrl)}</div>
+        )}
         <div className={styles.flex}>
+          {article.targetText && (
+            <div className={styles.button}>{article.targetText}</div>
+          )}{' '}
           {[article.categories[0]].map((c, index) => (
             <span className={styles.category}>{c?.name}</span>
           ))}

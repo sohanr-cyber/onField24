@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { readMinute } from '@/utility/helper'
 import { handleViewArticle } from '@/redux/pixelSlice'
+import t from '@/utility/dict'
 const Article = ({ article, index, flex, style }) => {
   const router = useRouter()
   const lang = router.locale
@@ -15,10 +16,15 @@ const Article = ({ article, index, flex, style }) => {
 
   return (
     <div
-      className={styles.wrapper}
+      className={`${
+        !article.isAd ? styles.wrapper : `${styles.wrapper} ${styles.adWrapper}`
+      }`}
       onClick={() => handleClick(article)}
       style={style ? { ...style } : {}}
     >
+      {article.isAd && (
+        <div className={styles.sponsore}>{t('sponsored', lang)}</div>
+      )}
       <div className={styles.image__container}>
         <Image
           src={article.thumbnail}
@@ -36,6 +42,9 @@ const Article = ({ article, index, flex, style }) => {
           </div>
         </div>
         <div className={styles.flex}>
+          {article.targetText && (
+            <div className={styles.button}>{article.targetText}</div>
+          )}
           {[article.categories[0]].map((c, index) => (
             <span className={styles.category}>{c?.name}</span>
           ))}

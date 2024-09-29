@@ -19,9 +19,21 @@ import { chunkArray } from '@/utility/helper'
 import { Widgets } from '@mui/icons-material'
 import Banner from '@/components/Header/Banner'
 
-export default function Home ({ data }) {
+export default function Home ({ data, ads }) {
   const router = useRouter()
   const lang = router.locale
+
+  const bannerAds = ads.filter(ad => ad.adType == 'banner')
+  const sideBarAds = ads
+    .filter(ad => ad.adType == 'sidebar')
+    .map(ad => ({
+      ...ad,
+      thumbnail: ad.image,
+      excerpt: ad.description,
+      categories: [],
+      tags: [],
+      isAd: true
+    }))
 
   return (
     <>
@@ -30,9 +42,7 @@ export default function Home ({ data }) {
           <div className={styles.categories}>
             <List2 />
           </div>
-          <div className={styles.banner} style={{ paddingTop: '1px' }}>
-            <Banner contents={data[0].articles.slice(1, 3)} />
-          </div>
+
           {data[0].articles.length > 0 && (
             <>
               <div className={styles.header__bigwidth}>
@@ -43,8 +53,8 @@ export default function Home ({ data }) {
               </div>
             </>
           )}
-          <div className={styles.banner}>
-            <Banner contents={data[0].articles.slice(3, 5)} />
+          <div className={styles.banner} style={{ paddingTop: '1px' }}>
+            <Banner contents={bannerAds} />
           </div>
           {/* Latest Article */}
           <div className={styles.latest__articles}>
@@ -59,9 +69,13 @@ export default function Home ({ data }) {
             </div>
             <PBar height={'2px'} />
             <div className={styles.grid}>
-              {data[0].articles.slice(1, 9).map((article, index) => (
-                <Article article={article} />
-              ))}
+              <>
+                {[...sideBarAds, ...data[0].articles.slice(1, 9)].map(
+                  (article, index) => (
+                    <Article article={article} />
+                  )
+                )}
+              </>
             </div>
           </div>
           <div className={styles.latest__articles}>
@@ -86,7 +100,6 @@ export default function Home ({ data }) {
               </div>
             </>
           )}
-
           {/* By Category */}
           {chunkArray(data.slice(2, data.length)).map((c, index) => (
             <div className={styles.articles_bycategory}>
@@ -102,7 +115,7 @@ export default function Home ({ data }) {
                 </div>
                 <PBar height={'2px'} />
                 <div className={styles.grid2}>
-                  {c[0].articles?.map((article, index) => (
+                  {[...sideBarAds, ...c[0].articles]?.map((article, index) => (
                     <>
                       {' '}
                       <div className={styles.mediumToBig__width}>
@@ -168,12 +181,16 @@ export async function getStaticProps ({ locale }) {
       `${BASE_URL}/api/article/bycategory?lang=${locale}`
     )
 
+    const { data: ads } = await axios.get(
+      `${BASE_URL}/api/ad?lang=${locale}&isActive=true`
+    )
     const end = new Date()
     console.log(`Data fetching time: ${end - start}ms`)
 
     return {
       props: {
-        data
+        data,
+        ads: ads.ads
       },
       revalidate: 60 // Regenerate the page every 60 seconds for fresh data
     }

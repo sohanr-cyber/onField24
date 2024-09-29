@@ -6,11 +6,13 @@ import { useRouter } from 'next/router'
 import { calculateReadingTimeFromHTML, readMinute } from '@/utility/helper'
 import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
+import { useSelector } from 'react-redux'
 
 const Banner = ({ contents }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const router = useRouter()
   const lang = router.locale
+  const userInfo = useSelector(state => state.user.userInfo)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,6 +26,7 @@ const Banner = ({ contents }) => {
 
   return (
     <div className={styles.wrapper}>
+      {/* <div className={styles.sponsore}>sponsore</div> */}
       <div className={styles.slider}>
         <>
           {' '}
@@ -32,21 +35,21 @@ const Banner = ({ contents }) => {
               key={index}
               className={styles.slide}
               style={{
-                backgroundImage: `url('${slide.thumbnail}')`,
+                backgroundImage: `url('${slide.image}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 transform: `translateX(-${currentSlide * 100}%)`
               }}
+              onDoubleClick={() =>
+                userInfo?.role == 'admin' &&
+                router.push(`/admin/ad/create?id=${slide._id}`)
+              }
             >
               <div className={styles.surface}>
                 {slide.title && <h3>{slide.title}</h3>}
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Magnam ducimus labore voluptate architecto sint laudantium
-                  eius quibusdam non. Eaque cumque{' '}
-                </p>
-                <div className={styles.button}>Buy Now</div>
+                <p>{slide.description}</p>
+                <div className={styles.button}>{slide.targetText}</div>
               </div>
             </div>
           ))}
