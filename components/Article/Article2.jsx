@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { handleViewArticle } from '@/redux/pixelSlice'
 import { cleanUrl, readMinute } from '@/utility/helper'
 import t from '@/utility/dict'
+import axios from 'axios'
 const Article2 = ({ article, index, isAd }) => {
   const router = useRouter()
   const lang = router.locale
@@ -14,14 +15,18 @@ const Article2 = ({ article, index, isAd }) => {
     handleViewArticle(article)
   }
 
-  const handleAdClick = ad => {}
-
+  const handleAdClick = ad => {
+    axios.patch(`/api/ad/${ad._id}`)
+    router.push(ad.targetUrl)
+  }
   return (
     <div
       className={`${
         !article.isAd ? styles.wrapper : `${styles.wrapper} ${styles.adWrapper}`
       }`}
-      onClick={() => (article.isAd ? handleAdClick() : handleClick(article))}
+      onClick={() =>
+        article.isAd ? handleAdClick(article) : handleClick(article)
+      }
     >
       {article.isAd && (
         <div className={styles.sponsore}>{t('sponsored', lang)}</div>

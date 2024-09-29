@@ -126,7 +126,7 @@ const Ads = ({
                 <th>{t('addType', lang)}</th>
                 <th>{t('location')}</th>
                 <th>{t('click', lang)}</th>
-                <th>{t('impression', lang)}</th>
+                {/* <th>{t('impression', lang)}</th> */}
                 <th>{t('action', lang)}</th>
                 {/* Add more table headers as needed */}
               </tr>
@@ -172,7 +172,7 @@ const Ads = ({
                     <td>{ad.adType}</td>
                     <td>{t(ad.location, lang)}</td>
                     <td>{ad.clicks}</td>
-                    <td>{ad.impressions}</td>
+                    {/* <td>{ad.impressions}</td> */}
                     <td className={styles.action}>
                       {isClient && userInfo.role == 'admin' && (
                         <span onDoubleClick={() => remove(ad._id)}>

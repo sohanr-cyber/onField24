@@ -66,7 +66,7 @@ handler.patch(async (req, res) => {
       return res.status(404).json({ message: 'Ad not found' })
     }
 
-    ad.clickCount += 1
+    ad.clicks += 1
     await ad.save()
 
     res
