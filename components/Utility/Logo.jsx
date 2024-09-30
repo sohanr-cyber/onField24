@@ -10,8 +10,8 @@ const Logo = ({ color }) => {
 
   return (
     <div className={styles.wrapper} onClick={() => router.push('/')}>
-      <span>On</span> <span>Field</span>
-      <span>360</span>
+      <span>Dhaka</span> <span>Pulse</span>
+      <span>24</span>
     </div>
   )
 }

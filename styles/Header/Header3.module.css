@@ -56,7 +56,7 @@
 
 .slide h2 {
     /* max-width: 350px; */
-    text-shadow: 1px 1px var(--theme);
+    text-shadow: 1px 1px black;
     min-width: 92%;
     max-width: 92%;
 }
