@@ -47,53 +47,43 @@ export async function getStaticPaths () {
     fallback: 'blocking' // Use blocking so new pages are generated on-demand
   }
 }
-
-export async function getStaticProps ({ params, locale }) {
-  const { slug } = params
+export async function getStaticProps({ params, locale }) {
+  const { slug } = params;
 
   try {
-    const start = new Date()
+    const start = Date.now();
 
-    // Fetch the article based on the slug and the locale
-    const { data } = await axios.get(
-      `${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`
-    )
-    const { data: ads } = await axios.get(
-      `${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=news`
-    )
+    // Fetch the article and ads concurrently
+    const [articleResponse, adsResponse] = await Promise.all([
+      axios.get(`${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`),
+      axios.get(`${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=news`)
+    ]);
 
-    const end = new Date()
-    const categories = data.categories.map(i => i._id).join(',')
+    const { data: article } = articleResponse;
+    const { data: ads } = adsResponse;
+    const categories = article.categories.map(i => i._id).join(',');
 
-    let relatedArticles = []
-    if (categories) {
-      const resp = await axios.get(
-        `${BASE_URL}/api/article?categories=${
-          categories || ''
-        }&limit=5&lang=${locale}`
-      )
+    // Fetch related articles based on categories concurrently
+    const relatedArticlesResponse = await axios.get(
+      `${BASE_URL}/api/article?categories=${categories || ''}&limit=5&lang=${locale}`
+    );
 
-      relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
-    } else {
-      const resp = await axios.get(
-        `${BASE_URL}/api/article?limit=5&lang=${locale}`
-      )
+    const relatedArticles = relatedArticlesResponse.data.articles.filter(i => i._id !== article._id);
 
-      relatedArticles = resp.data.articles.filter(i => i._id !== data._id)
-    }
-
-    console.log(`Data fetching time: ${end - start}ms`)
+    const end = Date.now();
+    console.log(`Data fetching time: ${end - start}ms`);
 
     return {
       props: {
-        article: data,
+        article,
         relatedArticles,
         ads: ads.ads
       },
       revalidate: 60 // Regenerate the page every 60 seconds
-    }
+    };
   } catch (error) {
-    console.error('Error fetching articles:', error)
+    console.error('Error fetching data:', error);
+
     return {
       props: {
         article: {},
@@ -101,9 +91,10 @@ export async function getStaticProps ({ params, locale }) {
         ads: [],
         error: error.message
       }
-    }
+    };
   }
 }
+
 
 const News = ({ article, error, relatedArticles, ads }) => {
   const [quantity, setQuantity] = useState(1)

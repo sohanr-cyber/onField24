@@ -2,9 +2,10 @@ import Image from 'next/image'
 import React from 'react'
 import styles from '../../styles/Admin/Card.module.css'
 import PeopleIcon from '@mui/icons-material/People'
-import { extractRGBA } from '@/utility/helper'
+import { convertToBanglaNumber, extractRGBA } from '@/utility/helper'
 import { statusColors, themeTransparent } from '@/utility/const'
 import ProgressBar from '../Utility/PBar'
+import { useRouter } from 'next/router'
 
 const colors = [
   'rgb(255, 0, 0, 0.1)',
@@ -13,16 +14,10 @@ const colors = [
   'rgb(131, 0, 131, 0.1)'
 ]
 
-const Card = ({
-  item,
-  index,
-  title,
-  status,
-  total,
-  denominator,
-  icon
-}) => {
+const Card = ({ item, index, title, status, total, denominator, icon }) => {
   const percentage = ((total / denominator) * 100).toFixed(0)
+  const router = useRouter()
+  const lang = router.locale
   return (
     <div
       className={styles.card__wrapper}
@@ -49,9 +44,9 @@ const Card = ({
       )}
       <div className={styles.bottom_flex}>
         <div className={styles.total}>
-          {total}{' '}
+          {convertToBanglaNumber(total, lang)}{' '}
           {status != 'None' && (total / denominator) * 100 > 0 && (
-            <span>({percentage})%</span>
+            <span>({convertToBanglaNumber(percentage, lang)})%</span>
           )}
         </div>
         {/* <div className={styles.amount}>{totalAmount.toLocaleString()} BDT</div> */}

@@ -3,9 +3,12 @@ import styles from '@/styles/Admin/DatePicker.module.css'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { showSnackBar } from '@/redux/notistackSlice'
+import t from '@/utility/dict'
 
 const DatePicker = ({ setOpen }) => {
   const router = useRouter()
+  const lang = router.locale
+
   const dispatch = useDispatch()
   const [startDate, setStartDate] = useState(
     router.query.startDate
@@ -52,7 +55,7 @@ const DatePicker = ({ setOpen }) => {
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.field}>
-          <span>From </span>
+          <span>{t('from', lang)} </span>
           <input
             type='date'
             value={startDate}
@@ -61,7 +64,7 @@ const DatePicker = ({ setOpen }) => {
           />
         </div>
         <div className={styles.field}>
-          <span>To </span>
+          <span>{t('to', lang)} </span>
           <input
             type='date'
             value={endDate}
@@ -76,9 +79,9 @@ const DatePicker = ({ setOpen }) => {
               updateRoute({ period: 'Custom', startDate, endDate })
             }
           >
-            Apply
+            {t('apply', lang)}
           </button>
-          <button onClick={() => setOpen(false)}>Cancel</button>
+          <button onClick={() => setOpen(false)}>{t('cancel', lang)}</button>
         </div>
       </div>
     </div>

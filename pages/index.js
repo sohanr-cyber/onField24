@@ -175,37 +175,35 @@ export default function Home ({ data, ads }) {
   )
 }
 
-export async function getStaticProps ({ locale }) {
+export async function getStaticProps({ locale }) {
   try {
-    const start = new Date()
+    const start = Date.now();
 
-    // Fetch data during build time based on locale
-    const { data } = await axios.get(
-      `${BASE_URL}/api/article/bycategory?lang=${locale}`
-    )
+    // Fetch data concurrently
+    const [articlesResponse, adsResponse] = await Promise.all([
+      axios.get(`${BASE_URL}/api/article/bycategory?lang=${locale}`),
+      axios.get(`${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=home&fromClient=true`)
+    ]);
 
-    const { data: ads } = await axios.get(
-      `${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=home&fromClient=true`
-    )
-
-    const end = new Date()
-    console.log(`Data fetching time: ${end - start}ms`)
+    const end = Date.now();
+    console.log(`Data fetching time: ${end - start}ms`);
 
     return {
       props: {
-        data,
-        ads: ads.ads
+        data: articlesResponse.data,
+        ads: adsResponse.data.ads
       },
       revalidate: 60 // Regenerate the page every 60 seconds for fresh data
-    }
+    };
   } catch (error) {
-    console.error('Error fetching products:', error)
+    console.error('Error fetching data:', error);
 
     return {
       props: {
-        data: [] // Fallback in case of error
+        data: [], // Fallback in case of error
+        ads: [] // Fallback for ads in case of error
       },
       revalidate: 60 // Still revalidate to try again after error
-    }
+    };
   }
 }

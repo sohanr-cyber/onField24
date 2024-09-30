@@ -462,9 +462,45 @@ const dict = {
     en: 'Write Description ...',
     bn: 'বর্ননা লিখুন ...'
   },
-  ad:{
-    en:"Ad",
-    bn:"অ্যাড"
+  ad: {
+    en: 'Ad',
+    bn: 'অ্যাড'
+  },
+  welcome: {
+    en: 'Welcome Back',
+    bn: 'স্বাগতম আপনাকে'
+  },
+  welcomeP: {
+    en: 'This is the lastest Update for your dashbaord !',
+    bn: 'আপনার ড্যাসবোর্ডের সর্বশেষ অবস্থা'
+  },
+  totalViews: {
+    en: 'Total Views',
+    bn: 'ভিউজ'
+  },
+  totalRead: {
+    en: 'Total Read',
+    bn: 'রিড'
+  },
+  totalArticle: {
+    en: 'Total Article',
+    bn: 'আর্টিকেল সংখ্যা'
+  },
+  newsStatistics: {
+    en: 'News Statistics',
+    bn: 'নিউস স্টাটিসটিক্স'
+  },
+  readingStatistics: {
+    en: 'Reading Statistics',
+    bn: 'রিডিং স্টাটিসটিক্স'
+  },
+  apply: {
+    en: 'Apply',
+    bn: 'সাবমিট'
+  },
+  cancel: {
+    en: 'Cancel',
+    bn: 'ক্যান্সেল'
   }
 }
 

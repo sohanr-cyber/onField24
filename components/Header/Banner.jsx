@@ -7,6 +7,7 @@ import { calculateReadingTimeFromHTML, readMinute } from '@/utility/helper'
 import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
 import { useSelector } from 'react-redux'
+import axios from 'axios'
 
 const Banner = ({ contents, style }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -23,6 +24,11 @@ const Banner = ({ contents, style }) => {
       clearInterval(interval)
     }
   }, [contents.length])
+
+  const handleAdClick = ad => {
+    axios.patch(`/api/ad/${ad._id}`)
+    router.push(ad.targetUrl)
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -46,7 +52,11 @@ const Banner = ({ contents, style }) => {
                 router.push(`/admin/ad/create?id=${slide._id}`)
               }
             >
-              <div className={styles.surface} style={style && { ...style }}>
+              <div
+                className={styles.surface}
+                style={style && { ...style }}
+                onClick={() => handleAdClick(slide)}
+              >
                 {slide.title && <h3>{slide.title}</h3>}
                 <p>{slide.description}</p>
                 <div className={styles.button}>{slide.targetText}</div>

@@ -37,6 +37,7 @@ const index = ({ summary }) => {
   const [open, setOpen] = useState(false)
   const [client, setClient] = useState(false)
   const result = summarizeOrders(summary)
+  const lang = router.locale
 
   const updateRoute = data => {
     if (data.filterType == 'Custom') {
@@ -63,8 +64,10 @@ const index = ({ summary }) => {
       {open && <DatePicker setOpen={setOpen} />}
       <div className={styles.welcome}>
         <div className={styles.left}>
-          <h2 style={{ margin: '0', marginBottom: '5px' }}>Welcome Back</h2>
-          <div>This is the latest update for your dashboard !</div>
+          <h2 style={{ margin: '0', marginBottom: '5px' }}>
+            {t('welcome', lang)}
+          </h2>
+          <div>{t('welcomeP', lang)}</div>
           {client && router.query.startDate && router.query.endDate && (
             <div
               style={{
@@ -77,11 +80,15 @@ const index = ({ summary }) => {
                 fontWeight: 'bold'
               }}
             >
-              From{' '}
+              {t('from', lang)} &nbsp;
               <span style={{ color: `${themeC}` }}>
-                {router.query.startDate.split('T')[0]}{' '}
-              </span>{' '}
-              to{' '}
+                {convertToBanglaNumber(
+                  router.query.startDate.split('T')[0],
+                  lang
+                )}
+                &nbsp;
+              </span>
+              {t('to', lang)} &nbsp;
               <span style={{ color: `${themeC}` }}>
                 {' '}
                 {router.query.endDate.split('T')[0]}{' '}
@@ -114,8 +121,8 @@ const index = ({ summary }) => {
       </div>
 
       <div className={styles.flex}>
-        <Graph title={'News Statistics'} summary={summary} />
-        <BarChart title={'Reading  Statistics'} summary={summary} />
+        <Graph title={t('newsStatistics', lang)} summary={summary} />
+        <BarChart title={t('readingStatistics', lang)} summary={summary} />
       </div>
     </div>
   )
@@ -123,11 +130,17 @@ const index = ({ summary }) => {
 
 export default index
 import { parse } from 'cookie' // Import the `parse` function to handle cookies
-import { convertToCamelCase, getTime, summarizeOrders } from '@/utility/helper'
+import {
+  convertToBanglaNumber,
+  convertToCamelCase,
+  getTime,
+  summarizeOrders
+} from '@/utility/helper'
 import { useRouter } from 'next/router'
 import DatePicker from '@/components/Admin/DatePicker'
 import { borderColor, statusColors, themeBg, themeC } from '@/utility/const'
 import PieWithTag from '@/components/Chart/PieWithTag'
+import t from '@/utility/dict'
 
 export async function getServerSideProps (context) {
   try {

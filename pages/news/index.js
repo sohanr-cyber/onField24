@@ -37,7 +37,7 @@ const sortOptions = [
     }
   }
 ]
-const Home = ({ articles, totalPages, currentPage, count }) => {
+const Home = ({ articles, totalPages, currentPage, count, ads }) => {
   const [open, setOpen] = useState(false)
   const [tags, setTags] = useState([])
   const router = useRouter()
@@ -52,6 +52,17 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
       shallow: false
     })
   }
+
+  const sideBarAds = ads
+    .filter(ad => ad.adType == 'sidebar')
+    .map(ad => ({
+      ...ad,
+      thumbnail: ad.image,
+      excerpt: ad.description,
+      categories: [],
+      tags: [],
+      isAd: true
+    }))
 
   const fetchTags = async () => {
     try {
@@ -102,7 +113,7 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
         </div>
       </div>
       <div className={styles.articles}>
-        {articles?.map((item, index) => (
+        {[...sideBarAds, ...articles]?.map((item, index) => (
           <>
             {' '}
             <div className={styles.mediumToBig__width}>
@@ -134,38 +145,67 @@ const Home = ({ articles, totalPages, currentPage, count }) => {
 export default Home
 
 export async function getServerSideProps (context) {
-  const { search, categories, tags, page, sortBy, sortOrder } = context.query
-  console.log(context.query)
+  const {
+    search = '',
+    categories = '',
+    tags = '',
+    page = 1,
+    sortBy = '',
+    sortOrder = '',
+    limit = 9
+  } = context.query
   const { locale } = context
+
   try {
-    const response = await axios.get(
-      `${BASE_URL}/api/article?lang=${locale || ''}&search=${
-        search || ''
-      }&categories=${categories || ''}&tags=${tags || ''}&page=${
-        page || 1
-      }&sortBy=${sortBy || ''}&sortOrder=${sortOrder || ''}`
-    )
+    // Use Promise.all to fetch articles and ads concurrently
+    const [articlesResponse, adsResponse] = await Promise.all([
+      axios.get(`${BASE_URL}/api/article`, {
+        params: {
+          lang: locale || '',
+          search,
+          categories,
+          tags,
+          page,
+          sortBy,
+          sortOrder,
+          limit
+        }
+      }),
+      axios.get(`${BASE_URL}/api/ad`, {
+        params: {
+          lang: locale,
+          isActive: true,
+          location: 'news',
+          page,
+          limit: 2
+        }
+      })
+    ])
+
     const {
       articles,
       totalPages,
       page: currentPage,
       totalArticles: count
-    } = response.data
+    } = articlesResponse.data
+
     return {
       props: {
         title: 'Article List',
         articles,
+        ads: adsResponse.data.ads,
         totalPages,
         currentPage,
         count
       }
     }
   } catch (error) {
-    console.error('Error fetching articles:', error)
+    console.error('Error fetching articles or ads:', error)
     return {
       props: {
         title: 'Article List',
-        articles: []
+        articles: [],
+        ads: []
       }
     }
   }

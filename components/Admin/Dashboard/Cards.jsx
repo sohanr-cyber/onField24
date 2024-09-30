@@ -2,6 +2,8 @@ import Card from '@/components/Chart/Card'
 import React from 'react'
 import styles from '../../../styles/Admin/Cards.module.css'
 import { getTotalProfit, summarizeOrders } from '@/utility/helper'
+import t from '@/utility/dict'
+import { useRouter } from 'next/router'
 
 const data = [
   {
@@ -28,13 +30,16 @@ const data = [
 4
 const Cards = ({ summary }) => {
   const result = summary
+  const router = useRouter()
+  const lang = router.locale
+
   return (
     <div className={styles.wrapper}>
       <Card
         index={0}
         totalAmount={result.totalAmount}
         status={'None'}
-        title={'Total Article'}
+        title={t('totalArticle', lang)}
         total={result.total}
         denominator={result.total}
         icon={'https://cdn-icons-png.flaticon.com/128/17385/17385190.png'}
@@ -44,7 +49,7 @@ const Cards = ({ summary }) => {
         // item={{ ...data[1], number: total?.totalOrders }}
         index={1}
         status={'published'}
-        title='Published'
+        title={t('published', lang)}
         total={result.published}
         denominator={result.total}
         icon={'https://cdn-icons-png.flaticon.com/128/1245/1245280.png'}
@@ -53,7 +58,7 @@ const Cards = ({ summary }) => {
         // item={{ ...data[1], number: total?.totalOrders }}
         index={1}
         status={'draft'}
-        title='Draft'
+        title={t('draft', lang)}
         total={result.draft}
         denominator={result.total}
         icon={'https://cdn-icons-png.flaticon.com/128/1245/1245280.png'}
@@ -63,7 +68,7 @@ const Cards = ({ summary }) => {
         // item={{ ...data[1], number: total?.totalOrders }}
         index={1}
         status={'views'}
-        title='Total Views'
+        title={t('totalViews', lang)}
         total={result.views}
         // denominator={result.total}
         icon={'https://cdn-icons-png.flaticon.com/128/7756/7756168.png'}
@@ -73,7 +78,7 @@ const Cards = ({ summary }) => {
         // item={{ ...data[1], number: total?.totalOrders }}
         index={1}
         status={'reads'}
-        title='Total Reads'
+        title={t('totalRead', lang)}
         total={result.reads}
         denominator={result.views}
         icon={'https://cdn-icons-png.flaticon.com/128/995/995726.png'}

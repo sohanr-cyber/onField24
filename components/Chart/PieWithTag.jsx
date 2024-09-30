@@ -3,8 +3,12 @@ import styles from '@/styles/Admin/Chart/PieWithTag.module.css'
 import { summarizeOrders } from '@/utility/helper'
 import { statusColors } from '@/utility/const'
 import Pie from './Pie'
+import t from '@/utility/dict'
+import { useRouter } from 'next/router'
 const PieWithTag = ({ data }) => {
   const [client, setClient] = useState(false)
+  const router = useRouter()
+  const lang = router.locale
 
   useEffect(() => {
     setClient(true)
@@ -30,7 +34,7 @@ const PieWithTag = ({ data }) => {
                     backgroundColor: `${i.color}`
                   }}
                 ></div>
-                <div>{i.name}</div>
+                <div>{t(i.name.toLocaleLowerCase(), lang)}</div>
               </div>
             ))}
           </div>
