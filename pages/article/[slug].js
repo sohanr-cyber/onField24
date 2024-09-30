@@ -34,7 +34,6 @@ import t from '@/utility/dict'
 import Banner from '@/components/Header/Banner'
 
 export async function getStaticPaths () {
-  // Fetch all available slugs for articles
   const { data } = await axios.get(`${BASE_URL}/api/article/slugs`)
 
   const paths = data.map(article => ({
