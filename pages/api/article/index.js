@@ -6,7 +6,7 @@ import nextConnect from 'next-connect'
 import slugify from 'slugify'
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
-import { calculateReadingTimeFromHTML } from '@/utility/helper'
+import { calculateReadingTimeFromHTML, deleteFileFromUrl } from '@/utility/helper'
 import User from '@/database/model/User'
 const handler = nextConnect()
 
@@ -236,19 +236,41 @@ handler.use(isAdmin)
 handler.delete(async (req, res) => {
   try {
     await db.connect()
-    // Find the article by ID and delete it
-    const article = await Article.findByIdAndDelete(req.query.id)
-    await db.disconnect()
 
-    // Check if the article was found and deleted
+    // Find and delete the article by ID
+    const article = await Article.findByIdAndDelete(req.query.id)
+
+    // If the article is not found, return a 404 error
     if (!article) {
       return res.status(404).json({ message: 'Article not found' })
     }
 
+    // Delete 'en' and 'bn' thumbnails asynchronously
+    const deleteThumbnail = async url => {
+      if (url) {
+        try {
+          await deleteFileFromUrl(url)
+        } catch (error) {
+          console.error(`Error deleting file at ${url}:`, error)
+        }
+      }
+    }
+
+    await Promise.all([
+      deleteThumbnail(article.thumbnail.en),
+      deleteThumbnail(article.thumbnail.bn)
+    ])
+
+    // Close the database connection
+    await db.disconnect()
+
     // Respond with a success message
-    res.status(200).json({ message: 'Article deleted successfully' })
+    res
+      .status(200)
+      .json({ message: 'Article and thumbnails deleted successfully' })
   } catch (error) {
     // Handle any errors that occur during the deletion process
+    console.error('Error during deletion:', error)
     res.status(500).json({ message: 'Server error', error })
   }
 })

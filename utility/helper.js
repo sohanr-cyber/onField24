@@ -3,6 +3,8 @@ import { companyName, delivery_charge, seoData } from './const'
 import mongoose from 'mongoose'
 import crypto from 'crypto'
 import t from './dict'
+import { storage } from '@/database/firebase'
+import { deleteObject, ref } from '@firebase/storage'
 
 function generateTrackingNumber (length = 10) {
   const characters =
@@ -297,6 +299,42 @@ function sortArrayByKey (arr, key, order = 'asc') {
     return order === 'desc' ? -comparison : comparison
   })
 }
+
+function getBaseUrl (firebaseUrl) {
+  // Use URL constructor to easily manipulate the URL
+  const url = new URL(firebaseUrl)
+  // Extract and construct the base URL (scheme + host + bucket)
+  const baseUrl = `${url.origin}${url.pathname.split('/o')[0]}/o/`
+  return baseUrl
+}
+
+function getFilePathFromUrl (mediaUrl) {
+  // const baseUrl = `https://firebasestorage.googleapis.com/v0/b/lms-926e5.appspot.com/o/`
+  const baseUrl = getBaseUrl(mediaUrl)
+
+  // Extract file path from URL by splitting it
+  const decodedUrl = decodeURIComponent(
+    mediaUrl.split(baseUrl)[1].split('?')[0]
+  )
+  console.log({ decodedUrl })
+
+  return decodedUrl
+}
+
+async function deleteFileFromUrl (mediaUrl) {
+  if (!mediaUrl) {
+    return
+  }
+  try {
+    // Create a storage reference from the URL
+    const fileRef = ref(storage, getFilePathFromUrl(mediaUrl))
+    await deleteObject(fileRef)
+    console.log('File deleted successfully')
+  } catch (error) {
+    console.error('Error deleting file:', error)
+  }
+}
+
 export {
   generateTrackingNumber,
   containsAdmin,
@@ -316,5 +354,6 @@ export {
   convertToBanglaNumber,
   timeAgo,
   sortArrayByKey,
-  cleanUrl
+  cleanUrl,
+  deleteFileFromUrl
 }

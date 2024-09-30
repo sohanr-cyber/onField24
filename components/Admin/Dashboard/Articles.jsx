@@ -66,7 +66,7 @@ const Articles = ({
         articles: filteredArticles.articles.filter(i => i._id != id)
       })
       dispatch(finishLoading())
-      dispatch(showSnackBar({ message: 'Product Removed !' }))
+      dispatch(showSnackBar({ message: 'Article Removed !' }))
     } catch (error) {
       dispatch(finishLoading())
       dispatch(
