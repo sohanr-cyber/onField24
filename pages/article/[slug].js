@@ -33,7 +33,21 @@ import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
 import t from '@/utility/dict'
 import Banner from '@/components/Header/Banner'
 
-export async function getServerSideProps({ params, locale }) {
+export async function getStaticPaths () {
+  // Fetch all available slugs for articles
+  const { data } = await axios.get(`${BASE_URL}/api/article/slugs`)
+
+  const paths = data.map(article => ({
+    params: { slug: article.slug },
+    locale: article.locale
+  }))
+
+  return {
+    paths,
+    fallback: 'blocking' // Use blocking so new pages are generated on-demand
+  }
+}
+export async function getStaticProps({ params, locale }) {
   const { slug } = params;
 
   try {
@@ -64,7 +78,8 @@ export async function getServerSideProps({ params, locale }) {
         article,
         relatedArticles,
         ads: ads.ads
-      }
+      },
+      revalidate: 60 // Regenerate the page every 60 seconds
     };
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -79,7 +94,6 @@ export async function getServerSideProps({ params, locale }) {
     };
   }
 }
-
 
 
 const News = ({ article, error, relatedArticles, ads }) => {
