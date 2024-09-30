@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
     const articles = await Article.find({}, { slug: 1, _id: 1 }).lean() // Select only the slug field
     const slugs = articles.map(article => article.slug) // Extract slugs from articles
     await db.disconnect()
-    res.json(articles) // Return only the slugs
+    return res.status(200).json(articles) // Return only the slugs
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Server Error' })

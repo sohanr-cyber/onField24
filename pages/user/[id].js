@@ -280,7 +280,7 @@ const user = ({ user: data }) => {
                 placeholder='+990164238922'
               />
             </div>
-            {isClient && userInfo.role == 'admin' && userInfo.id != user._id && (
+            {isClient && userInfo?.role == 'admin' && userInfo.id != user._id && (
               <div className={styles.field}>
                 <div className={styles.flex}>
                   {[
@@ -307,7 +307,7 @@ const user = ({ user: data }) => {
               </div>
             )}
 
-            {isClient && userInfo.id == router.query.id && (
+            {isClient && userInfo?.id == router.query.id && (
               <div className={styles.field}>
                 <button onClick={() => updateUser()}>Update </button>
               </div>
