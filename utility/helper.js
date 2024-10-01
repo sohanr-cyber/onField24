@@ -1,5 +1,5 @@
 import BASE_URL from '@/config'
-import { companyName, delivery_charge, seoData } from './const'
+import { companyName, seoData } from './const'
 import mongoose from 'mongoose'
 import crypto from 'crypto'
 import t from './dict'

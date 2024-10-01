@@ -5,7 +5,14 @@ import { useRouter } from 'next/router'
 import Logo from './Utility/Logo'
 import { useSelector } from 'react-redux'
 import { chunkArray } from '@/utility/helper'
-import { feacebook_page, instagram, whatsapp, footerP } from '@/utility/const'
+import {
+  feacebook_page,
+  instagram,
+  whatsapp,
+  footerP,
+  support_mail,
+  support_number
+} from '@/utility/const'
 import t from '@/utility/dict'
 
 const Footer = () => {
@@ -75,10 +82,10 @@ const Footer = () => {
             {t('address', lang)}: {t('addressDetails', lang)}
           </div>
           <div className={styles.mail}>
-            {t('mail', lang)}: <span>mail@gmail.com</span>
+            {t('mail', lang)}: <span>{support_mail}</span>
           </div>
           <div className={styles.call}>
-            {t('phone', lang)}: <span>+8802305825832</span>
+            {t('phone', lang)}: <span>{support_number}</span>
           </div>
           <div className={styles.social__media__links}>
             <Image

@@ -1,16 +1,17 @@
 import BASE_URL from '@/config'
-const companyName = 'OnField360'
+const companyName = 'DhakaPulse24'
 
 const footerP =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu erat in eros varius congue vitae ut mauris. Nunc sit amet justo vitae enim rutrum consectetur. Morbi id pretium risus. Donec gravida porta tellus, non iaculis purus ornare ac. Donec sagittis, nulla nec placerat efficitur, velit enim malesuada felis'
 
-const support_number = '01744329811'
-const support_mail = 'contactus@gmail.com'
-const delivery_positions = ['Inside Dhaka', 'Outside Dhaka', 'Dhaka Subburb']
-const feacebook_page = 'https://www.facebook.com/'
+const support_number = '8801759067789'
+const support_mail = 'dhakapulse@gmail.com'
+const feacebook_page =
+  'https://www.facebook.com/profile.php?id=61566430927721&mibextid=kFxxJD'
 const messenger = 'https://www.facebook.com/'
-const whatsapp = 'https://web.whatsapp.com/'
-const instagram = 'https://www.instagram.com/'
+const whatsapp = 'https://wa.me/8801759067789?text=Hi%20there!.'
+const instagram =
+  'https://www.instagram.com/dhakapulse24?igsh=MWZ5Y2Z1MWgyNXB5Mw%3D%3D&fbclid=IwY2xjawFo1F1leHRuA2FlbQIxMAABHVTYE4gWDmCGGluBrEvPsO_eB1pzp-mhTBi1Mz0JcR6hoh1AWb4d7hm9Yw_aem_JiQMIN9I7BI9IS7oBMm9Fg'
 
 const colors = [
   { name: 'Black', code: '#000000' },
@@ -215,7 +216,6 @@ const statusColors = {
 }
 
 export {
-  delivery_positions,
   themeTransparent,
   themeBg,
   themeC,
