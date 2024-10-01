@@ -7,7 +7,7 @@ import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
 
 const handler = nextConnect()
-handler.use(isAuth)
+// handler.use(isAuth)
 handler.get(async (req, res) => {
   const {
     status,
