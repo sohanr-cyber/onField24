@@ -31,9 +31,9 @@ handler.get(async (req, res) => {
 
     // Retrieve products with pagination and sorting
     const categories = await Category.find({ parent: null })
-    const tree = await Promise.all(
+    let tree = await Promise.all(
       categories.map(async item => {
-        const { _id, name } = item
+        const { _id, name, updatedAt } = item
         const c = await Category.find({ parent: _id })
 
         const subtree = await Promise.all(
@@ -43,7 +43,8 @@ handler.get(async (req, res) => {
             return {
               name: name[lang],
               _id: _id,
-              children: sc
+              children: sc,
+              updatedAt: updatedAt
             }
           })
         )
@@ -51,10 +52,13 @@ handler.get(async (req, res) => {
         return {
           name: name[lang],
           _id: _id,
-          children: subtree
+          children: subtree,
+          updatedAt: updatedAt
         }
       })
     )
+
+    tree = tree.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
 
     await db.disconnect()
     res.json(tree)

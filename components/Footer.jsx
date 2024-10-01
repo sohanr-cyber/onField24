@@ -84,9 +84,9 @@ const Footer = () => {
           <div className={styles.mail}>
             {t('mail', lang)}: <span>{support_mail}</span>
           </div>
-          <div className={styles.call}>
+          {/* <div className={styles.call}>
             {t('phone', lang)}: <span>{support_number}</span>
-          </div>
+          </div> */}
           <div className={styles.social__media__links}>
             <Image
               src={'https://cdn-icons-png.flaticon.com/128/5968/5968764.png'}
