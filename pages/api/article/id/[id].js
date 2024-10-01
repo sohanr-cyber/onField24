@@ -1,6 +1,6 @@
 import db from '@/database/connection'
 import Category from '@/database/model/Category'
-import { isAdmin, isAuth } from '@/utility'
+import { isAdmin, isAdminOrEditor, isAuth } from '@/utility'
 import nextConnect from 'next-connect'
 import slugify from 'slugify'
 import Article from '@/database/model/Article'
@@ -35,7 +35,7 @@ handler.get(async (req, res) => {
   }
 })
 
-handler.use(isAuth, isAdmin)
+handler.use(isAuth, isAdminOrEditor)
 handler.put(async (req, res) => {
   try {
     const { id } = req.query // Get the article ID from the query parameters
