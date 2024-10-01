@@ -20,7 +20,7 @@ const fetchFeaturedCategories = async lang => {
     categories.map(async category => {
       const articles = await Article.find({
         categories: { $in: category._id },
-      
+        status: 'published'
       })
         .sort({ publishedAt: -1 })
         .populate('categories', 'name')
@@ -54,7 +54,10 @@ const fetchFeaturedCategories = async lang => {
 }
 
 const fetchFeaturedArticles = async lang => {
-  const featuredArticles = await Article.find({ isFeatured: true })
+  const featuredArticles = await Article.find({
+    isFeatured: true,
+    status: 'published'
+  })
     .populate('categories', 'name')
     .limit(9)
   return featuredArticles.map(article => ({
@@ -73,7 +76,7 @@ const fetchFeaturedArticles = async lang => {
 }
 
 const fetchLatestArticles = async lang => {
-  const latestArticles = await Article.find({})
+  const latestArticles = await Article.find({ status: 'published' })
     .populate('categories', 'name')
     .populate('author', 'firstName lastName photo')
     .sort({ publishedAt: -1 })
