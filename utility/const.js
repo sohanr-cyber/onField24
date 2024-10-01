@@ -61,7 +61,7 @@ function getSeoData (lang = 'en') {
         description: `Catch up on the latest articles and breaking news from ${companyName}, covering a variety of topics including technology, politics, and education.`,
         images: [
           {
-            url: 'https://images.pexels.com/photos/237635/pexels-photo-237635.jpeg?auto=compress&cs=tinysrgb&w=600',
+            url: '/images/cover.png',
             alt: `News and Articles - ${companyName}`,
             width: 1200,
             height: 630
@@ -85,7 +85,7 @@ function getSeoData (lang = 'en') {
         description: `${companyName} থেকে প্রযুক্তি, রাজনীতি এবং শিক্ষা সহ বিভিন্ন বিষয়ের সাম্প্রতিক নিবন্ধ এবং ব্রেকিং নিউজ সম্পর্কে জানুন।`,
         images: [
           {
-            url: 'https://images.pexels.com/photos/237635/pexels-photo-237635.jpeg?auto=compress&cs=tinysrgb&w=600',
+            url: '/images/cover.png',
             alt: `সংবাদ এবং নিবন্ধ - ${companyName}`,
             width: 1200,
             height: 630
