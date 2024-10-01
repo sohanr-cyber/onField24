@@ -5,6 +5,8 @@ import db from '@/database/connection'
 import User from '@/database/model/User'
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
+import Category from '@/database/model/Category'
+
 
 const handler = nextConnect()
 // handler.use(isAuth)
