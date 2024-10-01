@@ -5,7 +5,7 @@ const footerP =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu erat in eros varius congue vitae ut mauris. Nunc sit amet justo vitae enim rutrum consectetur. Morbi id pretium risus. Donec gravida porta tellus, non iaculis purus ornare ac. Donec sagittis, nulla nec placerat efficitur, velit enim malesuada felis'
 
 const support_number = '8801759067789'
-const support_mail = 'dhakapulse@gmail.com'
+const support_mail = 'dhakapulse24@gmail.com'
 const feacebook_page =
   'https://www.facebook.com/profile.php?id=61566430927721&mibextid=kFxxJD'
 const messenger = 'https://www.facebook.com/'
