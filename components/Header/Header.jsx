@@ -32,7 +32,7 @@ const Header = ({ article }) => {
                 alt=''
               />
               <div className={styles.name}>
-                {article.author?.firstName} &nbsp; {article.author?.lastName}
+                {article.author?.firstName} {article.author?.lastName}
               </div>
             </div>
           )}
