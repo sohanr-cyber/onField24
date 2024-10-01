@@ -68,8 +68,8 @@ const articleSchema = new mongoose.Schema(
     ],
     publishedAt: {
       type: Date,
-      default: new Date(),
-      requred: true
+      default: () => new Date(), // Use a function to return a new date each time
+      required: true
     },
     duration: {
       type: Number

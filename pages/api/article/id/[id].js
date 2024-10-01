@@ -39,7 +39,7 @@ handler.use(isAuth, isAdmin)
 handler.put(async (req, res) => {
   try {
     const { id } = req.query // Get the article ID from the query parameters
-    const {
+    let {
       title,
       content,
       status,
@@ -50,7 +50,9 @@ handler.put(async (req, res) => {
       publishedAt,
       isFeatured
     } = req.body // Extract fields from the request body
+    publishedAt = publishedAt ? new Date(publishedAt) : new Date() // Set default if null or undefined
 
+    console.log({ publishedAt })
     // console.log({ content })
     // Validate required fields
     if (!title && !content) {

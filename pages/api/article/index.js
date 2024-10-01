@@ -6,7 +6,10 @@ import nextConnect from 'next-connect'
 import slugify from 'slugify'
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
-import { calculateReadingTimeFromHTML, deleteFileFromUrl } from '@/utility/helper'
+import {
+  calculateReadingTimeFromHTML,
+  deleteFileFromUrl
+} from '@/utility/helper'
 import User from '@/database/model/User'
 const handler = nextConnect()
 
@@ -156,7 +159,7 @@ handler.get(async (req, res) => {
 handler.use(isAuth, isAdminOrEditor)
 handler.post(async (req, res) => {
   try {
-    const {
+    let {
       title,
       content,
       categories,
@@ -168,6 +171,7 @@ handler.post(async (req, res) => {
       isFeatured
     } = req.body
     const authorId = req.user._id
+    publishedAt = publishedAt ? new Date(publishedAt) : new Date() // Set default if null or undefined
 
     // Validate required fields
     if (!title || !content || !excerpt) {

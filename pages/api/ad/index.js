@@ -11,7 +11,7 @@ const handler = nc()
 // POST /api/ads
 handler.post(async (req, res) => {
   try {
-    const {
+    let {
       title,
       description,
       image,
@@ -25,6 +25,7 @@ handler.post(async (req, res) => {
       isActive,
       location
     } = req.body
+
 
     const ad = new Ad({
       title,

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 const Header = ({ article }) => {
   const router = useRouter()
   const lang = router.locale
-  
+
   return (
     <div
       className={styles.wrapper}
@@ -39,7 +39,7 @@ const Header = ({ article }) => {
           <div className={styles.date}>
             {timeAgo(
               formatDistanceToNow(
-                new Date(article.createdAt || article.publishedAt)
+                new Date(article.publishedAt || article.createdAt)
               ) + ' Ago',
               lang
             )}
