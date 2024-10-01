@@ -172,7 +172,7 @@ handler.post(async (req, res) => {
     } = req.body
     const authorId = req.user._id
     publishedAt = publishedAt ? new Date(publishedAt) : new Date() // Set default if null or undefined
-
+    console.log({ publishedAt })
     // Validate required fields
     if (!title || !content || !excerpt) {
       return res.status(400).json({ message: 'Missing required fields' })
@@ -219,13 +219,12 @@ handler.post(async (req, res) => {
       author: authorId,
       categories: categories,
       slug: slugify(title.en),
-      status: status || 'draft',
-      publishedAt: status === 'published' ? new Date() : null
+      status: status || 'draft'
     })
 
     // Save the article to the database
     const savedArticle = await newArticle.save()
-
+    console.log({ publishedAt })
     res.status(201).json({
       message: 'Article created successfully',
       article: savedArticle
