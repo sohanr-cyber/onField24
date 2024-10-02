@@ -9,7 +9,7 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem, addToBuyNow } from '@/redux/cartSlice'
 import { useRouter } from 'next/router'
-import { generateArticleSeoData, getTime } from '@/utility/helper'
+import { generateArticleSeoData, getTime, timeAgo } from '@/utility/helper'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { NextSeo } from 'next-seo'
 import ArticlesByCategory from '@/components/Articles/ArticlesByCategory'
@@ -47,31 +47,35 @@ export async function getStaticPaths () {
     fallback: 'blocking' // Use blocking so new pages are generated on-demand
   }
 }
-export async function getStaticProps({ params, locale }) {
-  const { slug } = params;
+export async function getStaticProps ({ params, locale }) {
+  const { slug } = params
 
   try {
-    const start = Date.now();
+    const start = Date.now()
 
     // Fetch the article and ads concurrently
     const [articleResponse, adsResponse] = await Promise.all([
       axios.get(`${BASE_URL}/api/article/${slug}?blur=true&lang=${locale}`),
       axios.get(`${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=news`)
-    ]);
+    ])
 
-    const { data: article } = articleResponse;
-    const { data: ads } = adsResponse;
-    const categories = article.categories.map(i => i._id).join(',');
+    const { data: article } = articleResponse
+    const { data: ads } = adsResponse
+    const categories = article.categories.map(i => i._id).join(',')
 
     // Fetch related articles based on categories concurrently
     const relatedArticlesResponse = await axios.get(
-      `${BASE_URL}/api/article?categories=${categories || ''}&limit=5&lang=${locale}`
-    );
+      `${BASE_URL}/api/article?categories=${
+        categories || ''
+      }&limit=5&lang=${locale}`
+    )
 
-    const relatedArticles = relatedArticlesResponse.data.articles.filter(i => i._id !== article._id);
+    const relatedArticles = relatedArticlesResponse.data.articles.filter(
+      i => i._id !== article._id
+    )
 
-    const end = Date.now();
-    console.log(`Data fetching time: ${end - start}ms`);
+    const end = Date.now()
+    console.log(`Data fetching time: ${end - start}ms`)
 
     return {
       props: {
@@ -80,9 +84,9 @@ export async function getStaticProps({ params, locale }) {
         ads: ads.ads
       },
       revalidate: 60 // Regenerate the page every 60 seconds
-    };
+    }
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error)
 
     return {
       props: {
@@ -91,10 +95,9 @@ export async function getStaticProps({ params, locale }) {
         ads: [],
         error: error.message
       }
-    };
+    }
   }
 }
-
 
 const News = ({ article, error, relatedArticles, ads }) => {
   const [quantity, setQuantity] = useState(1)
@@ -110,7 +113,7 @@ const News = ({ article, error, relatedArticles, ads }) => {
   const buyNowItems = useSelector(state => state.cart.buyNow)
   const [loading, setLoading] = useState(false)
   const bannerAds = ads.filter(ad => ad.adType == 'banner')
-  
+
   const sideBarAds = ads
     .filter(ad => ad.adType == 'sidebar')
     .map(ad => ({
@@ -218,7 +221,15 @@ const News = ({ article, error, relatedArticles, ads }) => {
                   <div className={styles.date}>
                     {/* {getTime(article.publishedAt)} */}
                     {article.publishedAt && (
-                      <>{formatDistanceToNow(article.publishedAt)} Ago</>
+                      <>
+                        {' '}
+                        {timeAgo(
+                          formatDistanceToNow(
+                            new Date(article.publishedAt || article.createdAt)
+                          ) + ' Ago',
+                          lang
+                        )}
+                      </>
                     )}
                   </div>
                 </div>

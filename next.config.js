@@ -5,8 +5,9 @@ const nextConfig = {
     bodySizeLimit: '2mb' // Set desired value here
   },
   i18n: {
-    locales: ['en', 'bn'], // Add the languages you want to support
-    defaultLocale: 'en' // Default language
+    locales: ['bn', 'en'], // Add the languages you want to support
+    defaultLocale: 'bn', // Default language
+    localeDetection: false
   },
   images: {
     remotePatterns: [

@@ -221,11 +221,13 @@ const readMinute = (duration, lang) => {
 }
 
 const timeAgo = (time, lang = 'en') => {
+  console.log(time)
   if (lang == 'en') {
     return time
   }
 
   const dict = {
+    about: 'প্রায়',
     days: 'দিন',
     minutes: 'মিনিট',
     minute: 'মিনিট',
@@ -243,7 +245,7 @@ const timeAgo = (time, lang = 'en') => {
   let lst = time.split(' ')
   let converted = []
   lst.forEach((i, index) => {
-    if (index == 0) {
+    if (i.length <= 2) {
       converted.push(convertToBanglaNumber(i, lang))
     } else converted.push(dict[i])
   })
