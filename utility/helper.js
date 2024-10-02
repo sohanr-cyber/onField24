@@ -229,6 +229,7 @@ const timeAgo = (time, lang = 'en') => {
   const dict = {
     about: 'প্রায়',
     days: 'দিন',
+    day: 'দিন',
     minutes: 'মিনিট',
     minute: 'মিনিট',
     hour: 'ঘন্টা',
