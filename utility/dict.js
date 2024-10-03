@@ -121,8 +121,8 @@ const dict = {
     bn: 'নামের শেষ অংশ কিখুন'
   },
   addressDetails: {
-    en: 'House 41(meena bazar, lift 4), Gareeb-e-Newaz Avenue Road, Rangpur',
-    bn: 'বাড়ি 41 (মীনা বাজার, লিফট 4), গরিব-ই-নেওয়াজ এভিনিউ রোড, রংপুর'
+    en: 'Dhaka,Bangldesh',
+    bn: 'ঢাকা, বাংলাদেশ'
   },
   'Best Match': {
     en: 'Relavant',
