@@ -20,7 +20,7 @@ const Upload = ({ handle }) => {
     console.log('uploading...')
     setUploading(true)
 
-    const storageRef = ref(storage, `division/${file.name}`)
+    const storageRef = ref(storage, `media/${file.name}`)
     const uploadTask = uploadBytesResumable(storageRef, file)
     uploadTask.on(
       'state_changed',
