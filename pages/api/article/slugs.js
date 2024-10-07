@@ -7,8 +7,11 @@ const handler = nextConnect()
 handler.get(async (req, res) => {
   try {
     await db.connect()
-    const articles = await Article.find({}, { slug: 1, _id: 1 }).lean() // Select only the slug field
-    const slugs = articles.map(article => article.slug) // Extract slugs from articles
+    const articles = await Article.find(
+      {},
+      { slug: 1, _id: 1, publishedAt: 1 }
+    ).lean() // Select only the slug field
+    // const slugs = articles.map(article => article.slug) // Extract slugs from articles
     await db.disconnect()
     return res.status(200).json(articles) // Return only the slugs
   } catch (error) {

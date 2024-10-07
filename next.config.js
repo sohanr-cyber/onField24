@@ -9,6 +9,18 @@ const nextConfig = {
     defaultLocale: 'bn', // Default language
     localeDetection: false
   },
+  async rewrites () {
+    return [
+      {
+        source: '/robots.txt',
+        destination: '/api/text/robots'
+      },
+      {
+        source: '/sitemap.xml',
+        destination: '/api/text/sitemap'
+      }
+    ]
+  },
   images: {
     remotePatterns: [
       {
