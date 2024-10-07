@@ -10,6 +10,7 @@ import SkeletonDiv from '../Utility/SkeletonDiv'
 import SearchBox from '../SearchBox'
 import SearchIcon from '@mui/icons-material/Search'
 import { handleSearch } from '@/redux/pixelSlice'
+import t from '@/utility/dict'
 
 const SearchBox2 = ({ setOpen }) => {
   const router = useRouter()
@@ -38,14 +39,14 @@ const SearchBox2 = ({ setOpen }) => {
     <div className={styles.wrapper}>
       <div className={styles.left}>
         <div className={styles.flex}>
-          <h3>Search</h3>
+          <h3>{t('search', lang)}</h3>
           <h3 onClick={() => setOpen(false)}>X</h3>
         </div>
 
         <div className={styles.serach}>
           <input
             type='text'
-            placeholder='Search Products ..'
+            placeholder={`${t('search', lang)} ...`}
             value={name}
             onChange={e => setName(e.target.value)}
           />
@@ -56,7 +57,7 @@ const SearchBox2 = ({ setOpen }) => {
         {/* price filter */}
 
         {/* Category Filter */}
-        <div className={styles.heading}>Category</div>
+        <div className={styles.heading}>{t('category', lang)}</div>
         <div className={styles.filterOptions}>
           {categories
             ? categories.map((item, index) => (
