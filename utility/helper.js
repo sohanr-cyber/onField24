@@ -212,11 +212,15 @@ const readMinute = (duration, lang) => {
   if (!duration) {
     return
   } else if (duration > 1) {
-    if (lang == 'en') return `${t(duration, lang)} Minutes Read`
-    else if (lang == 'bn') return `${t(duration, lang)} মিনিট  `
+    if (lang == 'en')
+      return `${convertToBanglaNumber(duration, lang)} Minutes Read`
+    else if (lang == 'bn')
+      return `${convertToBanglaNumber(duration, lang)} মিনিট  `
   } else {
-    if (lang == 'en') return `${t(duration, lang)} Minute Read`
-    else if (lang == 'bn') return `${t(duration, lang)} মিনিট  `
+    if (lang == 'en')
+      return `${convertToBanglaNumber(duration, lang)} Minute Read`
+    else if (lang == 'bn')
+      return `${convertToBanglaNumber(duration, lang)} মিনিট  `
   }
 }
 

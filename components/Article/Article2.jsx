@@ -46,7 +46,13 @@ const Article2 = ({ article, index, isAd }) => {
         )}{' '}
       </div>
       <div className={styles.text__container}>
-        <b className={styles.title}>{article.title}</b>
+        <b className={styles.title}>
+          {article.title.length > 60 ? (
+            <>{article.title.substring(0, 60)} ...</>
+          ) : (
+            article.title
+          )}
+        </b>
         {article.targetUrl && (
           <div className={styles.targetURL}>{cleanUrl(article.targetUrl)}</div>
         )}

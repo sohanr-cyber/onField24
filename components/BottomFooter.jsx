@@ -15,11 +15,12 @@ const BottomFooter = () => {
         Design, Developed and Technical Supported by{' '}
         <span
           style={{
-            color: 'purple',
+            color: 'lightgreen',
             fontSize: '110%',
             fontWeight: 'bold',
             borderBottom: '1px solid blue',
-            paddingBottom: '3px'
+            paddingBottom: '3px',
+            cursor: 'pointer'
           }}
           onClick={() => router.push('https://quince-Software.vercel.app/')}
         >
