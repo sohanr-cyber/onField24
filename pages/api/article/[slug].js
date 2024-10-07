@@ -27,6 +27,7 @@ handler.get(async (req, res) => {
     const article = await Article.findOne({
       slug: req.query.slug
     })
+      .lean()
       .populate('author', 'firstName lastName firstNameBn lastNameBn photo') // Populate author info
       .populate('categories', 'name')
       .populate('tags', 'name') // Populate category info

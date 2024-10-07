@@ -206,7 +206,7 @@ const News = ({ article, error, relatedArticles, ads }) => {
                 <div className={styles.avater}>
                   <Image
                     src={
-                      article.author.photo ||
+                      article?.author?.photo ||
                       'https://cdn-icons-png.flaticon.com/128/4322/4322991.png'
                     }
                     width={32}
