@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
   try {
     await db.connect()
     const page = parseInt(req.query.page) || 1
-    const { query, pageSize = PAGE_SIZE } = req.query
+    const { query, pageSize = PAGE_SIZE, lang = 'en' } = req.query
 
     // Calculate the skip value based on the page number and page size
     const skip = (page - 1) * pageSize
@@ -32,7 +32,10 @@ handler.get(async (req, res) => {
     // Build the filter conditions for the shippingUser
     if (query) {
       filter.$or = [
-        { fullName: { $regex: query, $options: 'i' } },
+        { firstName: { $regex: query, $options: 'i' } },
+        { firstNameBn: { $regex: query, $options: 'i' } },
+        { lastName: { $regex: query, $options: 'i' } },
+        { lastNameBn: { $regex: query, $options: 'i' } },
         { phone: { $regex: query, $options: 'i' } }
       ]
     }
@@ -45,11 +48,17 @@ handler.get(async (req, res) => {
     const totalPages = Math.ceil(totalCount / pageSize)
 
     // Perform the query with population and filtering
-    const users = await User.find(filter)
+    let users = await User.find(filter)
+      .lean()
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(pageSize)
 
+    users = users.map(user => ({
+      ...user,
+      firstName: lang == 'en' ? user.firstName : user?.firstNameBn,
+      lastName: lang == 'en' ? user.lastName : user?.lastNameBn
+    }))
     // console.log({ users, totalPages, totalCount })
     await db.disconnect()
     return res.status(200).json({ page, totalPages, count: totalCount, users })

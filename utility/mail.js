@@ -13,12 +13,13 @@ import {
 
 const navbar = `  <div
 style="
-  background-color: rgb(8, 78, 67,0.1);
-  padding: 10px;
-
+  background-color: rgb(51, 51, 51);
+  height:50px;
 "
 >
-<div style ="font-weight: bold;font-size: 200%;color:${themeC};">${companyName}</div>
+<div style ="font-weight: bold;font-size: 200%;color:${themeC};">
+<img src="https://firebasestorage.googleapis.com/v0/b/dhakapulse24-9a544.appspot.com/o/media%2Flogo.jpeg?alt=media&token=a5fa3f85-955b-47ac-99ae-dd7e728b1711" alt="" height="50px"/>
+</div>
 </div>`
 
 const footer = data => {
@@ -26,8 +27,8 @@ const footer = data => {
 <div>If you have any questions or need further assistance, please do not hesitate to contact our customer support team at ${support_mail} or ${support_number}.</div>
 <p>Warm regards,</p>
 
-<div>Quince Shop</div>
-<div>House 41(meena bazar, lift 4), Gareeb-e-Newaz Avenue Road, Sector 11, Uttara, Dhaka</div>
+<div>DhakaPulse24</div>
+<div>Dhaka , Bangladesh</div>
 </div>`
 }
 
@@ -50,8 +51,6 @@ const resetPassword = data => {
     <div>This will expire in 5 minutes</div>
   </div>`
 }
-
-
 
 const sendMessage = data => {
   return `<div style='padding:10px'> ${data.content} </div>`

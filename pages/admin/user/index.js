@@ -38,7 +38,7 @@ export async function getServerSideProps (context) {
     const headers = { Authorization: `Bearer ${userInfo.token}` }
 
     const response = await axios.get(
-      `${BASE_URL}/api/user?page=${page || 1}&query=${
+      `${BASE_URL}/api/user?lang=${locale || ''}&page=${page || 1}&query=${
         query || ''
       }&position=${position}`,
       {

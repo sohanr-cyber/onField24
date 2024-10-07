@@ -11,7 +11,7 @@ import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import Upload from '@/components/Utility/Upload'
 import { logout } from '@/redux/userSlice'
-
+import CreateIcon from '@mui/icons-material/Create'
 const user = ({ user: data }) => {
   const [user, setUser] = useState(data)
   const [current, setCurrent] = useState('article')
@@ -168,6 +168,16 @@ const user = ({ user: data }) => {
           >
             Article
           </span>
+
+          {isClient && userInfo?.id == router.query.id && (
+            <span
+              className={styles.button}
+              onClick={() => router.push('/admin/article/create')}
+              style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+            >
+              <CreateIcon style={{ fontSize: '120%' }} /> Write
+            </span>
+          )}
           {isClient && userInfo?.id == router.query.id && (
             <span
               className={styles.button}

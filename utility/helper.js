@@ -58,7 +58,7 @@ const generateArticleSeoData = article => {
   const { title, excerpt = title, slug, thumbnail, author } = article
 
   const articleSeoData = {
-    title: title.substring(0, 60), // Ensure it's under 60 characters
+    title: title?.substring(0, 60), // Ensure it's under 60 characters
     description: excerpt.substring(0, 160), // Ensure it's under 160 characters
     canonical: `${BASE_URL}/article/${slug}`,
     openGraph: {

@@ -72,37 +72,7 @@ const Users = ({ title, dashboard, users, totalPages, currentPage }) => {
             <div
               className={styles.right}
               style={{ display: 'flex', gap: '10px' }}
-            >
-              <select
-                onChange={e =>
-                  updateRoute({ position: e.target.value.toLowerCase() })
-                }
-                // value={router.query.position}
-              >
-                {[
-                  // 'Select User Status',
-                  'All',
-                  'Inside Dhaka',
-                  'Outside Dhaka	',
-                  'Dhaka Subburb'
-                ].map((item, index) => (
-                  <option
-                    key={index}
-                    selected={
-                      item.toLocaleLowerCase() == router.query.position
-                        ? true
-                        : false
-                    }
-                  >
-                    {item}
-                  </option>
-                ))}
-              </select>
-              {/* <button onClick={() => router.push('/admin/product/create')}>
-                <span className={styles.plus__btn}>Add Product</span>
-                <span className={styles.plus__icon}>+</span>
-              </button> */}
-            </div>
+            ></div>
           </div>
         )}
         <div className={styles.table__wrapper}>
