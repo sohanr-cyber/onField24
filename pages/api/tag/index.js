@@ -5,7 +5,7 @@ import Tag from '@/database/model/Tag'
 import { isAdmin, isAuth } from '@/utility'
 import nc from 'next-connect'
 import slugify from 'slugify'
-const PAGE_SIZE = 20
+const PAGE_SIZE = 200
 const handler = nc()
 
 // get all the category

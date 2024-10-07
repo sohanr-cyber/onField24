@@ -3,9 +3,14 @@ import styles from '../../styles/Header/Header3.module.css'
 import Image from 'next/image'
 import { themeBg } from '@/utility/const'
 import { useRouter } from 'next/router'
-import { calculateReadingTimeFromHTML, readMinute } from '@/utility/helper'
+import {
+  calculateReadingTimeFromHTML,
+  readMinute,
+  timeAgo
+} from '@/utility/helper'
 import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
+import { formatDistanceToNow } from 'date-fns'
 
 const Header3 = ({ contents, style }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -45,13 +50,24 @@ const Header3 = ({ contents, style }) => {
                   {slide.title && <h2>{slide.title}</h2>}
                   <p>{slide.excerpt.substring(0, 300)} . . .</p>
                 </div>
+
                 <div className={styles.flex}>
+                  <div className={styles.time}>
+                    {' '}
+                    {timeAgo(
+                      formatDistanceToNow(
+                        new Date(slide.publishedAt || slide.createdAt)
+                      ) + ' Ago',
+                      lang
+                    )}
+                  </div>
                   <div className={styles.categories}>
                     {slide.categories?.slice(0, 2).map((i, index) => (
                       <span>{i.name}</span>
                     ))}
                   </div>
                   <div>{readMinute(slide.duration, lang)}</div>
+
                   <div
                     className={styles.button}
                     onClick={() => router.push(`/article/${slide.slug}`)}

@@ -106,7 +106,7 @@ handler.get(async (req, res) => {
     await db.connect()
     // Query the articles based on the filter and pagination
     let articles = await Article.find(filter)
-      .populate('author', 'name email') // Populate author info
+      .populate('author', 'firstName lastName firstNameBn lastNameBn') // Populate author info
       .populate('categories', 'name')
       .sort({ publishedAt: -1 })
       .skip(skip)
@@ -128,7 +128,13 @@ handler.get(async (req, res) => {
       title: article.title[lang], // Return title in the selected language
       // content: article.content[lang], // Return content in the selected language
       status: article.status,
-      author: article.author,
+      author: {
+        ...article.author,
+        firstName:
+          lang == 'en' ? article.author.firstName : article.author.firstNameBn,
+        lastName:
+          lang == 'en' ? article.author.lastName : article.author.lastNameBn
+      },
       thumbnail: article.thumbnail[lang],
       excerpt: article.excerpt[lang],
       categories: article.categories.map(i => ({

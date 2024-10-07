@@ -144,16 +144,20 @@ const user = ({ user: data }) => {
               Message
             </span>
           )}
-          <span
-            className={styles.button}
-            onClick={() =>
-              updateRoute({
-                current: 'settings'
-              })
-            }
-          >
-            Settings
-          </span>
+
+          {isClient && userInfo?.id == router.query.id && (
+            <span
+              className={styles.button}
+              onClick={() =>
+                updateRoute({
+                  current: 'settings'
+                })
+              }
+            >
+              Settings
+            </span>
+          )}
+
           <span
             className={styles.button}
             onClick={() =>
@@ -199,113 +203,136 @@ const user = ({ user: data }) => {
             <b className={styles.profession}>{user.role}</b>
             <div>{user.phone}</div>
           </div>
+          {isClient && userInfo?.role == 'admin' && userInfo.id != user._id && (
+            <div className={styles.flex}>
+              {[
+                'admin',
+                'editor',
+                'journalist',
+                'contributor',
+                'moderator',
+                'subscriber',
+                'user'
+              ].map((i, index) => (
+                <span
+                  style={
+                    user.role == i
+                      ? { background: 'black', color: 'white' }
+                      : {}
+                  }
+                  onClick={() => updateRole(i, user._id)}
+                >
+                  {i}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className={styles.right}>
         {router.query.current == 'settings' && (
           <div className={styles.settings}>
-            <div className={styles.flex}>
+            <div>
               {' '}
-              <div className={styles.field}>
-                <label>First Name</label>
-                <input
-                  type='text'
-                  value={user.firstName}
-                  onChange={e =>
-                    setUser({ ...user, firstName: e.target.value })
-                  }
-                />
-              </div>
-              <div className={styles.field}>
-                <label>Last Name</label>
-                <input
-                  type='text'
-                  value={user.lastName}
-                  onChange={e => setUser({ ...user, lastName: e.target.value })}
-                />
-              </div>
-            </div>
-            <div className={styles.field}>
-              <label>Photo</label>
-              <Upload
-                handle={files => {
-                  setUser(prev => ({
-                    ...prev,
-                    photo: files.url
-                  }))
-                }}
-              />
-            </div>
-            <div className={styles.field}>
-              <label>Phone No.</label>
-              <input
-                type='text'
-                value={user.phone}
-                onChange={e => setUser({ ...user, phone: e.target.value })}
-                placeholder='+8891329811'
-              />
-            </div>
-            <div className={styles.field}>
-              <label>Email</label>
-              <input
-                type='text'
-                value={user.email}
-                // onChange={e => setUser({ ...user, firstName: e.target.value })}
-              />
-            </div>
-            <div className={styles.field}>
-              <label>Address</label>
-              <input
-                type='text'
-                value={user.address}
-                onChange={e => setUser({ ...user, address: e.target.value })}
-                placeholder='Dhaka - Rangpur - Kurigram'
-              />
-            </div>
-            <div className={styles.field}>
-              <label>facebook</label>
-              <input
-                type='text'
-                value={user.facebook}
-                onChange={e => setUser({ ...user, facebook: e.target.value })}
-                placeholder='https://www.facebook.com/profile.php?id=100266481262836'
-              />
-            </div>
-            <div className={styles.field}>
-              <label>whatsapp</label>
-              <input
-                type='text'
-                value={user.whatsapp}
-                onChange={e => setUser({ ...user, whatsapp: e.target.value })}
-                placeholder='+990164238922'
-              />
-            </div>
-            {isClient && userInfo?.role == 'admin' && userInfo.id != user._id && (
-              <div className={styles.field}>
-                <div className={styles.flex}>
-                  {[
-                    'admin',
-                    'editor',
-                    'journalist',
-                    'contributor',
-                    'moderator',
-                    'subscriber',
-                    'user'
-                  ].map((i, index) => (
-                    <span
-                      style={
-                        user.role == i
-                          ? { background: 'black', color: 'white' }
-                          : {}
-                      }
-                      onClick={() => updateRole(i, user._id)}
-                    >
-                      {i}
-                    </span>
-                  ))}
+              <div className={styles.flex}>
+                {' '}
+                <div className={styles.field}>
+                  <label>First Name</label>
+                  <input
+                    type='text'
+                    value={user.firstName}
+                    onChange={e =>
+                      setUser({ ...user, firstName: e.target.value })
+                    }
+                  />
+                </div>
+                <div className={styles.field}>
+                  <label>Last Name</label>
+                  <input
+                    type='text'
+                    value={user.lastName}
+                    onChange={e =>
+                      setUser({ ...user, lastName: e.target.value })
+                    }
+                  />
+                </div>{' '}
+                <div className={styles.field}>
+                  <label>First Name (BN) </label>
+                  <input
+                    type='text'
+                    value={user.firstNameBn}
+                    onChange={e =>
+                      setUser({ ...user, firstNameBn: e.target.value })
+                    }
+                  />
+                </div>
+                <div className={styles.field}>
+                  <label>Last Name (EN)</label>
+                  <input
+                    type='text'
+                    value={user.lastNameBn}
+                    onChange={e =>
+                      setUser({ ...user, lastNameBn: e.target.value })
+                    }
+                  />
                 </div>
               </div>
-            )}
+              <div className={styles.field}>
+                <label>Photo</label>
+                <Upload
+                  handle={files => {
+                    setUser(prev => ({
+                      ...prev,
+                      photo: files.url
+                    }))
+                  }}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Phone No.</label>
+                <input
+                  type='text'
+                  value={user.phone}
+                  onChange={e => setUser({ ...user, phone: e.target.value })}
+                  placeholder='+8891329811'
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Email</label>
+                <input
+                  type='text'
+                  value={user.email}
+                  // onChange={e => setUser({ ...user, firstName: e.target.value })}
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Address</label>
+                <input
+                  type='text'
+                  value={user.address}
+                  onChange={e => setUser({ ...user, address: e.target.value })}
+                  placeholder='Dhaka - Rangpur - Kurigram'
+                />
+              </div>
+              <div className={styles.field}>
+                <label>facebook</label>
+                <input
+                  type='text'
+                  value={user.facebook}
+                  onChange={e => setUser({ ...user, facebook: e.target.value })}
+                  placeholder='https://www.facebook.com/profile.php?id=100266481262836'
+                />
+              </div>
+              <div className={styles.field}>
+                <label>whatsapp</label>
+                <input
+                  type='text'
+                  value={user.whatsapp}
+                  onChange={e => setUser({ ...user, whatsapp: e.target.value })}
+                  placeholder='+990164238922'
+                />
+              </div>
+            </div>
 
             {isClient && userInfo?.id == router.query.id && (
               <div className={styles.field}>

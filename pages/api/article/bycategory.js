@@ -22,6 +22,7 @@ const fetchFeaturedCategories = async lang => {
         categories: { $in: category._id },
         status: 'published'
       })
+        .lean()
         .sort({ publishedAt: -1 })
         .populate('categories', 'name')
         .limit(4)
@@ -58,6 +59,7 @@ const fetchFeaturedArticles = async lang => {
     isFeatured: true,
     status: 'published'
   })
+    .lean()
     .populate('categories', 'name')
     .limit(9)
   return featuredArticles.map(article => ({
@@ -77,8 +79,9 @@ const fetchFeaturedArticles = async lang => {
 
 const fetchLatestArticles = async lang => {
   const latestArticles = await Article.find({ status: 'published' })
+    .lean()
     .populate('categories', 'name')
-    .populate('author', 'firstName lastName photo')
+    .populate('author', 'firstName lastName firstNameBn lastNameBn photo')
     .sort({ publishedAt: -1 })
     .limit(10)
   return latestArticles.map(article => ({
@@ -86,7 +89,13 @@ const fetchLatestArticles = async lang => {
     title: article.title[lang],
     thumbnail: article.thumbnail[lang],
     duration: article.duration,
-    author: article.author,
+    author: {
+      ...article.author,
+      firstName:
+        lang == 'en' ? article.author.firstName : article.author?.firstNameBn,
+      lastName:
+        lang == 'en' ? article.author.lastName : article.author?.lastNameBn
+    },
     slug: article.slug,
     excerpt: article.excerpt[lang],
     categories: article.categories.map(cat => ({

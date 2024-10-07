@@ -221,7 +221,7 @@ const readMinute = (duration, lang) => {
 }
 
 const timeAgo = (time, lang = 'en') => {
-  console.log(time)
+  // console.log(time)
   if (lang == 'en') {
     return time
   }

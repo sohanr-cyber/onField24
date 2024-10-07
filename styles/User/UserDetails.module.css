@@ -147,11 +147,21 @@
     gap: 10px
 }
 
-.field .flex span {
+
+.left .flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+    /* background-color: red; */
+}
+
+.flex span {
     padding: 5px;
     border-radius: 5px;
     background: rgba(104, 34, 255, 0.1);
-    border:1px solid var(--highlight)
+    border: 1px solid var(--highlight)
 }
 
 .field input {

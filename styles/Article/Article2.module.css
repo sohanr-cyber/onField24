@@ -28,7 +28,10 @@
 
 .adWrapper .image__container {
     padding: 10px;
+
 }
+
+
 
 .sponsore {
     position: absolute;
@@ -47,7 +50,15 @@
 .wrapper .image__container {
     width: 50%;
     overflow: hidden;
+    position: relative
+}
 
+
+.image__container .time__ago {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
 }
 
 .wrapper .image__container img {

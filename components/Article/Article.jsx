@@ -6,6 +6,7 @@ import { readMinute } from '@/utility/helper'
 import { handleViewArticle } from '@/redux/pixelSlice'
 import t from '@/utility/dict'
 import axios from 'axios'
+import TimeDistance from '../Utility/TimeDistance'
 const Article = ({ article, index, flex, style }) => {
   const router = useRouter()
   const lang = router.locale
@@ -40,6 +41,11 @@ const Article = ({ article, index, flex, style }) => {
           height={'480'}
           alt={article.title}
         />
+        {!article.isAd && (
+          <div className={styles.time__ago}>
+            <TimeDistance article={article} />
+          </div>
+        )}{' '}
       </div>
       <div className={styles.text__container}>
         <div className={styles.text}>

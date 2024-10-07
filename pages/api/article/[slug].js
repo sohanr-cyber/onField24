@@ -27,7 +27,7 @@ handler.get(async (req, res) => {
     const article = await Article.findOne({
       slug: req.query.slug
     })
-      .populate('author', 'firstName lastName photo') // Populate author info
+      .populate('author', 'firstName lastName firstNameBn lastNameBn photo') // Populate author info
       .populate('categories', 'name')
       .populate('tags', 'name') // Populate category info
 
@@ -42,7 +42,13 @@ handler.get(async (req, res) => {
       content: article.content[lang], // Return content in the selected language
       thumbnail: article.thumbnail[lang],
       status: article.status,
-      author: article.author,
+      author: {
+        ...article.author,
+        firstName:
+          lang == 'en' ? article.author.firstName : article.author?.firstNameBn,
+        lastName:
+          lang == 'en' ? article.author.lastName : article.author?.lastNameBn
+      },
       categories: article.categories.map(i => ({
         name: i.name[lang],
         _id: i._id

@@ -40,7 +40,14 @@
     aspect-ratio: 3/2;
     max-height: 150px;
     width: 100%;
+    position: relative;
 
+}
+
+.wrapper .image__container .time__ago {
+    position: absolute;
+    right: 0;
+    bottom: 0
 }
 
 .wrapper .image__container img {

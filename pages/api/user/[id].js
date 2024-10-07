@@ -7,7 +7,6 @@ import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
 import Category from '@/database/model/Category'
 
-
 const handler = nextConnect()
 // handler.use(isAuth)
 handler.get(async (req, res) => {
@@ -129,11 +128,21 @@ handler.get(async (req, res) => {
   }
 })
 
+handler.use(isAuth)
 handler.put(async (req, res) => {
   try {
     const { id } = req.query // Get the article ID from the query parameters
-    const { firstName, lastName, phone, address, facebook, whatsapp, photo } =
-      req.body // Extract fields from the request body
+    const {
+      firstName,
+      lastName,
+      firstNameBn,
+      lastNameBn,
+      phone,
+      address,
+      facebook,
+      whatsapp,
+      photo
+    } = req.body // Extract fields from the request body
 
     if (!firstName || (!lastName && !phone)) {
       return res.status(400).json({ message: 'No fields to update' })
@@ -157,7 +166,9 @@ handler.put(async (req, res) => {
           address,
           facebook,
           whatsapp,
-          photo
+          photo,
+          firstNameBn,
+          lastNameBn,
         }
       },
       { new: true, runValidators: true }
