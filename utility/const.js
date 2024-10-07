@@ -1,4 +1,5 @@
 import BASE_URL from '@/config'
+import { Face, Facebook } from '@mui/icons-material'
 const companyName = 'DhakaPulse24'
 
 const footerP =
@@ -13,6 +14,16 @@ const whatsapp = 'https://wa.me/8801759067789?text=Hi%20there!.'
 const instagram =
   'https://www.instagram.com/dhakapulse24?igsh=MWZ5Y2Z1MWgyNXB5Mw%3D%3D&fbclid=IwY2xjawFo1F1leHRuA2FlbQIxMAABHVTYE4gWDmCGGluBrEvPsO_eB1pzp-mhTBi1Mz0JcR6hoh1AWb4d7hm9Yw_aem_JiQMIN9I7BI9IS7oBMm9Fg'
 
+const twitter = {
+  handle: '@newsportal',
+  site: '@newsportal',
+  cardType: 'summary_large_image'
+}
+const facebook = {
+  app_id: '',
+  page: 'https://www.facebook.com/profile.php?id=61566430927721',
+  admin: ''
+}
 const colors = [
   { name: 'Black', code: '#000000' },
   { name: 'White', code: '#FFFFFF' },
@@ -69,11 +80,8 @@ function getSeoData (lang = 'en') {
         ],
         site_name: companyName
       },
-      twitter: {
-        handle: '@newsportal',
-        site: '@newsportal',
-        cardType: 'summary_large_image'
-      }
+      twitter,
+      facebook
     },
     bn: {
       title: `সর্বশেষ খবর এবং আপডেট - ${companyName}`,
@@ -93,11 +101,8 @@ function getSeoData (lang = 'en') {
         ],
         site_name: companyName
       },
-      twitter: {
-        handle: '@newsportal',
-        site: '@newsportal',
-        cardType: 'summary_large_image'
-      }
+      twitter,
+      facebook
     }
   }
 
