@@ -3,7 +3,9 @@ import Category from '@/database/model/Category'
 import UserService from '@/services/user-service'
 import { isAdmin, isAdminOrEditor, isAuth } from '@/utility'
 import nextConnect from 'next-connect'
-import slugify from 'slugify'
+// import urlSlug from 'urlSlug'
+import urlSlug from 'url-slug';
+
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
 import {
@@ -198,7 +200,7 @@ handler.post(async (req, res) => {
       return res.status(404).json({ message: 'Some categories not found' })
     }
 
-    const existing = await Article.findOne({ slug: slugify(title.en) })
+    const existing = await Article.findOne({ slug: urlSlug(title.en) })
     if (existing) {
       return res
         .status(304)
@@ -224,7 +226,7 @@ handler.post(async (req, res) => {
       duration: calculateReadingTimeFromHTML(content.en || content.bn),
       author: authorId,
       categories: categories,
-      slug: slugify(title.en),
+      slug: urlSlug(title.en),
       status: status || 'draft'
     })
 

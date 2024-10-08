@@ -2,7 +2,9 @@ import db from '@/database/connection'
 import Category from '@/database/model/Category'
 import { isAdmin, isAdminOrEditor, isAuth } from '@/utility'
 import nextConnect from 'next-connect'
-import slugify from 'slugify'
+// import urlSlug from 'urlSlug'
+import urlSlug from 'url-slug';
+
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
 import { SUPPORTED_LANGUAGE } from '@/config'
@@ -67,7 +69,7 @@ handler.put(async (req, res) => {
         $set: {
           title,
           content,
-          slug: slugify(title.en),
+          slug: urlSlug(title.en),
           status,
           categories,
           excerpt,

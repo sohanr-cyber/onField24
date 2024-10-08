@@ -46,6 +46,7 @@
     "recharts": "^2.12.3",
     "sharp": "^0.33.4",
     "slugify": "^1.6.6",
-    "sslcommerz-lts": "^1.1.0"
+    "sslcommerz-lts": "^1.1.0",
+    "url-slug": "^4.0.1"
   }
 }
