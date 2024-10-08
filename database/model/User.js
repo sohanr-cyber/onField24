@@ -24,11 +24,11 @@ const userSchema = new mongoose.Schema(
 
     firstNameBn: {
       type: String,
-      required: true
+      // required: true
     },
     lastNameBn: {
       type: String,
-      required: true
+      // required: true
     },
     salt: {
       type: String
