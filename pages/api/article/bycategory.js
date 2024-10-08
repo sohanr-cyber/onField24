@@ -90,7 +90,7 @@ const fetchLatestArticles = async lang => {
     thumbnail: article.thumbnail[lang],
     duration: article.duration,
     author: {
-      ...article.author,
+      photo: article.author.photo,
       firstName:
         lang == 'en' ? article.author.firstName : article.author?.firstNameBn,
       lastName:

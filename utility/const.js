@@ -19,11 +19,7 @@ const twitter = {
   site: '@newsportal',
   cardType: 'summary_large_image'
 }
-const facebook = {
-  app_id: '',
-  page: 'https://www.facebook.com/profile.php?id=61566430927721',
-  admin: ''
-}
+
 const colors = [
   { name: 'Black', code: '#000000' },
   { name: 'White', code: '#FFFFFF' },
@@ -80,8 +76,7 @@ function getSeoData (lang = 'en') {
         ],
         site_name: companyName
       },
-      twitter,
-      facebook
+      twitter
     },
     bn: {
       title: `সর্বশেষ খবর এবং আপডেট - ${companyName}`,
@@ -101,8 +96,7 @@ function getSeoData (lang = 'en') {
         ],
         site_name: companyName
       },
-      twitter,
-      facebook
+      twitter
     }
   }
 
