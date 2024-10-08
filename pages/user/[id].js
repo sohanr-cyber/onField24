@@ -277,7 +277,7 @@ const user = ({ user: data }) => {
                   />
                 </div>
                 <div className={styles.field}>
-                  <label>Last Name (EN)</label>
+                  <label>Last Name (BN)</label>
                   <input
                     type='text'
                     value={user.lastNameBn}
