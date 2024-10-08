@@ -20,7 +20,7 @@ const Create = ({ article: data, tags }) => {
   const [error, setError] = useState('')
   const [descriptionEn, setDescriptionEn] = useState(article.content?.en)
   const [descriptionBn, setDescriptionBn] = useState(article.content?.bn)
-  const [lang, setLang] = useState(['en'])
+  const [lang, setLang] = useState(['en', 'bn'])
   const dispatch = useDispatch()
   const router = useRouter()
   const handleImages = files => {
