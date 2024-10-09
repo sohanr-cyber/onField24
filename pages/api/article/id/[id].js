@@ -24,7 +24,6 @@ handler.get(async (req, res) => {
         'firstName lastName firstNameBn lastNameBn photo email'
       ) // Populate author info
       .populate('categories', 'name _id')
-    // Populate category info
 
     console.log(article)
     if (!article) {
@@ -32,7 +31,6 @@ handler.get(async (req, res) => {
     }
 
     // Map over articles to return only the selected language fields for title and content
-
     res.status(200).json(article)
   } catch (error) {
     console.error('Error retrieving articles:', error)

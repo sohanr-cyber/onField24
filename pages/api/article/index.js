@@ -4,8 +4,7 @@ import UserService from '@/services/user-service'
 import { isAdmin, isAdminOrEditor, isAuth } from '@/utility'
 import nextConnect from 'next-connect'
 // import urlSlug from 'urlSlug'
-import urlSlug from 'url-slug';
-
+import urlSlug from 'url-slug'
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
 import {
@@ -202,8 +201,9 @@ handler.post(async (req, res) => {
 
     const existing = await Article.findOne({ slug: urlSlug(title.en) })
     if (existing) {
+      console.log({ message: 'Already Exist A Article with this slug .' })
       return res
-        .status(304)
+        .status(200)
         .json({ message: 'Already Exist A Article with this slug .' })
     }
 
@@ -233,7 +233,7 @@ handler.post(async (req, res) => {
     // Save the article to the database
     const savedArticle = await newArticle.save()
     console.log({ publishedAt })
-    res.status(201).json({
+    res.status(200).json({
       message: 'Article created successfully',
       article: savedArticle
     })
