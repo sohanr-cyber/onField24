@@ -3,7 +3,7 @@ import Category from '@/database/model/Category'
 import { isAdmin, isAdminOrEditor, isAuth } from '@/utility'
 import nextConnect from 'next-connect'
 // import urlSlug from 'urlSlug'
-import urlSlug from 'url-slug';
+import urlSlug from 'url-slug'
 
 import Article from '@/database/model/Article'
 import Tag from '@/database/model/Tag'
@@ -19,7 +19,10 @@ handler.get(async (req, res) => {
     const article = await Article.findOne({
       _id: req.query.id
     })
-      .populate('author', 'name email') // Populate author info
+      .populate(
+        'author',
+        'firstName lastName firstNameBn lastNameBn photo email'
+      ) // Populate author info
       .populate('categories', 'name _id')
     // Populate category info
 
