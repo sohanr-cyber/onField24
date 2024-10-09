@@ -32,10 +32,47 @@ const Create = ({ article: data, tags }) => {
   const { locale } = router
   const categories = useSelector(state => state.article.dualCategories)
 
+  const errorMessage = field => {
+    dispatch(
+      showSnackBar({
+        message: `${field} is Missing !`,
+        option: {
+          variant: 'error'
+        }
+      })
+    )
+    return false
+  }
+
+  const validate = article => {
+    if (!article.title.en) {
+      return errorMessage('Title(EN)')
+    }
+    if (!article.title.bn) {
+      return errorMessage('Title(BN)')
+    }
+    if (!descriptionEn) {
+      return errorMessage('Description(EN)')
+    }
+    if (!descriptionBn) {
+      return errorMessage('Description(BN)')
+    }
+    if (!article.excerpt.en) {
+      return errorMessage('Excerpt(EN)')
+    }
+    if (!article.excerpt.bn) {
+      return errorMessage('Excerpt(BN)')
+    }
+    if (!article.thumbnail.en) {
+      return errorMessage('Thumbnail(EN)')
+    }
+    if (!article.thumbnail.bn) {
+      return errorMessage('Thumbnail(BN)')
+    } else return true
+  }
+
   const saveArticle = async () => {
-    setError('')
-    if (!article.title || !article.content) {
-      setError('Pleas fill all the necessaary field')
+    if (!validate(article)) {
       return
     }
     try {
@@ -95,21 +132,7 @@ const Create = ({ article: data, tags }) => {
   }
 
   const updateArticle = async () => {
-    if (
-      !article.title ||
-      !article.content
-
-      // !article.stockQuantity
-    ) {
-      dispatch(
-        showSnackBar({
-          message: 'Please Fill All The Field !',
-          option: {
-            variant: 'info'
-          }
-        })
-      )
-
+    if (!validate(article)) {
       return
     }
     try {

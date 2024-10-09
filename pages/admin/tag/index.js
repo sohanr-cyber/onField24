@@ -25,8 +25,10 @@ export default index
 
 export async function getServerSideProps (context) {
   try {
-    const { page } = context.query
-    const response = await axios.get(`${BASE_URL}/api/tag?page=${page}`)
+    const { page, name } = context.query
+    const response = await axios.get(
+      `${BASE_URL}/api/tag?page=${page}&name=${name || ''}`
+    )
     const { tags, totalPages, page: currentPage } = response.data
     return {
       props: {

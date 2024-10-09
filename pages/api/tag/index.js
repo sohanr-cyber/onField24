@@ -5,12 +5,24 @@ import Tag from '@/database/model/Tag'
 import { isAdmin, isAuth } from '@/utility'
 import nc from 'next-connect'
 import slugify from 'slugify'
-const PAGE_SIZE = 200
+const PAGE_SIZE = 400
 const handler = nc()
+import urlSlug from 'url-slug'
 
+function sortTagsByName (tags, lang) {
+  return tags.sort((a, b) => a.name[lang].localeCompare(b.name[lang]))
+}
 // get all the category
 handler.get(async (req, res) => {
-  const { lang = 'en' } = req.query
+  const { lang = 'en', name } = req.query
+  const filter = {}
+
+  if (name) {
+    filter.$or = [
+      { 'name.en': { $regex: name, $options: 'i' } }, // Search in English title
+      { 'name.bn': { $regex: name, $options: 'i' } }
+    ]
+  }
   // Validate the lang parameter (only allow 'en' or 'bn')
   if (!SUPPORTED_LANGUAGE.includes(lang)) {
     return res.status(400).json({
@@ -31,15 +43,13 @@ handler.get(async (req, res) => {
     const totalPages = Math.ceil(totalCount / PAGE_SIZE)
 
     // Retrieve products with pagination and sorting
-    let tags = await Tag.find()
+    let tags = await Tag.find({ ...filter })
+      .lean()
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(PAGE_SIZE)
 
-    tags = tags.map(i => ({
-      name: i.name,
-      _id: i._id
-    }))
+    tags = sortTagsByName(tags, lang)
 
     await db.disconnect()
     res.json({ page, tags, totalPages })
@@ -49,7 +59,7 @@ handler.get(async (req, res) => {
   }
 })
 
-// handler.use(isAuth, isAdmin)
+handler.use(isAuth, isAdmin)
 // Create a new category
 handler.post(async (req, res) => {
   try {
@@ -80,6 +90,36 @@ handler.post(async (req, res) => {
   } catch (error) {
     console.error('Error creating category:', error)
     res.status(500).json({ message: 'Server error' })
+  }
+})
+
+handler.patch(async (req, res) => {
+  const tags = req.body.tags // expecting an array of tags like [{ en: "Science", bn: "বিজ্ঞান" }, ...]
+
+  if (!Array.isArray(tags) || tags.length === 0) {
+    return res
+      .status(400)
+      .json({ error: 'Invalid tags data. Expected a non-empty array.' })
+  }
+  try {
+    await db.connect()
+    const insertedTags = await Tag.insertMany(
+      tags.map(i => ({
+        name: i.name,
+        slug: urlSlug(i.name.en)
+      })),
+      { ordered: false }
+    )
+    await db.disconnect()
+    return res.status(201).json({
+      message: 'Tags created successfully',
+      tags: insertedTags
+    })
+  } catch (error) {
+    console.log(error)
+    return res
+      .status(500)
+      .json({ error: 'An error occurred while creating tags.' })
   }
 })
 

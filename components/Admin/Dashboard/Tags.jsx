@@ -26,6 +26,9 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
     setFilteredTags({ tags, totalPages, count, page: currentPage })
   }, [tags])
 
+  useEffect(() => {
+    setSearchQuery(router.query.name)
+  }, [router.query.name])
   const lang = router.locale
 
   const updateRoute = data => {
@@ -72,7 +75,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
               <input
                 type='text'
                 placeholder={`${t('search', lang)} ...`}
-                value={searchQuery || router.query.name}
+                value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
               />
               <span onClick={() => updateRoute({ name: searchQuery, page: 1 })}>

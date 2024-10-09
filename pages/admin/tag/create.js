@@ -21,7 +21,7 @@ const Create = ({ tag: data }) => {
   const router = useRouter()
   const [newTag, setNewTag] = useState(false)
   const categories = useSelector(state => state.article.categories)
-  const [lang, setLang] = useState(['en'])
+  const [lang, setLang] = useState(['en', 'bn'])
   const locale = router.locale
 
   useEffect(() => {
@@ -166,10 +166,10 @@ const Create = ({ tag: data }) => {
         {lang.find(i => i == 'en') && (
           <div className={styles.left}>
             <div className={styles.field}>
-              <label>{t('tagName', lang)}</label>
+              <label>{t('tagName', 'en')}</label>
               <input
                 type='text'
-                placeholder={t('enterTagName', lang)}
+                placeholder={t('enterTagName', 'en')}
                 value={tag.name?.en}
                 onChange={e =>
                   setTag({

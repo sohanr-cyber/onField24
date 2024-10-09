@@ -67,7 +67,7 @@ export async function getStaticProps ({ params, locale }) {
     const relatedArticlesResponse = await axios.get(
       `${BASE_URL}/api/article?categories=${
         categories || ''
-      }&limit=5&lang=${locale}`
+      }&limit=5&lang=${locale}&status=published`
     )
 
     const relatedArticles = relatedArticlesResponse.data.articles.filter(
