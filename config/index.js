@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
   // BASE_URL = 'https://organic-food-mu.vercel.app'
   // BASE_URL = 'https://ecomerce-phi-gold.vercel.app'
   // BASE_URL = 'https://electronics-52h4.vercel.app'
-  BASE_URL = 'https://www.dhakapulse24.com'
+  BASE_URL = 'https://on-field24.vercel.app'
 
   MONGODB_URI = process.env.MONGODB_URI_PRODUCTION
   GMAIL = process.env.GMAIL_USER

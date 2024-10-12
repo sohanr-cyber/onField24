@@ -126,20 +126,20 @@ button {
 
 @media (max-width:570px) {
   body {
-    font-size: 90%;
+    font-size: 94%;
   }
 }
 
 @media (max-width:480px) {
   body {
-    font-size: 88%;
+    font-size: 92%;
   }
 }
 
 
 @media (max-width:380px) {
   body {
-    font-size: 84%;
+    font-size: 90%;
   }
 
   h1 {

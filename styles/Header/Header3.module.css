@@ -1,164 +1,109 @@
 .wrapper {
-    padding: 15px 25px;
     background-color: var(--nav);
-
+    color: var(--navColor);
+    /* min-height: 45vh; */
+    padding: 25px;
 }
 
 .wrapper .slider {
     display: flex;
     overflow-x: hidden;
     min-width: 100%;
-    /* border-radius: 0px; */
     position: relative;
     cursor: pointer;
-
+    margin-top: -5px;
 
 }
 
-.wrapper .slide {
+
+
+
+.wrapper .slider .slide {
     min-height: 55vh;
     min-width: 100%;
-    /* aspect-ratio: 5/2; */
     transition: transform 0.5s ease-in-out;
-    background: var(--tGradient);
     position: relative;
     overflow: hidden;
-
-
+    /* border: 1px solid white; */
+    ;
 }
 
-.slide .surface {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-    gap: 25px;
-    color: white;
+.wrapper .slide .surface {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    /* height: 100%; */
-    background: linear-gradient(0deg, rgb(0, 0, 0, 0.8), rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.1));
-    /* padding: 0 15px; */
-
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 25px;
+    /* background-color: red; */
+    /* padding: 25px; */
 }
 
 
-.image__container {
-    flex: 1;
-    /* border-radius: 0px; */
-    overflow: hidden;
-    max-height: 350px;
-
+.wrapper .slide .surface .image__container {
+    width: 50%;
 }
 
+.wrapper .slide .surface .image__container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-.text__container {
-    flex: 1;
-    max-height: 45vh;
-    padding-bottom: 10px;
-    /* background-color: skyblue; */
+.wrapper .slide .surface .text__container {
+    width: 50%;
+    max-height: 300px;
     overflow-y: scroll;
 
 }
 
 
-
-.text__container h1 {
-    margin: 0;
+.wrapper .slide .surface .text__container::-webkit-scrollbar {
+    width: 0;
 }
-
 
 .text__container .date {
-    color: var(--highlight);
+    color: red;
     text-transform: capitalize;
-    font-weight: bold;
-    margin-top: 10px;
 }
 
-.text__container .author {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+.text__container h1 {
+    text-transform: capitalize;
+    margin-top: 0;
 }
 
-
-.text__container .author img {
-    border-radius: 50%;
-
+.text__container .category {
+    margin: 10px 0;
+    color: red;
 }
 
-
-.wrapper .image__container img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-
-}
-
-.slide .surface .flex {
-    margin-bottom: 15px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.slide .surface .flex .categories {
-    display: flex;
-    gap: 10px;
-    color: var(--highlight)
-}
-
-
-
-
-
-
-.wrapper .surface .flex .button {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: bold;
-    color: var(--linkColor);
-    font-size: 110%;
-    cursor: pointer;
-    margin-bottom: 10px;
+.button {
+    background: white;
+    color: black;
+    padding: 7px;
+    display: inline-block;
+    /* margin-bottom: 10px; */
 }
 
 .wrapper .dots {
+    min-height: 50px;
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
-    gap: 10px;
     justify-content: center;
-    margin: 15px 0;
-
-
+    gap:10px
 }
 
-.surface .category {
-    color: var(--highlight)
-}
-
-.surface .button {
-    background: var(--navColor);
-    padding: 7px;
-    color: var(--nav);
-    display: inline-block;
-}
-
-.wrapper .dots .dot {
-    min-width: 7px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background: rgb(186, 186, 186);
-
+.wrapper .dots span {
+    min-width: 10px;
+    min-height: 10px;
+    /* aspect-ratio: 1/1; */
+    background: white;
 
 }
-
-
-
 
 @media (min-width:1024px) {
     .wrapper {
@@ -166,110 +111,68 @@
     }
 }
 
+@media (max-width:760px) {
 
-@media (max-width:720px) {
     .wrapper {
-        padding: 0;
-        padding-bottom: 25px;
-    }
-
-    .wrapper .slide {
-        min-height: 100vh;
-        min-width: 100%;
-
-    }
-
-    .wrapper .surface .image__container {
-        min-height: 300px;
-    }
-
-    .wrapper .surface {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .wrapper .image__container {
-        width: 100%;
-    }
-
-    .wrapper .text__container {
         padding: 0 25px;
+    }
+
+    .wrapper .slider .slide {
+        min-height: 85vh;
+    }
+
+    .slide .surface {
+        flex-direction: column;
+        justify-content: flex-start !important;
+        padding: 0;
+        height: 100%;
+        /* width: 100%; */
+    }
+
+    .wrapper .slide .surface .image__container,
+    .wrapper .slide .surface .text__container {
         width: 100%;
-        max-height: 30vh;
-        overflow-y: scroll !important;
-
-    }
-
-    .wrapper .text__container div {
-        overflow-y: scroll !important;
-    }
-
-    .wrapper .dots {
+        /* background-color: white; */
         margin: 0;
+        ;
     }
 
-    .surface p,
-    .surface h1 {
-        width: 92%;
+
+    .wrapper .slide .surface .image__container {
+        height: 60% !important;
     }
 
+    .wrapper .slide .surface .text__container {
+        height: 40% !important;
+    }
 }
-
 
 @media (max-width:570px) {
     .wrapper {
-        padding: 0;
-        padding-bottom: 15px;
-        margin-top: -4px;
+        padding: 0 15px;
     }
 
-    .wrapper .surface .image__container {
-        min-height: 250px;
+    .wrapper .slide .surface .image__container {
+        height: 50% !important;
     }
 
-    .text__container {
-        padding: 15px;
-    }
-
-
-    .wrapper .slide .surface {
-        padding: 0
-    }
-
-    .slide h2 {
-        max-width: 250px;
-        font-size: 150%;
+    .wrapper .slide .surface .text__container {
+        height: 50% !important;
     }
 }
-
-
 
 @media (max-width:480px) {
-    .wrapper .surface .image__container {
-        min-height: 210px;
+    .wrapper {
+        padding: 0 10px;
+    }
+
+    .wrapper .slide .surface .image__container {
+        height: 40% !important;
+    }
+
+    .wrapper .slide .surface .text__container {
+        height: 60% !important;
     }
 }
 
-
-@media (max-width:410px) {
-    .wrapper .surface .image__container {
-        min-height: 180px;
-    }
-
-    .wrapper .dots {
-        margin-top: 10px;
-        margin-bottom: 0;
-    }
-
-
-    .slide h2 {
-        font-size: 120%;
-        margin: 10px 0
-    }
-
-
-    .wrapper .text__container {
-        padding: 10px 10px;
-    }
-
-}
+@media (max-width:410px) {}
