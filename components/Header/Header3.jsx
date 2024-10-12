@@ -55,36 +55,39 @@ const Header3 = ({ contents, style }) => {
                   />
                 </div>
                 <div className={styles.text__container}>
-                  <h1>{slide.title}</h1>
-                  <div className={styles.date}>
-                    {timeAgo(
-                      formatDistanceToNow(
-                        new Date(slide.publishedAt || slide.createdAt)
-                      ) + ' Ago',
-                      lang
-                    )}
-                  </div>
-                  <div className={styles.left__top}>
-                    <p>
-                      {slide.excerpt || (
-                        <>
-                          {' '}
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Atque, a eveniet. Quo aperiam odit, nulla nam
-                          ab, voluptate commodi quis ea, temporibus sunt
-                          excepturi odio delectus architecto
-                        </>
+                  <div>
+                    {' '}
+                    <h1>{slide.title}</h1>
+                    <div className={styles.date}>
+                      {timeAgo(
+                        formatDistanceToNow(
+                          new Date(slide.publishedAt || slide.createdAt)
+                        ) + ' Ago',
+                        lang
                       )}
-                    </p>
-                    <div className={styles.flex}>
-                      <div className={styles.category}>
-                        {slide.categories[0]?.name}
-                      </div>
-                      <div className={styles.time}>
-                        {readMinute(slide.duration)}
-                      </div>
                     </div>
-                    <div className={styles.button}>Read Now</div>
+                    <div className={styles.left__top}>
+                      <p>
+                        {slide.excerpt || (
+                          <>
+                            {' '}
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Atque, a eveniet. Quo aperiam odit, nulla nam
+                            ab, voluptate commodi quis ea, temporibus sunt
+                            excepturi odio delectus architecto
+                          </>
+                        )}
+                      </p>
+                      <div className={styles.flex}>
+                        <div className={styles.category}>
+                          {slide.categories[0]?.name}
+                        </div>
+                        <div className={styles.time}>
+                          {readMinute(slide.duration)}
+                        </div>
+                      </div>
+                      <div className={styles.button}>Read Now</div>
+                    </div>
                   </div>
                 </div>
               </div>
