@@ -10,8 +10,8 @@ const articleSchema = new mongoose.Schema(
         required: true
       },
       bn: {
-        type: String,
-        required: true
+        type: String
+        // required: true
       }
     },
     excerpt: {
@@ -20,8 +20,8 @@ const articleSchema = new mongoose.Schema(
         required: true
       },
       bn: {
-        type: String,
-        required: true
+        type: String
+        // required: true
       }
     },
     thumbnail: {
@@ -30,8 +30,8 @@ const articleSchema = new mongoose.Schema(
         required: true
       },
       bn: {
-        type: String,
-        required: true
+        type: String
+        // required: true
       }
     },
     slug: {
@@ -46,7 +46,7 @@ const articleSchema = new mongoose.Schema(
       },
       bn: {
         type: String,
-        required: true
+        // required: true
       }
     },
     author: {

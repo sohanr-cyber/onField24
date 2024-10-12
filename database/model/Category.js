@@ -9,7 +9,7 @@ const categorySchema = new mongoose.Schema(
       },
       bn: {
         type: String,
-        required: true
+        // required: true
       }
     },
     slug: {

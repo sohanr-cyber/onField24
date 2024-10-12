@@ -5,8 +5,8 @@ const nextConfig = {
     bodySizeLimit: '2mb' // Set desired value here
   },
   i18n: {
-    locales: ['bn', 'en'], // Add the languages you want to support
-    defaultLocale: 'bn', // Default language
+    locales: ['en'], // Add the languages you want to support
+    defaultLocale: 'en', // Default language
     localeDetection: false
   },
   async rewrites () {

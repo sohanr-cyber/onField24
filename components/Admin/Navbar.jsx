@@ -40,7 +40,7 @@ const Navbar = () => {
             alt=''
           />
         </div>
-        <LangPicker />
+        {/* <LangPicker /> */}
       </div>
     </div>
   )

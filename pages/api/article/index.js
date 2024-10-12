@@ -87,10 +87,10 @@ handler.get(async (req, res) => {
     if (search) {
       filter.$or = [
         { 'title.en': { $regex: search, $options: 'i' } }, // Search in English title
-        { 'title.bn': { $regex: search, $options: 'i' } }, // Search in Bengali title
+        // { 'title.bn': { $regex: search, $options: 'i' } }, // Search in Bengali title
 
-        { 'content.en': { $regex: search, $options: 'i' } }, // Search in English content
-        { 'content.bn': { $regex: search, $options: 'i' } } // Search in Bengali content // Search in category name (populated from Category collection, both English and Bengali)
+        { 'content.en': { $regex: search, $options: 'i' } } // Search in English content
+        // { 'content.bn': { $regex: search, $options: 'i' } } // Search in Bengali content // Search in category name (populated from Category collection, both English and Bengali)
       ]
     }
 

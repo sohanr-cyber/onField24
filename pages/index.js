@@ -46,16 +46,17 @@ export default function Home ({ data, ads }) {
           {data[0].articles.length > 0 && (
             <>
               <div className={styles.header__bigwidth}>
-                <Header article={data[0].articles[0]} />
+                {/* <Header article={data[0].articles[0]} /> */}
+                <Header3 contents={data[0].articles} />
               </div>
               <div className={styles.header__midwidth}>
-                <Header3 contents={[data[0].articles[0]]} />
+                <Header3 contents={data[0].articles} />
               </div>
             </>
           )}
-          <div className={styles.banner} style={{ paddingTop: '1px' }}>
+          {/* <div className={styles.banner} style={{ paddingTop: '1px' }}>
             <Banner contents={bannerAds} />
-          </div>
+          </div> */}
           {/* Latest Article */}
           <div className={styles.latest__articles}>
             <div className={styles.flex}>
@@ -175,18 +176,20 @@ export default function Home ({ data, ads }) {
   )
 }
 
-export async function getStaticProps({ locale }) {
+export async function getStaticProps ({ locale }) {
   try {
-    const start = Date.now();
+    const start = Date.now()
 
     // Fetch data concurrently
     const [articlesResponse, adsResponse] = await Promise.all([
       axios.get(`${BASE_URL}/api/article/bycategory?lang=${locale}`),
-      axios.get(`${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=home&fromClient=true`)
-    ]);
+      axios.get(
+        `${BASE_URL}/api/ad?lang=${locale}&isActive=true&location=home&fromClient=true`
+      )
+    ])
 
-    const end = Date.now();
-    console.log(`Data fetching time: ${end - start}ms`);
+    const end = Date.now()
+    console.log(`Data fetching time: ${end - start}ms`)
 
     return {
       props: {
@@ -194,9 +197,9 @@ export async function getStaticProps({ locale }) {
         ads: adsResponse.data.ads
       },
       revalidate: 60 // Regenerate the page every 60 seconds for fresh data
-    };
+    }
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error)
 
     return {
       props: {
@@ -204,6 +207,6 @@ export async function getStaticProps({ locale }) {
         ads: [] // Fallback for ads in case of error
       },
       revalidate: 60 // Still revalidate to try again after error
-    };
+    }
   }
 }

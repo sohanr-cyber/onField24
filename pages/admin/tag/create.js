@@ -21,7 +21,7 @@ const Create = ({ tag: data }) => {
   const router = useRouter()
   const [newTag, setNewTag] = useState(false)
   const categories = useSelector(state => state.article.categories)
-  const [lang, setLang] = useState(['en', 'bn'])
+  const [lang, setLang] = useState(['en'])
   const locale = router.locale
 
   useEffect(() => {
@@ -144,23 +144,6 @@ const Create = ({ tag: data }) => {
         <h2>
           {router.query.id ? t('updateTag', locale) : t('createTag', locale)}{' '}
         </h2>
-        <div
-          className={styles.status}
-          onDoubleClick={() => setLang(['en', 'bn'])}
-        >
-          <span
-            onClick={() => setLang(['en'])}
-            className={`${lang.find(i => i == 'en') ? styles.currentLang : ''}`}
-          >
-            EN
-          </span>
-          <span
-            onClick={() => setLang(['bn'])}
-            className={`${lang.find(i => i == 'bn') ? styles.currentLang : ''}`}
-          >
-            বাংলা
-          </span>
-        </div>
       </div>
       <form className={styles.forms}>
         {lang.find(i => i == 'en') && (

@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 :root {
 
   --font: 'Ubuntu', sans-serif;
   --percent: 10%;
   --background: #F5F5F5;
-  --nav: rgb(51, 51, 51);
+  --nav: rgb(0, 0, 0);
   --navColor: white;
   --bodyText: #333333;
   --key: #003366;
-  --highlight: #8b07ff;
+  --highlight: #fc2a2a;
   --linkColor: #1D9BF0;
   --action: red;
   --regularAction: #FFC107;
@@ -41,6 +41,8 @@ body {
   padding: 0;
   margin: 0;
   font-size: 93%;
+  font-style: var(--font);
+
 }
 
 hr {
@@ -70,12 +72,7 @@ body {
   color: rgb(0, 0, 0, 0.8);
   background: var(--background);
   min-height: 100vh;
-  font-family: "Noto Sans Bengali", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+
 
 }
 

@@ -4,15 +4,15 @@ const adSchema = new mongoose.Schema(
   {
     title: {
       en: { type: String, required: true },
-      bn: { type: String, required: true }
+      // bn: { type: String, required: true }
     },
     description: {
       en: { type: String, required: false },
-      bn: { type: String, required: false }
+      // bn: { type: String, required: false }
     },
     image: {
       en: { type: String, required: true }, // English version of the ad image
-      bn: { type: String, required: false } // Bengali version of the ad image (optional)
+      // bn: { type: String, required: false } // Bengali version of the ad image (optional)
     },
     targetUrl: {
       type: String,
@@ -20,7 +20,7 @@ const adSchema = new mongoose.Schema(
     },
     targetText: {
       en: { type: String, required: true },
-      bn: { type: String, required: true }
+      // bn: { type: String, required: true }
     },
     adType: {
       type: String,

@@ -61,9 +61,7 @@ const Header = ({ article }) => {
             <div className={styles.category}>{article.categories[0]?.name}</div>
             <div className={styles.time}>{readMinute(article.duration)}</div>
           </div>
-          <div className={styles.button}>
-            Read Now <EastIcon />
-          </div>
+          <div className={styles.button}>Read Now</div>
         </div>
       </div>
     </div>

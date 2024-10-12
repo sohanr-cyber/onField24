@@ -20,7 +20,7 @@ const Create = ({ article: data, tags }) => {
   const [error, setError] = useState('')
   const [descriptionEn, setDescriptionEn] = useState(article.content?.en)
   const [descriptionBn, setDescriptionBn] = useState(article.content?.bn)
-  const [lang, setLang] = useState(['en', 'bn'])
+  const [lang, setLang] = useState(['en'])
   const dispatch = useDispatch()
   const router = useRouter()
   const handleImages = files => {
@@ -46,28 +46,19 @@ const Create = ({ article: data, tags }) => {
 
   const validate = article => {
     if (!article.title.en) {
-      return errorMessage('Title(EN)')
+      return errorMessage('Title')
     }
-    if (!article.title.bn) {
-      return errorMessage('Title(BN)')
-    }
+
     if (!descriptionEn) {
-      return errorMessage('Description(EN)')
+      return errorMessage('Description')
     }
-    if (!descriptionBn) {
-      return errorMessage('Description(BN)')
-    }
+
     if (!article.excerpt.en) {
-      return errorMessage('Excerpt(EN)')
+      return errorMessage('Excerpt')
     }
-    if (!article.excerpt.bn) {
-      return errorMessage('Excerpt(BN)')
-    }
+
     if (!article.thumbnail.en) {
-      return errorMessage('Thumbnail(EN)')
-    }
-    if (!article.thumbnail.bn) {
-      return errorMessage('Thumbnail(BN)')
+      return errorMessage('Thumbnail')
     } else return true
   }
 
@@ -82,8 +73,7 @@ const Create = ({ article: data, tags }) => {
         {
           ...article,
           content: {
-            en: descriptionEn,
-            bn: descriptionBn
+            en: descriptionEn
           },
           categories: selected
         },
@@ -143,8 +133,7 @@ const Create = ({ article: data, tags }) => {
           ...article,
           categories: selected,
           content: {
-            en: descriptionEn,
-            bn: descriptionBn
+            en: descriptionEn
           }
         },
         { headers }
@@ -181,23 +170,6 @@ const Create = ({ article: data, tags }) => {
             ? t('updateArticle', locale)
             : t('createArticle', locale)}
         </h2>
-        <div
-          className={styles.status}
-          onDoubleClick={() => setLang(['en', 'bn'])}
-        >
-          <span
-            onClick={() => setLang(['en'])}
-            className={`${lang.find(i => i == 'en') ? styles.currentLang : ''}`}
-          >
-            EN
-          </span>
-          <span
-            onClick={() => setLang(['bn'])}
-            className={`${lang.find(i => i == 'bn') ? styles.currentLang : ''}`}
-          >
-            বাংলা
-          </span>
-        </div>
       </div>
 
       <form className={styles.forms}>

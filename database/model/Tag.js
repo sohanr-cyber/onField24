@@ -8,8 +8,8 @@ const tagSchema = new mongoose.Schema(
         required: true
       },
       bn: {
-        type: String,
-        required: true
+        type: String
+        // required: true
       }
     },
     slug: {

@@ -11,6 +11,7 @@ import {
 import EastIcon from '@mui/icons-material/East'
 import t from '@/utility/dict'
 import { formatDistanceToNow } from 'date-fns'
+import articleSlice from '@/redux/articleSlice'
 
 const Header3 = ({ contents, style }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -37,7 +38,7 @@ const Header3 = ({ contents, style }) => {
               key={index}
               className={styles.slide}
               style={{
-                backgroundImage: `url('${slide.thumbnail}')`,
+                // backgroundImage: `url('${slide.thumbnail}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -45,15 +46,17 @@ const Header3 = ({ contents, style }) => {
               }}
             >
               <div className={styles.surface}>
-                <div className={styles.text__container}>
-                  {' '}
-                  {slide.title && <h2>{slide.title}</h2>}
-                  <p>{slide.excerpt.substring(0, 300)} . . .</p>
+                <div className={styles.image__container}>
+                  <Image
+                    src={slide?.thumbnail}
+                    width={720}
+                    height={480}
+                    alt=''
+                  />
                 </div>
-
-                <div className={styles.flex}>
-                  <div className={styles.time}>
-                    {' '}
+                <div className={styles.text__container}>
+                  <h1>{slide.title}</h1>
+                  <div className={styles.date}>
                     {timeAgo(
                       formatDistanceToNow(
                         new Date(slide.publishedAt || slide.createdAt)
@@ -61,18 +64,27 @@ const Header3 = ({ contents, style }) => {
                       lang
                     )}
                   </div>
-                  <div className={styles.categories}>
-                    {slide.categories?.slice(0, 2).map((i, index) => (
-                      <span>{i.name}</span>
-                    ))}
-                  </div>
-                  <div>{readMinute(slide.duration, lang)}</div>
-
-                  <div
-                    className={styles.button}
-                    onClick={() => router.push(`/article/${slide.slug}`)}
-                  >
-                    {t('readMore', lang)} <EastIcon />
+                  <div className={styles.left__top}>
+                    <p>
+                      {slide.excerpt || (
+                        <>
+                          {' '}
+                          Lorem ipsum dolor sit amet consectetur adipisicing
+                          elit. Atque, a eveniet. Quo aperiam odit, nulla nam
+                          ab, voluptate commodi quis ea, temporibus sunt
+                          excepturi odio delectus architecto
+                        </>
+                      )}
+                    </p>
+                    <div className={styles.flex}>
+                      <div className={styles.category}>
+                        {slide.categories[0]?.name}
+                      </div>
+                      <div className={styles.time}>
+                        {readMinute(slide.duration)}
+                      </div>
+                    </div>
+                    <div className={styles.button}>Read Now</div>
                   </div>
                 </div>
               </div>
@@ -80,7 +92,7 @@ const Header3 = ({ contents, style }) => {
           ))}
         </>
       </div>
-      {/* <div className={styles.dots}>
+      <div className={styles.dots} sytle={{ minHeight: '10px' }}>
         {contents.map((i, indx) => (
           <span
             key={indx}
@@ -89,7 +101,7 @@ const Header3 = ({ contents, style }) => {
             onClick={() => setCurrentSlide(indx)}
           ></span>
         ))}
-      </div> */}
+      </div>
     </div>
   )
 }

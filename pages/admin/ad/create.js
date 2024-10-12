@@ -171,23 +171,6 @@ const Create = ({ ad: data }) => {
         <h2>
           {router.query.id ? t('updateAd', locale) : t('createAd', locale)}
         </h2>
-        <div
-          className={styles.status}
-          onDoubleClick={() => setLang(['en', 'bn'])}
-        >
-          <span
-            onClick={() => setLang(['en'])}
-            className={`${lang.find(i => i == 'en') ? styles.currentLang : ''}`}
-          >
-            EN
-          </span>
-          <span
-            onClick={() => setLang(['bn'])}
-            className={`${lang.find(i => i == 'bn') ? styles.currentLang : ''}`}
-          >
-            বাংলা
-          </span>
-        </div>
       </div>
 
       <form className={styles.forms}>

@@ -47,7 +47,7 @@ const Navbar = () => {
         <Logo />
       </div>
       <div className={styles.right}>
-        <LangPicker />
+        {/* <LangPicker /> */}
         {isClient && userInfo && (
           <AccountCircleIcon
             className={styles.icon}
