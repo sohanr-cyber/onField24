@@ -1,18 +1,18 @@
 import BASE_URL from '@/config'
 import { Face, Facebook } from '@mui/icons-material'
-const companyName = 'DhakaPulse24'
+const companyName = 'OnField24'
 
 const footerP =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu erat in eros varius congue vitae ut mauris. Nunc sit amet justo vitae enim rutrum consectetur. Morbi id pretium risus. Donec gravida porta tellus, non iaculis purus ornare ac. Donec sagittis, nulla nec placerat efficitur, velit enim malesuada felis'
 
-const support_number = '8801759067789'
-const support_mail = 'dhakapulse24@gmail.com'
+const support_number = '8801744329811'
+const support_mail = 'onfield24e24@gmail.com'
 const feacebook_page =
-  'https://www.facebook.com/profile.php?id=61566430927721&mibextid=kFxxJD'
+  'https://www.facebook.com/profile.php?id=261566430927721&mibextid=kFxxJD'
 const messenger = 'https://www.facebook.com/'
-const whatsapp = 'https://wa.me/8801759067789?text=Hi%20there!.'
+const whatsapp = 'https://wa.me/88017593067789?text=Hi%20there!.'
 const instagram =
-  'https://www.instagram.com/dhakapulse24?igsh=MWZ5Y2Z1MWgyNXB5Mw%3D%3D&fbclid=IwY2xjawFo1F1leHRuA2FlbQIxMAABHVTYE4gWDmCGGluBrEvPsO_eB1pzp-mhTBi1Mz0JcR6hoh1AWb4d7hm9Yw_aem_JiQMIN9I7BI9IS7oBMm9Fg'
+  'https://www.instagram.com/onField24?igsh=MWZ5Y2Z1MWgyNXB5Mw%3D%3D&fbclid=IwY2xjawFo1F1leHRuA2FlbQIxMAABHVTYE4gWDmCGGluBrEvPsO_eB1pzp-mhTBi1Mz0JcR6hoh1AWb4d7hm9Yw_aem_JiQMIN9I7BI9IS7oBMm9Fg'
 
 const twitter = {
   handle: '@newsportal',
@@ -68,7 +68,7 @@ function getSeoData (lang = 'en') {
         description: `Catch up on the latest articles and breaking news from ${companyName}, covering a variety of topics including technology, politics, and education.`,
         images: [
           {
-            url: '/images/cover.png',
+            url: '/images/quince.png',
             alt: `News and Articles - ${companyName}`,
             width: 1200,
             height: 630
@@ -88,7 +88,7 @@ function getSeoData (lang = 'en') {
         description: `${companyName} থেকে প্রযুক্তি, রাজনীতি এবং শিক্ষা সহ বিভিন্ন বিষয়ের সাম্প্রতিক নিবন্ধ এবং ব্রেকিং নিউজ সম্পর্কে জানুন।`,
         images: [
           {
-            url: '/images/cover.png',
+            url: '/images/quince.png',
             alt: `সংবাদ এবং নিবন্ধ - ${companyName}`,
             width: 1200,
             height: 630
@@ -107,7 +107,7 @@ function getSeoData (lang = 'en') {
 const TermsAndConditionSeoData = {
   title: `Our Terms And Conditions - ${companyName}`,
   description: `Welcome to ${companyName}! These terms and conditions outline the rules and regulations for the use of ${companyName}'s Website, located at ${BASE_URL}`,
-  canonical: `${BASE_URL}/cart`,
+  canonical: `${BASE_URL}/terms-and-conditions`,
   openGraph: {
     title: `Our Terms And Conditions - ${companyName}`,
     description: `Welcome to ${companyName}! These terms and conditions outline the rules and regulations for the use of ${companyName}'s Website, located at ${BASE_URL}`,
@@ -129,7 +129,7 @@ const TermsAndConditionSeoData = {
 const privacyPolicySeoData = {
   title: `Privacy Policy - ${companyName}`,
   description: `Welcome to ${companyName}! These privacy policy outline the rules and regulations for the use of ${companyName}'s Website, located at ${BASE_URL}`,
-  canonical: `${BASE_URL}/cart`,
+  canonical: `${BASE_URL}/terms-and-condition`,
   openGraph: {
     title: `Privacy Policy - ${companyName}`,
     description: `Welcome to ${companyName}! These privacy policy outline the rules and regulations for the use of ${companyName}'s Website, located at ${BASE_URL}`,
@@ -190,7 +190,7 @@ const loginSeoData = {
   twitter: seoData.twitter
 }
 
-const themeBg = 'linear-gradient(45deg, rgb(29, 102, 12), rgb(137, 208, 5))'
+const themeBg = 'red'
 const themeTransparent = 'rgba(7, 121, 214,0.1)'
 const themeC = 'rgb(29, 102, 12)'
 const buttonC = 'white'

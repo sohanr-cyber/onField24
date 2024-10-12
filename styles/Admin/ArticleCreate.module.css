@@ -18,7 +18,7 @@
     margin: 0;
 }
 
- .currentLang {
+.currentLang {
     background: var(--highlight);
     color: var(--navColor)
 }
@@ -50,7 +50,7 @@
 .wrapper .status {
     display: flex;
     border: 1px solid var(--borderColor);
-    border-radius: 5px;
+    border-radius: 0px;
     overflow: hidden;
 
 }
@@ -72,8 +72,9 @@
 .wrapper .forms .left,
 .wrapper .forms .right {
     background-color: var(--cardBg);
+    color: var(--cardColor);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 0px;
     flex: 1;
     padding-bottom: 20px;
 
@@ -137,7 +138,7 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    background: linear-gradient(aliceblue, white);
+    /* background: linear-gradient(aliceblue, white); */
     flex-wrap: wrap;
     width: 100%;
     overflow: scroll;
@@ -147,8 +148,8 @@
 
 .left .options span {
     padding: 2px 3px;
-    border-radius: 5px;
-    background-color: aquamarine;
+    border-radius: 0px;
+    background-color: rgb(69, 69, 69);
     cursor: pointer;
 }
 
@@ -160,7 +161,7 @@
 
 .images .image__container {
     border: 1px solid var(--borderColor);
-    border-radius: 5px;
+    border-radius: 0px;
     max-height: 180px;
     min-width: 180px;
     aspect-ratio: 1/1;

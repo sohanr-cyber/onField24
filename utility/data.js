@@ -1,4 +1,4 @@
-const newsPortalName = 'onField360'
+const newsPortalName = 'onField24'
 
 const termsAndConditions = [
   {
@@ -102,10 +102,9 @@ const termsAndConditions = [
   }
 ]
 
-
 const companyName = 'OnField360'
-const contactEmail = "OnField360@gmail.com"
-const contactPhone = "+882501-923-233"
+const contactEmail = 'OnField360@gmail.com'
+const contactPhone = '+882501-923-233'
 const privacyPolicy = [
   {
     section: 1,
@@ -217,6 +216,6 @@ const privacyPolicy = [
       bn: `এই গোপনীয়তা নীতি সম্পর্কে আপনার কোনও প্রশ্ন থাকলে, অনুগ্রহ করে ${contactEmail} অথবা ${contactPhone}-এ আমাদের সাথে যোগাযোগ করুন।`
     }
   }
-];
+]
 
 export { termsAndConditions, privacyPolicy }

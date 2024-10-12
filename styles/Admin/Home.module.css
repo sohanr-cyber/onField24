@@ -12,7 +12,7 @@
 
 .welcome select {
     padding: var(--buttonPadding);
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 .cards_and_chart {

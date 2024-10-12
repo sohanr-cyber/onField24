@@ -3,10 +3,10 @@
 .wrapper {
     display: flex;
     font-weight: bolder;
-    font-size: 170%;
+    font-size: 190%;
     cursor: pointer;
     padding: 0;
-    font-style: italic;
+    /* font-style: italic; */
     text-transform: uppercase;
     /* border: 1px solid white; */
 
@@ -14,27 +14,44 @@
 
 
 
+.wrapper .left {
+    display: flex;
 
-.wrapper .left div:nth-child(1) {
-    color: rgb(0, 174, 255);
+}
+
+
+
+.wrapper .left div:nth-child(1),
+.wrapper .left div:nth-child(2) {
+    color: rgb(247, 247, 248);
     margin: 0;
     /* border: 1px solid red; */
     padding: 0;
-    font-size: 95%;
     /* border: 1px solid red; */
-    margin-top: -3px;
+    /* margin-top: -3px; */
+
+}
+
+.wrapper .left div:nth-child(1) {
+    background-color: red;
+    padding: 0 3px;
 
 }
 
 .wrapper .left div:nth-child(2) {
-    color: rgb(255, 39, 39);
+
     margin: 0;
-    margin-top: -5px;
+    margin-top: -10px;
     font-size: 50%;
     text-align: right;
     margin-right: 2px;
     margin-left: -5px;
     margin-bottom: -2px;
+    border: 2px dotted green;
+    background-color: green;
+    max-height: 12px;
+    border-radius: 50%;
+    padding: 3px 2px;
     /* border:1px solid red */
 }
 
@@ -45,7 +62,7 @@
 }
 
 .wrapper .right {
-    background: red;
+    background: green;
     padding: 0 3px;
     display: flex;
     align-items: center;
@@ -53,7 +70,7 @@
     min-width: 40px;
     padding-right: 7px;
     margin-right: -5px;
-    clip-path: polygon(20% 0, 95% 0, 80% 100%, 5% 100%);
+    /* clip-path: polygon(20% 0, 95% 0, 80% 100%, 5% 100%); */
     /* margin-left: -5px; */
 
 

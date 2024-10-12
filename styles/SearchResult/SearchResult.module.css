@@ -23,7 +23,7 @@
     gap: 10px;
     border: 1px solid var(--borderColor);
     padding: 3px 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
     color: var(--highlight);
 }

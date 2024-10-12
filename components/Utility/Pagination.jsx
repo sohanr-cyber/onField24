@@ -23,8 +23,8 @@ const Pages = ({ totalPages, currentPage }) => {
       <Stack spacing={2}>
         <Pagination
           count={parseInt(totalPages)}
-          shape='rounded'
           color='primary'
+          variant='outlined'
           page={parseInt(currentPage || router.query.page)}
           onChange={(event, newPage) => updateRoute({ page: newPage })}
         />

@@ -2,6 +2,7 @@
     display: flex;
     padding: 25px;
     gap: 15px;
+    color: var(--cardColor);
 }
 
 .left {
@@ -57,7 +58,7 @@
     padding: var(--buttonPadding);
     background: var(--highlight);
     color: #fff;
-    border-radius: 5px;
+    border-radius: 0px;
     cursor: pointer;
     text-align: center;
 
@@ -120,7 +121,7 @@
 .settings,
 .articles {
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 0px;
 
 
 }
@@ -159,13 +160,14 @@
 
 .flex span {
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     background: rgba(104, 34, 255, 0.1);
     border: 1px solid var(--highlight)
 }
 
 .field input {
-    width: 97%;
+    width: 95%;
+    background-color: aliceblue;
 }
 
 .articles {

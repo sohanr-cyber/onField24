@@ -6,4 +6,7 @@
 
 }
 
-
+.flex button {
+    background: black;
+    color: red;
+}

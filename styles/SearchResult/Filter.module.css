@@ -117,7 +117,7 @@
 .selected {
     font-size: 80%;
     border: 1px solid var(--borderColor);
-    border-radius: 5px;
+    border-radius: 0px;
     display: inline-block;
     padding: 2px 5px;
     position: relative;
@@ -139,7 +139,7 @@
 
 .filterOptions .tag {
     padding: 2px 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     /* background-color: var(--highlight); */
     cursor: pointer;
     background-color: rgb(0, 0, 0, 0.1);

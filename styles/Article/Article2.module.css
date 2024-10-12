@@ -1,20 +1,21 @@
 .wrapper {
     display: flex;
     max-height: 130px;
-    border-bottom: 1px solid var(--borderColor);
+    /* border-bottom: 1px solid var(--borderColor); */
     /* max-width: 200px; */
     width: 100%;
-    min-height: 100px;
+    min-height: 120px;
     max-height: 120px;
     /* padding-bottom: 10px; */
     position: relative;
     cursor: pointer;
+    box-shadow: 1px 1px 1px var(--shadow);
 
 }
 
 .adWrapper {
     background: var(--inputField);
-    border-radius: 5px;
+    border-radius: 0px;
     ;
 }
 
@@ -54,11 +55,11 @@
 }
 
 
-.image__container .time__ago {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
+.time__ago {
+    color: var(--highlight);
+    font-weight: bold;
+    font-size: 90%;
+  
 }
 
 .wrapper .image__container img {
@@ -66,7 +67,7 @@
     height: 100%;
     max-width: 100%;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 .wrapper .text__container {
@@ -80,15 +81,19 @@
 
 .wrapper .text__container .flex {
     display: flex;
-    justify-content: space-between;
-
+    justify-content: flex-end;
+    font-size: 90%;
+    margin: 5px;
+    ;
 }
+
+
 
 .wrapper .text__container .flex .button {
     padding: 5px;
     background: var(--highlight);
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 0px;
     color: var(--navColor);
     cursor: pointer;
 }

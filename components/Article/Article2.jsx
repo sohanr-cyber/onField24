@@ -7,6 +7,7 @@ import { cleanUrl, readMinute } from '@/utility/helper'
 import t from '@/utility/dict'
 import axios from 'axios'
 import TimeDistance from '../Utility/TimeDistance'
+import { format } from 'date-fns'
 const Article2 = ({ article, index, isAd }) => {
   const router = useRouter()
   const lang = router.locale
@@ -39,13 +40,13 @@ const Article2 = ({ article, index, isAd }) => {
           height={'480'}
           alt={article.title}
         />
-        {!article.isAd && (
-          <div className={styles.time__ago}>
-            <TimeDistance article={article} />
-          </div>
-        )}{' '}
       </div>
       <div className={styles.text__container}>
+        {!article.isAd && (
+          <div className={styles.time__ago}>
+            {format(article.publishedAt || article.createdAt, 'dd MMM , yyyy')}{' '}
+          </div>
+        )}{' '}
         <b className={styles.title}>
           {article.title.length > 60 ? (
             <>{article.title.substring(0, 60)} ...</>
@@ -60,9 +61,6 @@ const Article2 = ({ article, index, isAd }) => {
           {article.targetText && (
             <div className={styles.button}>{article.targetText}</div>
           )}{' '}
-          {[article.categories[0]].map((c, index) => (
-            <span className={styles.category}>{c?.name}</span>
-          ))}
           <div className={styles.time}>
             {readMinute(article.duration, lang)}
           </div>

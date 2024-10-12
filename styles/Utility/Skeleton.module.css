@@ -4,7 +4,7 @@
     animation: skeleton-loading 1s ease-in-out infinite alternate;
     /* Animation */
     min-width: 100px;
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 @keyframes skeleton-loading {

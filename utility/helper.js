@@ -97,6 +97,8 @@ function chunkArray (array, chunkSize = 2) {
     // Use the slice method to create a chunk and push it to the result array
     result.push(array.slice(i, i + chunkSize))
   }
+  
+  console.log(result)
 
   return result
 }

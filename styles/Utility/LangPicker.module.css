@@ -2,7 +2,7 @@
     display: flex;
     border: 01px solid var(--borderColor);
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 0px;
 
 }
 

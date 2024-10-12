@@ -12,7 +12,7 @@
 
 .wrapper .image__container {
     flex: 1;
-    border-radius: 5px;
+    border-radius: 0px;
     overflow: hidden;
     max-height: 350px;
 
@@ -21,7 +21,7 @@
 
 
 .wrapper .image__container img {
-    border-radius: 5px;
+    border-radius: 0px;
 }
 
 
@@ -91,7 +91,7 @@
     background: var(--buttonBg);
     max-width: 100px;
     padding: 3px 7px;
-    border-radius: 5px;
+    border-radius: 0px;
     margin-top: 10px;
     color: white;
     justify-content: space-between;

@@ -6,7 +6,7 @@
     display: flex;
     overflow-x: hidden;
     min-width: 100%;
-    /* border-radius: 5px; */
+    /* border-radius: 0px; */
     position: relative;
 
     ;
@@ -84,7 +84,7 @@
 .wrapper .surface .button {
     cursor: pointer;
     padding: 3px 5px;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: var(--highlight);
     display: inline-block;
 }

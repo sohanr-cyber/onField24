@@ -48,9 +48,6 @@ const Footer = () => {
             <div className={styles.link} onClick={() => router.push('/news')}>
               {t('news', lang)}
             </div>
-          </div>
-
-          <div className={styles.flex}>
             <div className={styles.link} onClick={() => router.push('/login')}>
               {t('login', lang)}
             </div>
@@ -60,8 +57,6 @@ const Footer = () => {
             >
               {t('register', lang)}
             </div>
-          </div>
-          <div className={styles.flex}>
             <div
               className={styles.link}
               onClick={() => router.push('/privacy-policy')}

@@ -10,27 +10,31 @@
   --bodyText: #333333;
   --key: #003366;
   --highlight: #fc2a2a;
-  --linkColor: #1D9BF0;
+  --linkColor: #fc2a2a;
   --action: red;
   --regularAction: #FFC107;
-  --cardBg: rgba(255, 255, 255, 255);
-  --buttonBg: linear-gradient(45deg, rgb(136, 0, 255, 0.9), rgba(7, 121, 214, 255));
+  --cardBg: rgb(0, 0, 0);
+  --cardColor: white;
+  --buttonBg: red;
   --buttonC: white;
   --borderColor: rgba(197, 223, 244, 255);
-  --inputField: linear-gradient(245deg, rgb(136, 0, 255, 0.1), rgba(7, 121, 214, 0.1));
+  --inputField: aliceblue;
   --hoverBgColor: rgba(7, 121, 214, 255);
   --hoverColor: rgba(7, 121, 214, 255);
-  --scrollbar: rgba(7, 121, 214, 255);
+  --scrollbar: red;
+  ;
   --theme: rgba(7, 121, 214, 255);
   --icon: rgba(7, 121, 214, 255);
   --buttonPadding: 7px 10px;
   --logo: linear-gradient(45deg, rgba(7, 121, 214, 255) 50%, rgba(7, 121, 214, 255) 50%);
   --lightText: rgb(98, 96, 96);
+  --lightTextW: rgb(218, 218, 218);
+  --shadow: rgba(75, 26, 26, 0.3);
 }
 
 ::selection {
-  background-color: rgb(136, 0, 255, 0.9);
-  color: white
+  background-color: green;
+  color: white;
 }
 
 html,
@@ -40,8 +44,8 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-size: 93%;
-  font-style: var(--font);
+  font-size: 95%;
+  font-family: var(--font);
 
 }
 
@@ -99,7 +103,7 @@ textarea {
   font-variation-settings:
     "wdth" 100;
   background: var(--inputField);
-  border-radius: 5px;
+  border-radius: 0px;
   border: none;
   padding: var(--buttonPadding)
 }
@@ -108,7 +112,7 @@ textarea {
 button {
   border: none;
   font-family: 'Ubuntu', sans-serif;
-  border-radius: 5px;
+  border-radius: 0px;
   background: var(--buttonBg);
   color: var(--buttonC);
   cursor: pointer;

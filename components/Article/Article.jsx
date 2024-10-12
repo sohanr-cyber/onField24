@@ -7,6 +7,8 @@ import { handleViewArticle } from '@/redux/pixelSlice'
 import t from '@/utility/dict'
 import axios from 'axios'
 import TimeDistance from '../Utility/TimeDistance'
+import { format } from 'date-fns'
+
 const Article = ({ article, index, flex, style }) => {
   const router = useRouter()
   const lang = router.locale
@@ -41,16 +43,19 @@ const Article = ({ article, index, flex, style }) => {
           height={'480'}
           alt={article.title}
         />
-        {!article.isAd && (
-          <div className={styles.time__ago}>
-            <TimeDistance article={article} />
-          </div>
-        )}{' '}
       </div>
       <div className={styles.text__container}>
         <div className={styles.text}>
           {' '}
           <div className={styles.title}>{article.title}</div>
+          {!article.isAd && (
+            <div className={styles.time__ago}>
+              {format(
+                article.publishedAt || article.createdAt,
+                'dd MMM , yyyy'
+              )}
+            </div>
+          )}{' '}
           <div className={styles.excerpt}>
             {article.excerpt?.substring(0, 180)} ...
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from '../../styles/SearchResult/Filter.module.css'
-import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material'
-import { useRouter } from 'next/router'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';import { useRouter } from 'next/router'
 import SkeletonDiv from '../Utility/SkeletonDiv'
 import { findCategoryById } from '@/utility/helper'
 
@@ -29,7 +29,7 @@ const Categories = ({ categories, updateRoute }) => {
                       })
                     }
                   >
-                    <CheckBox />
+                    <CheckCircleIcon />
                     <span>{item.name}</span>
                   </div>
                 ) : (
@@ -41,7 +41,7 @@ const Categories = ({ categories, updateRoute }) => {
                       })
                     }}
                   >
-                    <CheckBoxOutlineBlank />
+                    <RadioButtonUncheckedIcon />
                     <span>{item.name}</span>
                   </div>
                 )}
@@ -80,7 +80,7 @@ const Categories = ({ categories, updateRoute }) => {
                           })
                         }}
                       >
-                        <CheckBox />
+                        <CheckCircleIcon />
                         <span>{i.name}</span>
                       </div>
                     ) : (
@@ -92,7 +92,7 @@ const Categories = ({ categories, updateRoute }) => {
                           })
                         }
                       >
-                        <CheckBoxOutlineBlank />
+                        <RadioButtonUncheckedIcon />
                         <span>{i.name}</span>
                       </div>
                     )}

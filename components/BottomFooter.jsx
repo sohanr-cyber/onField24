@@ -15,7 +15,7 @@ const BottomFooter = () => {
         Design, Developed and Technical Supported by{' '}
         <span
           style={{
-            color: 'lightgreen',
+            color: 'blue',
             fontSize: '110%',
             fontWeight: 'bold',
             borderBottom: '1px solid blue',

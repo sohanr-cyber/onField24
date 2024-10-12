@@ -242,7 +242,7 @@ const Create = ({ article: data, tags }) => {
                       }
                       style={
                         article.tags?.find(t => t == i._id)
-                          ? { background: 'black', color: 'white' }
+                          ? { background: 'red', color: 'white' }
                           : {}
                       }
                     >

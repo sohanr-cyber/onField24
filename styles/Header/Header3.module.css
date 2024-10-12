@@ -8,7 +8,7 @@
     display: flex;
     overflow-x: hidden;
     min-width: 100%;
-    border-radius: 5px;
+    /* border-radius: 0px; */
     position: relative;
     cursor: pointer;
 
@@ -47,7 +47,7 @@
 
 .image__container {
     flex: 1;
-    border-radius: 5px;
+    /* border-radius: 0px; */
     overflow: hidden;
     max-height: 350px;
 
@@ -133,6 +133,17 @@
 
 }
 
+.surface .category {
+    color: var(--highlight)
+}
+
+.surface .button {
+    background: var(--navColor);
+    padding: 7px;
+    color: var(--nav);
+    display: inline-block;
+}
+
 .wrapper .dots .dot {
     min-width: 7px;
     aspect-ratio: 1/1;
@@ -170,7 +181,6 @@
 
     .wrapper .surface {
         flex-direction: column;
-        border: 1px solid red;
         gap: 10px;
     }
 
@@ -199,6 +209,11 @@
     .wrapper {
         padding: 0;
         padding-bottom: 15px;
+        margin-top: -4px;
+    }
+
+    .wrapper .surface .image__container {
+        min-height: 250px;
     }
 
     .text__container {
@@ -218,16 +233,16 @@
 
 
 
-
 @media (max-width:480px) {
-    .slide p {
-        display: none;
+    .wrapper .surface .image__container {
+        min-height: 220px;
     }
 }
 
+
 @media (max-width:410px) {
-    .wrapper {
-        padding: 10px
+    .wrapper .surface .image__container {
+        min-height: 200px;
     }
 
     .wrapper .dots {
@@ -241,5 +256,9 @@
         margin: 10px 0
     }
 
+
+    .wrapper .text__container {
+        padding: 10px 10px;
+    }
 
 }

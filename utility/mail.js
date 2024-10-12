@@ -18,7 +18,7 @@ style="
 "
 >
 <div style ="font-weight: bold;font-size: 200%;color:${themeC};">
-<img src="https://firebasestorage.googleapis.com/v0/b/dhakapulse24-9a544.appspot.com/o/media%2Flogo.jpeg?alt=media&token=a5fa3f85-955b-47ac-99ae-dd7e728b1711" alt="" height="50px"/>
+<img src="https://firebasestorage.googleapis.com/v0/b/OnField24-9a544.appspot.com/o/media%2Flogo.jpeg?alt=media&token=a5fa3f85-955b-47ac-99ae-dd7e728b1711" alt="" height="50px"/>
 </div>
 </div>`
 
@@ -27,7 +27,7 @@ const footer = data => {
 <div>If you have any questions or need further assistance, please do not hesitate to contact our customer support team at ${support_mail} or ${support_number}.</div>
 <p>Warm regards,</p>
 
-<div>DhakaPulse24</div>
+<div>OnField24</div>
 <div>Dhaka , Bangladesh</div>
 </div>`
 }

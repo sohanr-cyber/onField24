@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styles from '@/styles/Search/SearchBox2.module.css'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
@@ -11,6 +9,8 @@ import SearchBox from '../SearchBox'
 import SearchIcon from '@mui/icons-material/Search'
 import { handleSearch } from '@/redux/pixelSlice'
 import t from '@/utility/dict'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
 
 const SearchBox2 = ({ setOpen }) => {
   const router = useRouter()
@@ -74,7 +74,7 @@ const SearchBox2 = ({ setOpen }) => {
                           })
                         }
                       >
-                        <CheckBoxIcon />
+                        <CheckCircleIcon />
                         <span
                           style={
                             item.children.length > 0
@@ -95,7 +95,7 @@ const SearchBox2 = ({ setOpen }) => {
                         }
                       >
                         {' '}
-                        <CheckBoxOutlineBlankIcon />
+                        <RadioButtonUncheckedIcon />
                         <span
                         // style={
                         //   item.children.length > 0

@@ -25,7 +25,7 @@ const fetchFeaturedCategories = async lang => {
         .lean()
         .sort({ publishedAt: -1 })
         .populate('categories', 'name')
-        .limit(4)
+        .limit(5)
 
       const subCategories = await Category.find({
         parent: category._id
@@ -59,9 +59,13 @@ const fetchFeaturedArticles = async lang => {
     isFeatured: true,
     status: 'published'
   })
+    .sort({
+      updatedAt: -1
+    })
     .lean()
+
     .populate('categories', 'name')
-    .limit(9)
+    .limit(5)
   return featuredArticles.map(article => ({
     _id: article._id,
     title: article.title[lang],

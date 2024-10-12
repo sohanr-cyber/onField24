@@ -12,7 +12,7 @@
     background: var(--nav);
     color: var(--navColor);
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 0px;
     text-align: center;
     /* min-width: 280px; */
 }
@@ -45,7 +45,7 @@
 .wrapper form .btn {
     padding: 10px;
     ;
-    border-radius: 5px;
+    border-radius: 0px;
     border: none;
     /* border: 1px solid var(--borderColor); */
     background-color: aliceblue;

@@ -9,18 +9,10 @@ const Logo = ({ color }) => {
 
   return (
     <div className={styles.wrapper} onClick={() => router.push('/')}>
-      <div className={styles.right}>D</div>
+      <div className={styles.right}>ON</div>
       <div className={styles.left}>
-        <div>haka</div>
-        <div>
-          {/* <Image
-            src={'https://cdn-icons-png.flaticon.com/128/17552/17552804.png'}
-            width={35}
-            height={10}
-            alt=''
-          /> */}
-          Magazine
-        </div>
+        <div>Field</div>
+        <div>24</div>
       </div>
     </div>
   )

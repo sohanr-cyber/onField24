@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/SearchResult/Filter.module.css'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
+
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import CheckBoxIcon from '@mui/icons-material/CheckBox'

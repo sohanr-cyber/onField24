@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styles from '@/styles/Category/SelectCategory.module.css'
-import CheckBox from '@mui/icons-material/CheckBox'
-import CheckBoxOutlineBlank from '@mui/icons-material/CheckBoxOutlineBlank'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import { useRouter } from 'next/router'
 
 const SelectCategory = ({ selected, setSelected, lang = 'en' }) => {
@@ -17,11 +17,11 @@ const SelectCategory = ({ selected, setSelected, lang = 'en' }) => {
           {' '}
           <div className={styles.item}>
             {selected.find(id => id == i._id) ? (
-              <CheckBox
+              <CheckCircleIcon
                 onClick={() => setSelected(selected.filter(id => id != i._id))}
               />
             ) : (
-              <CheckBoxOutlineBlank
+              <RadioButtonUncheckedIcon
                 onClick={() => setSelected([...selected, i._id])}
               />
             )}
@@ -33,13 +33,13 @@ const SelectCategory = ({ selected, setSelected, lang = 'en' }) => {
               <>
                 <div className={styles.item} style={{ marginLeft: '20px' }}>
                   {selected.find(id => id == i._id) ? (
-                    <CheckBox
+                    <CheckCircleIcon
                       onClick={() =>
                         setSelected(selected.filter(id => id != i._id))
                       }
                     />
                   ) : (
-                    <CheckBoxOutlineBlank
+                    <RadioButtonUncheckedIcon
                       onClick={() => setSelected([...selected, i._id])}
                     />
                   )}
