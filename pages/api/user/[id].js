@@ -73,7 +73,7 @@ handler.get(async (req, res) => {
         content: 0,
         comment: 0,
         author: 0,
-        excerpt: 0
+        // excerpt: 0
       }
     )
       .populate('categories', 'name _id')
@@ -106,6 +106,7 @@ handler.get(async (req, res) => {
         _id: article._id,
         slug: article.slug,
         title: article.title[lang],
+        excerpt:article.excerpt[lang],
         status: article.status,
         author: article.author,
         categories: article.categories.map(i => ({

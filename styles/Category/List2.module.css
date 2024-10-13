@@ -19,9 +19,9 @@
     top: 28px;
     z-index: 3;
     background: var(--cardBg);
-    color: black;
+    color:var(--cardColor);
     padding: 10px;
-    border-top: 2px solid rgb(0, 183, 255);
+    border-top: 2px solid var(--tertiary);
     min-width: 150px;
     /* border: 1px solid red; */
 }

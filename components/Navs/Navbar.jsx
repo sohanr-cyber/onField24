@@ -37,16 +37,16 @@ const Navbar = () => {
           className={styles.icon}
           onClick={() => setOpen(prev => !prev)}
         />
-        <SearchIcon
-          className={styles.icon}
-          onClick={() => setOpenSearch(prev => !prev)}
-          style={{ fontSize: '200%', marginTop: '5px' }}
-        />
       </div>
       <div className={styles.mid}>
         <Logo />
       </div>
       <div className={styles.right}>
+        <SearchIcon
+          className={styles.icon}
+          onClick={() => setOpenSearch(prev => !prev)}
+          style={{ fontSize: '200%', marginTop: '5px' }}
+        />
         {/* <LangPicker /> */}
         {isClient && userInfo && (
           <AccountCircleIcon

@@ -75,7 +75,7 @@
 }
 
 .wrapper .table__wrapper thead tr {
-    background: var(--buttonBg);
+    background: var(--tertiary);
     color: var(--buttonC);
     border-left: 3px solid black
 }

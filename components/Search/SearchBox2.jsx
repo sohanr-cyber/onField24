@@ -40,7 +40,7 @@ const SearchBox2 = ({ setOpen }) => {
       <div className={styles.left}>
         <div className={styles.flex}>
           <h3>{t('search', lang)}</h3>
-          <h3 onClick={() => setOpen(false)}>X</h3>
+          {/* <h3 onClick={() => setOpen(false)}>X</h3> */}
         </div>
 
         <div className={styles.serach}>

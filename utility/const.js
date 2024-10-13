@@ -200,22 +200,29 @@ const outerBg = 'rgb(232, 241, 247)'
 const borderColor = 'rgba(52, 134, 11, 0.5)'
 
 const statusColors = {
-  draft: 'rgb(255, 165, 0)', // Orange
-  published: 'rgb(0, 0, 255)', // Blue
+  draft: 'rgb(255, 0, 0)', // Orange
+  published: 'rgb(0, 0, 0)', // Blue
   confirmed: 'rgb(0, 128, 0)', // Green
   completed: 'rgb(0, 128, 0)', // Green
-  packing: 'rgb(255, 215, 0)', // Gold
-  packed: 'rgb(255, 140, 0)', // Dark Orange
-  reads: 'rgb(30, 144, 255)', // Dodger Blue
-  views: 'rgb(255, 205, 50)', // Lime Green
+  packing: 'rgb(128, 0, 128)', // Gold
+  packed: 'rgb(128, 0, 128)', // Dark Orange
+  reads: 'rgb(128, 0, 128)', // Dodger Blue
+  views: 'rgb(154, 205, 50)', // Lime Green
   canceled: 'rgb(255, 0, 0)', // Red
   failed: 'rgb(139, 0, 0)', // Dark Red
-  none: 'rgb(255,255,255)',
+  none: 'rgb(0,128,0',
   featured: `${themeC}`
+}
+
+const icons = {
+  aIcon: 'https://cdn-icons-png.flaticon.com/128/9605/9605271.png',
+  addIcon: 'https://cdn-icons-png.flaticon.com/128/4315/4315609.png',
+  adminIcon: 'https://cdn-icons-png.flaticon.com/128/16321/16321759.png'
 }
 
 export {
   themeTransparent,
+  icons,
   themeBg,
   themeC,
   outerBg,

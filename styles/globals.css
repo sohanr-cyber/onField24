@@ -9,6 +9,8 @@
   --navColor: white;
   --bodyText: #333333;
   --key: #003366;
+  --secondary: red;
+  --tertiary: green;
   --highlight: #fc2a2a;
   --linkColor: #fc2a2a;
   --action: red;
@@ -20,11 +22,12 @@
   --borderColor: rgba(197, 223, 244, 255);
   --inputField: aliceblue;
   --hoverBgColor: rgba(7, 121, 214, 255);
-  --hoverColor: rgba(7, 121, 214, 255);
+  --hoverColor: green;
   --scrollbar: red;
   ;
   --theme: rgba(7, 121, 214, 255);
-  --icon: rgba(7, 121, 214, 255);
+  --icon: red;
+  ;
   --buttonPadding: 7px 10px;
   --logo: linear-gradient(45deg, rgba(7, 121, 214, 255) 50%, rgba(7, 121, 214, 255) 50%);
   --lightText: rgb(98, 96, 96);

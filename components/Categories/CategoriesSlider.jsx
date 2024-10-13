@@ -31,9 +31,9 @@ const CategoriesSlider = ({ setOpen }) => {
             <div className={styles.top}>
               {' '}
               <Logo color={'white'} />
-              <div className={styles.close__btn} onClick={() => setOpen(false)}>
+              {/* <div className={styles.close__btn} onClick={() => setOpen(false)}>
                 X
-              </div>
+              </div> */}
             </div>
             <div className={styles.categories}>
               {categories && (

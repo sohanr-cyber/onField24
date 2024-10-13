@@ -30,3 +30,12 @@
 
     }
 }
+
+
+@media (max-width:410px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+}

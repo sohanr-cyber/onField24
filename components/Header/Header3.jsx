@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../styles/Header/Header3.module.css'
 import Image from 'next/image'
 import { themeBg } from '@/utility/const'

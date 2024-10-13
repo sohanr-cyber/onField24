@@ -6,6 +6,7 @@ import Image from 'next/image'
 import SideBar from './SideBar'
 import { useRouter } from 'next/router'
 import LangPicker from '../Utility/LangPicker'
+import { icons } from '@/utility/const'
 const Navbar = () => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
@@ -25,20 +26,10 @@ const Navbar = () => {
           className={styles.item}
           onClick={() => router.push(`/admin/article/create`)}
         >
-          <Image
-            src='https://cdn-icons-png.flaticon.com/128/15414/15414285.png'
-            width='25'
-            height='25'
-            alt=''
-          />
+          <Image src={icons.addIcon} width='25' height='25' alt='' />
         </div>
         <div className={styles.item} onClick={() => router.push(`/admin`)}>
-          <Image
-            src='https://cdn-icons-png.flaticon.com/128/3665/3665909.png'
-            width='25'
-            height='25'
-            alt=''
-          />
+          <Image src={icons.aIcon} width='25' height='25' alt='' />
         </div>
         {/* <LangPicker /> */}
       </div>
