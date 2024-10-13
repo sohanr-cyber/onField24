@@ -45,7 +45,10 @@ const Header3 = ({ contents, style }) => {
                 transform: `translateX(-${currentSlide * 100}%)`
               }}
             >
-              <div className={styles.surface}>
+              <div
+                className={styles.surface}
+                onClick={() => router.push(`/article/${slide.slug}`)}
+              >
                 <div className={styles.image__container}>
                   <Image
                     src={slide?.thumbnail}
