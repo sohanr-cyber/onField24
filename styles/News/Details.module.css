@@ -211,7 +211,9 @@
     }
 
     .wrapper .right .articles__horizontal {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 15px
     }
 
     .wrapper .description iframe {
@@ -232,6 +234,10 @@
         height: 200px;
     }
 
+    .wrapper .right .articles__horizontal {
+
+        gap: 10px
+    }
 
 
     .wrapper .flex .right {
