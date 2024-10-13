@@ -15,7 +15,7 @@
 .wrapper .right {
     width: 33.333%;
     position: sticky;
-    top: 45px;
+    top: 65px;
 }
 
 
@@ -34,11 +34,13 @@
 .wrapper .flex {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid var(--borderColor);
+    /* border-bottom: 1px solid var(--borderColor); */
     /* border-top: 1px solid var(--borderColor); */
-    padding: 10px 0;
+    padding: 10px;
     /* border: 1px solid red; */
     margin-top: -10px;
+    background: black;
+    color: white;
 
 
 }
@@ -54,10 +56,11 @@
 
 .wrapper .flex .right .icon {
     border-radius: 0px;
-    background: var(--inputField);
+    /* background: var(--inputField); */
     padding: 2px 3px;
     align-items: center;
     cursor: pointer;
+    /* color:black */
 }
 
 
@@ -76,6 +79,11 @@
     justify-content: center;
 }
 
+.wrapper .flex .left .date {
+    color: red;
+    font-size: 90%;
+}
+
 .wrapper .tags {
     margin: 25px 0;
     display: flex;
@@ -85,11 +93,18 @@
 
 .wrapper .tags span {
     border-radius: 0px;
+    border: 1px solid var(--highlight);
     padding: 5px 7px;
-    background: var(--highlight);
-    color: white;
+    color: black;
     cursor: pointer;
 }
+
+.wrapper .tags span:hover {
+    background: var(--nav);
+    color: red;
+    border-color: var(--nav);
+}
+
 
 .wrapper .right .articles__vertical {
     display: none;
@@ -118,7 +133,26 @@
 
 
 
+.wrapper .right .right__flex {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    background: var(--nav);
+    color: var(--navColor);
+    padding: 7px;
+    margin-bottom: 10px;
+}
 
+.wrapper .right .right__flex h2 {
+    margin: 0;
+    /* background:red; */
+
+}
+
+.wrapper h1 {
+    margin-top: 0;
+    /* text-transform: capitalize; */
+}
 
 @media (min-width:1024px) {
     .wrapper {
@@ -173,9 +207,11 @@
 
 
     .wrapper .right .articles__vertical {
-        display: flex;
-        overflow-x: scroll;
-        justify-content: flex-start;
+        display: none;
+    }
+
+    .wrapper .right .articles__horizontal {
+        display: block;
     }
 
     .wrapper .description iframe {

@@ -11,6 +11,7 @@
     cursor: pointer;
     box-shadow: 1px 1px 1px var(--shadow);
 
+
 }
 
 .adWrapper {
@@ -59,7 +60,7 @@
     color: var(--highlight);
     font-weight: bold;
     font-size: 90%;
-  
+
 }
 
 .wrapper .image__container img {
@@ -77,6 +78,12 @@
     flex-direction: column;
     display: flex;
     justify-content: space-between;
+    overflow-y: scroll;
+}
+
+
+.wrapper .text__container::-webkit-scrollbar {
+    width: 0;
 }
 
 .wrapper .text__container .flex {

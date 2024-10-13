@@ -28,10 +28,11 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import ShareIcon from '@mui/icons-material/Share'
-import { formatDistanceToNow } from 'date-fns'
+import { format, formatDistanceToNow } from 'date-fns'
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
 import t from '@/utility/dict'
 import Banner from '@/components/Header/Banner'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
 export async function getStaticPaths () {
   // Fetch all available slugs for articles
@@ -190,16 +191,23 @@ const News = ({ article, error, relatedArticles, ads }) => {
       <NextSeo {...generateArticleSeoData(article)} />{' '}
       <div className={styles.wrapper}>
         <div className={styles.left}>
-          <div className={styles.tags} style={{ marginBottom: '20px' }}>
+          {/* <PBar height={'2px'} /> */}
+          <h1>{article.title} </h1>
+          {/* <div
+            className={styles.tags}
+            style={{
+              marginBottom: '10px',
+              marginTop: '-10px',
+              justifyContent: 'flex-end'
+            }}
+          >
             {article.categories?.map((c, index) => (
               <span onClick={() => router.push(`/news?categories=${c._id}`)}>
                 {c.name}
               </span>
             ))}
-          </div>
-          <PBar height={'2px'} />
-          <h1>{article.title} </h1>
-          <PBar height={'2px'} />
+          </div> */}
+          {/* <PBar height={'2px'} /> */}
           <div className={styles.flex}>
             {article.author && (
               <div className={styles.left}>
@@ -220,17 +228,11 @@ const News = ({ article, error, relatedArticles, ads }) => {
                   </div>
                   <div className={styles.date}>
                     {/* {getTime(article.publishedAt)} */}
-                    {article.publishedAt && (
-                      <>
-                        {' '}
-                        {timeAgo(
-                          formatDistanceToNow(
-                            new Date(article.publishedAt || article.createdAt)
-                          ) + ' Ago',
-                          lang
-                        )}
-                      </>
-                    )}
+                    {article.publishedAt &&
+                      format(
+                        article.publishedAt || article.createdAt,
+                        'dd MMM , yyyy'
+                      )}
                   </div>
                 </div>
               </div>
@@ -301,8 +303,19 @@ const News = ({ article, error, relatedArticles, ads }) => {
           </div>
         </div>
         <div className={styles.right}>
-          <h1>{t('readMore', lang)} </h1>
-          <PBar height={'2px'} />
+          <div className={styles.right__flex}>
+            <h2>{t('readMore', lang)} </h2>
+            <ArrowForwardIcon
+              onClick={() =>
+                router.push(
+                  `/news?categories=${article.categories
+                    .map(i => i._id)
+                    .join(',')}`
+                )
+              }
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
           <div className={styles.articles__horizontal}>
             {[...sideBarAds, ...relatedArticles].length > 0 &&
               [...sideBarAds, ...relatedArticles].map((article, index) => (
