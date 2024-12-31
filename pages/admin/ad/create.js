@@ -377,7 +377,7 @@ const Create = ({ ad: data }) => {
       <div className={styles.top__flex}>
         <div className={styles.field}>
           <div className={styles.status}>
-            {['banner', 'video', 'sidebar', 'popup'].map((i, index) => (
+            {['banner', 'sidebar', 'popup'].map((i, index) => (
               <span
                 className={`${ad.adType == i ? styles.currentLang : ''}`}
                 onClick={() => setAd({ ...ad, adType: i })}

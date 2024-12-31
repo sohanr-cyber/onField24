@@ -56,9 +56,9 @@ export default function Home ({ data, ads }) {
               </div>
             </>
           )}
-          {/* <div className={styles.banner} style={{ paddingTop: '1px' }}>
+          <div className={styles.banner} style={{ paddingTop: '1px' }}>
             <Banner contents={bannerAds} />
-          </div> */}
+          </div>
           {/* By Category */}
           <div className={styles.articles_bycategory}>
             {data.slice(1, data.length).map((ci, incex) => (
