@@ -1,79 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
+
 .wrapper {
+    font-size: 100%;
+    font-weight: bold;
+    display: inline;
+    text-align: center;
+    position: relative;
     display: flex;
-    font-weight: bolder;
-    font-size: 190%;
-    cursor: pointer;
-    padding: 0;
-    /* font-style: italic; */
-    text-transform: uppercase;
-    /* border: 1px solid white; */
-
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    /* max-width: 100px; */
+    margin-left: 30px;
+   
 }
 
-
-
-.wrapper .left {
-    display: flex;
-
-}
-
-
-
-.wrapper .left div:nth-child(1),
-.wrapper .left div:nth-child(2) {
-    color: rgb(247, 247, 248);
-    margin: 0;
-    /* border: 1px solid red; */
-    padding: 0;
-    /* border: 1px solid red; */
-    /* margin-top: -3px; */
-
-}
-
-.wrapper .left div:nth-child(1) {
-    background-color: red;
-    padding: 0 3px;
-
-}
-
-.wrapper .left div:nth-child(2) {
-
-    margin: 0;
-    margin-top: -10px;
-    font-size: 50%;
-    text-align: right;
-    margin-right: 2px;
-    margin-left: -5px;
-    margin-bottom: -2px;
-    border: 2px dotted green;
-    background-color: green;
-    max-height: 12px;
-    border-radius: 50%;
-    padding: 3px 2px;
-    padding-bottom: 4px;
-    ;
-    /* border:1px solid red */
-}
 
 .wrapper img {
-    /* height: auto; */
-    object-fit: cover;
+    position: absolute;
+    left: -25px;
+    bottom: -6px;
+    transform: scale(1.1);
+}
+
+.wrapper .sun {
+    position: absolute;
+    left: 25px;
+    top: 15px;
+    /* transform: scale(1.5); */
+}
+
+.wrapper .top {
+    color: white;
+    font-size: 110%;
+    z-index: 2;
+    position: relative;
+    /* background-color: red; */
+    /* color: rgb(0, 201, 0); */
+    /* background-color: green; */
 
 }
 
-.wrapper .right {
-    background: green;
-    padding: 0 3px;
+.wrapper .top span {
+    /* color:rgb(2, 172, 2); */
+    z-index: 3;
+}
+
+
+
+.wrapper .mid {
     display: flex;
-    align-items: center;
+    gap: 5px;
+    color: rgb(112, 230, 112);
+    /* background-color: red;; */
+    /* background-color: green;; */
+
+    /* padding-left: 5px; */
+    font-size: 80%;
+    position: relative;
+    z-index: 2;
+    /* justify-content: center; */
+}
+
+.wrapper .flex {
+    font-size: initial;
+    display: flex;
+    gap: 5px;
     justify-content: center;
-    min-width: 40px;
-    padding-right: 7px;
-    margin-right: -5px;
-    /* clip-path: polygon(20% 0, 95% 0, 80% 100%, 5% 100%); */
-    /* margin-left: -5px; */
-
-
+    font-size: 60%;
+    display: none;
 }

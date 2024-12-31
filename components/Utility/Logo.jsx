@@ -9,12 +9,20 @@ const Logo = ({ color }) => {
 
   return (
     <div className={styles.wrapper} onClick={() => router.push('/')}>
-      <div className={styles.right}>ON</div>
-      <div className={styles.left}>
-        <div>Field</div>
-        <div>24</div>
+      <Image src="/images/curly-flag.png" width={38} height={40} alt="" />
+      <div className={styles.sun}>      <Image src="/images/sun.png" width={40} height={40} alt="" /></div>
+
+      <div className={styles.top}><span>BANGLADESH</span>
+      </div>      <div className={styles.mid}>
+        <div> TRAIGHTS</div>
+        <div>TIMES</div></div>
+      <div className={styles.flex}>
+        <span>-</span>
+        <span>NEWS CENTER</span>
+        <span>-</span>
       </div>
     </div>
+
   )
 }
 

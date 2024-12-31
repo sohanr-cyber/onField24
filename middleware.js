@@ -6,6 +6,7 @@ export default function middleware (req) {
   let verify = req.cookies.get('userInfo')
   let uri = req.url
 
+
   // not logged in
   if (!verify && uri.includes('/admin')) {
     return NextResponse.redirect(`${BASE_URL}/login`)
