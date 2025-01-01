@@ -4,7 +4,7 @@ import Pages from '@/components/Utility/Pagination'
 import SearchIcon from '@mui/icons-material/Search'
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { finishLoading, startLoading } from '@/redux/stateSlice'
 import { showSnackBar } from '@/redux/notistackSlice'
 import { statusColors } from '@/utility/const'
@@ -21,6 +21,8 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
     count,
     page: currentPage
   })
+  const userInfo = useSelector(state => state.user.userInfo)
+  const headers = { Authorization: `Bearer ${userInfo?.token}` }
 
   useEffect(() => {
     setFilteredTags({ tags, totalPages, count, page: currentPage })
@@ -43,7 +45,9 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
   const remove = async id => {
     try {
       dispatch(startLoading())
-      const { data } = await axios.delete(`/api/tag?id=${id}`)
+      const { data } = await axios.delete(`/api/tag/${id}`, {
+        headers
+      })
       setFilteredTags({
         ...filteredTags,
         tags: filteredTags.tags.filter(i => i._id != id)
@@ -95,7 +99,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
             <thead>
               <tr>
                 <th>{t('name', lang)}</th>
-                <th>{t('name', lang)}(BN)</th>
+                {/* <th>{t('name', lang)}(BN)</th> */}
                 <th>{t('action', lang)}</th>
                 {/* Add more table headers as needed */}
               </tr>
@@ -105,23 +109,20 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
                 <tr
                   key={index}
                   style={{
-                    borderLeft: `3px solid ${
-                      statusColors[
-                        `${
-                          tag.stockQuantity < 5
-                            ? 'pending'
-                            : tag.stockQuantity <= 1
+                    borderLeft: `3px solid ${statusColors[
+                      `${tag.stockQuantity < 5
+                          ? 'pending'
+                          : tag.stockQuantity <= 1
                             ? 'failed'
                             : 'none'
                         }`.toLowerCase()
                       ]
-                    }`,
+                      }`,
                     background: `${extractRGBA(
                       statusColors[
-                        `${
-                          tag.stockQuantity < 5
-                            ? 'pending'
-                            : tag.stockQuantity <= 1
+                      `${tag.stockQuantity < 5
+                          ? 'pending'
+                          : tag.stockQuantity <= 1
                             ? 'failed'
                             : 'none'
                         }`.toLowerCase()
@@ -131,7 +132,7 @@ const Tags = ({ title, dashboard, tags, totalPages, count, currentPage }) => {
                   }}
                 >
                   <td>{tag.name['en']}</td>
-                  <td>{tag.name['bn']}</td>
+                  {/* <td>{tag.name['bn']}</td> */}
 
                   <td className={styles.action}>
                     <span onDoubleClick={() => remove(tag._id)}>

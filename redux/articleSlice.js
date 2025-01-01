@@ -13,6 +13,7 @@ export const productSlice = createSlice({
       state.categories = action.payload
     },
     setFetchAgain: (state, action) => {
+      console.log("state" ,state.fetchAgain)
       state.fetchAgain = !state.fetchAgain
     },
     setDualCategories: (state, action) => {

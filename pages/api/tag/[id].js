@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
   }
 })
 
-// handler.use(isAuth, isAdmin)
+handler.use(isAuth, isAdmin)
 // Update tag by ID
 handler.put(async (req, res) => {
 

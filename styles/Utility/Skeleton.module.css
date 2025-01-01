@@ -1,5 +1,5 @@
 .skeleton {
-    background: var(--theme);
+    background: var(--hoverColor);
     /* Background color */
     animation: skeleton-loading 1s ease-in-out infinite alternate;
     /* Animation */
