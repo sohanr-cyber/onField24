@@ -1,6 +1,6 @@
 import BASE_URL from '@/config'
 import { Face, Facebook } from '@mui/icons-material'
-const companyName = 'OnField24'
+const companyName = 'Bangaldesh Straights Times'
 
 const footerP =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu erat in eros varius congue vitae ut mauris. Nunc sit amet justo vitae enim rutrum consectetur. Morbi id pretium risus. Donec gravida porta tellus, non iaculis purus ornare ac. Donec sagittis, nulla nec placerat efficitur, velit enim malesuada felis'
@@ -56,7 +56,7 @@ const seoData = {
   }
 }
 
-function getSeoData (lang = 'en') {
+function getSeoData(lang = 'en') {
   const seoData = {
     en: {
       title: `Latest News and Updates - ${companyName}`,
@@ -68,7 +68,7 @@ function getSeoData (lang = 'en') {
         description: `Catch up on the latest articles and breaking news from ${companyName}, covering a variety of topics including technology, politics, and education.`,
         images: [
           {
-            url: '/images/quince.png',
+            url: '/images/cover.png',
             alt: `News and Articles - ${companyName}`,
             width: 1200,
             height: 630
@@ -88,7 +88,7 @@ function getSeoData (lang = 'en') {
         description: `${companyName} থেকে প্রযুক্তি, রাজনীতি এবং শিক্ষা সহ বিভিন্ন বিষয়ের সাম্প্রতিক নিবন্ধ এবং ব্রেকিং নিউজ সম্পর্কে জানুন।`,
         images: [
           {
-            url: '/images/quince.png',
+            url: '/images/cover.png',
             alt: `সংবাদ এবং নিবন্ধ - ${companyName}`,
             width: 1200,
             height: 630
@@ -115,7 +115,7 @@ const TermsAndConditionSeoData = {
     url: `${BASE_URL}/terms-and-conditions`,
     images: [
       {
-        url: `${BASE_URL}/images/terms-and-conditions.png`,
+        url: `${BASE_URL}/images/cover.png`,
         width: 1200,
         height: 630,
         alt: `Our Terms And Conditions - ${companyName}`
@@ -137,7 +137,7 @@ const privacyPolicySeoData = {
     url: `${BASE_URL}/privacy-policy`,
     images: [
       {
-        url: `${BASE_URL}/images/privacy-policy.png`,
+        url: `${BASE_URL}/images/cover.png`,
         width: 1200,
         height: 630,
         alt: `Privacy Policy - ${companyName}`
