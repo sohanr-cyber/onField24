@@ -31,7 +31,7 @@ const Create = ({ article: data, tags }) => {
   const [selected, setSelected] = useState(article.categories?.map(i => i._id))
   const { locale } = router
   const categories = useSelector(state => state.article.dualCategories)
-
+  console.log({ userInfo })
   const errorMessage = field => {
     dispatch(
       showSnackBar({
@@ -45,6 +45,7 @@ const Create = ({ article: data, tags }) => {
   }
 
   const validate = article => {
+
     if (!article.title.en) {
       return errorMessage('Title')
     }
@@ -264,11 +265,11 @@ const Create = ({ article: data, tags }) => {
             </div>
             <div className={styles.field}>
               <label>Description</label>
-              <TextEditor
+              <div style={{ color: "black", background: "red" }}> <TextEditor
                 setDescriptionEn={setDescriptionEn}
                 description={descriptionEn}
                 lang='en'
-              />
+              /></div>
             </div>
             <div className={styles.field}>
               <label>Excerpt</label>
@@ -287,130 +288,133 @@ const Create = ({ article: data, tags }) => {
               ></textarea>
             </div>
           </div>
-        )}
+        )
+        }
 
-        {lang.find(i => i == 'bn') && (
-          <div className={`${styles.left} ${styles.right}`}>
-            {' '}
-            <div className={styles.field}>
-              <label>{t('title', 'bn')}</label>
-              <input
-                type='text'
-                placeholder={t('enterTitle', 'bn')}
-                value={article.title?.bn}
-                onChange={e =>
-                  setArticle(prev => ({
-                    ...prev,
-                    title: {
-                      en: prev.title.en,
-                      bn: e.target.value
-                    }
-                  }))
-                }
-              />
-            </div>
-            <div className={styles.field}>
-              <label>{t('thumbnail', 'bn')}</label>
-              <Upload
-                handle={files => {
-                  setArticle(prev => ({
-                    ...prev,
-                    thumbnail: { bn: files.url, en: prev.thumbnail?.en }
-                  }))
-                }}
-              />
-              <div className={styles.images}>
-                {article.thumbnail?.bn ? (
-                  <div className={styles.image__container}>
-                    <Image
-                      src={article.thumbnail?.bn}
-                      alt=''
-                      width='180'
-                      height={180}
+        {
+          lang.find(i => i == 'bn') && (
+            <div className={`${styles.left} ${styles.right}`}>
+              {' '}
+              <div className={styles.field}>
+                <label>{t('title', 'bn')}</label>
+                <input
+                  type='text'
+                  placeholder={t('enterTitle', 'bn')}
+                  value={article.title?.bn}
+                  onChange={e =>
+                    setArticle(prev => ({
+                      ...prev,
+                      title: {
+                        en: prev.title.en,
+                        bn: e.target.value
+                      }
+                    }))
+                  }
+                />
+              </div>
+              <div className={styles.field}>
+                <label>{t('thumbnail', 'bn')}</label>
+                <Upload
+                  handle={files => {
+                    setArticle(prev => ({
+                      ...prev,
+                      thumbnail: { bn: files.url, en: prev.thumbnail?.en }
+                    }))
+                  }}
+                />
+                <div className={styles.images}>
+                  {article.thumbnail?.bn ? (
+                    <div className={styles.image__container}>
+                      <Image
+                        src={article.thumbnail?.bn}
+                        alt=''
+                        width='180'
+                        height={180}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      className={styles.image__container}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        textAlign: 'center'
+                      }}
+                    >
+                      {t('noPhotoUploaded', 'bn')}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className={styles.flex}>
+                <div className={styles.field}>
+                  <label>{t('tag', 'bn')} </label>
+                  <div className={styles.options}>
+                    {' '}
+                    {tags?.map(i => (
+                      <span
+                        className={styles.option}
+                        onClick={() =>
+                          setArticle({
+                            ...article,
+                            tags: article?.tags?.find(t => t == i._id)
+                              ? article.tags.filter(t => t != i._id)
+                              : [...article?.tags, i._id]
+                          })
+                        }
+                        style={
+                          article.tags?.find(t => t == i._id)
+                            ? { background: 'black', color: 'white' }
+                            : {}
+                        }
+                      >
+                        {i.name['bn']}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.field}>
+                  <label>{t('category', 'bn')}</label>
+                  <div className={styles.options}>
+                    <SelectCategory
+                      currentCategories={article.categories}
+                      selected={selected}
+                      setSelected={setSelected}
+                      lang={'bn'}
                     />
                   </div>
-                ) : (
-                  <div
-                    className={styles.image__container}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      textAlign: 'center'
-                    }}
-                  >
-                    {t('noPhotoUploaded', 'bn')}
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className={styles.flex}>
-              <div className={styles.field}>
-                <label>{t('tag', 'bn')} </label>
-                <div className={styles.options}>
-                  {' '}
-                  {tags?.map(i => (
-                    <span
-                      className={styles.option}
-                      onClick={() =>
-                        setArticle({
-                          ...article,
-                          tags: article?.tags?.find(t => t == i._id)
-                            ? article.tags.filter(t => t != i._id)
-                            : [...article?.tags, i._id]
-                        })
-                      }
-                      style={
-                        article.tags?.find(t => t == i._id)
-                          ? { background: 'black', color: 'white' }
-                          : {}
-                      }
-                    >
-                      {i.name['bn']}
-                    </span>
-                  ))}
                 </div>
               </div>
               <div className={styles.field}>
-                <label>{t('category', 'bn')}</label>
-                <div className={styles.options}>
-                  <SelectCategory
-                    currentCategories={article.categories}
-                    selected={selected}
-                    setSelected={setSelected}
-                    lang={'bn'}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className={styles.field}>
-              <label>{t('description', 'bn')}</label>
+                <label>{t('description', 'bn')}</label>
 
-              <TextEditor
-                setDescriptionBn={setDescriptionBn}
-                description={descriptionBn}
-                lang='bn'
-              />
+                <TextEditor
+                  setDescriptionBn={setDescriptionBn}
+                  description={descriptionBn}
+                  lang='bn'
+                />
+              </div>
+              <div className={styles.field}>
+                <label>{t('excerpt', 'bn')}</label>
+                <textarea
+                  value={article.excerpt?.bn}
+                  placeholder={t('enterExcerpt', 'bn')}
+                  onChange={e =>
+                    setArticle(prev => ({
+                      ...prev,
+                      excerpt: {
+                        bn: e.target.value,
+                        en: prev.excerpt?.en
+                      }
+                    }))
+                  }
+                ></textarea>
+              </div>
             </div>
-            <div className={styles.field}>
-              <label>{t('excerpt', 'bn')}</label>
-              <textarea
-                value={article.excerpt?.bn}
-                placeholder={t('enterExcerpt', 'bn')}
-                onChange={e =>
-                  setArticle(prev => ({
-                    ...prev,
-                    excerpt: {
-                      bn: e.target.value,
-                      en: prev.excerpt?.en
-                    }
-                  }))
-                }
-              ></textarea>
-            </div>
-          </div>
-        )}
-      </form>
+          )
+        }
+      </form >
       <div className={styles.top__flex}>
         <div className={styles.field}>
           <div className={styles.status}>
@@ -435,17 +439,17 @@ const Create = ({ article: data, tags }) => {
             value={
               article.publishedAt
                 ? new Date(
-                    new Date(article.publishedAt).getTime() -
-                      new Date().getTimezoneOffset() * 60000
-                  )
-                    .toISOString()
-                    .slice(0, 16)
+                  new Date(article.publishedAt).getTime() -
+                  new Date().getTimezoneOffset() * 60000
+                )
+                  .toISOString()
+                  .slice(0, 16)
                 : new Date(
-                    new Date().getTime() -
-                      new Date().getTimezoneOffset() * 60000
-                  )
-                    .toISOString()
-                    .slice(0, 16)
+                  new Date().getTime() -
+                  new Date().getTimezoneOffset() * 60000
+                )
+                  .toISOString()
+                  .slice(0, 16)
             }
             onChange={e =>
               setArticle({ ...article, publishedAt: e.target.value })
@@ -456,17 +460,15 @@ const Create = ({ article: data, tags }) => {
         <div className={styles.field}>
           <div className={styles.status}>
             <span
-              className={`${
-                article.status == 'published' ? styles.currentLang : ''
-              }`}
+              className={`${article.status == 'published' ? styles.currentLang : ''
+                }`}
               onClick={() => setArticle({ ...article, status: 'published' })}
             >
               {t('published', locale)}
             </span>
             <span
-              className={`${
-                article.status == 'draft' ? styles.currentLang : ''
-              }`}
+              className={`${article.status == 'draft' ? styles.currentLang : ''
+                }`}
               onClick={() => setArticle({ ...article, status: 'draft' })}
             >
               {t('draft', locale)}
@@ -479,13 +481,13 @@ const Create = ({ article: data, tags }) => {
           {t('saveArticle', locale)}
         </button>
       </div>
-    </div>
+    </div >
   )
 }
 
 export default Create
 
-export async function getServerSideProps ({ query }) {
+export async function getServerSideProps({ query }) {
   const { id } = query
 
   const fetchArticle = async () => {
