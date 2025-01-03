@@ -14,7 +14,7 @@ const Logo = ({ color }) => {
 
       <div className={styles.top}><span>BANGLADESH</span>
       </div>      <div className={styles.mid}>
-        <div> TRAIGHTS</div>
+        <div> TRAITS</div>
         <div>TIMES</div></div>
       <div className={styles.flex}>
         <span>-</span>
